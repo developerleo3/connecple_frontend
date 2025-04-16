@@ -29,3 +29,42 @@ body {
   padding-left: 5%;
   padding-right: 5%;
 }
+
+/* 커스텀 pagination 스타일 */
+.swiper-pagination {
+  bottom: 10% !important; /* 점 위치 조정 */
+}
+
+/* 기본 점 크기 및 모양 커스텀 (모바일 기준) */
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: #888888 !important; /* 비활성 점 색상 */
+  opacity: 1 !important;
+  border-radius: 9999px !important;
+  margin: 0 4px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+/* 활성화된 점 */
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #ffffff !important; /* 흰색 */
+}
+
+/* sm 이상 (태블릿) */
+@media (min-width: 640px) {
+  .swiper-pagination-bullet {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 5px !important;
+  }
+}
+
+/* lg 이상 (데스크탑) */
+@media (min-width: 1024px) {
+  .swiper-pagination-bullet {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 6px !important;
+  }
+}
