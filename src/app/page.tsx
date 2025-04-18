@@ -8,6 +8,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 
+import AnimatedCounter from '../components/AnimatedCounter';
+import { useInView } from "react-intersection-observer";
+
 const slides = [
   {
     src: "/picture1.svg",
@@ -61,7 +64,20 @@ const slides = [
   },
 ];
 
+const storyLabels = [
+  { label: "커넥플과 함께<br />성장한 고객사", value: "21개" },
+  { label: "커넥플과 함께<br />성공한 프로젝트", value: "34개" },
+  { label: "커넥플과 함께<br />기대한 서비스 만족도", value: "97.3%" },
+  { label: "커넥플과 함께<br />걸어온 경력보유여성", value: "575명" },
+  { label: "커넥플과 함께<br />재도약에 성공한<br />경력보유여성", value: "81명" },
+];
+
 export default function Home() {
+  const { ref: counterSectionRef, inView } = useInView({
+    triggerOnce: true,  // 한 번만 실행
+    threshold: 0.3,     // 30% 보이면 발동
+  });
+
   return (
     <main>
       {/* 배경 이미지 섹션 */}
@@ -127,6 +143,49 @@ export default function Home() {
             </SwiperSlide>
           ))}
         </Swiper>
+      </section>
+
+      <section 
+        ref={counterSectionRef} // 여기에 ref 걸어줌
+        className="relative w-full h-auto py-16 sm:py-20 md:py-22 lg:py-24"
+      >
+        <div className="flex flex-col w-full items-center justify-center px-4 text-center space-y-4">
+          <p className="text-black text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold">
+            커넥플은 <strong>사람과 사람을, 사람과 사회</strong>를 다시
+            연결합니다
+          </p>
+          <p className="text-black text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold">
+            그리고 연결을 넘어, <strong>함께 성장하는 미래</strong>를
+            만들어갑니다
+          </p>
+
+          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-6">
+            Connect to Grow. Connect to Society
+          </h1>
+        </div>
+
+        <div className="mt-12 flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
+          {storyLabels.map((item, idx) => (
+            <div
+              key={idx}
+              className="relative w-[180px] h-[180px] bg-white 
+                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[6px_6px_12px_rgba(0,0,0,0.4)] 
+                py-3 flex flex-col overflow-hidden"
+            >
+              <div className="flex-3 flex items-center justify-center">
+                <p
+                  className="text-gray-800 text-lg font-semibold text-center"
+                  dangerouslySetInnerHTML={{ __html: item.label }}
+                ></p>
+              </div>
+              <div className="flex-2 flex items-center justify-center">
+                <p className="text-purple-900 font-extrabold text-4xl">
+                  <AnimatedCounter value={item.value} shouldAnimate={inView} />
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
