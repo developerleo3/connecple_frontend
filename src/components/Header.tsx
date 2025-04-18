@@ -102,7 +102,7 @@ export default function Header() {
                   <div
                     className="absolute top-full left-1/2 -translate-x-1/2 transform
                       w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px]
-                      border-l-transparent border-r-transparent border-b-purple-900"
+                      border-l-transparent border-r-transparent border-t-[#59168b]"
                   />
                 )}
               </div>
