@@ -585,6 +585,49 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Section9 - 자세히 보기 */}
+      <section 
+        className="relative w-full aspect-video text-white bg-cover bg-center"
+        style={{backgroundImage: "url('/picture8.svg')"}}
+      >
+        <div className="max-w-screen-xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-5 items-center">
+          {/* 왼쪽 텍스트 (세로줄 포함, 3/5) */}
+          <div className="md:col-span-3 border-l-4 border-white pl-6 space-y-4">
+            <p className="text-2xl sm:text-3xl font-bold">당신의 재도약을 응원합니다</p>
+            <h2 className="text-4xl sm:text-5xl font-extrabold">Women In The Hope</h2>
+            <p className="text-xl sm:text-2xl font-semibold">경력보유여성 재도약 프로젝트</p>
+          </div>
+
+          {/* 오른쪽 버튼 3개 (2/5) - 반응형 대응 포함) */}
+          <div className="mt-10 md:mt-0 md:col-span-2 flex flex-col md:items-start gap-4 w-full items-stretch max-w-[400px]">
+            {[
+              {
+                label: "W.I.T.H Project 자세히 보기",
+                href: "/with-project"
+              },
+              {
+                label: "W.I.T.H Connecday 자세히 보기",
+                href: "/with-connecday"
+              },
+              {
+                label: "W.I.T.H News letter 자세히 보기",
+                href: "/with-newsletter"
+              }
+            ].map((btn, idx) => (
+              <Link
+                key={idx}
+                href={btn.href}
+                className="bg-purple-900 hover:bg-[#B44FB4] text-white font-semibold px-6 py-4 
+                  rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] 
+                  text-center text-base sm:text-lg transition w-full"
+              >
+                {btn.label} →
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
