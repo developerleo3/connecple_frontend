@@ -135,6 +135,17 @@ const newsLetters = [
   },
 ];
 
+const logos = [
+  "/logo.png",
+  "/logo.png",
+  "/logo.png",
+  "/logo.png",
+  "/logo.png",
+  "/logo.png",
+  "/logo.png",
+  "/logo.png",
+];
+
 export default function Home() {
   const { ref: counterSectionRef, inView } = useInView({
     triggerOnce: true,  // 한 번만 실행
@@ -264,7 +275,7 @@ export default function Home() {
       </section>
 
       {/* Section4 - Brand Story */}
-      <section className="relative w-full h-auto py-8 sm:py-20 md:py-22 lg:py-24">
+      <section className="relative w-full h-auto px-10 py-8 sm:py-20 md:py-22 lg:py-24">
         <div className="flex flex-col items-center justify-center text-center">
           <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-6">
             Connecple Brand Story
@@ -442,7 +453,7 @@ export default function Home() {
 
       {/* Section7 - With News Letter */}
       <section className="bg-[#F4F4F4] w-full h-auto">
-        <div className="flex flex-col w-full h-auto bg-white rounded-tr-[150px] px-30 py-20">
+        <div className="flex flex-col w-full h-auto bg-white rounded-tr-[150px] px-30 py-30">
           <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
             W.I.T.H NEWS LETTER
           </h1>
@@ -520,6 +531,57 @@ export default function Home() {
             >
               가능성을 향한 첫 걸음 →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Section8 - 파트너스 */}
+      <section className="pb-30 w-full h-auto flex flex-col items-center">
+        <h1 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+            커넥플과 함께하고 있는 파트너스
+        </h1>
+        <p className="px-30 text-gray-400 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5 text-center">
+              경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
+        </p>
+        <div className="w-full overflow-hidden bg-white py-20">
+          <style jsx>{`
+            @keyframes scrollLeft {
+              0% {
+                transform: translateX(0%);
+              }
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+            .scroll-row {
+              display: flex;
+              width: max-content;
+              white-space: nowrap;
+              animation: scrollLeft 30s linear infinite;
+            }
+          `}</style>
+
+          {/* 두 줄 (엇갈림 적용) */}
+          <div className="flex flex-col gap-4">
+            {[0, 1].map((row) => (
+              <div key={row} className="overflow-hidden relative">
+                <div
+                  className={`scroll-row ${row % 2 === 1 ? 'ml-[70px]' : ''}`}
+                >
+                  {[...logos, ...logos].map((src, i) => (
+                    <div key={`${row}-${i}`} className="mx-6 flex items-center">
+                      <Image
+                        src={src}
+                        alt={`logo-${i}`}
+                        width={100}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
