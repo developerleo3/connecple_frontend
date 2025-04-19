@@ -324,6 +324,71 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Section6 - With ConnectDay */}
+      <section className="w-full h-auto bg-[#F4F4F4] py-20 px-30">
+        <div className="flex flex-col">
+          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+            W.I.T.H CONNECTDAY
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
+                경력보유여성의 성장을 지원하는 정기 네트워킹
+          </p>
+          <p className="italic text-purple-600 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
+            {"\"성장을 나누고, 새로운 기회를 연결하다\""}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 overflow-hidden rounded-3xl mt-5">
+            {[
+              {
+                src: "/picture1.svg",
+                title: "성장의 여정을 공유하는 자리",
+                content: "위드프로젝트 수료생들과의 만남",
+              },
+              {
+                src: "/picture2.svg",
+                title: "함께 걸어온 시간들",
+                content: "성장과 도전의 순간을 기념하다",
+              },
+              {
+                src: "/picture3.svg",
+                title: "다시 도약하는 그 순간",
+                content: "새로운 출발을 준비하는 우리들",
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="relative group h-[200px] sm:h-[300px]">
+                {/* 배경 이미지 */}
+                <Image
+                  src={item.src}
+                  alt={`image-${idx + 1}`}
+                  fill
+                  className="object-cover"
+                />
+
+                {/* 오버레이 */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white px-4 text-center">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">{item.title}</h3>
+                  <p className="text-base sm:text-lg lg:text-xl mt-2">{item.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="items-end justify-center mt-5">
+          <p className="text-purple-900 font-bold text-base sm:text-lg md:text-xl lg:text-2xl text-right">
+            가능성은 연결될 때 빛이 납니다
+          </p>
+        </div>
+        <div className="mt-5 flex justify-end">
+          <Link
+            href="/with-connectday"
+            className="px-6 py-4 bg-purple-900 text-white font-bold 
+              rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
+              text-lg lg:text-2xl text-center"
+          >
+            나의 성장도 연결하기 →
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
