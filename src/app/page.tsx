@@ -10,6 +10,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 
 import AnimatedCounter from '../components/AnimatedCounter';
 import { useInView } from "react-intersection-observer";
+import Link from "next/link";
 
 const slides = [
   {
@@ -72,6 +73,28 @@ const storyLabels = [
   { label: "커넥플과 함께<br />재도약에 성공한<br />경력보유여성", value: "81명" },
 ];
 
+function ListItem({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="mt-4 space-y-1">
+      {/* 첫 번째 줄 */}
+      <div className="flex items-center gap-2 space-x-5">
+        <span className="w-2.5 h-2.5 rounded-full bg-purple-900 shrink-0" />
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
+          {title}
+        </p>
+      </div>
+
+      {/* 두 번째 줄 */}
+      <div className="flex items-center gap-2 space-x-5">
+        <span className="w-2.5 h-2.5 shrink-0" />
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl">
+          - {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const { ref: counterSectionRef, inView } = useInView({
     triggerOnce: true,  // 한 번만 실행
@@ -80,7 +103,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* 배경 이미지 섹션 */}
+      {/* Section1 - 배경 이미지 */}
       <section className="relative w-full aspect-video">
         {/* 꽉 찬 배경 이미지 */}
         <Image
@@ -111,6 +134,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section2 - 슬라이드 */}
       <section className="relative w-full h-auto">
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -145,6 +169,7 @@ export default function Home() {
         </Swiper>
       </section>
 
+      {/* Section3 - 수치 */}
       <section 
         ref={counterSectionRef} // 여기에 ref 걸어줌
         className="relative w-full h-auto py-16 sm:py-20 md:py-22 lg:py-24"
@@ -188,7 +213,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative w-full h-auto py-8 px-5 sm:py-20 md:py-22 lg:py-24">
+      {/* Section4 - Brand Story */}
+      <section className="relative w-full h-auto py-8 sm:py-20 md:py-22 lg:py-24">
         <div className="flex flex-col items-center justify-center text-center">
           <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-6">
             Connecple Brand Story
@@ -213,6 +239,89 @@ export default function Home() {
             사람과 사람을, 사람과 사회를 연결하는 커넥플_<br />
             Connect to Grow. Connect to Society
           </p>
+        </div>
+      </section>
+
+      {/* Section5 - With Project */}
+      <section className="bg-white w-full h-auto">
+        <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4] rounded-tl-[150px] py-20">
+          <div className="pl-30 pt-10 pb-5">
+            <h2 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+              W.I.T.H PROJECT
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 w-full items-stretch">
+            {/* 좌측 콘텐츠 영역 */}
+            <div className="flex flex-col justify-center pl-30">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
+                경력보유여성 재도약 프로젝트
+              </p>
+              <p className="italic text-purple-600 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-4 mb-5">
+                {"\"경력의 공백을 가능성으로 바꾸다\""}
+              </p>
+              <div>
+                <ListItem
+                  title="ICT 융합 분야 트렌드 학습 기회"
+                  description="빠르게 변화하는 디지털 산업 흐름을 이해하고 대비합니다"
+                />
+                <ListItem
+                  title="프로젝트 멤버로 직접 참여하는 성장형 교육 프로그램"
+                  description="실전 프로젝트를 통해 실무 능력과 팀워크를 키웁니다"
+                />
+                <ListItem
+                  title="현장에서 쌓는 실무 경험"
+                  description="이론을 넘어, 실제 업무를 수행하며 경험을 쌓습니다"
+                />
+                <ListItem
+                  title="프로젝트 실무 노하우 집중 학습"
+                  description="현업 전문가의 노하우를 배우고 업무 역량을 강화합니다"
+                />
+                <ListItem
+                  title="커리어 방향성 설정 & 개인 강점 컨설팅"
+                  description="나만의 커리어 로드맵을 설계하고, 강점을 명확히 찾습니다"
+                />
+                <ListItem
+                  title="우수 수료생 대상 인턴십 프로그램"
+                  description="선발된 수료생에게 유연근무형 인턴십 기회를 제공합니다"
+                />
+                <ListItem
+                  title="경제적 자립을 위한 실질적 기회"
+                  description="프로젝트 참여를 통해 급여와 함께 자립 기반을 마련합니다"
+                />
+              </div>
+            </div>
+
+            {/* 우측 이미지 영역 */}
+            <div className="relative w-full h-full flex flex-col justify-between items-center">
+              <div className="relative w-full aspect-video md:aspect-auto md:flex-[9] overflow-hidden rounded-l-full">
+                <Image
+                  src="/picture1.svg"
+                  alt="WITH Project Banner"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+
+              <div>
+                <Link
+                  href="/with-project"
+                  className="md:absolute left-0 bottom-0 mx-auto my-6 md:my-0 md:ml-0 md:mr-0 block
+                    bg-purple-900 text-white px-6 py-4 font-bold rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
+                    text-lg lg:text-2xl space-y-1 text-center"
+                >
+                  <span className="block">가능성을</span>
+                  <span className="block">현실로</span>
+                  <span className="block">만들기 →</span>
+                </Link>
+              </div>
+
+              <div className="flex-[1] flex items-end justify-center">
+                <p className="text-purple-900 font-bold text-base sm:text-lg md:text-xl lg:text-2xl text-center">
+                  가능성은 여전히 당신 안에 있습니다
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
