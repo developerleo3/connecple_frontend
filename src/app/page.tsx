@@ -12,6 +12,8 @@ import AnimatedCounter from '../components/AnimatedCounter';
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 
+import { useState } from "react";
+
 const slides = [
   {
     src: "/picture1.svg",
@@ -95,11 +97,59 @@ function ListItem({ title, description }: { title: string; description: string }
   );
 }
 
+const newsLetters = [
+  {
+    image: "/picture1.svg",
+    title: "기업이 찾는 실무형 인재, W.I.T.H 프로젝트에서 나온다",
+    content:
+      "\"바로 채용하고 싶을 정도였어요.\" 프로젝트 파트너 기업의 솔직한 이야기. 이들이 주목한 건 단순한 스펙이 아닌, 실무에 강한 팀워크형 ...",
+    href: "/story/1",
+  },
+  {
+    image: "/picture2.svg",
+    title: "육아와 커리어, 두마리 토끼를 잡은 그녀의 하루",
+    content:
+      "오전엔 아이 등원, 오후엔 실무 교육, 저녁엔 나만의 성장 시간. 육아와 커리어를 동시에 이끌어가는 한 엄마의 진짜 이야기를 ...",
+    href: "/story/2",
+  },
+  {
+    image: "/picture3.svg",
+    title: "당당한 복귀, 두려움은 없었다",
+    content:
+      "W.I.T.H 프로젝트로 다시 커리어를 시작한 그녀. 실무 능력뿐 아니라 자신감까지 얻은 성장의 기록 ...",
+    href: "/story/3",
+  },
+  {
+    image: "/picture4.svg",
+    title: "팀워크가 만든 놀라운 결과",
+    content:
+      "프로젝트 속 팀 활동에서 얻은 협업 경험. 실무 현장에서 더 빛났던 이유를 전합니다 ...",
+    href: "/story/4",
+  },
+  {
+    image: "/picture5.svg",
+    title: "첫 도전, 첫 성과",
+    content:
+      "경력단절 후 첫 실무 도전, 결과는 예상보다 놀라웠다. 진짜 실력은 포기하지 않은 마음에서 나온다 ...",
+    href: "/story/5",
+  },
+];
+
 export default function Home() {
   const { ref: counterSectionRef, inView } = useInView({
     triggerOnce: true,  // 한 번만 실행
     threshold: 0.3,     // 30% 보이면 발동
   });
+
+  const [index, setIndex] = useState(0);
+
+  const prev = () => {
+    setIndex((prev) => (prev === 0 ? newsLetters.length - 2 : prev - 1));
+  };
+
+  const next = () => {
+    setIndex((prev) => (prev >= newsLetters.length - 2 ? 0 : prev + 1));
+  };
 
   return (
     <main>
@@ -307,7 +357,7 @@ export default function Home() {
                   href="/with-project"
                   className="md:absolute left-0 bottom-0 mx-auto my-6 md:my-0 md:ml-0 md:mr-0 block
                     bg-purple-900 text-white px-6 py-4 font-bold rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
-                    text-lg lg:text-2xl space-y-1 text-center"
+                    text-lg lg:text-2xl space-y-1 text-left"
                 >
                   <span className="block">가능성을</span>
                   <span className="block">현실로</span>
@@ -387,6 +437,90 @@ export default function Home() {
           >
             나의 성장도 연결하기 →
           </Link>
+        </div>
+      </section>
+
+      {/* Section7 - With News Letter */}
+      <section className="bg-[#F4F4F4] w-full h-auto">
+        <div className="flex flex-col w-full h-auto bg-white rounded-tr-[150px] px-30 py-20">
+          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+            W.I.T.H NEWS LETTER
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
+                경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
+          </p>
+          <p className="italic text-purple-600 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
+            {"\"가능성을 깨우고, 성장의 기회를 전하다\""}
+          </p>
+          <div className="flex justify-end gap-5 mb-5">
+            <button
+              onClick={prev}
+              disabled={index === 0}
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl
+                ${index === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:text-purple-700 cursor-pointer'}`}
+            >
+              ←
+            </button>
+            <button
+              onClick={next}
+              disabled={index >= newsLetters.length - 2}
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl
+                ${index >= newsLetters.length - 2 ? 'text-gray-300 cursor-not-allowed' : 'text-black hover:text-purple-700 cursor-pointer'}`}
+            >
+              →
+            </button>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-screen-xl w-full">
+            {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
+              <div
+                key={i}
+                className="relative h-[300px] sm:h-[400px] rounded-3xl overflow-hidden group"
+              >
+                {/* 이미지 */}
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+
+                {/* 어두운 배경 */}
+                <div className="absolute inset-0 group-hover:bg-black/60 transition duration-300" />
+
+                {/* 텍스트 (hover 시 등장) */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 pr-20 text-white 
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm sm:text-base line-clamp-2">{item.content}</p>
+                </div>
+
+                {/* 우하단 바로가기 버튼 (hover 시 등장) */}
+                <Link
+                  href={item.href}
+                  className="absolute w-8 h-8 bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                            bg-transparent text-white rounded-xl border border-white hover:bg-white hover:text-black
+                            flex items-center justify-center"
+                >
+                  {"\>"}
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8">
+            <p className="text-purple-900 font-bold text-base sm:text-lg md:text-xl lg:text-2xl">
+              당신과의 시간과 당신의 가능성은 소중합니다
+            </p>
+          </div>
+          <div className="mt-5">
+            <Link
+              href="/with-connectday"
+              className="px-6 py-4 bg-purple-900 text-white font-bold 
+                rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
+                text-lg lg:text-2xl text-center"
+            >
+              가능성을 향한 첫 걸음 →
+            </Link>
+          </div>
         </div>
       </section>
     </main>
