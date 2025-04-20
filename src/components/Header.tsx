@@ -92,7 +92,7 @@ export default function Header() {
               >
                 <Link
                   href={path}
-                  className={`flex items-center justify-center w-full h-full font-bold text-[19px] transition duration-300 ease-in-out
+                  className={`flex items-center justify-center w-full h-full font-extrabold text-[19px] transition duration-300 ease-in-out
                 ${
                   isSelected
                     ? "bg-purple-900 text-white"
