@@ -242,44 +242,90 @@ export default function Home() {
       {/* Section3 - 수치 */}
       <section 
         ref={counterSectionRef} // 여기에 ref 걸어줌
-        className="relative w-full h-auto py-16 sm:py-20 md:py-22 lg:py-24"
+        className="relative w-full h-auto
+          pt-[31px]
+          lg:pt-[163px]"
       >
-        <div className="flex flex-col w-full items-center justify-center px-4 text-center space-y-4">
-          <p className="text-black text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold">
-            커넥플은 <strong>사람과 사람을, 사람과 사회</strong>를 다시
-            연결합니다
-          </p>
-          <p className="text-black text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold">
-            그리고 연결을 넘어, <strong>함께 성장하는 미래</strong>를
-            만들어갑니다
-          </p>
-
-          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-6">
-            Connect to Grow. Connect to Society
-          </h1>
+        <div className="flex flex-col w-full items-center justify-center text-center text-black font-bold
+          space-y-[10px] text-[10px]
+          lg:space-y-[28px] lg:text-[27px]">
+          <p>커넥플은 <span className="font-black">사람과 사람을, 사람과 사회</span>를 다시 연결합니다</p>
+          <p>그리고 연결을 넘어, <span className="font-black">함께 성장하는 미래</span>를 만들어갑니다</p>
         </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
+        <h1 className="flex flex-col w-full items-center justify-center text-center text-[#541E80] font-black
+          text-[15px] mt-[12px]
+          lg:text-[45px] lg:mt-[34px]">
+            Connect to Grow. Connect to Society
+        </h1>
+
+        <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-[34px] lg:mt-[86px]">
           {storyLabels.map((item, idx) => (
             <div
               key={idx}
-              className="relative w-[180px] h-[180px] bg-white 
-                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[6px_6px_12px_rgba(0,0,0,0.4)] 
-                py-3 flex flex-col overflow-hidden"
+              className="flex flex-col items-center justify-center
+                w-[176px] h-[176px] 
+                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[5px_5px_10px_0_rgba(0,0,0,0.9)]"
             >
-              <div className="flex-3 flex items-center justify-center">
+              <div className="flex-[3] flex items-center justify-center text-center">
                 <p
-                  className="text-gray-800 text-lg font-semibold text-center"
+                  className="text-black font-bold text-[18px] space-y-[9px]"
                   dangerouslySetInnerHTML={{ __html: item.label }}
                 ></p>
               </div>
-              <div className="flex-2 flex items-center justify-center">
-                <p className="text-purple-900 font-extrabold text-4xl">
+              <div className="flex-[2] flex items-center justify-center text-center">
+                <p className="text-[#541E80] font-black text-[31px]">
                   <AnimatedCounter value={item.value} shouldAnimate={inView} />
                 </p>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="lg:hidden grid grid-rows-2 gap-y-[17px] mt-[31px]">
+          <div className="flex justify-center items-center gap-x-[9px]">
+            {storyLabels.slice(0, 3).map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center justify-center w-[87px] h-[87px]
+                  rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
+              >
+                <div className="flex-[3] flex items-center justify-center text-center">
+                  <p
+                    className="text-black font-bold text-[9px] space-y-[6px]"
+                    dangerouslySetInnerHTML={{ __html: item.label }}
+                  ></p>
+                </div>
+                <div className="flex-[2] flex items-center justify-center text-center">
+                  <p className="text-[#541E80] font-black text-[15px]">
+                    <AnimatedCounter value={item.value} shouldAnimate={inView} />
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center items-center gap-x-[9px]">
+            {storyLabels.slice(3, 5).map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center justify-center w-[87px] h-[87px]
+                  rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
+              >
+                <div className="flex-[3] flex items-center justify-center text-center">
+                  <p
+                    className="text-black font-bold text-[9px] space-y-[6px]"
+                    dangerouslySetInnerHTML={{ __html: item.label }}
+                  ></p>
+                </div>
+                <div className="flex-[2] flex items-center justify-center text-center">
+                  <p className="text-[#541E80] font-black text-[15px]">
+                    <AnimatedCounter value={item.value} shouldAnimate={inView} />
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
