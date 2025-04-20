@@ -177,11 +177,11 @@ export default function Home() {
         {/* 중앙 텍스트 오버레이 */}
         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
           flex flex-col items-center justify-center text-white">
-          <p className="text-[9px] mb-[5px]
+          <p className="font-bold text-[9px] mb-[5px]
             lg:text-[29px] lg:mb-[17px]">
             당신의 여정이 머무르지 않도록,
           </p>
-          <h1 className="font-extrabold text-[21px]
+          <h1 className="font-black text-[21px]
             lg:text-[61px]">
             우리는 길을 만듭니다
           </h1>
