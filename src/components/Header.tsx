@@ -40,69 +40,73 @@ export default function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-    }
+    };
   }, []);
 
   return (
-    <header className="header-padding shadow-md bg-white">
-      <nav className="flex items-center justify-between lg:grid lg:grid-cols-7 lg:gap-4">
+    <header className="shadow-md bg-white">
+      <nav className="h-[47px] flex items-center justify-between px-5 
+        lg:h-[90px] lg:grid lg:grid-cols-7 lg:gap-4 lg:px-30">
         {/* 로고 */}
-        <div className="relative w-[120px] h-[64px] lg:col-span-1 flex-shrink-0">
-          <Link href="/" className="block w-full h-full relative">
-            <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+        <div className="flex items-center h-full col-span-1">
+          <Link href="/" className="block relative">
+            <Image
+              src="/logo_header.svg"
+              alt="Logo"
+              width={90}
+              height={20}
+              className="object-contain lg:w-[160px] lg:h-[36px]"
+            />
           </Link>
         </div>
 
-        {/* 햄버거 버튼 (모바일에서만 보임) */}
+        {/* 햄버거 버튼 (모바일만) */}
         <button
           ref={menuButtonRef}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden relative w-8 h-8 flex items-center justify-center z-50 cursor-pointer"
+          className="lg:hidden relative flex items-center justify-center w-[20px] h-full z-50 cursor-pointer"
           aria-label="모바일 메뉴 토글"
         >
-          {/* 1번째 줄 */}
           <span
-            className={`absolute w-6 h-0.5 bg-gray-800 transform transition-all duration-300 ease-in-out
-              ${isMenuOpen ? "rotate-45 top-1/2" : "-translate-y-2"}`}
+            className={`absolute w-[20px] h-[2px] bg-gray-800 transform transition-all duration-300 ease-in-out
+          ${isMenuOpen ? "rotate-45 top-1/2" : "-translate-y-[4px]"}`}
           />
-          {/* 2번째 줄 */}
           <span
-            className={`absolute w-6 h-0.5 bg-gray-800 transform transition-all duration-300 ease-in-out
-              ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
+            className={`absolute w-[20px] h-[2px] bg-gray-800 transform transition-all duration-300 ease-in-out
+          ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
           />
-          {/* 3번째 줄 */}
           <span
-            className={`absolute w-6 h-0.5 bg-gray-800 transform transition-all duration-300 ease-in-out
-              ${isMenuOpen ? "-rotate-45 top-1/2" : "translate-y-2"}`}
+            className={`absolute w-[20px] h-[2px] bg-gray-800 transform transition-all duration-300 ease-in-out
+          ${isMenuOpen ? "-rotate-45 top-1/2" : "translate-y-[4px]"}`}
           />
         </button>
 
-        {/* 데스크탑 메뉴 */}
-        <div className="hidden lg:grid col-span-6 grid-cols-6">
+        {/* 데스크탑 메뉴 (lg 이상) */}
+        <div className="hidden lg:grid lg:grid-cols-6 col-span-6 h-full">
           {menus.map(({ text, path }) => {
             const isSelected = pathname === path;
-
             return (
-              <div key={text} className="group relative">
+              <div
+                key={text}
+                className="group relative flex items-center justify-center"
+              >
                 <Link
                   href={path}
-                  className={`block text-center w-full px-4 py-8 font-bold transition duration-300 ease-in-out
-                    ${
-                      isSelected
-                        ? "bg-purple-900 text-white"
-                        : "bg-white text-gray-800 hover:bg-purple-200"
-                    }
-                    hover:opacity-80`}
+                  className={`flex items-center justify-center w-full h-full font-bold text-[19px] transition duration-300 ease-in-out
+                ${
+                  isSelected
+                    ? "bg-purple-900 text-white"
+                    : "bg-white text-gray-800 hover:bg-purple-200"
+                }
+                hover:opacity-80`}
                 >
                   {text}
                 </Link>
-
-                {/* 화살표: 선택된 경우만 보임 */}
                 {isSelected && (
                   <div
                     className="absolute top-full left-1/2 -translate-x-1/2 transform
-                      w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px]
-                      border-l-transparent border-r-transparent border-t-[#59168b]"
+                  w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px]
+                  border-l-transparent border-r-transparent border-t-[#59168b]"
                   />
                 )}
               </div>
@@ -115,10 +119,12 @@ export default function Header() {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className={
-            `lg:hidden overflow-hidden bg-white border-t border-gray-200 px-4 shadow transition-all duration-300 ease-in-out cursor-pointer
-              ${isMenuOpen ? "max-h-[500px] opacity-100 pt-4" : "max-h-0 opacity-0 pt-0"}`
-            }
+          className={`lg:hidden overflow-hidden bg-white border-t border-gray-200 px-4 shadow transition-all duration-300 ease-in-out cursor-pointer
+              ${
+                isMenuOpen
+                  ? "max-h-[500px] opacity-100 pt-4"
+                  : "max-h-0 opacity-0 pt-0"
+              }`}
         >
           {menus.map(({ text, path }) => {
             const isSelected = pathname === path;
