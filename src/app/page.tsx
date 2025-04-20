@@ -330,30 +330,30 @@ export default function Home() {
       </section>
 
       {/* Section4 - Brand Story */}
-      <section className="relative w-full h-auto px-10 py-8 sm:py-20 md:py-22 lg:py-24">
-        <div className="flex flex-col items-center justify-center text-center">
-          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-6">
+      <section className="relative w-full h-auto">
+        <div className="flex flex-col items-center justify-center text-center
+          mt-[71px] mb-[45px] lg:mt-[200px] lg:mb-[139px]">
+          <h1 className="text-[#541E80] font-black
+            text-[18px] lg:text-[45px]">
             Connecple Brand Story
           </h1>
-          <p className="text-black mt-8 text-sm font-bold
-            sm:mt-10 sm:text-base 
-            md:mt-13 md:text-lg 
-            lg:mt-17 lg:text-2xl">
-            경력은 멈출 수 있어도, 가능성은 멈추지 않습니다.<br /><br />
+          <p className="text-black font-extrabold
+            mt-[30px] text-[8px] lg:mt-[56px] lg:text-[22px]">
+            <span className="text-[#944896]">경력은 멈출 수 있어도, 가능성은 멈추지 않습니다.</span><br /><br />
 
             커넥플은 경력보유여성이 다시 사회와 연결되어, 자신의 경험과 역량을 새로운 기회로 바꿀 수 있도록 함께해요.<br />
             우리는 단순한 복귀를 넘어, 스스로 길을 만들어가는 성장을 지향하지요.<br />
             경력의 공백은 약점이 아니라, 더 단단해질 기회임을, 각자의 시간은 모두 소중한 경험임을 우리는 믿어요.<br /><br />
 
-            당신의 경력, 다시 시작이 아닌 새로운 도약입니다.<br />
-            커넥플과 함께, 우리는 새로운 출발을 준비합니다.<br /><br />
+            <span className="text-[#944896]">당신의 경력, 다시 시작이 아닌 새로운 도약입니다.<br />
+            커넥플과 함께, 우리는 새로운 출발을 준비합니다.</span><br /><br />
 
             체계적인 교육과 실질적인 커리어 연결을 통해, 당신이 다시 주인공이 되는 순간을 함께 할게요.<br />
             단절의 시간을 넘어, 당신의 경험과 역량은 더 큰 가치를 만들어 낼 것이 분명해요.<br /><br /><br />
 
 
             사람과 사람을, 사람과 사회를 연결하는 커넥플_<br />
-            Connect to Grow. Connect to Society
+            <span className="text-[#944896] font-tvn-medium">Connect to Grow. Connect to Society</span>
           </p>
         </div>
       </section>
