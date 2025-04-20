@@ -220,12 +220,16 @@ export default function Home() {
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center px-4">
-                  <p className="text-white text-base sm:text-lg md:text-2xl lg:text-3xl mb-2 font-bold">
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center">
+                  <p className="text-white font-extrabold
+                    text-[9px]
+                    lg:text-[29px]">
                     {slide.company}
                   </p>
                   <h1
-                    className="text-white text-2xl leading-normal sm:text-3xl md:text-4xl lg:text-6xl font-bold"
+                    className="text-white font-extrabold
+                      text-[20px]
+                      lg:text-[51px]"
                     dangerouslySetInnerHTML={{ __html: slide.title }}
                   ></h1>
                 </div>
