@@ -26,54 +26,100 @@
   font-weight: 100;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-ExtraLight.ttf') format('truetype');
   font-weight: 200;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-Light.ttf') format('truetype');
   font-weight: 300;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-Regular.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-Bold.ttf') format('truetype');
   font-weight: 700;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'SUIT';
   src: url('/fonts/SUIT/SUIT-Heavy.ttf') format('truetype');
   font-weight: 900;
   font-display: swap;
 }
+
+/* === tvN 즐거운이야기 폰트 굵기별 등록 === */
+@font-face {
+  font-family: 'tvN';
+  src: url('/fonts/tvN/tvN 즐거운이야기 Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'tvN';
+  src: url('/fonts/tvN/tvN 즐거운이야기 Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'tvN';
+  src: url('/fonts/tvN/tvN 즐거운이야기 Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+.font-tvn-light {
+  font-family: 'tvN', sans-serif;
+  font-weight: 300;
+}
+
+.font-tvn-medium {
+  font-family: 'tvN', sans-serif;
+  font-weight: 500;
+}
+
+.font-tvn-bold {
+  font-family: 'tvN', sans-serif;
+  font-weight: 700;
+}
+
 
 body {
   background: var(--background);
@@ -83,14 +129,16 @@ body {
 
 /* 커스텀 pagination 스타일 */
 .swiper-pagination {
-  bottom: 10% !important; /* 점 위치 조정 */
+  bottom: 10% !important;
+  /* 점 위치 조정 */
 }
 
 /* 기본 점 크기 및 모양 커스텀 (모바일 기준) */
 .swiper-pagination-bullet {
   width: 5px !important;
   height: 5px !important;
-  background-color: #888888 !important; /* 비활성 점 색상 */
+  background-color: #888888 !important;
+  /* 비활성 점 색상 */
   opacity: 1 !important;
   border-radius: 9999px !important;
   margin: 0 1.5px !important;
@@ -99,7 +147,8 @@ body {
 
 /* 활성화된 점 */
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: #ffffff !important; /* 흰색 */
+  background-color: #ffffff !important;
+  /* 흰색 */
 }
 
 /* sm 이상 (태블릿) */
