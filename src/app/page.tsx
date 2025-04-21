@@ -103,14 +103,14 @@ function ListItem({ title, description }: { title: string; description: string }
 
 const newsLetters = [
   {
-    image: "/picture1.svg",
+    image: "/picture_main_with_news_letter_1.png",
     title: "기업이 찾는 실무형 인재, W.I.T.H 프로젝트에서 나온다",
     content:
       "\"바로 채용하고 싶을 정도였어요.\" 프로젝트 파트너 기업의 솔직한 이야기. 이들이 주목한 건 단순한 스펙이 아닌, 실무에 강한 팀워크형 ...",
     href: "/story/1",
   },
   {
-    image: "/picture2.svg",
+    image: "/picture_main_with_news_letter_2.png",
     title: "육아와 커리어, 두마리 토끼를 잡은 그녀의 하루",
     content:
       "오전엔 아이 등원, 오후엔 실무 교육, 저녁엔 나만의 성장 시간. 육아와 커리어를 동시에 이끌어가는 한 엄마의 진짜 이야기를 ...",
@@ -528,44 +528,59 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        
       </section>
 
       {/* Section7 - With News Letter */}
       <section className="bg-[#F4F4F4] w-full h-auto">
-        <div className="flex flex-col w-full h-auto bg-white rounded-tr-[150px] px-30 py-30">
-          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+        <div className="flex flex-col w-full h-auto bg-white rounded-tr-[100px]
+          lg:pt-[95px] lg:px-[130px]">
+          <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H NEWS LETTER
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
-                경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
+          <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
+            경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
           </p>
-          <p className="italic text-purple-600 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
-            {"\"가능성을 깨우고, 성장의 기회를 전하다\""}
+          <p className="font-tvn-medium 
+            lg:text-[33px] lg:text-[#944896]">
+            {"\“가능성을 깨우고, 성장의 기회를 전하다\""}
           </p>
-          <div className="flex justify-end gap-5 mb-5">
+          <div className="flex justify-end gap-[44px] lg:mt-[-9px] lg:mb-[33px]">
+            {/* 왼쪽 화살표 */}
             <button
               onClick={prev}
               disabled={index === 0}
-              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl
-                ${index === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:text-purple-700 cursor-pointer'}`}
+              className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
             >
-              ←
+              <Image
+                src={index === 0 ? "/vector_left_gray.svg" : "/vector_right_black.svg"}
+                alt="왼쪽 화살표"
+                width={32}
+                height={32}
+                className={`w-full h-full object-contain ${index === 0 ? "" : "rotate-180"}`}
+              />
             </button>
+
+            {/* 오른쪽 화살표 */}
             <button
               onClick={next}
               disabled={index >= newsLetters.length - 2}
-              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl
-                ${index >= newsLetters.length - 2 ? 'text-gray-300 cursor-not-allowed' : 'text-black hover:text-purple-700 cursor-pointer'}`}
+              className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
             >
-              →
+              <Image
+                src={index >= newsLetters.length - 2 ? "/vector_left_gray.svg" : "/vector_right_black.svg"}
+                alt="오른쪽 화살표"
+                width={32}
+                height={32}
+                className={`w-full h-full object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
+              />
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-screen-xl w-full">
+          <div className="grid lg:grid-cols-2 lg:gap-[16px] w-full">
             {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
               <div
                 key={i}
-                className="relative h-[300px] sm:h-[400px] rounded-3xl overflow-hidden group"
+                className="relative rounded-[30px] overflow-hidden group
+                  lg:h-[300px]"
               >
                 {/* 이미지 */}
                 <Image
@@ -579,37 +594,40 @@ export default function Home() {
                 <div className="absolute inset-0 group-hover:bg-black/60 transition duration-300" />
 
                 {/* 텍스트 (hover 시 등장) */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 pr-20 text-white 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="text-lg sm:text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-sm sm:text-base line-clamp-2">{item.content}</p>
+                <div className="absolute inset-0 flex flex-col text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                  lg:pl-[40px] lg:pr-[40%] lg:pb-[10px] lg:pt-[75px]">
+                  <div className="flex-[3]">
+                    <h1 className=" font-black lg:text-[23px]">{item.title}</h1>  
+                  </div>
+                  <div className="flex-[2] overflow-hidden">
+                    <p className="font-medium line-clamp-3 lg:text-[14px] lg:mb-[34px] ">{item.content}</p>
+                  </div>
                 </div>
 
                 {/* 우하단 바로가기 버튼 (hover 시 등장) */}
                 <Link
                   href={item.href}
-                  className="absolute w-8 h-8 bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                            bg-transparent text-white rounded-xl border border-white hover:bg-white hover:text-black
-                            flex items-center justify-center"
+                  className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center
+                    bg-transparent text-white border border-white hover:bg-white hover:text-black
+                    lg:w-[30px] lg:h-[30px] lg:bottom-[50px] lg:right-[50px]"
                 >
                   {"\>"}
                 </Link>
               </div>
             ))}
           </div>
-          <div className="mt-8">
-            <p className="text-purple-900 font-bold text-base sm:text-lg md:text-xl lg:text-2xl">
+          <div className="lg:mt-[37px]">
+            <p className="text-[#541E80] font-extrabold lg:text-[20px]">
               당신과의 시간과 당신의 가능성은 소중합니다
             </p>
           </div>
-          <div className="mt-5">
+          <div className="flex justify-start lg:mt-[16px]">
             <Link
-              href="/with-connectday"
-              className="px-6 py-4 bg-purple-900 text-white font-bold 
-                rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
-                text-lg lg:text-2xl text-center"
+              href="/with-newsletter"
+              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px]
+                lg:w-[267px] lg:h-[52px] lg:text-[20px]"
             >
-              가능성을 향한 첫 걸음 →
+              나의 성장도 연결하기&nbsp;&nbsp;&nbsp;➝
             </Link>
           </div>
         </div>
