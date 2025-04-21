@@ -27,9 +27,9 @@ export default function Footer() {
       <Image
         src="/logo_footer.svg"
         alt="CONNECPLE"
-        width={272}
-        height={61}
-        className="w-[90px] h-[21px] mt-[15px] lg:mt-[35px]"
+        width={90}
+        height={21}
+        className="lg:w-[272px] lg:h-[61px] mt-[15px] lg:mt-[35px]"
       />
 
       <div className="grid grid-cols-5 mt-[15px] lg:mt-[40px]">
