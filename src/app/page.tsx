@@ -368,9 +368,9 @@ export default function Home() {
           rounded-tl-[100px] pt-[54px]
           lg:rounded-tl-[150px] lg:pt-[129px]">
           <div className="lg:pl-[130px]">
-            <h2 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
+            <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
               W.I.T.H PROJECT
-            </h2>
+            </h1>
           </div>
           <div className="w-full 
             grid grid-cols-1 
@@ -453,7 +453,7 @@ export default function Home() {
               <div className="flex-[1] flex items-center">
                 <p className="text-[#541E80] font-extrabold
                   lg:h-[14px] lg:text-[20px] lg:ml-[32px]">
-                  가능성은 여전히 당신 안에 있습니다
+                  가능성은 여전히 당신 안에 있습니다.
                 </p>
               </div>
             </div>
@@ -462,36 +462,39 @@ export default function Home() {
       </section>
 
       {/* Section6 - With ConnectDay */}
-      <section className="w-full h-auto bg-[#F4F4F4] py-20 px-30">
-        <div className="flex flex-col">
-          <h1 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+      <section className="w-full h-auto bg-[#F4F4F4]">
+        <div className="flex flex-col
+          lg:pt-[151px] lg:px-[130px]">
+          <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H CONNECTDAY
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
-                경력보유여성의 성장을 지원하는 정기 네트워킹
+          <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
+            경력보유여성의 성장을 지원하는 정기 네트워킹
           </p>
-          <p className="italic text-purple-600 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5">
-            {"\"성장을 나누고, 새로운 기회를 연결하다\""}
+          <p className="font-tvn-medium 
+            lg:text-[33px] lg:text-[#944896] lg:h-[60px] lg:mb-[15px]">
+            {"\“성장을 나누고, 새로운 기회를 연결하다\""}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 overflow-hidden rounded-3xl mt-5">
+          <div className="grid grid-cols-1 gap-0 overflow-hidden
+            lg:grid-cols-3 lg:rounded-[50px] lg:h-[280px]">
             {[
               {
-                src: "/picture1.svg",
+                src: "/picture_main_with_connectday_1.png",
                 title: "성장의 여정을 공유하는 자리",
                 content: "위드프로젝트 수료생들과의 만남",
               },
               {
-                src: "/picture2.svg",
-                title: "함께 걸어온 시간들",
-                content: "성장과 도전의 순간을 기념하다",
+                src: "/picture_main_with_connectday_2.png",
+                title: "새로운 커리어 기회를 연결하는 네트워킹",
+                content: "다양한 분야 전문가들과의 만남",
               },
               {
-                src: "/picture3.svg",
-                title: "다시 도약하는 그 순간",
-                content: "새로운 출발을 준비하는 우리들",
+                src: "/picture_main_with_connectday_3.png",
+                title: "단절을 넘어 함께 그리는 미래",
+                content: "성장 선언 챌린지, 테이블 멘토링",
               },
             ].map((item, idx) => (
-              <div key={idx} className="relative group h-[200px] sm:h-[300px]">
+              <div key={idx} className="relative group">
                 {/* 배경 이미지 */}
                 <Image
                   src={item.src}
@@ -501,29 +504,31 @@ export default function Home() {
                 />
 
                 {/* 오버레이 */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white px-4 text-center">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">{item.title}</h3>
-                  <p className="text-base sm:text-lg lg:text-xl mt-2">{item.content}</p>
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white text-center">
+                  <h1 className="font-extrabold lg:text-[20px] lg:h-[14px]">{item.title}</h1>
+                  <p className="font-bold lg:text-[18px] lg:h-[13px] lg:mt-[21px]">{item.content}</p>
                 </div>
               </div>
             ))}
           </div>
+          <div className="items-end justify-center 
+            lg:mt-[29px] lg:mb-[16px] lg:mr-[22px]">
+            <p className="text-[#541E80] font-extrabold text-right
+              lg:text-[20px] lg:h-[14px] lg:mb-[16px]">
+              가능성은 연결될 때 빛이 납니다.
+            </p>
+          </div>
+          <div className="flex justify-end lg:mr-[22px] lg:mb-[115px]">
+            <Link
+              href="/with-connectday"
+              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px]
+                lg:w-[267px] lg:h-[52px] lg:text-[20px]"
+            >
+              나의 성장도 연결하기&nbsp;&nbsp;&nbsp;➝
+            </Link>
+          </div>
         </div>
-        <div className="items-end justify-center mt-5">
-          <p className="text-purple-900 font-bold text-base sm:text-lg md:text-xl lg:text-2xl text-right">
-            가능성은 연결될 때 빛이 납니다
-          </p>
-        </div>
-        <div className="mt-5 flex justify-end">
-          <Link
-            href="/with-connectday"
-            className="px-6 py-4 bg-purple-900 text-white font-bold 
-              rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
-              text-lg lg:text-2xl text-center"
-          >
-            나의 성장도 연결하기 ➝
-          </Link>
-        </div>
+        
       </section>
 
       {/* Section7 - With News Letter */}
