@@ -641,7 +641,7 @@ export default function Home() {
         <p className="text-[#686868] font-extrabold text-center lg:text-[27px] lg:mt-[10px]">
           공급기관, 민관기업을 포함한 30개 이상의 고객사가 커넥플과 함께하고 있습니다. 
         </p>
-        <div className="w-full overflow-hidden bg-white lg:mt-[31px]">
+        <div className="w-full overflow-hidden bg-white lg:mt-[31px] lg:mb-[80px]">
           <style jsx>{`
             @keyframes scrollLeft {
               0% {
@@ -685,20 +685,27 @@ export default function Home() {
       </section>
 
       {/* Section9 - 자세히 보기 */}
-      <section 
-        className="relative w-full aspect-video text-white bg-cover bg-center"
-        style={{backgroundImage: "url('/picture8.svg')"}}
-      >
-        <div className="max-w-screen-xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-5 items-center">
+      <section className="relative w-full aspect-video">
+        {/* 꽉 찬 배경 이미지 */}
+        <Image
+          src="/picture_main_detail_bg.png" // public 폴더에 넣은 이미지 경로
+          alt="Main Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* 콘텐츠 영역 */}
+        <div className="absolute inset-0 flex items-start justify-center 
+          lg:px-[100px] lg:mt-[150px]">
           {/* 왼쪽 텍스트 (세로줄 포함, 3/5) */}
-          <div className="md:col-span-3 border-l-4 border-white pl-6 space-y-4">
-            <p className="text-2xl sm:text-3xl font-bold">당신의 재도약을 응원합니다</p>
-            <h2 className="text-4xl sm:text-5xl font-extrabold">Women In The Hope</h2>
-            <p className="text-xl sm:text-2xl font-semibold">경력보유여성 재도약 프로젝트</p>
+          <div className="flex-[3] border-l-[3px] text-white border-white lg:pl-[32px] space-y-[16px]">
+            <p className="font-bold lg:text-[45px]">당신의 재도약을 응원합니다</p>
+            <h2 className="font-black lg:text-[60px]">Women In The Hope</h2>
+            <p className="font-bold lg:text-[25px]">경력보유여성 재도약 프로젝트</p>
           </div>
 
           {/* 오른쪽 버튼 3개 (2/5) - 반응형 대응 포함) */}
-          <div className="mt-10 md:mt-0 md:col-span-2 flex flex-col md:items-start gap-4 w-full items-stretch max-w-[400px]">
+          <div className="flex-[2] flex flex-col gap-y-[14px]">
             {[
               {
                 label: "W.I.T.H Project 자세히 보기",
@@ -716,11 +723,12 @@ export default function Home() {
               <Link
                 key={idx}
                 href={btn.href}
-                className="bg-purple-900 hover:bg-[#B44FB4] text-white font-semibold px-6 py-4 
-                  rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] 
-                  text-center text-base sm:text-lg transition w-full"
+                className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold 
+                  lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px] 
+                  lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
               >
-                {btn.label} →
+                <span className="truncate">{btn.label}</span>
+                <span className="ml-2 text-[22px]">➝</span>
               </Link>
             ))}
           </div>
