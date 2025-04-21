@@ -77,19 +77,23 @@ const storyLabels = [
 
 function ListItem({ title, description }: { title: string; description: string }) {
   return (
-    <div className="mt-4 space-y-1">
+    <div>
       {/* 첫 번째 줄 */}
-      <div className="flex items-center gap-2 space-x-5">
-        <span className="w-2.5 h-2.5 rounded-full bg-purple-900 shrink-0" />
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
+      <div className="flex items-center lg:h-[14px]">
+        <span className="rounded-full bg-[#541E80] shrink-0
+          lg:w-[8px] lg:h-[8px]" />
+        <p className="font-extrabold
+          lg:text-[20px] lg:ml-[16px]">
           {title}
         </p>
       </div>
 
       {/* 두 번째 줄 */}
-      <div className="flex items-center gap-2 space-x-5">
-        <span className="w-2.5 h-2.5 shrink-0" />
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl">
+      <div className="flex items-center lg:h-[13px] lg:mt-[17px]">
+        <span className="shrink-0
+          lg:w-[8px] lg:h-[8px]" />
+        <p className="font-medium
+          lg:text-[18px] lg:ml-[16px]">
           - {description}
         </p>
       </div>
@@ -360,22 +364,28 @@ export default function Home() {
 
       {/* Section5 - With Project */}
       <section className="bg-white w-full h-auto">
-        <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4] rounded-tl-[150px] py-20">
-          <div className="pl-30 pt-10 pb-5">
-            <h2 className="text-purple-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+        <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4]  
+          rounded-tl-[100px] pt-[54px]
+          lg:rounded-tl-[150px] lg:pt-[129px]">
+          <div className="lg:pl-[130px]">
+            <h2 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
               W.I.T.H PROJECT
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 w-full items-stretch">
+          <div className="w-full 
+            grid grid-cols-1 
+            lg:grid-cols-2">
             {/* 좌측 콘텐츠 영역 */}
-            <div className="flex flex-col justify-center pl-30">
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
+            <div className="flex flex-col justify-center lg:pl-[130px]">
+              <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
                 경력보유여성 재도약 프로젝트
               </p>
-              <p className="italic text-purple-600 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-4 mb-5">
+              <p className="font-tvn-medium 
+                lg:text-[33px] lg:text-[#944896]">
                 {"\"경력의 공백을 가능성으로 바꾸다\""}
               </p>
-              <div>
+              <div className="flex flex-col space-y-[26px]
+                lg:mt-[44px] lg:gab-[26px]">
                 <ListItem
                   title="ICT 융합 분야 트렌드 학습 기회"
                   description="빠르게 변화하는 디지털 산업 흐름을 이해하고 대비합니다"
@@ -409,30 +419,40 @@ export default function Home() {
 
             {/* 우측 이미지 영역 */}
             <div className="relative w-full h-full flex flex-col justify-between items-center">
-              <div className="relative w-full aspect-video md:aspect-auto md:flex-[9] overflow-hidden rounded-l-full">
+              <div className="relative flex-[9] w-full aspect-video overflow-hidden rounded-l-full">
                 <Image
-                  src="/picture1.svg"
+                  src="/picture_with_project.png"
                   alt="WITH Project Banner"
                   fill
                   className="object-cover object-top"
                 />
+                {/* 우측 하단 로고 */}
+                <Image
+                  src="/logo_with_project.svg" // 원하는 로고 이미지 경로로 바꾸세요
+                  alt="Logo"
+                  width={274}
+                  height={144}
+                  className="absolute lg:bottom-[30px] right-[23px]"
+                />
               </div>
-
               <div>
                 <Link
                   href="/with-project"
-                  className="md:absolute left-0 bottom-0 mx-auto my-6 md:my-0 md:ml-0 md:mr-0 block
-                    bg-purple-900 text-white px-6 py-4 font-bold rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
-                    text-lg lg:text-2xl space-y-1 text-left"
+                  className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center
+                    lg:left-[83px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]
+                    lg:rounded-tl-[12px] lg:rounded-tr-[12x] lg:rounded-bl-[12px]"
                 >
-                  <span className="block">가능성을</span>
-                  <span className="block">현실로</span>
-                  <span className="block">만들기 →</span>
+                  <span>
+                    가능성을<br />
+                    현실로<br />
+                    만들기&nbsp;&nbsp;&nbsp;➝
+                  </span>
                 </Link>
               </div>
 
-              <div className="flex-[1] flex items-end justify-center">
-                <p className="text-purple-900 font-bold text-base sm:text-lg md:text-xl lg:text-2xl text-center">
+              <div className="flex-[1] flex items-center">
+                <p className="text-[#541E80] font-extrabold
+                  lg:h-[14px] lg:text-[20px] lg:ml-[32px]">
                   가능성은 여전히 당신 안에 있습니다
                 </p>
               </div>
@@ -501,7 +521,7 @@ export default function Home() {
               rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl
               text-lg lg:text-2xl text-center"
           >
-            나의 성장도 연결하기 →
+            나의 성장도 연결하기 ➝
           </Link>
         </div>
       </section>
