@@ -634,14 +634,14 @@ export default function Home() {
       </section>
 
       {/* Section8 - 파트너스 */}
-      <section className="pb-30 w-full h-auto flex flex-col items-center">
-        <h1 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+      <section className="w-full h-auto flex flex-col items-center lg:mt-[120px]">
+        <h1 className="font-black text-center lg:text-[45px]">
             커넥플과 함께하고 있는 파트너스
         </h1>
-        <p className="px-30 text-gray-400 text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-5 text-center">
-              경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
+        <p className="text-[#686868] font-extrabold text-center lg:text-[27px] lg:mt-[10px]">
+          공급기관, 민관기업을 포함한 30개 이상의 고객사가 커넥플과 함께하고 있습니다. 
         </p>
-        <div className="w-full overflow-hidden bg-white py-20">
+        <div className="w-full overflow-hidden bg-white lg:mt-[31px]">
           <style jsx>{`
             @keyframes scrollLeft {
               0% {
@@ -660,19 +660,19 @@ export default function Home() {
           `}</style>
 
           {/* 두 줄 (엇갈림 적용) */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col lg:gap-[16px]">
             {[0, 1].map((row) => (
               <div key={row} className="overflow-hidden relative">
                 <div
-                  className={`scroll-row ${row % 2 === 1 ? 'ml-[70px]' : ''}`}
+                  className={`scroll-row ${row % 2 === 1 ? 'ml-[80px]' : ''}`}
                 >
                   {[...logos, ...logos].map((src, i) => (
-                    <div key={`${row}-${i}`} className="mx-6 flex items-center">
+                    <div key={`${row}-${i}`} className="lg:mx-[30px] flex items-center">
                       <Image
                         src={src}
                         alt={`logo-${i}`}
-                        width={100}
-                        height={40}
+                        width={128}
+                        height={79}
                         className="object-contain"
                       />
                     </div>
