@@ -14,6 +14,8 @@ import Link from "next/link";
 
 import { useState } from "react";
 
+import { motion } from "framer-motion";
+
 const slides = [
   {
     src: "/picture1.svg",
@@ -224,17 +226,30 @@ export default function Home() {
           }}
         />
         {/* 중앙 텍스트 오버레이 */}
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-          flex flex-col items-center justify-center text-white z-20">
-          <p className="font-bold text-[9px] mb-[5px]
-            lg:text-[29px] lg:mb-[17px]">
+        <motion.div
+          className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+            flex flex-col items-center justify-center text-white z-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.p
+            className="font-bold text-[9px] mb-[5px] lg:text-[29px] lg:mb-[17px]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
             당신의 여정이 머무르지 않도록,
-          </p>
-          <h1 className="font-black text-[21px]
-            lg:text-[61px]">
+          </motion.p>
+          <motion.h1
+            className="font-black text-[21px] lg:text-[61px]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
             우리는 길을 만듭니다
-          </h1>
-        </div>
+          </motion.h1>
+        </motion.div>
 
         {/* 하단 로고 */}
         <div className="absolute left-1/2 -translate-x-1/2 transform
