@@ -433,31 +433,31 @@ export default function Home() {
                 lg:mt-[44px] lg:gab-[26px]">
                 <ListItem
                   title="ICT 융합 분야 트렌드 학습 기회"
-                  description="빠르게 변화하는 디지털 산업 흐름을 이해하고 대비합니다"
+                  description="빠르게 변화하는 디지털 산업 흐름을 이해하고 대비합니다."
                 />
                 <ListItem
                   title="프로젝트 멤버로 직접 참여하는 성장형 교육 프로그램"
-                  description="실전 프로젝트를 통해 실무 능력과 팀워크를 키웁니다"
+                  description="실전 프로젝트를 통해 실무 능력과 팀워크를 키웁니다."
                 />
                 <ListItem
                   title="현장에서 쌓는 실무 경험"
-                  description="이론을 넘어, 실제 업무를 수행하며 경험을 쌓습니다"
+                  description="이론을 넘어, 실제 업무를 수행하며 경험을 쌓습니다."
                 />
                 <ListItem
                   title="프로젝트 실무 노하우 집중 학습"
-                  description="현업 전문가의 노하우를 배우고 업무 역량을 강화합니다"
+                  description="현업 전문가의 노하우를 배우고 업무 역량을 강화합니다."
                 />
                 <ListItem
                   title="커리어 방향성 설정 & 개인 강점 컨설팅"
-                  description="나만의 커리어 로드맵을 설계하고, 강점을 명확히 찾습니다"
+                  description="나만의 커리어 로드맵을 설계하고, 강점을 명확히 찾습니다."
                 />
                 <ListItem
                   title="우수 수료생 대상 인턴십 프로그램"
-                  description="선발된 수료생에게 유연근무형 인턴십 기회를 제공합니다"
+                  description="선발된 수료생에게 유연근무형 인턴십 기회를 제공합니다."
                 />
                 <ListItem
                   title="경제적 자립을 위한 실질적 기회"
-                  description="프로젝트 참여를 통해 급여와 함께 자립 기반을 마련합니다"
+                  description="프로젝트 참여를 통해 급여와 함께 자립 기반을 마련합니다."
                 />
               </div>
             </div>
@@ -506,12 +506,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section6 - With ConnectDay */}
+      {/* Section6 - With ConnecDay */}
       <section className="w-full h-auto bg-[#F4F4F4]">
         <div className="flex flex-col
           lg:pt-[151px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
-            W.I.T.H CONNECTDAY
+            W.I.T.H CONNECDAY
           </h1>
           <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
             경력보유여성의 성장을 지원하는 정기 네트워킹
@@ -684,7 +684,7 @@ export default function Home() {
             커넥플과 함께하고 있는 파트너스
         </h1>
         <p className="text-[#686868] font-extrabold text-center lg:text-[27px] lg:mt-[20px]">
-          공급기관, 민관기업을 포함한 30개 이상의 고객사가 커넥플과 함께하고 있습니다. 
+          공공기관, 민간기업을 포함한 30개 이상의 고객사가 커넥플과 함께하고 있습니다. 
         </p>
         <div className="w-full overflow-hidden bg-white lg:mt-[31px] lg:mb-[150px]">
           <style jsx>{`
