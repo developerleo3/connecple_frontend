@@ -46,7 +46,7 @@ export default function Header() {
   return (
     <header className="shadow-md bg-white">
       <nav className="h-[47px] flex items-center justify-between px-5 
-        lg:h-[90px] lg:grid lg:grid-cols-7 lg:gap-4 lg:px-30">
+        lg:h-[90px] lg:grid lg:grid-cols-7 lg:gap-4">
         {/* 로고 */}
         <div className="flex items-center h-full col-span-1">
           <Link href="/" className="block relative">
