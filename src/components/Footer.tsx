@@ -29,14 +29,14 @@ export default function Footer() {
         alt="CONNECPLE"
         width={90}
         height={21}
-        className="lg:w-[272px] lg:h-[61px] mt-[15px] lg:mt-[35px]"
+        className="lg:w-[272px] lg:h-[61px] mt-[10px] lg:mt-[25px]"
       />
 
       <div className="grid grid-cols-5 mt-[15px] lg:mt-[40px]">
         {/* 좌측 정보 (3/5) */}
         <div className="col-span-3 border-r-[1px] border-[#C3C3C3]
-          space-y-[5px] text-[8px]
-          lg:space-y-[16px] lg:text-[20px]">
+          space-y-[10px] text-[8px]
+          lg:space-y-[30px] lg:text-[20px]">
           {/* 대표 정보 */}
           <div className="flex font-medium gap-x-[10px] lg:gap-x-[44px]">
             <p className="font-bold">대표</p>
@@ -53,18 +53,19 @@ export default function Footer() {
           {/* 사업자정보 */}
           <div className="flex flex-wrap">
             <p className="font-bold">사업자번호</p>
-            <p className="ml-[5px] lg:ml-[22px]">123-45-67890</p>
+            <p className="ml-[5px] lg:ml-[22px]">191-88-02321</p>
             <p className="font-bold ml-[10px] lg:ml-[44px]">대표 이메일</p>
-            <p className="ml-[5px] lg:ml-[22px]">with@cnp.day</p>
+            <p className="ml-[5px] lg:ml-[22px]">admin@cnp.day</p>
           </div>
         </div>
 
         {/* 우측 고객센터 (2/5) */}
         <div className="col-span-2 pl-[31px] lg:pl-[112px]">
           <p className="font-bold text-[8px] lg:text-[20px]">고객센터</p>
-          <p className="font-bold text-[11px] lg:text-[32px]">02-2610-9774</p>
+          <p className="font-bold text-[9px] lg:text-[24px]">02-2610-9770<span className="font-medium text-[8px] lg:text-[20px]">  (대표)</span></p>
+          <p className="font-bold text-[9px] lg:text-[24px]">02-2610-9772<span className="font-medium text-[8px] lg:text-[20px]">  (MICE사업부)</span></p>
+          <p className="font-bold text-[9px] lg:text-[24px]">02-2610-9774<span className="font-medium text-[8px] lg:text-[20px]">  (교육사업부)</span></p>
           <p className="font-medium text-[6px] lg:text-[20px]">평일 9:00 - 18:00</p>
-          <p className="font-medium text-[6px] lg:text-[20px]">주말 10:00 - 14:00</p>
         </div>
       </div>
       <p className="text-[8px] mt-[20px] mb-[28px]
