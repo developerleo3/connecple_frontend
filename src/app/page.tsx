@@ -139,15 +139,53 @@ const newsLetters = [
   },
 ];
 
-const logos = [
-  "/logo.png",
-  "/logo.png",
-  "/logo.png",
-  "/logo.png",
-  "/logo.png",
-  "/logo.png",
-  "/logo.png",
-  "/logo.png",
+const logos1 = [
+  "/partners/과기부.png",
+  "/partners/국민외교아카데미.png",
+  "/partners/국방부.png",
+  "/partners/사이버작전사령부.png",
+  "/partners/산업통상자원부.png",
+  "/partners/서울우먼업.png",
+  "/partners/서울특별시.png",
+  "/partners/서울특별시여성능력개발원.png",
+  "/partners/알씨케이.png",
+  "/partners/올잇원.png",
+  "/partners/외교부.png",
+  "/partners/재외동포청.png",
+  "/partners/질병관리본부KCDC.png",
+  "/partners/한국국제교류재단.png",
+  "/partners/한국데이터산업진흥원.png",
+  "/partners/한국여성재단.png",
+  "/partners/한국전자통신연구원.png",
+  "/partners/한국지능정보사회진흥원.png",
+  "/partners/alpinelab.png",
+  "/partners/autocrypt.png",
+  "/partners/BKit.png",
+];
+
+const logos2 = [
+  "/partners/ccmediaservice.png",
+  "/partners/cloud.png",
+  "/partners/coontec.png",
+  "/partners/deotis.png",
+  "/partners/enki.png",
+  "/partners/iaccess.png",
+  "/partners/idb.png",
+  "/partners/iotree.png",
+  "/partners/KISA.png",
+  "/partners/lg경영연구원.png",
+  "/partners/luvmom.png",
+  "/partners/Mind&Manual.png",
+  "/partners/nshc.png",
+  "/partners/nurilab.png",
+  "/partners/opstech.png",
+  "/partners/pado.svg",
+  "/partners/smarterbuild.png",
+  "/partners/somma.png",
+  "/partners/uinus.png",
+  "/partners/vizensoft.png",
+  "/partners/webbizz.png",
+  "/partners/zetaluh.png",
 ];
 
 export default function Home() {
@@ -175,12 +213,19 @@ export default function Home() {
           src="/picture_main.png" // public 폴더에 넣은 이미지 경로
           alt="Main Background"
           fill
-          className="object-cover"
+          className="object-cover z-0"
           priority
+        />
+        {/* 💡 Linear Gradient Overlay */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1))",
+          }}
         />
         {/* 중앙 텍스트 오버레이 */}
         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-          flex flex-col items-center justify-center text-white">
+          flex flex-col items-center justify-center text-white z-20">
           <p className="font-bold text-[9px] mb-[5px]
             lg:text-[29px] lg:mb-[17px]">
             당신의 여정이 머무르지 않도록,
@@ -194,7 +239,7 @@ export default function Home() {
         {/* 하단 로고 */}
         <div className="absolute left-1/2 -translate-x-1/2 transform
           bottom-[20px] w-[71px] h-[16px]
-          lg:bottom-[37px] lg:w-[175px] lg:h-[40px]">
+          lg:bottom-[37px] lg:w-[175px] lg:h-[40px] z-20">
           <Image
             src="/logo_main_picture.svg"
             alt="Logo-white"
@@ -269,7 +314,7 @@ export default function Home() {
               key={idx}
               className="flex flex-col items-center justify-center
                 w-[176px] h-[176px] 
-                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[5px_5px_10px_0_rgba(0,0,0,0.9)]"
+                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[5px_5px_10px_0_rgba(0,0,0,0.5)]"
             >
               <div className="flex-[3] flex items-center justify-center text-center">
                 <p
@@ -634,14 +679,14 @@ export default function Home() {
       </section>
 
       {/* Section8 - 파트너스 */}
-      <section className="w-full h-auto flex flex-col items-center lg:mt-[120px]">
+      <section className="w-full h-auto flex flex-col items-center lg:mt-[150px]">
         <h1 className="font-black text-center lg:text-[45px]">
             커넥플과 함께하고 있는 파트너스
         </h1>
-        <p className="text-[#686868] font-extrabold text-center lg:text-[27px] lg:mt-[10px]">
+        <p className="text-[#686868] font-extrabold text-center lg:text-[27px] lg:mt-[20px]">
           공급기관, 민관기업을 포함한 30개 이상의 고객사가 커넥플과 함께하고 있습니다. 
         </p>
-        <div className="w-full overflow-hidden bg-white lg:mt-[31px] lg:mb-[80px]">
+        <div className="w-full overflow-hidden bg-white lg:mt-[31px] lg:mb-[150px]">
           <style jsx>{`
             @keyframes scrollLeft {
               0% {
@@ -659,27 +704,41 @@ export default function Home() {
             }
           `}</style>
 
-          {/* 두 줄 (엇갈림 적용) */}
+          {/* 두 줄 (서로 다른 logos1, logos2) */}
           <div className="flex flex-col lg:gap-[16px]">
-            {[0, 1].map((row) => (
-              <div key={row} className="overflow-hidden relative">
-                <div
-                  className={`scroll-row ${row % 2 === 1 ? 'ml-[80px]' : ''}`}
-                >
-                  {[...logos, ...logos].map((src, i) => (
-                    <div key={`${row}-${i}`} className="lg:mx-[30px] flex items-center">
-                      <Image
-                        src={src}
-                        alt={`logo-${i}`}
-                        width={128}
-                        height={79}
-                        className="object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
+            {/* logos1 */}
+            <div className="overflow-hidden relative">
+              <div className="scroll-row">
+                {[...logos1, ...logos1].map((src, i) => (
+                  <div key={`logos1-${i}`} className="lg:mx-[30px] flex items-center">
+                    <Image
+                      src={src}
+                      alt={`logos1-${i}`}
+                      width={128}
+                      height={79}
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* logos2 */}
+            <div className="overflow-hidden relative">
+              <div className="scroll-row ml-[80px]">
+                {[...logos2, ...logos2].map((src, i) => (
+                  <div key={`logos2-${i}`} className="lg:mx-[30px] flex items-center">
+                    <Image
+                      src={src}
+                      alt={`logos2-${i}`}
+                      width={128}
+                      height={79}
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -727,8 +786,8 @@ export default function Home() {
                   lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px] 
                   lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
               >
-                <span className="truncate">{btn.label}</span>
-                <span className="ml-2 text-[22px]">➝</span>
+                 <span className="truncate">{btn.label}</span>
+                 <span className="text-[22px]">➝</span>
               </Link>
             ))}
           </div>
