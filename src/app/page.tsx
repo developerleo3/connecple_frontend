@@ -231,13 +231,13 @@ export default function Home() {
             flex flex-col items-center justify-center text-white z-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 3 }}
         >
           <motion.p
             className="font-bold text-[9px] mb-[5px] lg:text-[29px] lg:mb-[17px]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            transition={{ duration: 3, delay: 0.3 }}
           >
             당신의 여정이 머무르지 않도록,
           </motion.p>
@@ -245,7 +245,7 @@ export default function Home() {
             className="font-black text-[21px] lg:text-[61px]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            transition={{ duration: 3, delay: 0.6 }}
           >
             우리는 길을 만듭니다
           </motion.h1>
