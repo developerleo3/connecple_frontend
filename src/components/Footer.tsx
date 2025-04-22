@@ -24,21 +24,22 @@ export default function Footer() {
           문의하기
         </Link>
       </div>
-      <Image
-        src="/logo_footer.svg"
-        alt="CONNECPLE"
-        width={90}
-        height={21}
-        className="lg:w-[272px] lg:h-[61px] mt-[10px] lg:mt-[25px]"
-      />
 
-      <div className="grid grid-cols-5 mt-[15px] lg:mt-[40px]">
+      <div className="grid grid-cols-5 mt-[3px] lg:mt-[10px]">
         {/* 좌측 정보 (3/5) */}
         <div className="col-span-3 border-r-[1px] border-[#C3C3C3]
-          space-y-[10px] text-[8px]
-          lg:space-y-[30px] lg:text-[20px]">
+          space-y-[1px] text-[8px]
+          lg:space-y-[5px] lg:text-[20px]"
+        >
+          <Image
+            src="/logo_footer.svg"
+            alt="CONNECPLE"
+            width={90}
+            height={21}
+            className="lg:w-[272px] lg:h-[61px] mt-[3px]"
+          />
           {/* 대표 정보 */}
-          <div className="flex font-medium gap-x-[10px] lg:gap-x-[44px]">
+          <div className="flex font-medium gap-x-[10px] mt-[3px] lg:mt-[10px] lg:gap-x-[44px]">
             <p className="font-bold">대표</p>
             <p>박지희</p>
             <p>주식회사커넥플</p>
@@ -68,7 +69,7 @@ export default function Footer() {
           <p className="font-medium text-[6px] lg:text-[20px]">평일 9:00 - 18:00</p>
         </div>
       </div>
-      <p className="text-[8px] mt-[20px] mb-[28px]
+      <p className="text-[8px] mt-[14px] mb-[28px]
         lg:text-[20px] lg:mt-[40px] lg:mb-[70px]">Copyright ⓒ 2025.All right Reserved by CONNECPLE.</p>
     </footer>
   );
