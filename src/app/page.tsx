@@ -672,7 +672,7 @@ export default function Home() {
               className="bg-[#541E80] text-white font-extrabold flex items-center justify-center rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px]
                 lg:w-[267px] lg:h-[52px] lg:text-[20px]"
             >
-              나의 성장도 연결하기&nbsp;&nbsp;&nbsp;➝
+              가능을 향한 첫 걸음&nbsp;&nbsp;&nbsp;➝
             </Link>
           </div>
         </div>
@@ -772,7 +772,7 @@ export default function Home() {
               },
               {
                 label: "W.I.T.H Connecday 자세히 보기",
-                href: "/with-connecday"
+                href: "/with-connectday"
               },
               {
                 label: "W.I.T.H News letter 자세히 보기",
