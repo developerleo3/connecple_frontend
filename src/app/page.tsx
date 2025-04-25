@@ -81,20 +81,26 @@ function ListItem({ title, description }: { title: string; description: string }
   return (
     <div>
       {/* 첫 번째 줄 */}
-      <div className="flex items-center lg:h-[14px]">
+      <div className="flex items-center h-[7px] lg:h-[14px]">
         <span className="rounded-full bg-[#541E80] shrink-0
+          w-[4px] h-[4px]
           lg:w-[8px] lg:h-[8px]" />
         <p className="font-extrabold
+          text-[10px] ml-[7px]
           lg:text-[20px] lg:ml-[16px]">
           {title}
         </p>
       </div>
 
       {/* 두 번째 줄 */}
-      <div className="flex items-center lg:h-[13px] lg:mt-[17px]">
+      <div className="flex items-center 
+        h-[7px] mt-[8px]
+        lg:h-[13px] lg:mt-[17px]">
         <span className="shrink-0
+          w-[4px] h-[4px]
           lg:w-[8px] lg:h-[8px]" />
         <p className="font-medium
+          text-[10px] ml-[7px]
           lg:text-[18px] lg:ml-[16px]">
           - {description}
         </p>
@@ -434,9 +440,9 @@ export default function Home() {
       {/* Section5 - With Project */}
       <section className="bg-white w-full h-auto">
         <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4]  
-          rounded-tl-[100px] pt-[54px]
+          rounded-tl-[60px] pt-[54px]
           lg:rounded-tl-[150px] lg:pt-[129px]">
-          <div className="lg:pl-[130px]">
+          <div className="pl-[51px] lg:pl-[130px]">
             <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
               W.I.T.H PROJECT
             </h1>
@@ -445,16 +451,20 @@ export default function Home() {
             grid grid-cols-1 
             lg:grid-cols-2">
             {/* 좌측 콘텐츠 영역 */}
-            <div className="flex flex-col justify-center lg:pl-[130px]">
-              <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
+            <div className="flex flex-col justify-center pl-[51px] lg:pl-[130px]">
+              <p className="font-black 
+                text-[12px] mt-[1px] mb-[3px]
+                lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
                 경력보유여성 재도약 프로젝트
               </p>
-              <p className="font-tvn-medium 
-                lg:text-[33px] lg:text-[#944896]">
+              <p className="font-tvn-medium text-[#944896]
+                text-[12px]
+                lg:text-[33px]">
                 {"\"경력의 공백을 가능성으로 바꾸다\""}
               </p>
-              <div className="flex flex-col space-y-[26px]
-                lg:mt-[44px] lg:gab-[26px]">
+              <div className="flex flex-col 
+                mt-[20px] space-y-[8px]
+                lg:mt-[44px] lg:space-y-[26px]">
                 <ListItem
                   title="ICT 융합 분야 트렌드 학습 기회"
                   description="빠르게 변화하는 디지털 산업 흐름을 이해하고 대비합니다."
@@ -487,8 +497,12 @@ export default function Home() {
             </div>
 
             {/* 우측 이미지 영역 */}
-            <div className="relative w-full h-full flex flex-col justify-between items-center">
-              <div className="relative flex-[9] w-full aspect-video overflow-hidden rounded-l-full">
+            <div className="relative w-full h-full flex flex-col justify-between items-center
+              px-[50px] mt-[31px]
+              lg:px-0 lg:mt-0">
+              <div className="relative flex-[8] lg:flex-[9] w-full aspect-video overflow-hidden 
+                rounded-l-[36px] rounded-r-[36px]
+                lg:rounded-l-full">
                 <Image
                   src="/picture_with_project.png"
                   alt="WITH Project Banner"
@@ -499,16 +513,19 @@ export default function Home() {
                 <Image
                   src="/logo_with_project.svg" // 원하는 로고 이미지 경로로 바꾸세요
                   alt="Logo"
-                  width={274}
-                  height={144}
-                  className="absolute lg:bottom-[30px] right-[23px]"
+                  width={109}
+                  height={57}
+                  className="absolute bottom-[13px] right-[20px] 
+                    lg:bottom-[30px] lg:right-[23px] lg:w-[274px] lg:h-[144px]"
                 />
               </div>
               <div>
                 <Link
                   href="/with-project"
                   className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center
-                    lg:left-[83px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]
+                    left-[50px] bottom-[10px] text-[10px] space-y-[8px] w-[68px] h-[68px]
+                    rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
+                    lg:left-[63px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]
                     lg:rounded-tl-[12px] lg:rounded-tr-[12x] lg:rounded-bl-[12px]"
                 >
                   <span>
@@ -519,8 +536,9 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="flex-[1] flex items-center">
+              <div className="flex-[2] lg:flex-[1] flex items-center">
                 <p className="text-[#541E80] font-extrabold
+                  h-[7px] text-[10px] ml-[25px]
                   lg:h-[14px] lg:text-[20px] lg:ml-[32px]">
                   가능성은 여전히 당신 안에 있습니다.
                 </p>
