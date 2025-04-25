@@ -206,6 +206,15 @@ export default function Home() {
     setIndex((prev) => (prev >= newsLetters.length - 2 ? 0 : prev + 1));
   };
 
+  // 💡 고정된 로고 크기 및 간격
+  const baseWidth = 55;
+  const gap = 30; // mx-[15px] * 2
+  const scrollSpeed = 80; // px/sec (원하는 속도)
+
+  // 💡 logos 길이 기준 애니메이션 시간 계산
+  const logos1Duration = ((baseWidth + gap) * logos1.length * 2) / scrollSpeed;
+  const logos2Duration = ((baseWidth + gap) * logos2.length * 2) / scrollSpeed;
+
   return (
     <main>
       {/* Section1 - 배경 이미지 */}
@@ -694,14 +703,16 @@ export default function Home() {
       </section>
 
       {/* Section8 - 파트너스 */}
-      <section className="w-full h-auto flex flex-col items-center lg:mt-[150px]">
-        <h1 className="font-black text-center lg:text-[45px]">
+      <section className="w-full h-auto flex flex-col items-center mt-[84px] mb-[37px] lg:mt-[150px] lg:mb-[150px]">
+        <h1 className="font-black text-center text-[18px] lg:text-[45px]">
             커넥플과 함께하고 있는 파트너스
         </h1>
-        <p className="text-[#686868] font-extrabold text-center lg:text-[27px] lg:mt-[20px]">
+        <p className="text-[#686868] font-extrabold text-center 
+        text-[12px] mt-[15px]
+        lg:text-[27px] lg:mt-[20px]">
           공공기관, 민간기업을 포함한 30개 이상의 고객사가 커넥플과 함께하고 있습니다. 
         </p>
-        <div className="w-full overflow-hidden bg-white lg:mt-[31px] lg:mb-[150px]">
+        <div className="w-full overflow-hidden bg-white mt-[20px] lg:mt-[31px]">
           <style jsx>{`
             @keyframes scrollLeft {
               0% {
@@ -711,11 +722,17 @@ export default function Home() {
                 transform: translateX(-50%);
               }
             }
-            .scroll-row {
+            .scroll-row-1 {
               display: flex;
               width: max-content;
               white-space: nowrap;
-              animation: scrollLeft 30s linear infinite;
+              animation: scrollLeft ${logos1Duration}s linear infinite;
+            }
+            .scroll-row-2 {
+              display: flex;
+              width: max-content;
+              white-space: nowrap;
+              animation: scrollLeft ${logos2Duration}s linear infinite;
             }
           `}</style>
 
@@ -723,14 +740,13 @@ export default function Home() {
           <div className="flex flex-col lg:gap-[16px]">
             {/* logos1 */}
             <div className="overflow-hidden relative">
-              <div className="scroll-row">
+              <div className="scroll-row-1">
                 {[...logos1, ...logos1].map((src, i) => (
-                  <div key={`logos1-${i}`} className="lg:mx-[30px] flex items-center">
+                  <div key={`logos1-${i}`} className="flex items-center mx-[15px] lg:mx-[30px] relative w-[55px] h-[34px] lg:w-[128px] lg:h-[79px]">
                     <Image
                       src={src}
                       alt={`logos1-${i}`}
-                      width={128}
-                      height={79}
+                      fill
                       className="object-contain"
                     />
                   </div>
@@ -740,9 +756,9 @@ export default function Home() {
 
             {/* logos2 */}
             <div className="overflow-hidden relative">
-              <div className="scroll-row ml-[80px]">
+              <div className="scroll-row-2 ml-[40px] lg:ml-[80px]">
                 {[...logos2, ...logos2].map((src, i) => (
-                  <div key={`logos2-${i}`} className="lg:mx-[30px] flex items-center">
+                  <div key={`logos2-${i}`} className="flex items-center mx-[15px] lg:mx-[30px] relative w-[55px] h-[34px] lg:w-[128px] lg:h-[79px]">
                     <Image
                       src={src}
                       alt={`logos2-${i}`}
