@@ -769,17 +769,20 @@ export default function Home() {
           priority
         />
         {/* 콘텐츠 영역 */}
-        <div className="absolute inset-0 flex items-start justify-center 
+        <div className="absolute inset-0 flex items-start justify-center
+          px-[34px] mt-[47px]
           lg:px-[100px] lg:mt-[150px]">
           {/* 왼쪽 텍스트 (세로줄 포함, 3/5) */}
-          <div className="flex-[3] border-l-[3px] text-white border-white lg:pl-[32px] space-y-[16px]">
-            <p className="font-bold lg:text-[45px]">당신의 재도약을 응원합니다</p>
-            <h2 className="font-black lg:text-[60px]">Women In The Hope</h2>
-            <p className="font-bold lg:text-[25px]">경력보유여성 재도약 프로젝트</p>
+          <div className="flex-[3] border-l-[3px] text-white border-white 
+            pl-[34px] space-y-[5px]
+            lg:pl-[32px] lg:space-y-[16px]">
+            <p className="font-bold text-[10px] lg:text-[45px]">당신의 재도약을 응원합니다</p>
+            <h2 className="font-black text-[15px] lg:text-[60px]">Women In The Hope</h2>
+            <p className="font-bold text-[8px] lg:text-[25px]">경력보유여성 재도약 프로젝트</p>
           </div>
 
           {/* 오른쪽 버튼 3개 (2/5) - 반응형 대응 포함) */}
-          <div className="flex-[2] flex flex-col gap-y-[14px]">
+          <div className="flex-[2] flex flex-col gap-y-[5px] lg:gap-y-[14px]">
             {[
               {
                 label: "W.I.T.H Project 자세히 보기",
@@ -798,11 +801,13 @@ export default function Home() {
                 key={idx}
                 href={btn.href}
                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold 
+                  rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px] 
+                  px-[11px] w-[180px] h-[20px] text-[9px]
                   lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px] 
                   lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
               >
                  <span className="truncate">{btn.label}</span>
-                 <span className="text-[22px]">➝</span>
+                 <span className="text-[10px] lg:text-[22px]">➝</span>
               </Link>
             ))}
           </div>
