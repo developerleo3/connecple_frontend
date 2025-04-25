@@ -551,7 +551,7 @@ export default function Home() {
       {/* Section6 - With ConnecDay */}
       <section className="w-full h-auto bg-[#F4F4F4]">
         <div className="flex flex-col
-          pt-[67px] px-[50px]
+          pt-[100px] px-[50px]
           lg:pt-[151px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H CONNECDAY
@@ -631,19 +631,23 @@ export default function Home() {
 
       {/* Section7 - With News Letter */}
       <section className="bg-[#F4F4F4] w-full h-auto">
-        <div className="flex flex-col w-full h-auto bg-white rounded-tr-[100px]
-          lg:pt-[95px] lg:px-[130px]">
+        <div className="flex flex-col w-full h-auto bg-white
+          rounded-tr-[60px] mt-[47px] px-[50px]
+          lg:rounded-tr-[100px] lg:mt-[95px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H NEWS LETTER
           </h1>
-          <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
+          <p className="font-black 
+            text-[12px] mt-[1px] mb-[1px]
+            lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
             경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
           </p>
-          <p className="font-tvn-medium 
-            lg:text-[33px] lg:text-[#944896]">
+          <p className="font-tvn-medium text-[#944896] text-[12px] lg:text-[33px]">
             {"\“가능성을 깨우고, 성장의 기회를 전하다\""}
           </p>
-          <div className="flex justify-end gap-[44px] lg:mt-[-9px] lg:mb-[33px]">
+          <div className="flex justify-end 
+            gap-[10px] mt-[-20px] mb-[10px]
+            lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
             {/* 왼쪽 화살표 */}
             <button
               onClick={prev}
@@ -653,9 +657,9 @@ export default function Home() {
               <Image
                 src={index === 0 ? "/vector_left_gray.svg" : "/vector_right_black.svg"}
                 alt="왼쪽 화살표"
-                width={32}
-                height={32}
-                className={`w-full h-full object-contain ${index === 0 ? "" : "rotate-180"}`}
+                width={9}
+                height={9}
+                className={`lg:w-[32px] lg:h-[32px] object-contain ${index === 0 ? "" : "rotate-180"}`}
               />
             </button>
 
@@ -668,18 +672,19 @@ export default function Home() {
               <Image
                 src={index >= newsLetters.length - 2 ? "/vector_left_gray.svg" : "/vector_right_black.svg"}
                 alt="오른쪽 화살표"
-                width={32}
-                height={32}
-                className={`w-full h-full object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
+                width={9}
+                height={9}
+                className={`lg:w-[32px] lg:h-[32px] object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
               />
             </button>
           </div>
-          <div className="grid lg:grid-cols-2 lg:gap-[16px] w-full">
+          <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px] ">
             {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
               <div
                 key={i}
-                className="relative rounded-[30px] overflow-hidden group
-                  lg:h-[300px]"
+                className="relative  overflow-hidden group
+                  h-[118px] rounded-[12px]
+                  lg:h-[300px] lg:rounded-[30px]"
               >
                 {/* 이미지 */}
                 <Image
@@ -694,12 +699,13 @@ export default function Home() {
 
                 {/* 텍스트 (hover 시 등장) */}
                 <div className="absolute inset-0 flex flex-col text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                  lg:pl-[40px] lg:pr-[40%] lg:pb-[10px] lg:pt-[75px]">
+                  pl-[12px] pr-[30%] pt-[28px]
+                  lg:pl-[40px] lg:pr-[40%] lg:pt-[75px]">
                   <div className="flex-[3]">
-                    <h1 className=" font-black lg:text-[23px]">{item.title}</h1>  
+                    <h1 className=" font-black text-[8px] lg:text-[23px]">{item.title}</h1>  
                   </div>
                   <div className="flex-[2] overflow-hidden">
-                    <p className="font-medium line-clamp-3 lg:text-[14px] lg:mb-[34px] ">{item.content}</p>
+                    <p className="font-medium line-clamp-3 text-[5px] lg:text-[14px]">{item.content}</p>
                   </div>
                 </div>
 
@@ -708,6 +714,7 @@ export default function Home() {
                   href={item.href}
                   className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center
                     bg-transparent text-white border border-white hover:bg-white hover:text-black
+                    w-[9px] h-[9px] bottom-[20px] right-[26px] text-[5px]
                     lg:w-[30px] lg:h-[30px] lg:bottom-[50px] lg:right-[50px]"
                 >
                   {"\>"}
@@ -715,15 +722,18 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="lg:mt-[37px]">
-            <p className="text-[#541E80] font-extrabold lg:text-[20px]">
+          <div className="mt-[11px] lg:mt-[37px]">
+            <p className="text-[#541E80] font-extrabold text-[10px] lg:text-[20px]">
               당신과의 시간과 당신의 가능성은 소중합니다
             </p>
           </div>
-          <div className="flex justify-start lg:mt-[16px]">
+          <div className="flex justify-start mt-[5px] lg:mt-[16px]">
             <Link
               href="/with-newsletter"
-              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px]
+              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center 
+                rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
+                w-[125px] h-[25px] text-[10px]
+                lg:rounded-tl-[12px] lg:rounded-tr-[12px] lg:rounded-bl-[12px]
                 lg:w-[267px] lg:h-[52px] lg:text-[20px]"
             >
               가능을 향한 첫 걸음&nbsp;&nbsp;&nbsp;➝
