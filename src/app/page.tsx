@@ -551,18 +551,23 @@ export default function Home() {
       {/* Section6 - With ConnecDay */}
       <section className="w-full h-auto bg-[#F4F4F4]">
         <div className="flex flex-col
+          pt-[67px] px-[50px]
           lg:pt-[151px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H CONNECDAY
           </h1>
-          <p className="font-black lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
+          <p className="font-black 
+            text-[12px] mt-[1px] mb-[3px]
+            lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
             경력보유여성의 성장을 지원하는 정기 네트워킹
           </p>
-          <p className="font-tvn-medium 
-            lg:text-[33px] lg:text-[#944896] lg:h-[60px] lg:mb-[15px]">
+          <p className="font-tvn-medium text-[#944896]
+            text-[12px] h-[8px] mb-[29px]
+            lg:text-[33px] lg:h-[60px] lg:mb-[15px]">
             {"\“성장을 나누고, 새로운 기회를 연결하다\""}
           </p>
-          <div className="grid grid-cols-1 gap-0 overflow-hidden
+          <div className="grid gap-0 overflow-hidden
+            rounded-[20px] h-[174px]
             lg:grid-cols-3 lg:rounded-[50px] lg:h-[280px]">
             {[
               {
@@ -592,28 +597,35 @@ export default function Home() {
 
                 {/* 오버레이 */}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white text-center">
-                  <h1 className="font-extrabold lg:text-[20px] lg:h-[14px]">{item.title}</h1>
-                  <p className="font-bold lg:text-[18px] lg:h-[13px] lg:mt-[21px]">{item.content}</p>
+                  <h1 className="font-extrabold text-[10px] h-[7px] lg:text-[20px] lg:h-[14px]">{item.title}</h1>
+                  <p className="font-bold text-[8px] h-[6px] mt-[6px] lg:text-[18px] lg:h-[13px] lg:mt-[21px]">{item.content}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="items-end justify-center 
-            lg:mt-[29px] lg:mb-[16px] lg:mr-[22px]">
-            <p className="text-[#541E80] font-extrabold text-right
-              lg:text-[20px] lg:h-[14px] lg:mb-[16px]">
-              가능성은 연결될 때 빛이 납니다.
-            </p>
-          </div>
-          <div className="flex justify-end lg:mr-[22px] lg:mb-[115px]">
-            <Link
-              href="/with-connectday"
-              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px]
-                lg:w-[267px] lg:h-[52px] lg:text-[20px]"
-            >
-              나의 성장도 연결하기&nbsp;&nbsp;&nbsp;➝
-            </Link>
-          </div>
+          <div className="grid
+            grid-cols-10 mb-[58px] mt-[17px]
+            lg:flex lg:flex-col lg:mb-[115px] lg:mt-[29px]">
+            <div className="col-span-6 flex items-center justify-end h-full">
+              <p className="text-[#541E80] font-extrabold text-right
+                text-[10px]
+                lg:text-[20px]">
+                가능성은 연결될 때 빛이 납니다.
+              </p>
+            </div>
+            <div className="col-span-4 h-full flex items-center justify-end lg:mt-[16px]">
+              <Link
+                href="/with-connectday"
+                className="bg-[#541E80] text-white font-extrabold flex items-center justify-center
+                  rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
+                  w-[125px] h-[25px] text-[10px]
+                  lg:rounded-tl-[12px] lg:rounded-tr-[12px] lg:rounded-bl-[12px]
+                  lg:w-[267px] lg:h-[52px] lg:text-[20px]"
+              >
+                나의 성장도 연결하기&nbsp;&nbsp;&nbsp;➝
+              </Link>
+            </div>
+          </div>            
         </div>
       </section>
 
