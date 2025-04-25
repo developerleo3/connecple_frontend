@@ -322,7 +322,7 @@ export default function Home() {
       <section 
         ref={counterSectionRef} // 여기에 ref 걸어줌
         className="relative bg-white w-full h-auto
-          pt-[31px]
+          pt-[31px] pb-[20px]
           lg:pt-[163px]"
       >
         <div className="flex flex-col w-full items-center justify-center text-center text-black font-bold
@@ -411,7 +411,7 @@ export default function Home() {
       {/* Section4 - Brand Story */}
       <section className="relative bg-white w-full h-auto">
         <div className="flex flex-col items-center justify-center text-center
-          mt-[71px] mb-[45px] lg:mt-[200px] lg:mb-[139px]">
+          pt-[51px] pb-[45px] lg:pt-[200px] lg:pb-[139px]">
           <h1 className="text-[#541E80] font-black
             text-[18px] lg:text-[45px]">
             Connecple Brand Story
@@ -451,8 +451,8 @@ export default function Home() {
             grid grid-cols-1 
             lg:grid-cols-2">
             {/* 좌측 콘텐츠 영역 */}
-            <div className="flex flex-col justify-center pl-[51px] lg:pl-[130px]">
-              <p className="font-black 
+            <div className="text-black flex flex-col justify-center pl-[51px] lg:pl-[130px]">
+              <p className="font-black
                 text-[12px] mt-[1px] mb-[3px]
                 lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
                 경력보유여성 재도약 프로젝트
@@ -550,7 +550,7 @@ export default function Home() {
 
       {/* Section6 - With ConnecDay */}
       <section className="w-full h-auto bg-[#F4F4F4]">
-        <div className="flex flex-col
+        <div className="flex flex-col text-black
           pt-[100px] px-[50px]
           lg:pt-[151px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
@@ -631,7 +631,7 @@ export default function Home() {
 
       {/* Section7 - With News Letter */}
       <section className="bg-[#F4F4F4] w-full h-auto">
-        <div className="flex flex-col w-full h-auto bg-white
+        <div className="flex flex-col w-full h-auto bg-white text-black
           rounded-tr-[60px] pt-[47px] px-[50px]
           lg:rounded-tr-[100px] lg:pt-[95px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
@@ -743,7 +743,8 @@ export default function Home() {
       </section>
 
       {/* Section8 - 파트너스 */}
-      <section className="bg-white w-full h-auto flex flex-col items-center mt-[84px] mb-[37px] lg:mt-[150px] lg:mb-[150px]">
+      <section className="bg-white w-full h-auto flex flex-col items-center text-black
+        pt-[84px] pb-[37px] lg:pt-[150px] lg:pb-[150px]">
         <h1 className="font-black text-center text-[18px] lg:text-[45px]">
             커넥플과 함께하고 있는 파트너스
         </h1>
