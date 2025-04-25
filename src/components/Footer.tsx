@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full h-auto flex flex-col
-      mt-[31px] px-[46px]
-      lg:mt-[66px] lg:px-[130px]">
+    <footer className="w-full h-auto flex flex-col bg-white text-black
+      pt-[31px] px-[46px]
+      lg:pt-[66px] lg:px-[130px]">
       {/* 메뉴 */}
       <div
         className="flex text-black font-bold
