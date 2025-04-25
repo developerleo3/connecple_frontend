@@ -61,7 +61,7 @@ export default function Footer() {
         </div>
 
         {/* 우측 고객센터 (2/5) */}
-        <div className="col-span-2 pl-[11px] lg:pl-[112px]">
+        <div className="col-span-2 pt-[5px] pl-[11px] lg:pt-[10px] lg:pl-[112px]">
           <p className="font-bold text-[7px] lg:text-[20px]">고객센터</p>
           <p className="font-bold text-[8px] lg:text-[24px]">02-2610-9770<span className="font-medium text-[8px] lg:text-[20px]">  (대표)</span></p>
           <p className="font-bold text-[8px] lg:text-[24px]">02-2610-9772<span className="font-medium text-[8px] lg:text-[20px]">  (MICE사업부)</span></p>
