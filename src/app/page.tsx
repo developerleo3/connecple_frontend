@@ -608,7 +608,7 @@ export default function Home() {
             lg:flex lg:flex-col lg:mb-[115px] lg:mt-[29px]">
             <div className="col-span-6 flex items-center justify-end h-full">
               <p className="text-[#541E80] font-extrabold text-right
-                text-[10px]
+                text-[10px] mr-[10px]
                 lg:text-[20px]">
                 가능성은 연결될 때 빛이 납니다.
               </p>
@@ -830,7 +830,7 @@ export default function Home() {
           lg:px-[100px] lg:mt-[150px]">
           {/* 왼쪽 텍스트 (세로줄 포함, 3/5) */}
           <div className="flex-[3] border-l-[3px] text-white border-white 
-            pl-[34px] space-y-[5px]
+            pl-[11px] space-y-[5px]
             lg:pl-[32px] lg:space-y-[16px]">
             <p className="font-bold text-[10px] lg:text-[45px]">당신의 재도약을 응원합니다</p>
             <h2 className="font-black text-[15px] lg:text-[60px]">Women In The Hope</h2>
@@ -841,15 +841,15 @@ export default function Home() {
           <div className="flex-[2] flex flex-col gap-y-[5px] lg:gap-y-[14px]">
             {[
               {
-                label: "W.I.T.H Project 자세히 보기",
+                label: "W.I.T.H Project",
                 href: "/with-project"
               },
               {
-                label: "W.I.T.H Connecday 자세히 보기",
+                label: "W.I.T.H Connecday",
                 href: "/with-connectday"
               },
               {
-                label: "W.I.T.H News letter 자세히 보기",
+                label: "W.I.T.H News letter",
                 href: "/with-newsletter"
               }
             ].map((btn, idx) => (
@@ -858,12 +858,15 @@ export default function Home() {
                 href={btn.href}
                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold 
                   rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px] 
-                  px-[11px] w-[180px] h-[20px] text-[9px]
+                  px-[11px] w-[132px] h-[20px] text-[9px]
                   lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px] 
                   lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
               >
-                 <span className="truncate">{btn.label}</span>
-                 <span className="text-[10px] lg:text-[22px]">➝</span>
+                <span className="truncate">
+                  {btn.label}
+                  <span className="hidden lg:inline">&nbsp;자세히 보기</span>
+                </span>
+                <span className="text-[10px] lg:text-[22px]">➝</span>
               </Link>
             ))}
           </div>
