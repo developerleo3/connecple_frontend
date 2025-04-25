@@ -280,7 +280,7 @@ export default function Home() {
       </section>
 
       {/* Section2 - 슬라이드 */}
-      <section className="relative w-full h-auto">
+      <section className="relative bg-white w-full h-auto">
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
@@ -321,7 +321,7 @@ export default function Home() {
       {/* Section3 - 수치 */}
       <section 
         ref={counterSectionRef} // 여기에 ref 걸어줌
-        className="relative w-full h-auto
+        className="relative bg-white w-full h-auto
           pt-[31px]
           lg:pt-[163px]"
       >
@@ -409,7 +409,7 @@ export default function Home() {
       </section>
 
       {/* Section4 - Brand Story */}
-      <section className="relative w-full h-auto">
+      <section className="relative bg-white w-full h-auto">
         <div className="flex flex-col items-center justify-center text-center
           mt-[71px] mb-[45px] lg:mt-[200px] lg:mb-[139px]">
           <h1 className="text-[#541E80] font-black
@@ -632,8 +632,8 @@ export default function Home() {
       {/* Section7 - With News Letter */}
       <section className="bg-[#F4F4F4] w-full h-auto">
         <div className="flex flex-col w-full h-auto bg-white
-          rounded-tr-[60px] mt-[47px] px-[50px]
-          lg:rounded-tr-[100px] lg:mt-[95px] lg:px-[130px]">
+          rounded-tr-[60px] pt-[47px] px-[50px]
+          lg:rounded-tr-[100px] lg:pt-[95px] lg:px-[130px]">
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H NEWS LETTER
           </h1>
@@ -743,7 +743,7 @@ export default function Home() {
       </section>
 
       {/* Section8 - 파트너스 */}
-      <section className="w-full h-auto flex flex-col items-center mt-[84px] mb-[37px] lg:mt-[150px] lg:mb-[150px]">
+      <section className="bg-white w-full h-auto flex flex-col items-center mt-[84px] mb-[37px] lg:mt-[150px] lg:mb-[150px]">
         <h1 className="font-black text-center text-[18px] lg:text-[45px]">
             커넥플과 함께하고 있는 파트너스
         </h1>
@@ -815,7 +815,7 @@ export default function Home() {
       </section>
 
       {/* Section9 - 자세히 보기 */}
-      <section className="relative w-full aspect-video">
+      <section className="relative bg-white w-full aspect-video">
         {/* 꽉 찬 배경 이미지 */}
         <Image
           src="/picture_main_detail_bg.png" // public 폴더에 넣은 이미지 경로
