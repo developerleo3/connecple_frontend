@@ -28,7 +28,7 @@ export default function Footer() {
       <div className="grid grid-cols-5 mt-[3px] lg:mt-[10px]">
         {/* 좌측 정보 (3/5) */}
         <div className="col-span-3 border-r-[1px] border-[#C3C3C3]
-          space-y-[1px] text-[8px]
+          space-y-[1px] text-[8px] mr-[10px]
           lg:space-y-[5px] lg:text-[20px]"
         >
           <Image
@@ -54,14 +54,14 @@ export default function Footer() {
           {/* 사업자정보 */}
           <div className="flex flex-wrap">
             <p className="font-bold">사업자번호</p>
-            <p className="ml-[5px] lg:ml-[22px]">191-88-02321</p>
-            <p className="font-bold ml-[10px] lg:ml-[44px]">대표 이메일</p>
-            <p className="ml-[5px] lg:ml-[22px]">admin@cnp.day</p>
+            <p className="ml-[3px] lg:ml-[22px]">191-88-02321</p>
+            <p className="font-bold ml-[5px] lg:ml-[44px]">대표 이메일</p>
+            <p className="ml-[3px] lg:ml-[22px]">admin@cnp.day</p>
           </div>
         </div>
 
         {/* 우측 고객센터 (2/5) */}
-        <div className="col-span-2 pl-[31px] lg:pl-[112px]">
+        <div className="col-span-2 lg:pl-[112px]">
           <p className="font-bold text-[8px] lg:text-[20px]">고객센터</p>
           <p className="font-bold text-[9px] lg:text-[24px]">02-2610-9770<span className="font-medium text-[8px] lg:text-[20px]">  (대표)</span></p>
           <p className="font-bold text-[9px] lg:text-[24px]">02-2610-9772<span className="font-medium text-[8px] lg:text-[20px]">  (MICE사업부)</span></p>
