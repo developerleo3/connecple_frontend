@@ -46,7 +46,7 @@ export default function Header() {
   return (
     <header className="shadow-md bg-white">
       <nav className="h-[47px] flex items-center justify-between px-5 
-        lg:h-[90px] lg:grid lg:grid-cols-7 lg:gap-4">
+        lg:h-[70px] lg:grid lg:grid-cols-7 lg:gap-4">
         {/* 로고 */}
         <div className="flex items-center h-full col-span-1">
           <Link href="/" className="block relative">
@@ -96,9 +96,8 @@ export default function Header() {
                 ${
                   isSelected
                     ? "bg-purple-900 text-white"
-                    : "bg-white text-gray-800 hover:bg-purple-200"
-                }
-                hover:opacity-80`}
+                    : "bg-white text-gray-800"
+                }`}
                 >
                   {text}
                 </Link>
@@ -137,9 +136,8 @@ export default function Header() {
                   ${
                     isSelected
                       ? "bg-purple-900 text-white"
-                      : "bg-white text-gray-800 hover:bg-purple-200"
-                  }
-                    hover:opacity-80`}
+                      : "bg-white text-gray-800"
+                  }`}
               >
                 {text}
               </Link>
