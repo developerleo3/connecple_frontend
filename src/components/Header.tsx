@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const pathname = usePathname(); // 현재 경로 확인용
@@ -42,6 +43,8 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const selectedIndex = menus.findIndex(({ path }) => path === pathname);
 
   return (
     <header className="shadow-md bg-white">
@@ -82,7 +85,21 @@ export default function Header() {
         </button>
 
         {/* 데스크탑 메뉴 (lg 이상) */}
-        <div className="hidden lg:grid lg:grid-cols-6 col-span-6 h-full">
+        <div className="hidden lg:grid lg:grid-cols-6 col-span-6 h-full relative">
+          {/* 움직이는 보라색 배경 */}
+          {selectedIndex !== -1 && (
+            <motion.div
+              layoutId="menu-highlight"
+              className="absolute top-0 left-0 z-10 h-full bg-purple-900"
+              initial={false}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              style={{
+                width: `calc(100% / ${menus.length})`,
+                left: `calc(${selectedIndex} * (100% / ${menus.length}))`,
+              }}
+            />
+          )}
+
           {menus.map(({ text, path }) => {
             const isSelected = pathname === path;
             return (
@@ -92,20 +109,22 @@ export default function Header() {
               >
                 <Link
                   href={path}
-                  className={`flex items-center justify-center w-full h-full font-extrabold text-[19px] transition duration-300 ease-in-out
-                ${
-                  isSelected
-                    ? "bg-purple-900 text-white"
-                    : "bg-white text-gray-800"
-                }`}
+                  className={`flex items-center justify-center w-full h-full font-extrabold text-[19px] transition duration-300 ease-in-out relative z-20 ${
+                    isSelected ? "text-white" : "text-gray-800"
+                  }`}
                 >
                   {text}
                 </Link>
+
+                {/* ✅ 움직이는 화살표 */}
                 {isSelected && (
-                  <div
+                  <motion.div
+                    layoutId="menu-arrow"
                     className="absolute top-full left-1/2 -translate-x-1/2 transform
-                  w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px]
-                  border-l-transparent border-r-transparent border-t-[#59168b]"
+                      w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px]
+                      border-l-transparent border-r-transparent border-t-[#59168b]"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
               </div>
