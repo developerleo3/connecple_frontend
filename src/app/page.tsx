@@ -862,9 +862,9 @@ export default function Home() {
           px-[34px] mt-[47px]
           lg:px-[100px] lg:mt-[150px]">
           {/* 왼쪽 텍스트 (세로줄 포함, 3/5) */}
-          <div className="flex-[3] border-l-[3px] text-white border-white 
-            pl-[11px] space-y-[5px]
-            lg:pl-[32px] lg:space-y-[16px]">
+          <div className="flex-[3] text-white border-white 
+            pl-[11px] space-y-[5px] border-l-[1px]
+            lg:pl-[32px] lg:space-y-[16px] lg:border-l-[3px]">
             <p className="font-bold text-[10px] lg:text-[45px]">당신의 재도약을 응원합니다</p>
             <h2 className="font-black text-[15px] lg:text-[60px]">Women In The Hope</h2>
             <p className="font-bold text-[8px] lg:text-[25px]">경력보유여성 재도약 프로젝트</p>
