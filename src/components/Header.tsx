@@ -49,7 +49,7 @@ export default function Header() {
   return (
     <header className="shadow-md bg-white">
       <nav className="h-[47px] flex items-center justify-between px-5 
-        lg:h-[70px] lg:grid lg:grid-cols-7 lg:gap-4">
+        lg:h-[70px] lg:grid lg:grid-cols-7 lg:gap-4 lg:ml-[20px]">
         {/* 로고 */}
         <div className="flex items-center h-full col-span-1">
           <Link href="/" className="block relative">
@@ -85,7 +85,8 @@ export default function Header() {
         </button>
 
         {/* 데스크탑 메뉴 (lg 이상) */}
-        <div className="hidden lg:grid lg:grid-cols-6 col-span-6 h-full relative">
+        <div className="hidden col-span-6 h-full relative 
+          lg:grid lg:grid-cols-6 lg:ml-[20px] lg:mr-[300px]">
           {/* 움직이는 보라색 배경 */}
           {selectedIndex !== -1 && (
             <motion.div
@@ -116,7 +117,7 @@ export default function Header() {
                   {text}
                 </Link>
 
-                {/* ✅ 움직이는 화살표 */}
+                {/* 움직이는 화살표 */}
                 {isSelected && (
                   <motion.div
                     layoutId="menu-arrow"
