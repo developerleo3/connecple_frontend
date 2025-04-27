@@ -271,6 +271,7 @@ export default function Home() {
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative w-full aspect-video group overflow-hidden shadow-md">
+                {/* 배경 이미지 */}
                 <Image
                   src={slide.src}
                   alt={`슬라이드 ${index + 1}`}
@@ -278,11 +279,15 @@ export default function Home() {
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                {/* 텍스트 오버레이 */}
+                <div className="absolute inset-0 bg-black/50
+                  opacity-100 lg:opacity-0 
+                  lg:group-hover:opacity-100 
+                  transition-opacity duration-300 
                   flex flex-col items-center justify-center text-center">
                   
-                  {/* 텍스트 감싸는 div 추가 */}
-                  <div className="border-t-[1px] border-b-[1px] border-white py-[44px] px-[65px]">
+                  {/* 텍스트 감싸는 div */}
+                  <div className="border-t-[1px] border-b-[1px] border-white py-[15px] px-[22px] lg:py-[44px] lg:px-[65px]">
                     <p className="text-white font-extrabold text-[9px] lg:text-[29px]">
                       {slide.company}
                     </p>

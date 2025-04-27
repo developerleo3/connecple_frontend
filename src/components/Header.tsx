@@ -86,7 +86,7 @@ export default function Header() {
 
         {/* 데스크탑 메뉴 (lg 이상) */}
         <div className="hidden col-span-6 h-full relative 
-          lg:grid lg:grid-cols-6 lg:ml-[20px] lg:mr-[300px]">
+          lg:grid lg:grid-cols-6 lg:ml-[20px] lg:mr-[240px]">
           {/* 움직이는 보라색 배경 */}
           {selectedIndex !== -1 && (
             <motion.div
