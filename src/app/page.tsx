@@ -613,7 +613,7 @@ export default function Home() {
             grid-cols-10 mb-[58px] mt-[17px]
             lg:flex lg:flex-col lg:mb-[115px] lg:mt-[29px]">
             
-            <div className="col-span-6 flex items-center justify-end h-full">
+            <div className="col-span-5 flex items-center justify-end h-full">
               <p className="text-[#541E80] font-extrabold text-right
                 text-[10px] mr-[10px]
                 lg:text-[20px]">
@@ -621,7 +621,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="relative col-span-4 h-full flex items-center justify-end lg:mt-[16px]">
+            <div className="relative col-span-5 h-full flex items-center justify-end lg:mt-[16px]">
               <Link
                 href="/with-connectday"
                 className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
