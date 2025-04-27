@@ -626,7 +626,7 @@ export default function Home() {
                 href="/with-connectday"
                 className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
                   rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
-                  w-[159px] h-[25px] text-[10px]
+                  w-[139px] h-[25px] text-[10px]
                   lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px]
                   lg:w-[307px] lg:h-[52px] lg:text-[20px]"
               >
@@ -637,14 +637,11 @@ export default function Home() {
                     alt="화살표"
                     width={10}
                     height={6.7}
-                    className="absolute object-contain
-                      right-[8px] bottom-[9px]
-                      lg:right-[20px] lg:bottom-[17px] lg:w-[20px] lg:h-[20px]"
+                    className="object-contain lg:w-[20px] lg:h-[20px]"
                   />
                 </span>
               </Link>
             </div>
-            
           </div>            
         </div>
       </section>
