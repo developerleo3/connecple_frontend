@@ -412,7 +412,7 @@ export default function Home() {
 
 
             사람과 사람을, 사람과 사회를 연결하는 커넥플_<br />
-            <span className="text-[#944896] lg:text-[30px] font-tvn-medium">Connect to Grow. Connect to Society</span>
+            <span className="text-[#944896] text-[11px] lg:text-[30px] font-tvn-medium">Connect to Grow. Connect to Society</span>
           </p>
         </div>
       </section>
