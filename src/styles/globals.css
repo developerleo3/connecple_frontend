@@ -163,8 +163,8 @@ body {
 /* lg 이상 (데스크탑) */
 @media (min-width: 1024px) {
   .swiper-pagination-bullet {
-    width: 18px !important;
-    height: 18px !important;
+    width: 13px !important;
+    height: 13px !important;
     margin: 0 9px !important;
   }
 }

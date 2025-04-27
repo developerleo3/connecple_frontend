@@ -18,52 +18,52 @@ import { motion } from "framer-motion";
 
 const slides = [
   {
-    src: "/picture1.svg",
+    src: "/pictures/picture1.png",
     company: "과학기술정보통신부/한국데이터산업진흥원",
     title: "2024 데이터 안심구역 활용<br />공동경진대회 시상식",
   },
   {
-    src: "/picture2.svg",
+    src: "/pictures/picture2.png",
     company: "과학기술정보통신부/한국데이터산업진흥원",
     title: "2024 데이터안심구역 활용<br />공동경진대회 성과발표회",
   },
   {
-    src: "/picture3.svg",
+    src: "/pictures/picture3.png",
     company: "과학기술정보통신부/한국데이터산업진흥원",
     title: "2023 데이터안심구역<br />대전센터 개소식",
   },
   {
-    src: "/picture4.svg",
+    src: "/pictures/picture4.png",
     company: "과학기술정보통신부/한국지능정보사회진흥원",
     title: "2023 SW우수인재 시상식",
   },
   {
-    src: "/picture5.svg",
+    src: "/pictures/picture5.png",
     company: "과학기술정보통신부/한국지능정보사회진흥원",
     title: "2023 SW여성인재 데모데이",
   },
   {
-    src: "/picture6.svg",
+    src: "/pictures/picture6.png",
     company: "국립외교원/국민외교아카데미",
     title: "2024 제 7기 대학생<br />외교연수 과정",
   },
   {
-    src: "/picture7.svg",
+    src: "/pictures/picture7.png",
     company: "국립외교원/국민외교아카데미",
     title: "2024 대국민 특강",
   },
   {
-    src: "/picture8.svg",
+    src: "/pictures/picture8.png",
     company: "국립외교원/국민외교아카데미",
     title: "2024 국민외교아카데미<br />제 6기 서포터스",
   },
   {
-    src: "/picture9.svg",
+    src: "/pictures/picture9.png",
     company: "개인정보보호위원회/한국인터넷진흥원",
     title: "2022 가명정보 전문가 풀<br />워크숍",
   },
   {
-    src: "/picture10.svg",
+    src: "/pictures/picture10.png",
     company: "서울시청",
     title: "2022 서울시청 서울런<br />입시설명회 행사",
   },
@@ -115,35 +115,14 @@ const newsLetters = [
     title: "기업이 찾는 실무형 인재, W.I.T.H 프로젝트에서 나온다",
     content:
       "\"바로 채용하고 싶을 정도였어요.\" 프로젝트 파트너 기업의 솔직한 이야기. 이들이 주목한 건 단순한 스펙이 아닌, 실무에 강한 팀워크형 ...",
-    href: "/story/1",
+    href: "/",
   },
   {
     image: "/picture_main_with_news_letter_2.png",
     title: "육아와 커리어, 두마리 토끼를 잡은 그녀의 하루",
     content:
       "오전엔 아이 등원, 오후엔 실무 교육, 저녁엔 나만의 성장 시간. 육아와 커리어를 동시에 이끌어가는 한 엄마의 진짜 이야기를 ...",
-    href: "/story/2",
-  },
-  {
-    image: "/picture3.svg",
-    title: "당당한 복귀, 두려움은 없었다",
-    content:
-      "W.I.T.H 프로젝트로 다시 커리어를 시작한 그녀. 실무 능력뿐 아니라 자신감까지 얻은 성장의 기록 ...",
-    href: "/story/3",
-  },
-  {
-    image: "/picture4.svg",
-    title: "팀워크가 만든 놀라운 결과",
-    content:
-      "프로젝트 속 팀 활동에서 얻은 협업 경험. 실무 현장에서 더 빛났던 이유를 전합니다 ...",
-    href: "/story/4",
-  },
-  {
-    image: "/picture5.svg",
-    title: "첫 도전, 첫 성과",
-    content:
-      "경력단절 후 첫 실무 도전, 결과는 예상보다 놀라웠다. 진짜 실력은 포기하지 않은 마음에서 나온다 ...",
-    href: "/story/5",
+    href: "/",
   },
 ];
 
@@ -299,18 +278,19 @@ export default function Home() {
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center">
-                  <p className="text-white font-extrabold
-                    text-[9px]
-                    lg:text-[29px]">
-                    {slide.company}
-                  </p>
-                  <h1
-                    className="text-white font-extrabold
-                      text-[20px]
-                      lg:text-[51px]"
-                    dangerouslySetInnerHTML={{ __html: slide.title }}
-                  ></h1>
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                  flex flex-col items-center justify-center text-center">
+                  
+                  {/* 텍스트 감싸는 div 추가 */}
+                  <div className="border-t-[1px] border-b-[1px] border-white py-[44px] px-[65px]">
+                    <p className="text-white font-extrabold text-[9px] lg:text-[29px]">
+                      {slide.company}
+                    </p>
+                    <h1
+                      className="text-white font-extrabold text-[20px] lg:text-[51px]"
+                      dangerouslySetInnerHTML={{ __html: slide.title }}
+                    ></h1>
+                  </div>
                 </div>
               </div>
             </SwiperSlide>
@@ -326,10 +306,10 @@ export default function Home() {
           lg:pt-[163px]"
       >
         <div className="flex flex-col w-full items-center justify-center text-center text-black font-bold
-          space-y-[10px] text-[10px]
-          lg:space-y-[28px] lg:text-[27px]">
-          <p>커넥플은 <span className="font-black">사람과 사람을, 사람과 사회</span>를 다시 연결합니다</p>
-          <p>그리고 연결을 넘어, <span className="font-black">함께 성장하는 미래</span>를 만들어갑니다</p>
+          space-y-[3px] text-[10px]
+          lg:space-y-[10px] lg:text-[27px]">
+          <p>커넥플은 <span className="font-black">사람과 사람을, 사람과 사회</span>를 다시 연결합니다.</p>
+          <p>그리고 연결을 넘어, <span className="font-black">함께 성장하는 미래</span>를 만들어갑니다.</p>
         </div>
 
         <h1 className="flex flex-col w-full items-center justify-center text-center text-[#541E80] font-black
@@ -354,7 +334,7 @@ export default function Home() {
               </div>
               <div className="flex-[2] flex items-center justify-center text-center">
                 <p className="text-[#541E80] font-black text-[31px]">
-                  <AnimatedCounter value={item.value} shouldAnimate={inView} />
+                  <AnimatedCounter value={item.value} shouldAnimate={inView} duration={1 + idx * 0.3} />
                 </p>
               </div>
             </div>
@@ -377,7 +357,7 @@ export default function Home() {
                 </div>
                 <div className="flex-[2] flex items-center justify-center text-center">
                   <p className="text-[#541E80] font-black text-[15px]">
-                    <AnimatedCounter value={item.value} shouldAnimate={inView} />
+                    <AnimatedCounter value={item.value} shouldAnimate={inView} duration={1 + idx * 0.3} />
                   </p>
                 </div>
               </div>
@@ -399,7 +379,7 @@ export default function Home() {
                 </div>
                 <div className="flex-[2] flex items-center justify-center text-center">
                   <p className="text-[#541E80] font-black text-[15px]">
-                    <AnimatedCounter value={item.value} shouldAnimate={inView} />
+                    <AnimatedCounter value={item.value} shouldAnimate={inView} duration={1.9 + idx * 0.3} />
                   </p>
                 </div>
               </div>
@@ -432,14 +412,14 @@ export default function Home() {
 
 
             사람과 사람을, 사람과 사회를 연결하는 커넥플_<br />
-            <span className="text-[#944896] font-tvn-medium">Connect to Grow. Connect to Society</span>
+            <span className="text-[#944896] lg:text-[30px] font-tvn-medium">Connect to Grow. Connect to Society</span>
           </p>
         </div>
       </section>
 
       {/* Section5 - With Project */}
       <section className="bg-white w-full h-auto">
-        <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4]  
+        <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4]
           rounded-tl-[60px] pt-[54px]
           lg:rounded-tl-[150px] lg:pt-[129px]">
           <div className="pl-[51px] lg:pl-[130px]">
@@ -460,7 +440,7 @@ export default function Home() {
               <p className="font-tvn-medium text-[#944896]
                 text-[12px]
                 lg:text-[33px]">
-                {"\"경력의 공백을 가능성으로 바꾸다\""}
+                {"\"경력의 공백을 가능성으로 바꾸다.\""}
               </p>
               <div className="flex flex-col 
                 mt-[20px] space-y-[8px]
@@ -522,16 +502,26 @@ export default function Home() {
               <div>
                 <Link
                   href="/with-project"
-                  className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center
+                  className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
                     left-[50px] bottom-[10px] text-[10px] space-y-[8px] w-[68px] h-[68px]
                     rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
                     lg:left-[63px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]
-                    lg:rounded-tl-[12px] lg:rounded-tr-[12x] lg:rounded-bl-[12px]"
+                    lg:rounded-tl-[20px] lg:rounded-tr-[20xp] lg:rounded-bl-[20px]"
                 >
                   <span>
                     가능성을<br />
                     현실로<br />
-                    만들기&nbsp;&nbsp;&nbsp;➝
+                    만들기&nbsp;&nbsp;&nbsp;<span>
+                      <Image
+                        src={"/vector_right_white.svg"}
+                        alt="화살표"
+                        width={10}
+                        height={6.7}
+                        className={`absolute object-contain
+                          right-[8px] bottom-[15px]
+                          lg:right-[14px] lg:bottom-[23px] lg:w-[20px] lg:h-[20px]`}
+                      />
+                    </span>
                   </span>
                 </Link>
               </div>
@@ -553,6 +543,8 @@ export default function Home() {
         <div className="flex flex-col text-black
           pt-[100px] px-[50px]
           lg:pt-[151px] lg:px-[130px]">
+          
+          {/* 제목 영역 */}
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H CONNECDAY
           </h1>
@@ -564,11 +556,14 @@ export default function Home() {
           <p className="font-tvn-medium text-[#944896]
             text-[12px] h-[8px] mb-[29px]
             lg:text-[33px] lg:h-[60px] lg:mb-[15px]">
-            {"\“성장을 나누고, 새로운 기회를 연결하다\""}
+            {"\“성장을 나누고, 새로운 기회를 연결하다.\""}
           </p>
+
+          {/* 카드 영역 */}
           <div className="grid gap-0 overflow-hidden
             rounded-[20px] h-[174px]
             lg:grid-cols-3 lg:rounded-[50px] lg:h-[280px]">
+            
             {[
               {
                 src: "/picture_main_with_connectday_1.png",
@@ -586,7 +581,7 @@ export default function Home() {
                 content: "성장 선언 챌린지, 테이블 멘토링",
               },
             ].map((item, idx) => (
-              <div key={idx} className="relative group">
+              <div key={idx} className="relative">
                 {/* 배경 이미지 */}
                 <Image
                   src={item.src}
@@ -595,17 +590,24 @@ export default function Home() {
                   className="object-cover"
                 />
 
-                {/* 오버레이 */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white text-center">
-                  <h1 className="font-extrabold text-[10px] h-[7px] lg:text-[20px] lg:h-[14px]">{item.title}</h1>
-                  <p className="font-bold text-[8px] h-[6px] mt-[6px] lg:text-[18px] lg:h-[13px] lg:mt-[21px]">{item.content}</p>
+                {/* 항상 보이는 오버레이 */}
+                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center">
+                  <h1 className="font-extrabold text-[10px] h-[7px] lg:text-[20px] lg:h-[14px]">
+                    {item.title}
+                  </h1>
+                  <p className="font-bold text-[8px] h-[6px] mt-[6px] lg:text-[18px] lg:h-[13px] lg:mt-[21px]">
+                    {item.content}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* 하단 문구 + 버튼 */}
           <div className="grid
             grid-cols-10 mb-[58px] mt-[17px]
             lg:flex lg:flex-col lg:mb-[115px] lg:mt-[29px]">
+            
             <div className="col-span-6 flex items-center justify-end h-full">
               <p className="text-[#541E80] font-extrabold text-right
                 text-[10px] mr-[10px]
@@ -613,18 +615,31 @@ export default function Home() {
                 가능성은 연결될 때 빛이 납니다.
               </p>
             </div>
-            <div className="col-span-4 h-full flex items-center justify-end lg:mt-[16px]">
+
+            <div className="relative col-span-4 h-full flex items-center justify-end lg:mt-[16px]">
               <Link
                 href="/with-connectday"
-                className="bg-[#541E80] text-white font-extrabold flex items-center justify-center
+                className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
                   rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
-                  w-[125px] h-[25px] text-[10px]
-                  lg:rounded-tl-[12px] lg:rounded-tr-[12px] lg:rounded-bl-[12px]
-                  lg:w-[267px] lg:h-[52px] lg:text-[20px]"
+                  w-[139px] h-[25px] text-[10px]
+                  lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px]
+                  lg:w-[307px] lg:h-[52px] lg:text-[20px]"
               >
-                나의 성장도 연결하기&nbsp;&nbsp;&nbsp;➝
+                나의 성장 가능성 연결하기&nbsp;&nbsp;&nbsp;
+                <span>
+                  <Image
+                    src="/vector_right_white.svg"
+                    alt="화살표"
+                    width={10}
+                    height={6.7}
+                    className="absolute object-contain
+                      right-[8px] bottom-[9px]
+                      lg:right-[20px] lg:bottom-[17px] lg:w-[20px] lg:h-[20px]"
+                  />
+                </span>
               </Link>
             </div>
+            
           </div>            
         </div>
       </section>
@@ -634,21 +649,21 @@ export default function Home() {
         <div className="flex flex-col w-full h-auto bg-white text-black
           rounded-tr-[60px] pt-[47px] px-[50px]
           lg:rounded-tr-[100px] lg:pt-[95px] lg:px-[130px]">
+          
+          {/* 제목 영역 */}
           <h1 className="text-[#541E80] font-black text-[18px] lg:text-[45px]">
             W.I.T.H NEWS LETTER
           </h1>
-          <p className="font-black 
-            text-[12px] mt-[1px] mb-[1px]
-            lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
+          <p className="font-black text-[12px] mt-[1px] mb-[1px] lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
             경력보유여성을 위한 커리어 인사이트와 성장 소식을 전하는 정기 뉴스레터
           </p>
           <p className="font-tvn-medium text-[#944896] text-[12px] lg:text-[33px]">
-            {"\“가능성을 깨우고, 성장의 기회를 전하다\""}
+            {"\“가능성을 깨우고, 성장의 기회를 전하다.\""}
           </p>
-          <div className="flex justify-end 
-            gap-[10px] mt-[-20px] mb-[10px]
-            lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
-            {/* 왼쪽 화살표 */}
+
+          {/* 네비게이션 화살표 */}
+          <div className="flex justify-end gap-[10px] mt-[-20px] mb-[10px] lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
+            {/* 왼쪽 */}
             <button
               onClick={prev}
               disabled={index === 0}
@@ -663,7 +678,7 @@ export default function Home() {
               />
             </button>
 
-            {/* 오른쪽 화살표 */}
+            {/* 오른쪽 */}
             <button
               onClick={next}
               disabled={index >= newsLetters.length - 2}
@@ -678,11 +693,13 @@ export default function Home() {
               />
             </button>
           </div>
-          <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px] ">
+
+          {/* 뉴스 카드 */}
+          <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px]">
             {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
               <div
                 key={i}
-                className="relative  overflow-hidden group
+                className="relative overflow-hidden group
                   h-[118px] rounded-[12px]
                   lg:h-[300px] lg:rounded-[30px]"
               >
@@ -691,52 +708,66 @@ export default function Home() {
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover"
                 />
 
-                {/* 어두운 배경 */}
-                <div className="absolute inset-0 group-hover:bg-black/60 transition duration-300" />
+                {/* 항상 보이는 어두운 배경 */}
+                <div className="absolute inset-0 bg-black/60" />
 
-                {/* 텍스트 (hover 시 등장) */}
-                <div className="absolute inset-0 flex flex-col text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                {/* 항상 보이는 텍스트 */}
+                <div className="absolute inset-0 flex flex-col text-white
                   pl-[12px] pr-[30%] pt-[28px]
                   lg:pl-[40px] lg:pr-[40%] lg:pt-[75px]">
                   <div className="flex-[3]">
-                    <h1 className=" font-black text-[8px] lg:text-[23px]">{item.title}</h1>  
+                    <h1 className="font-black text-[8px] lg:text-[23px]">{item.title}</h1>
                   </div>
                   <div className="flex-[2] overflow-hidden">
                     <p className="font-medium line-clamp-3 text-[5px] lg:text-[14px]">{item.content}</p>
                   </div>
                 </div>
 
-                {/* 우하단 바로가기 버튼 (hover 시 등장) */}
+                {/* 항상 보이는 우하단 버튼 (hover하면 색 반전) */}
                 <Link
                   href={item.href}
-                  className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center
-                    bg-transparent text-white border border-white hover:bg-white hover:text-black
+                  className="absolute flex items-center justify-center
+                    bg-transparent text-white border border-white
+                    hover:bg-white hover:text-black transition-colors duration-300
                     w-[9px] h-[9px] bottom-[20px] right-[26px] text-[5px]
-                    lg:w-[30px] lg:h-[30px] lg:bottom-[50px] lg:right-[50px]"
+                    lg:w-[30px] lg:h-[30px] lg:bottom-[50px] lg:right-[50px] lg:text-[15px]"
                 >
-                  {"\>"}
+                  {">"}
                 </Link>
               </div>
             ))}
           </div>
+
+          {/* 하단 문구 */}
           <div className="mt-[11px] lg:mt-[37px]">
             <p className="text-[#541E80] font-extrabold text-[10px] lg:text-[20px]">
-              당신과의 시간과 당신의 가능성은 소중합니다
+              당신과의 시간과 당신의 가능성은 소중합니다.
             </p>
           </div>
-          <div className="flex justify-start mt-[5px] lg:mt-[16px]">
+
+          {/* 하단 버튼 */}
+          <div className="relative flex justify-start mt-[5px] lg:mt-[16px]">
             <Link
               href="/with-newsletter"
-              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center 
+              className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
-                w-[125px] h-[25px] text-[10px]
-                lg:rounded-tl-[12px] lg:rounded-tr-[12px] lg:rounded-bl-[12px]
-                lg:w-[267px] lg:h-[52px] lg:text-[20px]"
+                w-[141px] h-[25px] text-[10px]
+                lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px]
+                lg:w-[295px] lg:h-[52px] lg:text-[20px]"
             >
-              가능을 향한 첫 걸음&nbsp;&nbsp;&nbsp;➝
+              성장의 첫 걸음, 지금 시작&nbsp;&nbsp;&nbsp;
+              <span>
+                <Image
+                  src="/vector_right_white.svg"
+                  alt="화살표"
+                  width={10}
+                  height={6.7}
+                  className="object-contain lg:w-[20px] lg:h-[20px]"
+                />
+              </span>
             </Link>
           </div>
         </div>
@@ -744,7 +775,7 @@ export default function Home() {
 
       {/* Section8 - 파트너스 */}
       <section className="bg-white w-full h-auto flex flex-col items-center text-black
-        pt-[84px] pb-[37px] lg:pt-[150px] lg:pb-[150px]">
+        pt-[84px] pb-[37px] lg:pt-[177px] lg:pb-[136px]">
         <h1 className="font-black text-center text-[18px] lg:text-[45px]">
             커넥플과 함께하고 있는 파트너스
         </h1>
@@ -783,12 +814,13 @@ export default function Home() {
             <div className="overflow-hidden relative">
               <div className="scroll-row-1">
                 {[...logos1, ...logos1].map((src, i) => (
-                  <div key={`logos1-${i}`} className="flex items-center mx-[15px] lg:mx-[30px] relative w-[55px] h-[34px] lg:w-[128px] lg:h-[79px]">
+                  <div key={`logos1-${i}`} className="flex items-center justify-center mx-[15px] lg:mx-[30px] w-[55px] h-[34px] lg:w-[128px] lg:h-[79px]">
                     <Image
                       src={src}
                       alt={`logos1-${i}`}
-                      fill
-                      className="object-contain"
+                      width={128}
+                      height={79}
+                      className="object-contain max-w-full max-h-full"
                     />
                   </div>
                 ))}
@@ -799,13 +831,13 @@ export default function Home() {
             <div className="overflow-hidden relative">
               <div className="scroll-row-2 ml-[40px] lg:ml-[80px]">
                 {[...logos2, ...logos2].map((src, i) => (
-                  <div key={`logos2-${i}`} className="flex items-center mx-[15px] lg:mx-[30px] relative w-[55px] h-[34px] lg:w-[128px] lg:h-[79px]">
+                  <div key={`logos2-${i}`} className="flex items-center justify-center mx-[15px] lg:mx-[30px] w-[55px] h-[34px] lg:w-[128px] lg:h-[79px]">
                     <Image
                       src={src}
                       alt={`logos2-${i}`}
                       width={128}
                       height={79}
-                      className="object-contain"
+                      className="object-contain max-w-full max-h-full"
                     />
                   </div>
                 ))}
@@ -815,14 +847,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section9 - 자세히 보기 */}
+      {/* Section9 - 신청 링크 */}
       <section className="relative bg-white w-full aspect-video">
         {/* 꽉 찬 배경 이미지 */}
         <Image
-          src="/picture_main_detail_bg.png" // public 폴더에 넣은 이미지 경로
-          alt="Main Background"
+          src="/picture_main_view_bg.png" // public 폴더에 넣은 이미지 경로
+          alt="Main Detail Background"
           fill
-          className="object-cover"
+          className="object-contain"
           priority
         />
         {/* 콘텐츠 영역 */}
@@ -842,15 +874,18 @@ export default function Home() {
           <div className="flex-[2] flex flex-col gap-y-[5px] lg:gap-y-[14px]">
             {[
               {
-                label: "W.I.T.H Project",
+                labelEng: "W.I.T.H Project",
+                labelKor: "바로 신청하기",
                 href: "/with-project"
               },
               {
-                label: "W.I.T.H Connecday",
+                labelEng: "W.I.T.H Connecday",
+                labelKor: "바로 함께하기",
                 href: "/with-connectday"
               },
               {
-                label: "W.I.T.H News letter",
+                labelEng: "W.I.T.H News letter",
+                labelKor: "바로 구독하기",
                 href: "/with-newsletter"
               }
             ].map((btn, idx) => (
@@ -863,11 +898,22 @@ export default function Home() {
                   lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px] 
                   lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
               >
-                <span className="truncate">
-                  {btn.label}
-                  <span className="hidden lg:inline">&nbsp;자세히 보기</span>
+                <span className="truncate flex items-center gap-x-[2px]">
+                  {/* ✅ 영어는 항상 보이고 */}
+                  <span>{btn.labelEng}</span>
+
+                  {/* ✅ 한글은 PC(lg 이상)일 때만 보이게 */}
+                  <span className="hidden lg:inline">&nbsp;{btn.labelKor}</span>
                 </span>
-                <span className="text-[10px] lg:text-[22px]">➝</span>
+                <span>
+                  <Image
+                    src={"/vector_right_white.svg"}
+                    alt="화살표"
+                    width={10}
+                    height={6.7}
+                    className="object-contain lg:w-[20px] lg:h-[20px]"
+                  />
+                </span>
               </Link>
             ))}
           </div>

@@ -11,21 +11,21 @@ type AnimatedCounterProps = {
 export default function AnimatedCounter({
   value,
   duration = 1.5,
-  shouldAnimate = true
+  shouldAnimate = true,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false); // 애니메이션 중 여부
   const frame = useRef<number | null>(null);
   const startTime = useRef<number | null>(null);
 
-  // 숫자 부분만 추출 (예: "97.3%" → "97.3")
   const match = value.match(/[0-9,.]+/);
   const number = match ? parseFloat(match[0].replace(/,/g, "")) : 0;
-
-  // 숫자 부분을 제외한 나머지를 suffix로 (예: "%" 포함)
   const suffix = match ? value.slice(match[0].length) : "";
 
   useEffect(() => {
     if (!shouldAnimate) return;
+
+    setIsAnimating(true); // 애니메이션 시작할 때
 
     const animate = (timestamp: number) => {
       if (!startTime.current) startTime.current = timestamp;
@@ -37,6 +37,8 @@ export default function AnimatedCounter({
 
       if (percentage < 1) {
         frame.current = requestAnimationFrame(animate);
+      } else {
+        setIsAnimating(false); // 애니메이션 끝났을 때
       }
     };
 
@@ -45,7 +47,12 @@ export default function AnimatedCounter({
   }, [shouldAnimate, number, duration, value]);
 
   return (
-    <span>
+    <span
+      style={{
+        opacity: isAnimating ? 0.3 : 1, // 숫자 올라가는 중이면 50%, 완료되면 100%
+        transition: "opacity 0.3s ease", // 부드럽게 변하게
+      }}
+    >
       {count}
       {suffix}
     </span>
