@@ -856,7 +856,7 @@ export default function Home() {
       <section className="relative bg-white w-full aspect-video">
         {/* 꽉 찬 배경 이미지 */}
         <Image
-          src="/picture_main_view_bg.png" // public 폴더에 넣은 이미지 경로
+          src="/picture_main_link_bg.png" // public 폴더에 넣은 이미지 경로
           alt="Main Detail Background"
           fill
           className="object-contain"
@@ -904,10 +904,10 @@ export default function Home() {
                   lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
               >
                 <span className="truncate flex items-center gap-x-[2px]">
-                  {/* ✅ 영어는 항상 보이고 */}
+                  {/* 영어는 항상 보이고 */}
                   <span>{btn.labelEng}</span>
 
-                  {/* ✅ 한글은 PC(lg 이상)일 때만 보이게 */}
+                  {/* 한글은 PC(lg 이상)일 때만 보이게 */}
                   <span className="hidden lg:inline">&nbsp;{btn.labelKor}</span>
                 </span>
                 <span>
