@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function ComingSoon({ title }: { title: string }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-center px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-center px-4 text-black">
       <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mb-12">
         <Image
           src="/circle-check.svg"
