@@ -72,7 +72,7 @@ const slides = [
 const storyLabels = [
   { label: "커넥플과 함께<br />성장한 고객사", value: "21개" },
   { label: "커넥플과 함께<br />성공한 프로젝트", value: "34개" },
-  { label: "커넥플과 함께<br />기대한 서비스 만족도", value: "97.3%" },
+  { label: "커넥플과 함께<br />기대한 사업 만족도", value: "97.3%" },
   { label: "커넥플과 함께<br />걸어온 경력보유여성", value: "575명" },
   { label: "커넥플과 함께<br />재도약에 성공한<br />경력보유여성", value: "81명" },
 ];
