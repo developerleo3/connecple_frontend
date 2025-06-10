@@ -2,8 +2,12 @@
 
 import type React from "react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function LoginPage() {
+  const router = useRouter()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -15,15 +19,34 @@ export default function LoginPage() {
     setError("")
     setIsLoading(true)
 
-    // 로그인 시뮬레이션
-    setTimeout(() => {
-      setIsLoading(false)
-      if (username !== "conadmin" || password !== "correctpassword") {
+    try {
+      const response = await fetch(`${API_URL}/admin/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: username,
+          password: password,
+        }),
+      })
+
+      const data = await response.text()
+
+      if (data === "success") {
+        // 로그인 성공 시 처리
+        router.push("/admin/login")
+      } else if (data === "fail") {
         setError("아이디 혹은 비밀번호가 일치하지 않습니다.")
       } else {
-        window.location.href = "/dashboard"
+        setError("알 수 없는 오류가 발생했습니다.")
       }
-    }, 1000)
+
+    } catch (err) {
+      setError("서버 연결이 원활하지 않습니다.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -108,7 +131,7 @@ export default function LoginPage() {
                   ? "bg-purple-700 hover:bg-purple-800 text-white"
                   : "bg-gray-300 hover:bg-gray-400 text-gray-700"
               }`}
-              disabled={isLoading}
+              disabled={isLoading || !username || !password}
             >
               {isLoading ? "로그인 중..." : "로그인"}
             </button>
