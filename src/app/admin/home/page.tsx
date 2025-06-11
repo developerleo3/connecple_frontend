@@ -36,6 +36,7 @@ interface StatItem {
   title: string
   subtitle: string
   count: string
+  sortOrder?: number
 }
 
 interface StatisticData {
@@ -236,36 +237,29 @@ export default function AdminHomePage() {
   }
 
   // 통계 수치 유효성 검사 함수
-  const validateStatItems = () => {
-    const errors: ValidationErrors = {}
-    let hasErrors = false
+  const validateForm = () => {
+    const newErrors: ValidationErrors = {}
 
-    statItems.forEach((item) => {
-      // 하나라도 값이 있으면 모든 필드가 필수
-      const hasAnyValue = item.title.trim() || item.subtitle.trim() || item.count.trim()
+    // 각 항목의 필수 입력값 검사
+    statItems.forEach((item, index) => {
+      const itemErrors = {
+        title: !item.title.trim(),
+        subtitle: !item.subtitle.trim(),
+        count: !item.count.trim(),
+      }
 
-      if (hasAnyValue) {
-        const itemErrors = {
-          title: !item.title.trim(),
-          subtitle: !item.subtitle.trim(),
-          count: !item.count.trim(),
-        }
-
-        if (itemErrors.title || itemErrors.subtitle || itemErrors.count) {
-          errors[item.id] = itemErrors
-          hasErrors = true
-        }
+      if (itemErrors.title || itemErrors.subtitle || itemErrors.count) {
+        newErrors[index] = itemErrors
       }
     })
 
-    setValidationErrors(errors)
-    return !hasErrors
+    setValidationErrors(newErrors)
+    return Object.keys(newErrors).length === 0
   }
 
   const handleSaveSlides = () => {
-
-      // 유효성 검사 실행 - 모달창 표시 없이 오류 상태만 설정
-    validateStatItems()
+    // 유효성 검사 실행 - 모달창 표시 없이 오류 상태만 설정
+    validateForm()
 
     // 실제로 저장할 데이터만 필터링 (모든 필드가 채워진 항목만)
     const validStatItems = statItems.filter((item) => item.title.trim() && item.subtitle.trim() && item.count.trim())
@@ -349,27 +343,19 @@ export default function AdminHomePage() {
   }
 
   const handleSaveStats = () => {
-    // 유효성 검사 실행
-    if (!validateStatItems()) {
+    // 통계수치가 5개가 아닌 경우
+    if (statItems.length !== 5) {
       setAlertModal({
         isOpen: true,
-        title: "입력 오류",
-        message: "통계정보를 모두 작성해주세요.",
+        title: "알림",
+        message: "통계수치는 반드시 5개를 입력해야 합니다.",
         type: "warning",
       })
       return
     }
 
-    // 실제로 저장할 데이터만 필터링 (모든 필드가 채워진 항목만)
-    const validStatItems = statItems.filter((item) => item.title.trim() && item.subtitle.trim() && item.count.trim())
-
-    if (validStatItems.length === 0) {
-      setAlertModal({
-        isOpen: true,
-        title: "입력 오류",
-        message: "최소 하나의 통계 항목을 완전히 입력해주세요.",
-        type: "warning",
-      })
+    // 유효성 검사 실행
+    if (!validateForm()) {
       return
     }
 
@@ -380,12 +366,11 @@ export default function AdminHomePage() {
       action: async () => {
         setIsLoading(true)
         try {
-          // API 요청 데이터 형식에 맞게 변환
-          const requestData = validStatItems.map((item, index) => ({
+          const requestData = statItems.map((item) => ({
             statsName: item.title,
-            statistic: Number.parseFloat(item.subtitle),
+            statistic: parseInt(item.subtitle),
             unit: item.count,
-            sortOrder: index + 1,
+            sortOrder: item.sortOrder || 0,
           }))
 
           const response = await fetch(`${API_BASE_URL}/admin/stats`, {
@@ -394,32 +379,35 @@ export default function AdminHomePage() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              statsList: requestData
-            }),
+            body: JSON.stringify({ statsList: requestData }),
           })
 
           if (!response.ok) {
             const errorData = await response.json()
-            throw new Error(errorData.error || "통계 수치 저장에 실패했습니다.")
+            throw new Error(errorData.message || "통계수치 등록에 실패했습니다")
           }
-
-          const result = await response.json()
-          console.log("통계 수치 저장 성공:", result)
 
           setAlertModal({
             isOpen: true,
-            title: "성공",
-            message: "통계 수치가 성공적으로 등록되었습니다.",
+            title: "등록 완료",
+            message: "통계수치를 등록하였습니다.",
             type: "success",
           })
-          // 성공 시 유효성 검사 오류 초기화
-          setValidationErrors({})
-        } catch (err) {
-          setError(err instanceof Error ? err.message : "통계 수치 저장에 실패했습니다.")
+        } catch (error) {
+          setAlertModal({
+            isOpen: true,
+            title: "등록 실패",
+            message: "적절한 수치 값을 입력해 주세요",
+            type: "error",
+          })
         } finally {
           setIsLoading(false)
-          setConfirmModal({ ...confirmModal, isOpen: false })
+          setConfirmModal({
+            isOpen: false,
+            title: "",
+            message: "",
+            action: null,
+          })
         }
       },
     })
@@ -589,7 +577,7 @@ export default function AdminHomePage() {
 
               <div className="space-y-6">
                 {statItems.map((item, index) => {
-                  const hasError = validationErrors[item.id]
+                  const hasError = validationErrors[index]
                   const hasAnyValue = item.title.trim() || item.subtitle.trim() || item.count.trim()
                   const showError = hasError && (hasError.title || hasError.subtitle || hasError.count)
 

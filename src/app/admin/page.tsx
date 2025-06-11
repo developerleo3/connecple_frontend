@@ -36,7 +36,7 @@ export default function LoginPage() {
 
       if (data === "success") {
         // 로그인 성공 시 처리
-        router.push("/admin/history")
+        router.push("/admin/home")
       } else if (data === "fail") {
         setError("아이디 혹은 비밀번호가 일치하지 않습니다.")
       } else {

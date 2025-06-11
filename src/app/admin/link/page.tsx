@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ConfirmModal } from "@/components/confirm-modal"
+import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
 
 interface LinkData {
@@ -28,6 +29,13 @@ export default function AdminLinkPage() {
         wordConnecday: "",
         wordNewsletter: "",
         wordGig: "",
+    })
+
+    const [modal, setModal] = useState({
+        isOpen: false,
+        title: "",
+        message: "",
+        type: "info" as "info" | "warning" | "error" | "success",
     })
 
     const [errors, setErrors] = useState<ValidationErrors>({})
@@ -143,10 +151,19 @@ export default function AdminLinkPage() {
             console.log("링크 등록 성공:", result)
 
             // 성공 처리
-            alert("링크가 성공적으로 등록되었습니다!")
+            setModal({
+                isOpen: true,
+                title: "등록 완료",
+                message: "링크를 등록하였습니다.",
+                type: "success",
+            })
         } catch (error) {
-            console.error("링크 등록 오류:", error)
-            alert(error instanceof Error ? error.message : "링크 등록 중 오류가 발생했습니다. 다시 시도해주세요.")
+            setModal({
+                isOpen: true,
+                title: "등록 실패",
+                message: "링크 등록 중 오류가 발생하였습니다.",
+                type: "error",
+            })
         } finally {
             setIsLoading(false)
             setIsModalOpen(false)
@@ -283,16 +300,20 @@ export default function AdminLinkPage() {
                 </div>
             </main>
 
-            {/* 확인 모달 */}
             <ConfirmModal
                 isOpen={isModalOpen}
                 onClose={handleCancel}
                 onConfirm={handleConfirm}
                 title="등록하기"
-                message={currentAction ? `${currentAction.label}로 등록하시겠습니까?` : ""}
-                confirmText="등록하기"
-                cancelText="취소하기"
-                isLoading={isLoading}
+                message={`${currentAction?.label}을(를) 등록하시겠습니까?`}
+            />
+
+            <AlertModal
+                isOpen={modal.isOpen}
+                onClose={() => setModal({ ...modal, isOpen: false })}
+                title={modal.title}
+                message={modal.message}
+                type={modal.type}
             />
         </div>
     )

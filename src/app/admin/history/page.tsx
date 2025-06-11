@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { Plus, X, ChevronDown } from "lucide-react"
 import AdminSidebar from "@/components/admin-sidebar"
 import AlertModal from "@/components/alert-modal"
+import { ConfirmModal } from "@/components/confirm-modal"
+
 
 interface HistoryItem {
     historyYear: string
@@ -25,6 +27,13 @@ export default function HistoryManagePage() {
         type: "info" as "info" | "warning" | "error" | "success",
     })
     const [errors, setErrors] = useState<{ [key: number]: string }>({})
+
+    const [confirmModal, setConfirmModal] = useState({
+        isOpen: false,
+        title: "",
+        message: "",
+        action: null as (() => void) | null,
+    })
 
     // 페이지 로드 시 기존 연혁 데이터 가져오기
     useEffect(() => {
@@ -112,44 +121,52 @@ export default function HistoryManagePage() {
             return
         }
 
-        try {
-            setIsLoading(true)
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/intro/history`, {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ historyList }),
-            })
-
-            const data: ApiResponse = await response.json()
-
-            if (response.ok) {
-                setModal({
-                    isOpen: true,
-                    title: "등록 완료",
-                    message: "커넥플 소개의 연혁으로 등록하시겠습니까?",
-                    type: "success",
-                })
-            } else {
-                setModal({
-                    isOpen: true,
-                    title: "등록 실패",
-                    message: data.message || "등록 중 오류가 발생했습니다.",
-                    type: "error",
-                })
-            }
-        } catch (error) {
-            setModal({
-                isOpen: true,
-                title: "등록 실패",
-                message: "네트워크 오류가 발생했습니다.",
-                type: "error",
-            })
-        } finally {
-            setIsLoading(false)
-        }
+        setConfirmModal({
+            isOpen: true,
+            title: "등록하기",
+            message: "커넥플 소개의 연혁으로 등록하시겠습니까?",
+            action: async () => {
+                setIsLoading(true)
+                try {
+                    setIsLoading(true)
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/intro/history`, {
+                        method: "POST",
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ historyList }),
+                    })
+        
+                    const data: ApiResponse = await response.json()
+        
+                    if (response.ok) {
+                        setModal({
+                            isOpen: true,
+                            title: "등록 완료",
+                            message: "연혁을 등록하였습니다.",
+                            type: "success",
+                        })
+                    } else {
+                        setModal({
+                            isOpen: true,
+                            title: "등록 실패",
+                            message: data.message || "등록 중 오류가 발생했습니다.",
+                            type: "error",
+                        })
+                    }
+                } catch (error) {
+                    setModal({
+                        isOpen: true,
+                        title: "등록 실패",
+                        message: "네트워크 오류가 발생했습니다.",
+                        type: "error",
+                    })
+                } finally {
+                    setIsLoading(false)
+                }
+            },
+        })
     }
 
     const closeModal = () => {
@@ -163,6 +180,63 @@ export default function HistoryManagePage() {
             years.push(year.toString())
         }
         return years
+    }
+
+    const handleConfirm = async () => {
+        if (!confirmModal.action) return
+
+        setIsLoading(true)
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/intro/history`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ historyList }),
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json()
+                throw new Error(errorData.error || "링크 등록에 실패했습니다")
+            }
+
+            const result = await response.json()
+            console.log("링크 등록 성공:", result)
+
+            // 성공 처리
+            setModal({
+                isOpen: true,
+                title: "등록 완료",
+                message: "연혁을 등록하였습니다.",
+                type: "success",
+            })
+        } catch (error) {
+            setModal({
+                isOpen: true,
+                title: "등록 실패",
+                message: "링크 등록 중 오류가 발생하였습니다.",
+                type: "error",
+            })
+        } finally {
+            setIsLoading(false)
+            setConfirmModal({
+                isOpen: false,
+                title: "",
+                message: "",
+                action: null,
+            })
+        }
+    }
+
+    const handleCancel = () => {
+        setConfirmModal({
+            isOpen: false,
+            title: "",
+            message: "",
+            action: null,
+        })
     }
 
     return (
@@ -252,6 +326,14 @@ export default function HistoryManagePage() {
                 title={modal.title}
                 message={modal.message}
                 type={modal.type}
+            />
+
+            <ConfirmModal
+                isOpen={confirmModal.isOpen}
+                onClose={handleCancel}
+                onConfirm={handleConfirm}
+                title={confirmModal.title}
+                message={confirmModal.message}
             />
         </div>
     )
