@@ -6,8 +6,8 @@ import { LogOut } from "lucide-react"
 
 const menuItems = [
   { href: "/admin/home", label: "홈 관리" },
-  { href: "/admin/main-links", label: "메인 링크 관리" },
-  { href: "/admin/intro", label: "소개 관리" },
+  { href: "/admin/link", label: "메인 링크 관리" },
+  { href: "/admin/history", label: "소개 관리" },
   { href: "/admin/faq", label: "FAQ 관리" },
   { href: "/admin/notice", label: "공지사항 관리" },
 ]
@@ -20,14 +20,9 @@ export default function AdminSidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center">
-          <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-2">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
+          <div className="text-xl font-bold">
+            <img alt="CONNECPLE 로고" className="h-10 w-40" src="/logo_header.svg"/>
           </div>
-          <span className="text-xl font-bold">
-            <span className="text-purple-600">CO</span>
-            <span className="text-gray-400">NN</span>
-            <span className="text-purple-600">ECPLE</span>
-          </span>
         </div>
       </div>
 
@@ -37,7 +32,7 @@ export default function AdminSidebar() {
           <Link
             key={item.href}
             href={item.href}
-            className={`block px-6 py-3 text-lg hover:bg-gray-100 ${
+            className={`block px-6 py-3 text-lg hover:bg-gray-100${
               pathname === item.href ? "bg-gray-100 font-medium" : ""
             }`}
           >

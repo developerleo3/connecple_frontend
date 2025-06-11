@@ -1,10 +1,28 @@
 "use client"
 
-import { useState } from "react"
-import Image from "next/image"
+import { useState, useEffect } from "react"
 import { Plus, X } from "lucide-react"
 import AdminSidebar from "@/components/admin-sidebar"
+import AlertModal from "@/components/alert-modal"
+import { ConfirmModal } from "@/components/confirm-modal"
 
+// API 응답 타입 정의
+interface ImageSlideResponse {
+  id: number
+  imagePath: string
+  sortOrder?: number
+  title: string
+  company: string
+}
+
+interface StatItemResponse {
+  statsName: string
+  statistic: number
+  unit: string
+  sortOrder?: number
+}
+
+// 컴포넌트 내부에서 사용할 타입 정의
 interface ImageSlide {
   id: number
   image: string
@@ -20,36 +38,160 @@ interface StatItem {
   count: string
 }
 
-export default function AdminHomePage() {
-  const [imageSlides, setImageSlides] = useState<ImageSlide[]>([
-    {
-      id: 1,
-      image: "/sample-image.png",
-      title: "2024 데이터산업구역 활용 공동경진대회 시상식",
-      description: "이미지 관련 정보를 모두 작성해주세요.",
-      organization: "[과학기술정보통신부/한국데이터산업진흥원]",
-    },
-    {
-      id: 2,
-      image: "/sample-image.png",
-      title: "2024 데이터산업구역 활용 공동경진대회 시상식",
-      description: "",
-      organization: "[과학기술정보통신부/한국데이터산업진흥원]",
-    },
-  ])
+interface StatisticData {
+  statsName: string
+  statistic: number
+  unit: string
+  sortOrder: number
+}
 
+// 유효성 검사 상태 타입
+interface ValidationErrors {
+  [key: number]: {
+    title: boolean
+    subtitle: boolean
+    count: boolean
+  }
+}
+
+// API 기본 URL
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+
+export default function AdminHomePage() {
+  const [imageSlides, setImageSlides] = useState<ImageSlide[]>([])
   const [statItems, setStatItems] = useState<StatItem[]>([
-    { id: 1, title: "커넥플과 함께 성장한", subtitle: "고객사 기업 · 기관", count: "12개" },
-    { id: 2, title: "커넥플과 함께 성장한", subtitle: "고객사 기업 · 기관", count: "12개" },
-    { id: 3, title: "커넥플과 함께 성장한", subtitle: "고객사 기업 · 기관", count: "12개" },
+    { id: 1, title: "", subtitle: "", count: "" },
+    { id: 2, title: "", subtitle: "", count: "" },
+    { id: 3, title: "", subtitle: "", count: "" },
     { id: 4, title: "", subtitle: "", count: "" },
     { id: 5, title: "", subtitle: "", count: "" },
   ])
 
-  const [currentCount] = useState(2)
-  const [maxCount] = useState(10)
+  const [statistics, setStatistics] = useState<StatisticData[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // 유효성 검사 상태 추가
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({})
+
+  // 모달 상태
+  const [alertModal, setAlertModal] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info" as "info" | "warning" | "error" | "success",
+  })
+
+  const [confirmModal, setConfirmModal] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    action: null as (() => void) | null,
+  })
+
+  const maxCount = 10
+  const currentCount = imageSlides.length
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true)
+      setError(null)
+
+      try {
+        // 이미지 슬라이드 데이터 가져오기
+        const slidesResponse = await fetch(`${API_BASE_URL}/admin/main-intro-images`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+
+        if (slidesResponse.ok) {
+          const slidesData = await slidesResponse.json()
+          if (slidesData && Array.isArray(slidesData) && slidesData.length > 0) {
+            const mappedSlides = slidesData.map((item: ImageSlideResponse) => ({
+              id: item.id,
+              image: item.imagePath,
+              title: item.title,
+              sortOrder: item.sortOrder,
+              description: "",
+              organization: item.company,
+            }))
+
+            mappedSlides.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+            setImageSlides(mappedSlides)
+          }
+        }
+
+        // 통계 수치 데이터 가져오기
+        const statsResponse = await fetch(`${API_BASE_URL}/admin/stats`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+
+        if (statsResponse.ok) {
+          const { data } = await statsResponse.json()
+          if (data && Array.isArray(data)) {
+            const mappedStats = data.map((item: StatisticData, index: number) => ({
+              id: index + 1,
+              title: item.statsName,
+              subtitle: item.statistic.toString(),
+              count: item.unit,
+              sortOrder: item.sortOrder,
+            }))
+
+            mappedStats.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+            const filledStats = [...mappedStats]
+            while (filledStats.length < 5) {
+              filledStats.push({
+                id: filledStats.length + 1,
+                title: "",
+                subtitle: "",
+                count: "",
+                sortOrder: 0,
+              })
+            }
+            setStatItems(filledStats.slice(0, 5))
+          }
+        }
+      } catch (error) {
+        console.error("데이터 로딩 중 오류 발생:", error)
+        setError(error instanceof Error ? error.message : "데이터를 불러오는 중 오류가 발생했습니다.")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 에러 처리
+  useEffect(() => {
+    if (error) {
+      setAlertModal({
+        isOpen: true,
+        title: "오류",
+        message: error,
+        type: "error",
+      })
+    }
+  }, [error])
 
   const handleAddSlide = () => {
+    if (currentCount >= maxCount) {
+      setAlertModal({
+        isOpen: true,
+        title: "홈 화면 이미지",
+        message: "홈화면 이미지는 최대 10개까지 첨부 가능합니다.",
+        type: "warning",
+      })
+      return
+    }
+
     const newSlide: ImageSlide = {
       id: Date.now(),
       image: "",
@@ -80,6 +222,215 @@ export default function AdminHomePage() {
 
   const handleStatChange = (id: number, field: keyof StatItem, value: string) => {
     setStatItems(statItems.map((item) => (item.id === id ? { ...item, [field]: value } : item)))
+
+    // 입력 시 해당 필드의 오류 상태 제거
+    if (validationErrors[id]) {
+      setValidationErrors((prev) => ({
+        ...prev,
+        [id]: {
+          ...prev[id],
+          [field]: false,
+        },
+      }))
+    }
+  }
+
+  // 통계 수치 유효성 검사 함수
+  const validateStatItems = () => {
+    const errors: ValidationErrors = {}
+    let hasErrors = false
+
+    statItems.forEach((item) => {
+      // 하나라도 값이 있으면 모든 필드가 필수
+      const hasAnyValue = item.title.trim() || item.subtitle.trim() || item.count.trim()
+
+      if (hasAnyValue) {
+        const itemErrors = {
+          title: !item.title.trim(),
+          subtitle: !item.subtitle.trim(),
+          count: !item.count.trim(),
+        }
+
+        if (itemErrors.title || itemErrors.subtitle || itemErrors.count) {
+          errors[item.id] = itemErrors
+          hasErrors = true
+        }
+      }
+    })
+
+    setValidationErrors(errors)
+    return !hasErrors
+  }
+
+  const handleSaveSlides = () => {
+
+      // 유효성 검사 실행 - 모달창 표시 없이 오류 상태만 설정
+    validateStatItems()
+
+    // 실제로 저장할 데이터만 필터링 (모든 필드가 채워진 항목만)
+    const validStatItems = statItems.filter((item) => item.title.trim() && item.subtitle.trim() && item.count.trim())
+
+    if (validStatItems.length === 0) {
+      // 모든 항목이 비어있는 경우에만 모달 표시
+      setAlertModal({
+        isOpen: true,
+        title: "입력 오류",
+        message: "최소 하나의 통계 항목을 완전히 입력해주세요.",
+        type: "warning",
+      })
+      return
+    }
+
+    if (imageSlides.length === 0) {
+      setAlertModal({
+        isOpen: true,
+        title: "홈 화면 이미지",
+        message: "홈 화면 이미지는 최소 1개 이상 있어야 합니다.",
+        type: "warning",
+      })
+      return
+    }
+
+    // 필수 필드 검증
+    const hasEmptyFields = imageSlides.some((slide) => !slide.image || !slide.title || !slide.organization)
+    if (hasEmptyFields) {
+      setAlertModal({
+        isOpen: true,
+        title: "입력 오류",
+        message: "모든 이미지에 대해 이미지, 기관명, 사업명을 입력해주세요.",
+        type: "warning",
+      })
+      return
+    }
+
+    setConfirmModal({
+      isOpen: true,
+      title: "등록하기",
+      message: "홈 화면에 이미지 슬라이드를 등록하시겠습니까?",
+      action: async () => {
+        setIsLoading(true)
+        try {
+          // API 요청 데이터 형식에 맞게 변환
+          const requestData = imageSlides.map((slide, index) => ({
+            id: slide.id,
+            imagePath: slide.image,
+            sortOrder: index + 1,
+            title: slide.title,
+            company: slide.organization,
+          }))
+
+          const response = await fetch(`${API_BASE_URL}/admin/main-intro-images`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+          })
+
+          if (response.ok) {
+            setAlertModal({
+              isOpen: true,
+              title: "성공",
+              message: "이미지 슬라이드가 성공적으로 등록되었습니다.",
+              type: "success",
+            })
+          } else {
+            throw new Error("이미지 슬라이드 저장에 실패했습니다.")
+          }
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "이미지 슬라이드 저장에 실패했습니다.")
+        } finally {
+          setIsLoading(false)
+          setConfirmModal({ ...confirmModal, isOpen: false })
+        }
+      },
+    })
+  }
+
+  const handleSaveStats = () => {
+    // 유효성 검사 실행
+    if (!validateStatItems()) {
+      setAlertModal({
+        isOpen: true,
+        title: "입력 오류",
+        message: "통계정보를 모두 작성해주세요.",
+        type: "warning",
+      })
+      return
+    }
+
+    // 실제로 저장할 데이터만 필터링 (모든 필드가 채워진 항목만)
+    const validStatItems = statItems.filter((item) => item.title.trim() && item.subtitle.trim() && item.count.trim())
+
+    if (validStatItems.length === 0) {
+      setAlertModal({
+        isOpen: true,
+        title: "입력 오류",
+        message: "최소 하나의 통계 항목을 완전히 입력해주세요.",
+        type: "warning",
+      })
+      return
+    }
+
+    setConfirmModal({
+      isOpen: true,
+      title: "등록하기",
+      message: "입력하신 정보로\n홈 화면에 통계수치를 등록하시겠습니까?",
+      action: async () => {
+        setIsLoading(true)
+        try {
+          // API 요청 데이터 형식에 맞게 변환
+          const requestData = validStatItems.map((item, index) => ({
+            statsName: item.title,
+            statistic: Number.parseFloat(item.subtitle),
+            unit: item.count,
+            sortOrder: index + 1,
+          }))
+
+          const response = await fetch(`${API_BASE_URL}/admin/stats`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              statsList: requestData
+            }),
+          })
+
+          if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(errorData.error || "통계 수치 저장에 실패했습니다.")
+          }
+
+          const result = await response.json()
+          console.log("통계 수치 저장 성공:", result)
+
+          setAlertModal({
+            isOpen: true,
+            title: "성공",
+            message: "통계 수치가 성공적으로 등록되었습니다.",
+            type: "success",
+          })
+          // 성공 시 유효성 검사 오류 초기화
+          setValidationErrors({})
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "통계 수치 저장에 실패했습니다.")
+        } finally {
+          setIsLoading(false)
+          setConfirmModal({ ...confirmModal, isOpen: false })
+        }
+      },
+    })
+  }
+
+  if (isLoading) {
+    return <div className="text-center">로딩 중...</div>
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>
   }
 
   return (
@@ -88,9 +439,9 @@ export default function AdminHomePage() {
 
       <div className="bg-white flex-1">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-8 py-4">
+        <div className="bg-white border-gray-200 px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">홈 관리</h1>
+            <h1 className="text-2xl font-bold text-black">홈 관리</h1>
             <div className="text-sm text-gray-600">관리자명</div>
           </div>
         </div>
@@ -105,7 +456,7 @@ export default function AdminHomePage() {
             {/* Image Slides Section */}
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold">
+                <h2 className="text-lg font-semibold text-black">
                   홈 화면 소개 이미지 <span className="text-red-500">*</span>
                 </h2>
                 <span className="text-sm text-gray-500">
@@ -118,6 +469,7 @@ export default function AdminHomePage() {
                 <button
                   onClick={handleAddSlide}
                   className="w-full flex items-center justify-center gap-2 text-purple-600 hover:text-purple-700"
+                  disabled={isLoading}
                 >
                   <Plus size={20} />
                   <span>이미지 슬라이드 추가</span>
@@ -137,7 +489,11 @@ export default function AdminHomePage() {
                     <div className="relative">
                       <div className="w-[280px] h-[160px] bg-gray-100 rounded-lg overflow-hidden relative">
                         {slide.image ? (
-                          <Image src={slide.image || "/placeholder.svg"} alt="Preview" fill className="object-cover" />
+                          <img
+                            src={slide.image || "/logo_header.svg"}
+                            alt="Preview"
+                            className="w-full h-full object-cover"
+                          />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center bg-gray-100">
                             <span className="text-gray-400">이미지 없음</span>
@@ -155,10 +511,11 @@ export default function AdminHomePage() {
                                 const file = e.target.files?.[0]
                                 if (file) handleImageUpload(slide.id, file)
                               }}
+                              disabled={isLoading}
                             />
                             <div className="bg-white text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2">
                               <Plus size={16} />
-                              <span>이미지 업로드</span>
+                              <span>{isLoading ? "업로드중..." : "이미지 업로드"}</span>
                             </div>
                           </label>
                         </div>
@@ -168,6 +525,7 @@ export default function AdminHomePage() {
                       <button
                         onClick={() => handleRemoveSlide(slide.id)}
                         className="absolute -top-2 -right-2 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800"
+                        disabled={isLoading}
                       >
                         <X size={14} />
                       </button>
@@ -192,20 +550,20 @@ export default function AdminHomePage() {
                             value={slide.organization}
                             onChange={(e) => handleSlideChange(slide.id, "organization", e.target.value)}
                             maxLength={30}
+                            disabled={isLoading}
                           />
                         </div>
 
                         <div>
                           <input
                             type="text"
-                            placeholder="2024 데이터산업구역 활용 공동경진대회 시상식"
+                            placeholder="사업명 (최대 100자)"
                             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
                             value={slide.title}
                             onChange={(e) => handleSlideChange(slide.id, "title", e.target.value)}
+                            disabled={isLoading}
                           />
                         </div>
-
-                        {index === 0 && <p className="text-sm text-red-500">이미지 관련 정보를 모두 작성해주세요.</p>}
                       </div>
                     </div>
                   </div>
@@ -213,59 +571,116 @@ export default function AdminHomePage() {
               ))}
 
               <div className="flex justify-end">
-                <button className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">등록하기</button>
+                <button
+                  onClick={handleSaveSlides}
+                  disabled={isLoading}
+                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                >
+                  {isLoading ? "저장중..." : "등록하기"}
+                </button>
               </div>
             </div>
 
             {/* Statistics Section */}
             <div>
-              <h2 className="text-lg font-semibold mb-6">
+              <h2 className="text-lg font-semibold mb-6 text-black">
                 통계 수치 관리 <span className="text-red-500">*</span>
               </h2>
 
-              <div className="space-y-4">
-                {statItems.map((item, index) => (
-                  <div key={item.id} className="grid grid-cols-3 gap-4">
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="커넥플과 함께 성장한"
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                        value={item.title}
-                        onChange={(e) => handleStatChange(item.id, "title", e.target.value)}
-                      />
-                      {index === 0 && <p className="text-sm text-red-500 mt-1">통계정보를 모두 작성해주세요.</p>}
+              <div className="space-y-6">
+                {statItems.map((item, index) => {
+                  const hasError = validationErrors[item.id]
+                  const hasAnyValue = item.title.trim() || item.subtitle.trim() || item.count.trim()
+                  const showError = hasError && (hasError.title || hasError.subtitle || hasError.count)
+
+                  return (
+                    <div key={item.id} className="space-y-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-sm font-medium text-gray-700">통계 {index + 1}</span>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4">
+                        <div>
+                          <input
+                            type="text"
+                            placeholder="제목"
+                            className={`w-full rounded-lg px-3 py-2 text-sm border ${
+                              hasError?.title
+                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                            }`}
+                            value={item.title}
+                            onChange={(e) => handleStatChange(item.id, "title", e.target.value)}
+                            disabled={isLoading}
+                          />
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            placeholder="수치"
+                            className={`w-full rounded-lg px-3 py-2 text-sm border ${
+                              hasError?.subtitle
+                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                            }`}
+                            value={item.subtitle}
+                            onChange={(e) => handleStatChange(item.id, "subtitle", e.target.value)}
+                            disabled={isLoading}
+                          />
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            placeholder="단위"
+                            className={`w-full rounded-lg px-3 py-2 text-sm border ${
+                              hasError?.count
+                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                            }`}
+                            value={item.count}
+                            onChange={(e) => handleStatChange(item.id, "count", e.target.value)}
+                            disabled={isLoading}
+                          />
+                        </div>
+                      </div>
+
+                      {showError && <p className="text-sm text-red-500 mt-1">통계정보를 모두 작성해주세요.</p>}
                     </div>
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="고객사 기업 · 기관"
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                        value={item.subtitle}
-                        onChange={(e) => handleStatChange(item.id, "subtitle", e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="12개"
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                        value={item.count}
-                        onChange={(e) => handleStatChange(item.id, "count", e.target.value)}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
 
               <div className="flex justify-end mt-8">
-                <button className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">등록하기</button>
+                <button
+                  onClick={handleSaveStats}
+                  disabled={isLoading}
+                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                >
+                  {isLoading ? "저장중..." : "등록하기"}
+                </button>
               </div>
             </div>
           </div>
-          
         </div>
       </div>
+
+      {/* Modals */}
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+        title={alertModal.title}
+        message={alertModal.message}
+        type={alertModal.type}
+      />
+
+      <ConfirmModal
+        isOpen={confirmModal.isOpen}
+        onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
+        onConfirm={confirmModal.action || (() => {})}
+        title={confirmModal.title}
+        message={confirmModal.message}
+        isLoading={isLoading}
+      />
     </div>
   )
 }

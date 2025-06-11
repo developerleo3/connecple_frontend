@@ -22,6 +22,7 @@ export default function LoginPage() {
     try {
       const response = await fetch(`${API_URL}/admin/login`, {
         method: "POST",
+        credentials : "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -35,7 +36,7 @@ export default function LoginPage() {
 
       if (data === "success") {
         // 로그인 성공 시 처리
-        router.push("/admin/login")
+        router.push("/admin/history")
       } else if (data === "fail") {
         setError("아이디 혹은 비밀번호가 일치하지 않습니다.")
       } else {
