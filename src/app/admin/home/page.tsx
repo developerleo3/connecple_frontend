@@ -5,6 +5,7 @@ import { Plus, X } from "lucide-react"
 import AdminSidebar from "@/components/admin-sidebar"
 import AlertModal from "@/components/alert-modal"
 import { ConfirmModal } from "@/components/confirm-modal"
+import LoginRequiredModal from "@/components/login-required-modal"
 
 // API 응답 타입 정의
 interface ImageSlideResponse {
@@ -89,6 +90,8 @@ export default function AdminHomePage() {
     message: "",
     action: null as (() => void) | null,
   })
+
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
   const maxCount = 10
   const currentCount = imageSlides.length
@@ -342,22 +345,18 @@ export default function AdminHomePage() {
     })
   }
 
-  const handleSaveStats = () => {
-    // 통계수치가 5개가 아닌 경우
+  const handleSaveStats = async () => {
     if (statItems.length !== 5) {
       setAlertModal({
         isOpen: true,
-        title: "알림",
-        message: "통계수치는 반드시 5개를 입력해야 합니다.",
-        type: "warning",
+        title: "입력 오류",
+        message: "정확히 5개의 통계를 입력해주세요.",
+        type: "warning"
       })
       return
     }
 
-    // 유효성 검사 실행
-    if (!validateForm()) {
-      return
-    }
+    if (!validateForm()) return
 
     setConfirmModal({
       isOpen: true,
@@ -668,6 +667,11 @@ export default function AdminHomePage() {
         title={confirmModal.title}
         message={confirmModal.message}
         isLoading={isLoading}
+      />
+
+      <LoginRequiredModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
       />
     </div>
   )
