@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation"
 import  AdminSidebar  from "@/components/admin-sidebar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
+import { RichTextEditor } from "@/components/rich-text-editor"
 
 interface FormData {
     category: string
@@ -24,7 +24,7 @@ interface FormErrors {
     answer?: string
 }
 
-export default function CreateFAQPage() {
+export default function CreateFaqPage() {
     const router = useRouter()
     const [formData, setFormData] = useState<FormData>({
         category: "",
@@ -61,23 +61,25 @@ export default function CreateFAQPage() {
 
         setLoading(true)
         try {
-            // API 호출
-            // const response = await fetch('/api/faqs', {
-            //   method: 'POST',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //   },
-            //   body: JSON.stringify(formData),
-            // })
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/faqs`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    category: formData.category,
+                    question: formData.question,
+                    answer: formData.answer,
+                    isActive: formData.status === "활성",
+                }),
+            })
 
-            // if (!response.ok) {
-            //   throw new Error('FAQ 생성에 실패했습니다')
-            // }
+            if (!response.ok) {
+                throw new Error("FAQ 생성에 실패했습니다")
+            }
 
-            // Mock API 호출 시뮬레이션
-            await new Promise((resolve) => setTimeout(resolve, 1000))
-
-            router.push("/faq")
+            router.push("/admin/faq")
         } catch (error) {
             console.error("FAQ 생성 실패:", error)
             alert("FAQ 생성에 실패했습니다. 다시 시도해주세요.")
@@ -108,19 +110,21 @@ export default function CreateFAQPage() {
                                     <Label htmlFor="category" className="text-sm font-medium text-gray-700">
                                         카테고리
                                     </Label>
-                                    <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                                        <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
-                                            <SelectValue placeholder="카테고리를 선택하세요" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="위드프로젝트">위드프로젝트</SelectItem>
-                                            <SelectItem value="위드카데미">위드카데미</SelectItem>
-                                            <SelectItem value="위드뉴스레터">위드뉴스레터</SelectItem>
-                                            <SelectItem value="위드GIG">위드GIG</SelectItem>
-                                            <SelectItem value="기타">기타</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                    {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
+                                    <div className="relative">
+                                        <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
+                                            <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
+                                                <SelectValue placeholder="카테고리를 선택하세요" />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                                                <SelectItem value="워드프로젝트">워드프로젝트</SelectItem>
+                                                <SelectItem value="워드커네디어">워드커네디어</SelectItem>
+                                                <SelectItem value="워드뉴스리터">워드뉴스리터</SelectItem>
+                                                <SelectItem value="워드GIG">워드GIG</SelectItem>
+                                                <SelectItem value="기타">기타</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                        {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
+                                    </div>
                                 </div>
 
                                 <div>
@@ -163,16 +167,12 @@ export default function CreateFAQPage() {
                                 <Label htmlFor="answer" className="text-sm font-medium text-gray-700">
                                     FAQ 답변 <span className="text-red-500">*</span>
                                 </Label>
-                                <div className="mt-1 relative">
-                                    <Textarea
-                                        id="answer"
-                                        placeholder="질문에 대한 답변을 작성해주세요"
-                                        value={formData.answer}
-                                        onChange={(e) => handleInputChange("answer", e.target.value)}
-                                        className={`min-h-[200px] ${errors.answer ? "border-red-500" : ""}`}
-                                        maxLength={1000}
+                                <div className="mt-1">
+                                    <RichTextEditor
+                                        content={formData.answer}
+                                        onChange={(value) => handleInputChange("answer", value)}
+                                        placeholder="답변을 작성해주세요"
                                     />
-                                    <div className="absolute right-3 bottom-3 text-xs text-gray-400">{formData.answer.length}/1000</div>
                                 </div>
                                 {errors.answer && <p className="mt-1 text-sm text-red-600">{errors.answer}</p>}
                             </div>

@@ -26,6 +26,13 @@ const nextConfig = {
             },
         ]
     },
+    // HTTPS 설정 추가
+    server: {
+        https: {
+            key: './certificates/localhost-key.pem',
+            cert: './certificates/localhost.pem',
+        },
+    },
 }
 
 module.exports = nextConfig

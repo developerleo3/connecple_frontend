@@ -109,19 +109,21 @@ export default function CreateNoticePage() {
                   <Label htmlFor="category" className="text-sm font-medium text-gray-700">
                     카테고리
                   </Label>
-                  <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                    <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
-                      <SelectValue placeholder="카테고리를 선택하세요" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="워드프로젝트">워드프로젝트</SelectItem>
-                      <SelectItem value="워드커네디어">워드커네디어</SelectItem>
-                      <SelectItem value="워드뉴스리터">워드뉴스리터</SelectItem>
-                      <SelectItem value="워드GIG">워드GIG</SelectItem>
-                      <SelectItem value="기타">기타</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
+                  <div className="relative">
+                    <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
+                      <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
+                        <SelectValue placeholder="카테고리를 선택하세요" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                        <SelectItem value="워드프로젝트">워드프로젝트</SelectItem>
+                        <SelectItem value="워드커네디어">워드커네디어</SelectItem>
+                        <SelectItem value="워드뉴스리터">워드뉴스리터</SelectItem>
+                        <SelectItem value="워드GIG">워드GIG</SelectItem>
+                        <SelectItem value="기타">기타</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
+                  </div>
                 </div>
 
                 <div>
@@ -166,11 +168,9 @@ export default function CreateNoticePage() {
                 </Label>
                 <div className="mt-1">
                   <RichTextEditor
-                    value={formData.content}
+                    content={formData.content}
                     onChange={(value) => handleInputChange("content", value)}
                     placeholder="공지사항 내용을 작성해주세요"
-                    maxLength={5000}
-                    className={errors.content ? "border-red-500" : ""}
                   />
                 </div>
                 {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
