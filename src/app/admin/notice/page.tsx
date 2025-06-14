@@ -285,7 +285,7 @@ export default function NoticeListPage() {
                 <div className="text-sm text-gray-600">총 {totalCount}건</div>
                 <div className="flex items-center gap-2">                 
                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                    <SelectTrigger className="w-28">
+                    <SelectTrigger className="w-30">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">

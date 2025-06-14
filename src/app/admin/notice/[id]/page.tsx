@@ -9,7 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RichTextEditor } from "@/components/rich-text-editor"
 import { ConfirmModal } from "@/components/confirm-modal"
 import AlertModal from "@/components/alert-modal"
-import { Trash2, Edit } from "lucide-react"
+import { Trash2, Edit, List } from "lucide-react"
+import AdminSidebar from "@/components/admin-sidebar"
 
 // Types for this page
 interface Notice {
@@ -205,7 +206,7 @@ export default function NoticeDetailPage() {
                     type: "success",
                 })
                 setIsEditing(false)
-                fetchNotice() // 데이터 새로고침
+                fetchNotice()
 
             } else if (confirmModal.action === "delete") {
                 await deleteNotice(noticeId)
@@ -217,7 +218,6 @@ export default function NoticeDetailPage() {
                     type: "success",
                 })
 
-                // 삭제 후 목록 페이지로 이동
                 setTimeout(() => {
                     router.push("/admin/notice")
                 }, 1500)
@@ -248,9 +248,12 @@ export default function NoticeDetailPage() {
 
     if (loading && !notice) {
         return (
-            <div className="p-6">
-                <div className="flex justify-center items-center h-64">
-                    <div className="text-lg">로딩 중...</div>
+            <div className="flex min-h-screen bg-gray-50">
+                <AdminSidebar />
+                <div className="flex-1 p-6">
+                    <div className="flex justify-center items-center h-64">
+                        <div className="text-lg">로딩 중...</div>
+                    </div>
                 </div>
             </div>
         )
@@ -258,180 +261,192 @@ export default function NoticeDetailPage() {
 
     if (!notice) {
         return (
-            <div className="p-6">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold mb-4">공지사항을 찾을 수 없습니다</h1>
-                    <Button onClick={() => router.push("/admin/notice")}>목록으로 돌아가기</Button>
+            <div className="flex min-h-screen bg-gray-50">
+                <AdminSidebar />
+                <div className="flex-1 p-6">
+                    <div className="text-center">
+                        <h1 className="text-2xl font-bold mb-4">공지사항을 찾을 수 없습니다</h1>
+                        <Button onClick={() => router.push("/admin/notice")}>목록으로 돌아가기</Button>
+                    </div>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className="p-6 max-w-4xl">
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-2xl font-bold">{isEditing ? "공지사항 수정" : "공지사항 상세"}</h1>
-                {!isEditing && (
-                    <div className="flex gap-2">
-                        <Button variant="outline" onClick={handleDelete} className="text-red-600 border-red-600 hover:bg-red-50">
-                            <Trash2 className="h-4 w-4 mr-2" />
-                            삭제하기
-                        </Button>
-                        <Button onClick={() => setIsEditing(true)} className="bg-purple-600 hover:bg-purple-700">
-                            <Edit className="h-4 w-4 mr-2" />
-                            수정하기
-                        </Button>
+        <div className="flex min-h-screen bg-gray-50">
+            <AdminSidebar />
+            <div className="flex-1 p-6">
+                <div className="max-w-4xl mx-auto">
+                    <div className="flex justify-between items-center mb-8">
+                        <h1 className="text-2xl font-bold">{isEditing ? "공지사항 수정" : "공지사항 상세"}</h1>
                     </div>
-                )}
+
+                    {!isEditing ? (
+                        // View Mode
+                        <div className="space-y-6 relative pb-12">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <Label>카테고리</Label>
+                                    <div className="mt-1 p-2 border rounded-md bg-gray-50">{notice.category}</div>
+                                </div>
+                                <div>
+                                    <Label>상태</Label>
+                                    <div className="mt-1 p-2 border rounded-md bg-gray-50">{notice.isActive ? "활성" : "비활성"}</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <Label>공지사항 제목</Label>
+                                <div className="mt-1 p-2 border rounded-md bg-gray-50">{notice.title}</div>
+                            </div>
+
+                            <div>
+                                <Label>공지사항 내용</Label>
+                                <div
+                                    className="mt-1 p-4 border rounded-md bg-gray-50 min-h-[200px]"
+                                    dangerouslySetInnerHTML={{ __html: notice.content || "" }}
+                                />
+                            </div>
+
+                            <div>
+                                <Label>작성일시</Label>
+                                <div className="mt-1 p-2 border rounded-md bg-gray-50">{formatDate(notice.createdAt)}</div>
+                            </div>
+
+                            {/* Buttons at bottom-right */}
+                            <div className="absolute bottom-0 right-0 flex gap-2">
+                                <Button variant="outline" onClick={()=>{router.push("/admin/notice")}} className="text-gray-600 border-gray-600 hover:bg-gray-50">
+                                    <List className="h-4 w-4 mr-2" />
+                                    목록으로
+                                </Button>
+                                <Button variant="outline" onClick={handleDelete} className="text-red-600 border-red-600 hover:bg-red-50">
+                                    <Trash2 className="h-4 w-4 mr-2" />
+                                    삭제하기
+                                </Button>
+                                <Button onClick={() => setIsEditing(true)} className="bg-purple-600 hover:bg-purple-700">
+                                    <Edit className="h-4 w-4 mr-2" />
+                                    수정하기
+                                </Button>
+                            </div>
+                        </div>
+                    ) : (
+                        // Edit Mode
+                        <div className="space-y-6">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <Label htmlFor="category">카테고리</Label>
+                                    <Select
+                                        value={formData.category}
+                                        onValueChange={(value) => setFormData({ ...formData, category: value })}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                                            {CATEGORIES.map((category) => (
+                                                <SelectItem key={category} value={category}>
+                                                    {category}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="status">상태</Label>
+                                    <Select
+                                        value={formData.isActive ? "active" : "inactive"}
+                                        onValueChange={(value) => setFormData({ ...formData, isActive: value === "active" })}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                                            <SelectItem value="active">활성</SelectItem>
+                                            <SelectItem value="inactive">비활성</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <Label htmlFor="title">
+                                    공지사항 제목 <span className="text-red-500">*</span>
+                                </Label>
+                                <div className="relative">
+                                    <Input
+                                        id="title"
+                                        value={formData.title || ""}
+                                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                        maxLength={200}
+                                        className={errors.title ? "border-red-500" : ""}
+                                    />
+                                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-400">
+                                        {(formData.title || "").length}/200
+                                    </span>
+                                </div>
+                                {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+                            </div>
+
+                            <div>
+                                <Label htmlFor="content" className="text-sm font-medium text-gray-700">
+                                    공지사항 내용 <span className="text-red-500">*</span>
+                                </Label>
+                                <div className="mt-1">
+                                    <RichTextEditor
+                                        content={formData.content}
+                                        onChange={(value) => setFormData({ ...formData, content: value })}
+                                        placeholder="공지사항 내용을 작성해주세요"
+                                    />
+                                </div>
+                                {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
+                            </div>
+
+                            <div className="flex justify-end gap-2">
+                                <Button
+                                    variant="outline"
+                                    onClick={() => {
+                                        setIsEditing(false)
+                                        setFormData({
+                                            category: notice.category,
+                                            title: notice.title,
+                                            content: notice.content,
+                                            isActive: notice.isActive,
+                                        })
+                                        setErrors({})
+                                    }}
+                                >
+                                    취소
+                                </Button>
+                                <Button onClick={handleUpdate} disabled={loading} className="bg-purple-600 hover:bg-purple-700">
+                                    {loading ? "수정 중..." : "수정하기"}
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+
+                    <ConfirmModal
+                        isOpen={confirmModal.isOpen}
+                        onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
+                        onConfirm={handleConfirmAction}
+                        title={confirmModal.title}
+                        message={confirmModal.message}
+                        confirmText={confirmModal.action === "delete" ? "삭제하기" : "수정하기"}
+                        cancelText="취소하기"
+                        isLoading={loading}
+                    />
+
+                    <AlertModal
+                        isOpen={alertModal.isOpen}
+                        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+                        title={alertModal.title}
+                        message={alertModal.message}
+                        type={alertModal.type}
+                    />
+                </div>
             </div>
-
-            {!isEditing ? (
-                // View Mode
-                <div className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <Label>카테고리</Label>
-                            <div className="mt-1 p-2 border rounded-md bg-gray-50">{notice.category}</div>
-                        </div>
-                        <div>
-                            <Label>상태</Label>
-                            <div className="mt-1 p-2 border rounded-md bg-gray-50">{notice.isActive ? "활성" : "비활성"}</div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <Label>공지사항 제목</Label>
-                        <div className="mt-1 p-2 border rounded-md bg-gray-50">{notice.title}</div>
-                    </div>
-
-                    <div>
-                        <Label>공지사항 내용</Label>
-                        <div
-                            className="mt-1 p-4 border rounded-md bg-gray-50 min-h-[200px]"
-                            dangerouslySetInnerHTML={{ __html: notice.content || "" }}
-                        />
-                    </div>
-
-                    <div>
-                        <Label>작성일시</Label>
-                        <div className="mt-1 p-2 border rounded-md bg-gray-50">{formatDate(notice.createdAt)}</div>
-                    </div>
-                </div>
-            ) : (
-                // Edit Mode
-                <div className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <Label htmlFor="category">카테고리</Label>
-                            <Select
-                                value={formData.category}
-                                onValueChange={(value) => setFormData({ ...formData, category: value })}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                    {CATEGORIES.map((category) => (
-                                        <SelectItem key={category} value={category}>
-                                            {category}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
-                        </div>
-
-                        <div>
-                            <Label htmlFor="status">상태</Label>
-                            <Select
-                                value={formData.isActive ? "active" : "inactive"}
-                                onValueChange={(value) => setFormData({ ...formData, isActive: value === "active" })}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                    <SelectItem value="active">활성</SelectItem>
-                                    <SelectItem value="inactive">비활성</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <Label htmlFor="title">
-                            공지사항 제목 <span className="text-red-500">*</span>
-                        </Label>
-                        <div className="relative">
-                            <Input
-                                id="title"
-                                value={formData.title || ""}
-                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                maxLength={200}
-                                className={errors.title ? "border-red-500" : ""}
-                            />
-                            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-400">
-                                {(formData.title || "").length}/200
-                            </span>
-                        </div>
-                        {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
-                    </div>
-
-                    <div>
-                        <Label htmlFor="content" className="text-sm font-medium text-gray-700">
-                            공지사항 내용 <span className="text-red-500">*</span>
-                        </Label>
-                        <div className="mt-1">
-                            <RichTextEditor
-                                content={formData.content}
-                                onChange={(value) => setFormData({ ...formData, content: value })}
-                                placeholder="공지사항 내용을 작성해주세요"
-                            />
-                        </div>
-                        {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
-                    </div>
-
-                    <div className="flex justify-end gap-2">
-                        <Button
-                            variant="outline"
-                            onClick={() => {
-                                setIsEditing(false)
-                                setFormData({
-                                    category: notice.category,
-                                    title: notice.title,
-                                    content: notice.content,
-                                    isActive: notice.isActive,
-                                })
-                                setErrors({})
-                            }}
-                        >
-                            취소
-                        </Button>
-                        <Button onClick={handleUpdate} disabled={loading} className="bg-purple-600 hover:bg-purple-700">
-                            {loading ? "수정 중..." : "수정하기"}
-                        </Button>
-                    </div>
-                </div>
-            )}
-
-            <ConfirmModal
-                isOpen={confirmModal.isOpen}
-                onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
-                onConfirm={handleConfirmAction}
-                title={confirmModal.title}
-                message={confirmModal.message}
-                confirmText={confirmModal.action === "delete" ? "삭제하기" : "수정하기"}
-                cancelText="취소하기"
-                isLoading={loading}
-            />
-
-            <AlertModal
-                isOpen={alertModal.isOpen}
-                onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
-                title={alertModal.title}
-                message={alertModal.message}
-                type={alertModal.type}
-            />
         </div>
     )
-} 
+}
