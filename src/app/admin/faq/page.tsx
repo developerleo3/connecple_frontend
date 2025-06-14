@@ -238,7 +238,7 @@ export default function FaqListPage() {
                       value={searchKeyword}
                       onChange={(e) => setSearchKeyword(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-all"
+                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     />
                   </div>
                   <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
