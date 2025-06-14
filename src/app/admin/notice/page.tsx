@@ -5,7 +5,6 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
@@ -34,16 +33,6 @@ interface NoticeListResponse {
 interface ApiResponse<T> {
   message: string
   data: T
-}
-
-interface PaginationParams {
-  page?: number
-  size?: number
-  sortBy?: string
-}
-
-interface SearchParams extends PaginationParams {
-  keyword?: string
 }
 
 // API functions for this page
@@ -78,11 +67,35 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
   return response.json()
 }
 
-const getNotices = async (page: number, size: number, keyword?: string): Promise<ApiResponse<NoticeListResponse>> => {
-  const endpoint = keyword
-    ? `/admin/notice/search?keyword=${encodeURIComponent(keyword)}&page=${page}&size=${size}&sortBy=createdAt`
-    : `/admin/notice?page=${page}&size=${size}&sortBy=createdAt`
-  return fetchApi<NoticeListResponse>(endpoint)
+const getNotices = async (page: number, size: number, keyword?: string, categories?: string[]): Promise<ApiResponse<NoticeListResponse>> => {
+  const queryParams: string[] = [];
+
+  if (keyword) {
+    queryParams.push(`keyword=${encodeURIComponent(keyword)}`);
+  }
+
+  // 카테고리 필터링 추가: '전체'가 아닐 경우에만 추가
+  if (categories && categories.length > 0 && !categories.includes("전체")) {
+    categories.forEach(cat => {
+      queryParams.push(`category=${encodeURIComponent(cat)}`);
+    });
+  }
+
+  queryParams.push(`page=${page}`);
+  queryParams.push(`size=${size}`);
+  queryParams.push(`sortBy=createdAt`);
+
+  let endpoint = `/admin/notice`;
+  // If keyword is present, use search endpoint
+  if (keyword) {
+      endpoint = `/admin/notice/search`;
+  }
+
+  if (queryParams.length > 0) {
+      endpoint += `?${queryParams.join('&')}`;
+  }
+
+  return fetchApi<NoticeListResponse>(endpoint);
 }
 
 const CATEGORIES = ["전체", "워드프로젝트", "워드커네디어", "워드뉴스리터", "워드GIG", "기타"]
@@ -114,7 +127,7 @@ export default function NoticeListPage() {
   const fetchNotices = async () => {
     try {
       setLoading(true)
-      const response = await getNotices(currentPage, pageSize, searchKeyword)
+      const response = await getNotices(currentPage, pageSize, searchKeyword, selectedCategories)
 
       if (response.data) {
         setNotices(response.data.notices)
@@ -139,7 +152,7 @@ export default function NoticeListPage() {
 
   useEffect(() => {
     fetchNotices()
-  }, [currentPage, pageSize])
+  }, [currentPage, pageSize, selectedCategories])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -156,10 +169,30 @@ export default function NoticeListPage() {
   }
 
   const handleCategoryChange = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category],
-    )
-  }
+    setSelectedCategories((prev) => {
+      if (category === "전체") {
+        // '전체'를 선택하면 다른 모든 카테고리 선택 해제하고 '전체'만 선택
+        return ["전체"];
+      } else {
+        // '전체'가 아닌 다른 카테고리를 선택
+        const newSelection = prev.includes(category)
+          ? prev.filter((c) => c !== category) // 이미 선택된 경우 해제
+          : [...prev, category]; // 선택되지 않은 경우 추가
+
+        // 만약 '전체'가 선택되어 있다면 해제
+        if (newSelection.includes("전체")) {
+          return newSelection.filter((c) => c !== "전체");
+        }
+
+        // 모든 카테고리가 해제되면 자동으로 '전체' 선택
+        if (newSelection.length === 0) {
+          return ["전체"];
+        }
+
+        return newSelection;
+      }
+    });
+  };
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(Number(value))
