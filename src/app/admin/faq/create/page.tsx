@@ -135,7 +135,7 @@ export default function CreateFaqPage() {
                                         <SelectTrigger className="mt-1">
                                             <SelectValue />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                             <SelectItem value="활성">활성</SelectItem>
                                             <SelectItem value="비활성">비활성</SelectItem>
                                         </SelectContent>
