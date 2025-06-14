@@ -168,11 +168,9 @@ export default function CreateNoticePage() {
                 </Label>
                 <div className="mt-1">
                   <RichTextEditor
-                    value={formData.content}
+                    content={formData.content}
                     onChange={(value) => handleInputChange("content", value)}
                     placeholder="공지사항 내용을 작성해주세요"
-                    maxLength={5000}
-                    className={errors.content ? "border-red-500" : ""}
                   />
                 </div>
                 {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}

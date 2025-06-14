@@ -378,15 +378,17 @@ export default function NoticeDetailPage() {
                     </div>
 
                     <div>
-                        <Label htmlFor="content">
+                        <Label htmlFor="content" className="text-sm font-medium text-gray-700">
                             공지사항 내용 <span className="text-red-500">*</span>
                         </Label>
-                        <RichTextEditor
-                            content={formData.content || ""}
-                            onChange={(value) => setFormData({ ...formData, content: value })}
-                            placeholder="공지사항 내용을 작성해주세요"
-                        />
-                        {errors.content && <p className="text-red-500 text-sm mt-1">{errors.content}</p>}
+                        <div className="mt-1">
+                            <RichTextEditor
+                                content={formData.content}
+                                onChange={(value) => setFormData({ ...formData, content: value })}
+                                placeholder="공지사항 내용을 작성해주세요"
+                            />
+                        </div>
+                        {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
                     </div>
 
                     <div className="flex justify-end gap-2">

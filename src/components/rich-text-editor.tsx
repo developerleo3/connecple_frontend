@@ -55,7 +55,10 @@ export function RichTextEditor({
     }
 
     return (
-        <div className="border rounded-lg">
+        <div 
+            className="border rounded-lg min-h-[200px] cursor-text"
+            onClick={() => editor.commands.focus()}
+        >
             <div className="border-b p-2 flex gap-1">
                 <Button
                     variant="ghost"
@@ -115,7 +118,10 @@ export function RichTextEditor({
                     <ImageIcon className="h-4 w-4" />
                 </Button>
             </div>
-            <EditorContent editor={editor} className="p-4 min-h-[200px]" />
+            <EditorContent 
+                editor={editor} 
+                className="p-4 min-h-[200px] prose prose-sm max-w-none focus:outline-none"
+            />
         </div>
     );
 } 
