@@ -309,38 +309,42 @@ export default function FaqDetailPage() {
                             <Label htmlFor="category">
                                 카테고리 <span className="text-red-500">*</span>
                             </Label>
-                            <Select
-                                value={formData.category}
-                                onValueChange={(value) => setFormData({ ...formData, category: value })}
-                            >
-                                <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
-                                    <SelectValue placeholder="카테고리를 선택하세요" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {CATEGORIES.map((category) => (
-                                        <SelectItem key={category} value={category}>
-                                            {category}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
+                            <div className="relative">
+                                <Select
+                                    value={formData.category}
+                                    onValueChange={(value) => setFormData({ ...formData, category: value })}
+                                >
+                                    <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
+                                        <SelectValue placeholder="카테고리를 선택하세요" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                                        {CATEGORIES.map((category) => (
+                                            <SelectItem key={category} value={category}>
+                                                {category}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
+                            </div>
                         </div>
 
                         <div>
                             <Label htmlFor="status">상태</Label>
-                            <Select
-                                value={formData.isActive ? "활성" : "비활성"}
-                                onValueChange={(value) => setFormData({ ...formData, isActive: value === "활성" })}
-                            >
-                                <SelectTrigger className="mt-1">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="활성">활성</SelectItem>
-                                    <SelectItem value="비활성">비활성</SelectItem>
-                                </SelectContent>
-                            </Select>
+                            <div className="relative">
+                                <Select
+                                    value={formData.isActive ? "활성" : "비활성"}
+                                    onValueChange={(value) => setFormData({ ...formData, isActive: value === "활성" })}
+                                >
+                                    <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                                        <SelectItem value="활성">활성</SelectItem>
+                                        <SelectItem value="비활성">비활성</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
                     </div>
 
