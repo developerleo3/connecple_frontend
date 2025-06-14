@@ -196,34 +196,31 @@ export default function NoticeDetailPage() {
             setLoading(true)
 
             if (confirmModal.action === "update") {
-                const response = await updateNotice(noticeId, formData)
+                await updateNotice(noticeId, formData)
 
-                if (response.data) {
-                    setAlertModal({
-                        isOpen: true,
-                        title: "성공",
-                        message: "공지사항이 성공적으로 수정되었습니다.",
-                        type: "success",
-                    })
-                    setIsEditing(false)
-                    fetchNotice() // 데이터 새로고침
-                }
+                setAlertModal({
+                    isOpen: true,
+                    title: "성공",
+                    message: "공지사항이 성공적으로 수정되었습니다.",
+                    type: "success",
+                })
+                setIsEditing(false)
+                fetchNotice() // 데이터 새로고침
+
             } else if (confirmModal.action === "delete") {
-                const response = await deleteNotice(noticeId)
+                await deleteNotice(noticeId)
 
-                if (response.data) {
-                    setAlertModal({
-                        isOpen: true,
-                        title: "성공",
-                        message: "공지사항이 성공적으로 삭제되었습니다.",
-                        type: "success",
-                    })
+                setAlertModal({
+                    isOpen: true,
+                    title: "성공",
+                    message: "공지사항이 성공적으로 삭제되었습니다.",
+                    type: "success",
+                })
 
-                    // 삭제 후 목록 페이지로 이동
-                    setTimeout(() => {
-                        router.push("/admin/notice")
-                    }, 1500)
-                }
+                // 삭제 후 목록 페이지로 이동
+                setTimeout(() => {
+                    router.push("/admin/notice")
+                }, 1500)
             }
         } catch (error) {
             console.error("Failed to perform action:", error)
@@ -385,7 +382,7 @@ export default function NoticeDetailPage() {
                             공지사항 내용 <span className="text-red-500">*</span>
                         </Label>
                         <RichTextEditor
-                            value={formData.content || ""}
+                            content={formData.content || ""}
                             onChange={(value) => setFormData({ ...formData, content: value })}
                             placeholder="공지사항 내용을 작성해주세요"
                         />

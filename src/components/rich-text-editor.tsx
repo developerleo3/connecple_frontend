@@ -14,6 +14,7 @@ import {
     Link as LinkIcon,
     Image as ImageIcon,
 } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface RichTextEditorProps {
     content: string;
@@ -42,6 +43,12 @@ export function RichTextEditor({
             onChange(editor.getHTML());
         },
     });
+
+    useEffect(() => {
+        if (editor && content !== editor.getHTML()) {
+            editor.commands.setContent(content);
+        }
+    }, [content, editor]);
 
     if (!editor) {
         return null;
