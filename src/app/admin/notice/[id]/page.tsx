@@ -330,7 +330,7 @@ export default function NoticeDetailPage() {
                                 <SelectTrigger>
                                     <SelectValue />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                     {CATEGORIES.map((category) => (
                                         <SelectItem key={category} value={category}>
                                             {category}
@@ -350,7 +350,7 @@ export default function NoticeDetailPage() {
                                 <SelectTrigger>
                                     <SelectValue />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                     <SelectItem value="active">활성</SelectItem>
                                     <SelectItem value="inactive">비활성</SelectItem>
                                 </SelectContent>

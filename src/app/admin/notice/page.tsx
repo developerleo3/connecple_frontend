@@ -269,7 +269,7 @@ export default function NoticeListPage() {
                     <SelectTrigger className="w-24">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                       {PAGE_SIZE_OPTIONS.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
