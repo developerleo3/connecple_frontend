@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, Plus, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
 import Link from "next/link"
@@ -36,7 +36,7 @@ interface ApiResponse<T> {
 }
 
 // API functions for this page
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://connecple.agong.store"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 class ApiError extends Error {
   constructor(
@@ -74,7 +74,6 @@ const getNotices = async (page: number, size: number, keyword?: string, categori
     queryParams.push(`keyword=${encodeURIComponent(keyword)}`);
   }
 
-  // 카테고리 필터링 추가: '전체'가 아닐 경우에만 추가
   if (categories && categories.length > 0 && !categories.includes("전체")) {
     categories.forEach(cat => {
       queryParams.push(`category=${encodeURIComponent(cat)}`);
@@ -86,7 +85,6 @@ const getNotices = async (page: number, size: number, keyword?: string, categori
   queryParams.push(`sortBy=createdAt`);
 
   let endpoint = `/admin/notice`;
-  // If keyword is present, use search endpoint
   if (keyword) {
       endpoint = `/admin/notice/search`;
   }
@@ -100,9 +98,9 @@ const getNotices = async (page: number, size: number, keyword?: string, categori
 
 const CATEGORIES = ["전체", "워드프로젝트", "워드커네디어", "워드뉴스리터", "워드GIG", "기타"]
 const PAGE_SIZE_OPTIONS = [
-  { value: "10", label: "10개씩" },
-  { value: "30", label: "30개씩" },
-  { value: "50", label: "50개씩" },
+  { value: "10", label: "10개씩 보기" },
+  { value: "30", label: "30개씩 보기" },
+  { value: "50", label: "50개씩 보기" },
 ]
 
 export default function NoticeListPage() {
@@ -171,20 +169,16 @@ export default function NoticeListPage() {
   const handleCategoryChange = (category: string) => {
     setSelectedCategories((prev) => {
       if (category === "전체") {
-        // '전체'를 선택하면 다른 모든 카테고리 선택 해제하고 '전체'만 선택
         return ["전체"];
       } else {
-        // '전체'가 아닌 다른 카테고리를 선택
         const newSelection = prev.includes(category)
-          ? prev.filter((c) => c !== category) // 이미 선택된 경우 해제
-          : [...prev, category]; // 선택되지 않은 경우 추가
+          ? prev.filter((c) => c !== category)
+          : [...prev, category];
 
-        // 만약 '전체'가 선택되어 있다면 해제
         if (newSelection.includes("전체")) {
           return newSelection.filter((c) => c !== "전체");
         }
 
-        // 모든 카테고리가 해제되면 자동으로 '전체' 선택
         if (newSelection.length === 0) {
           return ["전체"];
         }
@@ -196,7 +190,7 @@ export default function NoticeListPage() {
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(Number(value))
-    setCurrentPage(0) // 페이지 크기가 변경되면 첫 페이지로 이동
+    setCurrentPage(0)
   }
 
   const formatDate = (dateString: string) => {
@@ -209,6 +203,34 @@ export default function NoticeListPage() {
     })
   }
 
+  // Pagination logic
+  const pagesPerGroup = 5;
+  const currentGroup = Math.floor(currentPage / pagesPerGroup);
+  const startPage = currentGroup * pagesPerGroup;
+  const endPage = Math.min(startPage + pagesPerGroup, totalPages);
+  const pageNumbers = Array.from(
+    { length: endPage - startPage },
+    (_, i) => startPage + i
+  );
+
+  const handlePrevGroup = () => {
+    const newPage = Math.max(0, startPage - pagesPerGroup);
+    setCurrentPage(newPage);
+  };
+
+  const handleNextGroup = () => {
+    const newPage = Math.min(totalPages - 1, startPage + pagesPerGroup);
+    setCurrentPage(newPage);
+  };
+
+  const handleFirstPage = () => {
+    setCurrentPage(0);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages - 1);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
@@ -216,10 +238,8 @@ export default function NoticeListPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900">공지사항 관리</h1>
-            <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-600">화면정의</div>
-              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700">
-                <Plus className="h-4 w-4 mr-2" />
+            <div className="flex items-center gap-4">             
+              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700">                
                 공지사항 작성
               </Button>
             </div>
@@ -263,10 +283,9 @@ export default function NoticeListPage() {
 
               <div className="flex justify-between items-center mt-4">
                 <div className="text-sm text-gray-600">총 {totalCount}건</div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">보기</span>
+                <div className="flex items-center gap-2">                 
                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                    <SelectTrigger className="w-24">
+                    <SelectTrigger className="w-30">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
@@ -332,34 +351,47 @@ export default function NoticeListPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
+                  onClick={handleFirstPage}
+                  disabled={currentPage === 0}
+                >
+                  <ChevronsLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrevGroup}
                   disabled={currentPage === 0}
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
 
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const pageNum = i + 1
-                  return (
-                    <Button
-                      key={pageNum}
-                      variant={currentPage === pageNum - 1 ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setCurrentPage(pageNum - 1)}
-                      className={currentPage === pageNum - 1 ? "bg-purple-600 hover:bg-purple-700" : ""}
-                    >
-                      {pageNum}
-                    </Button>
-                  )
-                })}
+                {pageNumbers.map((pageNum) => (
+                  <Button
+                    key={pageNum}
+                    variant={currentPage === pageNum ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700" : ""}
+                  >
+                    {pageNum + 1}
+                  </Button>
+                ))}
 
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))}
-                  disabled={currentPage === totalPages - 1}
+                  onClick={handleNextGroup}
+                  disabled={currentPage >= totalPages - 1}
                 >
                   <ChevronRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLastPage}
+                  disabled={currentPage >= totalPages - 1}
+                >
+                  <ChevronsRight className="h-4 w-4" />
                 </Button>
               </div>
             )}
