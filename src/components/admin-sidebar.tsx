@@ -75,9 +75,9 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
 
   return (
     <>
-      <div className={cn("pb-12 w-64 bg-white border-r", className)}>
+      <div className={cn("pb-12 w-64 bg-white border-r border-gray-200", className)}>
         {/* Logo */}
-        <div className="p-6 border-b">
+        <div className="p-6 border-b border-gray-200">
           <Image
             src="/logo_header.svg"
             alt="CONNECPLE 로고"
