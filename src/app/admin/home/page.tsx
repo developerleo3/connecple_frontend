@@ -533,7 +533,7 @@ export default function AdminHomePage() {
                           <input
                             type="text"
                             placeholder="기관명 (최대 30자)"
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-all"
                             value={slide.organization}
                             onChange={(e) => handleSlideChange(slide.id, "organization", e.target.value)}
                             maxLength={30}
@@ -545,7 +545,7 @@ export default function AdminHomePage() {
                           <input
                             type="text"
                             placeholder="사업명 (최대 100자)"
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-all"
                             value={slide.title}
                             onChange={(e) => handleSlideChange(slide.id, "title", e.target.value)}
                             disabled={isLoading}
@@ -593,9 +593,9 @@ export default function AdminHomePage() {
                             placeholder="제목"
                             className={`w-full rounded-lg px-3 py-2 text-sm border ${
                               hasError?.title
-                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                                : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            }`}
+                                ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+                                : "border-gray-300 focus:border-purple-600 focus:ring-purple-200"
+                            } focus:outline-none focus:ring-2 transition-all`}
                             value={item.title}
                             onChange={(e) => handleStatChange(item.id, "title", e.target.value)}
                             disabled={isLoading}
@@ -607,9 +607,9 @@ export default function AdminHomePage() {
                             placeholder="수치"
                             className={`w-full rounded-lg px-3 py-2 text-sm border ${
                               hasError?.subtitle
-                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                                : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            }`}
+                                ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+                                : "border-gray-300 focus:border-purple-600 focus:ring-purple-200"
+                            } focus:outline-none focus:ring-2 transition-all`}
                             value={item.subtitle}
                             onChange={(e) => handleStatChange(item.id, "subtitle", e.target.value)}
                             disabled={isLoading}
@@ -621,9 +621,9 @@ export default function AdminHomePage() {
                             placeholder="단위"
                             className={`w-full rounded-lg px-3 py-2 text-sm border ${
                               hasError?.count
-                                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                                : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            }`}
+                                ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+                                : "border-gray-300 focus:border-purple-600 focus:ring-purple-200"
+                            } focus:outline-none focus:ring-2 transition-all`}
                             value={item.count}
                             onChange={(e) => handleStatChange(item.id, "count", e.target.value)}
                             disabled={isLoading}

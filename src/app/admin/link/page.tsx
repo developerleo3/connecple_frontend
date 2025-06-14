@@ -201,7 +201,7 @@ export default function AdminLinkPage() {
                                             placeholder="링크를 입력해 넣어주세요"
                                             value={links.wordProject}
                                             onChange={(e) => handleInputChange("wordProject", e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-all text-black placeholder:text-gray-500"
                                         />
                                         {errors.wordProject && <p className="text-red-500 text-sm mt-1">{errors.wordProject}</p>}
                                     </div>
