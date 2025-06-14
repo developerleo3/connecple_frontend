@@ -9,12 +9,15 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { RichTextEditor } from "@/components/rich-text-editor"
+import { ConfirmModal } from "@/components/confirm-modal"
+import AlertModal from "@/components/alert-modal"
 
 interface FormData {
   category: string
   status: string
   title: string
   content: string
+  isActive: boolean
 }
 
 interface FormErrors {
@@ -30,9 +33,25 @@ export default function CreateNoticePage() {
     status: "활성",
     title: "",
     content: "",
+    isActive: true,
   })
   const [errors, setErrors] = useState<FormErrors>({})
   const [loading, setLoading] = useState(false)
+
+  // Alert modal state
+  const [alertModal, setAlertModal] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info" as "info" | "warning" | "error" | "success",
+  })
+
+  // Confirm modal state
+  const [confirmModal, setConfirmModal] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+  })
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
@@ -53,12 +72,19 @@ export default function CreateNoticePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!validateForm()) return
 
-    if (!validateForm()) {
-      return
-    }
+    setConfirmModal({
+      isOpen: true,
+      title: "공지사항 생성",
+      message: "공지사항을 생성하시겠습니까?",
+    })
+  }
 
+  const handleConfirm = async () => {
+    setConfirmModal({ ...confirmModal, isOpen: false })
     setLoading(true)
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/notice`, {
         method: "POST",
@@ -81,7 +107,12 @@ export default function CreateNoticePage() {
       router.push("/admin/notice")
     } catch (error) {
       console.error("공지사항 생성 실패:", error)
-      alert("공지사항 생성에 실패했습니다. 다시 시도해주세요.")
+      setAlertModal({
+        isOpen: true,
+        title: "오류",
+        message: "공지사항 생성에 실패했습니다.",
+        type: "error",
+      })
     } finally {
       setLoading(false)
     }
@@ -176,13 +207,32 @@ export default function CreateNoticePage() {
                 {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
               </div>
 
-              <div className="flex justify-end">
-                <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8" disabled={loading}>
+              <div className="flex justify-end gap-2">
+                <Button onClick={() => router.push("/admin/notice")} variant="outline">
+                  취소
+                </Button>
+                <Button type="submit" disabled={loading} className="bg-purple-600 hover:bg-purple-700">
                   {loading ? "생성 중..." : "생성하기"}
                 </Button>
               </div>
             </form>
           </div>
+
+          <AlertModal
+            isOpen={alertModal.isOpen}
+            onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+            title={alertModal.title}
+            message={alertModal.message}
+            type={alertModal.type}
+          />
+
+          <ConfirmModal
+            isOpen={confirmModal.isOpen}
+            onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
+            onConfirm={handleConfirm}
+            title={confirmModal.title}
+            message={confirmModal.message}
+          />
         </div>
       </div>
     </div>

@@ -199,28 +199,14 @@ export default function NoticeDetailPage() {
             if (confirmModal.action === "update") {
                 await updateNotice(noticeId, formData)
 
-                setAlertModal({
-                    isOpen: true,
-                    title: "성공",
-                    message: "공지사항이 성공적으로 수정되었습니다.",
-                    type: "success",
-                })
                 setIsEditing(false)
                 fetchNotice()
+                router.push("/admin/notice")
 
             } else if (confirmModal.action === "delete") {
-                await deleteNotice(noticeId)
+                await deleteNotice(noticeId)           
 
-                setAlertModal({
-                    isOpen: true,
-                    title: "성공",
-                    message: "공지사항이 성공적으로 삭제되었습니다.",
-                    type: "success",
-                })
-
-                setTimeout(() => {
-                    router.push("/admin/notice")
-                }, 1500)
+                router.push("/admin/notice")
             }
         } catch (error) {
             console.error("Failed to perform action:", error)
