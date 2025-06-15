@@ -109,3 +109,47 @@ export async function saveStats(statsList: StatItem[]): Promise<void> {
     throw error
   }
 }
+
+import { useAuth } from "@/components/auth-provider"
+
+export class ApiError extends Error {
+    constructor(public status: number, message: string) {
+        super(message)
+        this.name = "ApiError"
+    }
+}
+
+export interface ApiResponse<T> {
+    data: T
+    message: string
+    status: number
+}
+
+export async function fetchApi<T>(
+    endpoint: string,
+    options: RequestInit = {}
+): Promise<ApiResponse<T>> {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`
+
+    const response = await fetch(url, {
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            ...options.headers,
+        },
+        ...options,
+    })
+
+    if (response.status === 401) {
+        // 세션 만료 또는 인증 실패
+        alert("세션이 만료되었습니다. 로그인 페이지로 이동합니다.")
+        window.location.href = "/admin"
+        throw new ApiError(401, "인증이 필요합니다.")
+    }
+
+    if (!response.ok) {
+        throw new ApiError(response.status, `HTTP error! status: ${response.status}`)
+    }
+
+    return response.json()
+}
