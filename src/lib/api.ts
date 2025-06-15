@@ -142,7 +142,6 @@ export async function fetchApi<T>(
 
     if (response.status === 401) {
         // 세션 만료 또는 인증 실패
-        alert("세션이 만료되었습니다. 로그인 페이지로 이동합니다.")
         window.location.href = "/admin"
         throw new ApiError(401, "인증이 필요합니다.")
     }
