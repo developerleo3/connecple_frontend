@@ -26,7 +26,7 @@ export default function AlertModal({
     const getTypeStyles = () => {
         switch (type) {
             case "success":
-                return "bg-green-50 text-green-800"
+                return "bg-purple-50 text-purple-800"
             case "error":
                 return "bg-red-50 text-red-800"
             case "warning":
@@ -38,7 +38,7 @@ export default function AlertModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="fixed inset-0 bg-gray-800 bg-opacity-80" onClick={onClose} />
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-10" onClick={onClose} />
             <div className="relative bg-white rounded-lg p-6 max-w-md w-full mx-4">
                 <div className={`p-4 rounded-lg ${getTypeStyles()}`}>
                     <h3 className="text-lg font-semibold mb-2">{title}</h3>
@@ -64,7 +64,7 @@ export default function AlertModal({
                             type === "error"
                                 ? "bg-red-600 hover:bg-red-700"
                                 : type === "success"
-                                ? "bg-green-600 hover:bg-green-700"
+                                ? "bg-purple-600 hover:bg-purple-700"
                                 : type === "warning"
                                 ? "bg-yellow-600 hover:bg-yellow-700"
                                 : "bg-blue-600 hover:bg-blue-700"

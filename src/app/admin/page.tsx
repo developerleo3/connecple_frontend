@@ -3,11 +3,13 @@
 import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/components/auth-provider"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function LoginPage() {
   const router = useRouter()
+  const { checkAuth } = useAuth()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -22,7 +24,7 @@ export default function LoginPage() {
     try {
       const response = await fetch(`${API_URL}/admin/login`, {
         method: "POST",
-        credentials : "include",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -35,7 +37,8 @@ export default function LoginPage() {
       const data = await response.text()
 
       if (data === "success") {
-        // 로그인 성공 시 처리
+        // 로그인 성공 시 인증 상태 체크 후 홈으로 이동
+        await checkAuth()
         router.push("/admin/home")
       } else if (data === "fail") {
         setError("아이디 혹은 비밀번호가 일치하지 않습니다.")

@@ -33,7 +33,7 @@ export function ConfirmModal({
 }: ConfirmModalProps) {
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md bg-white">
                 <DialogHeader>
                     <DialogTitle className="text-center text-xl font-bold">{title}</DialogTitle>
                     <DialogDescription className="text-center text-base pt-4">{message}</DialogDescription>
