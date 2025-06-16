@@ -36,7 +36,7 @@ interface ApiResponse<T> {
 }
 
 // API functions for this page
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://connecple.agong.store"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 class ApiError extends Error {
   constructor(
@@ -100,9 +100,9 @@ const getFaqs = async (page: number, size: number, keyword?: string, categories?
 
 const CATEGORIES = ["전체", "워드프로젝트", "워드커네디어", "워드뉴스리터", "워드GIG", "기타"]
 const PAGE_SIZE_OPTIONS = [
-  { value: "10", label: "10개씩" },
-  { value: "30", label: "30개씩" },
-  { value: "50", label: "50개씩" },
+  { value: "10", label: "10개씩 보기" },
+  { value: "30", label: "30개씩 보기" },
+  { value: "50", label: "50개씩 보기" },
 ]
 
 export default function FaqListPage() {
@@ -217,16 +217,14 @@ export default function FaqListPage() {
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900">FAQ 관리</h1>
             <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-600">화면정의</div>
-              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700 text-white">                
                 FAQ 작성
               </Button>
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="p-6">
+            <div className="p-6 pb-3">
               <p className="text-gray-600 mb-4">자주 묻는 질문을 작성하고 관리할 수 있습니다.</p>
 
               <div className="mb-6 space-y-4">
@@ -238,10 +236,10 @@ export default function FaqListPage() {
                       value={searchKeyword}
                       onChange={(e) => setSearchKeyword(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                     />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -254,7 +252,8 @@ export default function FaqListPage() {
                     key={category}
                     variant={selectedCategories.includes(category) ? "default" : "outline"}
                     onClick={() => handleCategoryChange(category)}
-                    className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700" : ""}
+                    className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50" 
+                      : "text-gray-500 border-gray-200 hover:bg-gray-200 hover:cursor-pointer shadow-sm"}
                   >
                     {category}
                   </Button>
@@ -262,16 +261,15 @@ export default function FaqListPage() {
               </div>
 
               <div className="flex justify-between items-center mt-6">
-                <div className="text-sm text-gray-600">총 {totalCount}건</div>
+                <div className="text-base font-bold text-gray-400">총 {totalCount}건</div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">보기</span>
                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                    <SelectTrigger className="w-24">
+                    <SelectTrigger className="w-30 border border-gray-200 shadow-md">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50 w-30">
                       {PAGE_SIZE_OPTIONS.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
+                        <SelectItem key={option.value} value={option.value} className="hover:bg-gray-200">
                           {option.label}
                         </SelectItem>
                       ))}
@@ -284,10 +282,10 @@ export default function FaqListPage() {
             <Table>
               <TableHeader className="bg-purple-600">
                 <TableRow>
-                  <TableHead className="text-white font-medium">카테고리</TableHead>
-                  <TableHead className="text-white font-medium">질문</TableHead>
-                  <TableHead className="text-white font-medium">작성일자</TableHead>
-                  <TableHead className="text-white font-medium">상태</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle">질문</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle">작성일자</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle">상태</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -305,21 +303,23 @@ export default function FaqListPage() {
                   </TableRow>
                 ) : (
                   faqs.map((faq) => (
-                    <TableRow key={faq.id} className="hover:bg-gray-50">
-                      <TableCell className="font-medium">{faq.category}</TableCell>
-                      <TableCell>
-                        <Link href={`/admin/faq/${faq.id}`} className="text-blue-600 hover:underline">
+                    <TableRow key={faq.id} className="hover:bg-gray-50 border-t border-gray-200">
+                      <TableCell className="text-gray-600 font-medium text-center text-base align-middle py-3">{faq.category}</TableCell>
+                      <TableCell className="text-center py-3">
+                        <Link href={`/admin/faq/${faq.id}`} className="text-base text-blue-600 hover:underline">
                           {faq.question}
                         </Link>
                       </TableCell>
-                      <TableCell className="text-gray-600">{formatDate(faq.createdAt)}</TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={faq.isActive ? "default" : "secondary"}
-                          className={faq.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}
-                        >
-                          {faq.isActive ? "활성" : "비활성"}
-                        </Badge>
+                      <TableCell className="text-gray-600 text-base text-center align-middle">{formatDate(faq.createdAt)}</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex justify-center">
+                          <Badge
+                            variant={faq.isActive ? "default" : "secondary"}
+                            className={faq.isActive ? "text-sm bg-green-100 text-green-800 rounded-full w-15" : "text-sm bg-red-100 text-red-800 rounded-full w-15"}
+                          >
+                            {faq.isActive ? "활성" : "비활성"}
+                          </Badge>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))
@@ -334,6 +334,7 @@ export default function FaqListPage() {
                   size="sm"
                   onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
                   disabled={currentPage === 0}
+                  className="border border-gray text-gray-300"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
