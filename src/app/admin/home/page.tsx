@@ -424,22 +424,19 @@ export default function AdminHomePage() {
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
 
-      <div className="bg-white flex-1">
+      <div className="bg-gray flex-1 p-6">
         {/* Header */}
-        <div className="bg-white border-gray-200 px-8 py-4">
+        <div className="bg-gray border-gray-200 px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-black">홈 관리</h1>
-            <div className="text-sm text-gray-600">관리자명</div>
           </div>
+          <p className="text-gray-600 pt-4">메인 페이지의 슬라이드 이미지와 통계 수치, 메뉴별 메인 링크를 변경할 수 있습니다.</p>
         </div>
 
         {/* Main Content */}
-        <div className="p-8">
+        <div className="p-8 pt-0">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <p className="text-gray-600 mb-8">
-              메인 페이지의 슬라이드 이미지와 통계 수치, 메뉴별 메인 링크를 변경할 수 있습니다.
-            </p>
-
+        
             {/* Image Slides Section */}
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
@@ -452,14 +449,14 @@ export default function AdminHomePage() {
               </div>
 
               {/* Add Image Button */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-6">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-6 hover:cursor-pointer hover:border-purple-600">
                 <button
                   onClick={handleAddSlide}
-                  className="w-full flex items-center justify-center gap-2 text-purple-600 hover:text-purple-700"
+                  className="w-full flex items-center justify-center gap-2 text-purple-600 hover:text-purple-700 hover:cursor-pointer"
                   disabled={isLoading}
                 >
                   <Plus size={20} />
-                  <span>이미지 슬라이드 추가</span>
+                  <span className="hover:cursor-pointer">이미지 슬라이드 추가</span>
                 </button>
               </div>
 
@@ -511,7 +508,7 @@ export default function AdminHomePage() {
                       {/* Delete Button */}
                       <button
                         onClick={() => handleRemoveSlide(slide.id)}
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800"
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 hover:cursor-pointer"
                         disabled={isLoading}
                       >
                         <X size={14} />
@@ -561,7 +558,7 @@ export default function AdminHomePage() {
                 <button
                   onClick={handleSaveSlides}
                   disabled={isLoading}
-                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 hover:cursor-pointer"
                 >
                   {isLoading ? "저장중..." : "등록하기"}
                 </button>
@@ -641,7 +638,7 @@ export default function AdminHomePage() {
                 <button
                   onClick={handleSaveStats}
                   disabled={isLoading}
-                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 hover:cursor-pointer"
                 >
                   {isLoading ? "저장중..." : "등록하기"}
                 </button>

@@ -234,9 +234,9 @@ export default function NoticeListPage() {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-10">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-1">
             <h1 className="text-2xl font-bold text-gray-900">공지사항 관리</h1>
             <div className="flex items-center gap-4">
               <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
@@ -244,10 +244,11 @@ export default function NoticeListPage() {
               </Button>
             </div>
           </div>
+          <p className="text-gray-600 mb-6">사용자에게 알리고 싶은 내용을 작성하고 관리할 수 있습니다.</p>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
             <div className="p-6 pb-3">
-              <p className="text-gray-600 mb-4">사용자에게 알리고 싶은 내용을 작성하고 관리할 수 있습니다.</p>
+              <p className="text-gray-600 font-bold mb-4 text-lg">공지사항</p>
 
               <div className="mb-6 space-y-4">
                 <form onSubmit={handleSearch} className="flex gap-4">
@@ -275,7 +276,7 @@ export default function NoticeListPage() {
                     variant={selectedCategories.includes(category) ? "default" : "outline"}
                     onClick={() => handleCategoryChange(category)}
                     className={selectedCategories.includes(category)
-                      ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50"
+                      ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50 hover:cursor-pointer"
                       : "text-gray-500 border-gray-200 hover:bg-gray-200 hover:cursor-pointer shadow-sm"}
                   >
                     {category}
@@ -287,12 +288,12 @@ export default function NoticeListPage() {
                 <div className="text-base font-bold text-gray-400">총 {totalCount}건</div>
                 <div className="flex items-center gap-2">
                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                    <SelectTrigger className="w-30 border border-gray-200 shadow-md">
+                    <SelectTrigger className="w-30 border border-gray-200 shadow-md hover:cursor-pointer">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50 w-30">
                       {PAGE_SIZE_OPTIONS.map((option) => (
-                        <SelectItem key={option.value} value={option.value} className="hover:bg-gray-200">
+                        <SelectItem key={option.value} value={option.value} className="hover:bg-gray-200 hover:cursor-pointer">
                           {option.label}
                         </SelectItem>
                       ))}

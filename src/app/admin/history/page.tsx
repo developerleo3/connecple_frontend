@@ -248,7 +248,7 @@ export default function HistoryManagePage() {
                     <h1 className="text-2xl font-bold mb-2">소개 관리</h1>
                     <p className="text-gray-600 mb-8">커넥플 소개 메뉴의 내용을 관리합니다.</p>
 
-                    <div className="bg-white rounded-lg shadow-sm border-gray p-6">
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div className="flex items-center gap-2 mb-6">
                             <h2 className="text-lg font-semibold">연혁</h2>
                             <span className="text-red-500">*</span>

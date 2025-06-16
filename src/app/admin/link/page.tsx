@@ -180,14 +180,14 @@ export default function AdminLinkPage() {
         <div className="flex min-h-screen bg-gray-50">
             <AdminSidebar />
 
-            <main className="flex-1 p-8 ml-20">
-                <div className="max-w-4xl">
+            <main className="flex-1 p-8 ">
+                <div className="max-w-4xl mx-auto">
                     <Card>
-                        <CardHeader>
+                        <CardHeader className="p-0">
                             <CardTitle className="text-2xl font-bold text-black">메인 링크 관리</CardTitle>
-                            <CardDescription className="text-black">매뉴별 메인 링크를 설정할 수 있습니다.</CardDescription>
+                            <CardDescription className="text-black text-base">매뉴별 메인 링크를 설정할 수 있습니다.</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-8">
+                        <CardContent className="space-y-8 bg-white rounded-lg shadow-sm border border-gray-200 p-8">
                             {/* 워드프로젝트 메인 링크 설정 */}
                             <div className="space-y-2">
                                 <Label htmlFor="wordProject" className="text-base font-medium text-black">
@@ -207,7 +207,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordProject")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white"
+                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
@@ -234,7 +234,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordConnecday")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white"
+                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
@@ -261,7 +261,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordNewsletter")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white"
+                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
@@ -288,7 +288,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordGig")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white"
+                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
