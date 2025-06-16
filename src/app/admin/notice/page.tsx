@@ -239,7 +239,7 @@ export default function NoticeListPage() {
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900">공지사항 관리</h1>
             <div className="flex items-center gap-4">
-              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700 text-white">
+              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                 공지사항 작성
               </Button>
             </div>
@@ -261,7 +261,7 @@ export default function NoticeListPage() {
                       className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                     />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white">
+                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -357,7 +357,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handleFirstPage}
                   disabled={currentPage === 0}
-                  className="border border-gray-200 text-gray-600"
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronsLeft className="h-4 w-4" />
                 </Button>
@@ -366,7 +366,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handlePrevGroup}
                   disabled={currentPage === 0}
-                  className="border border-gray-200 text-gray-600"
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
@@ -377,7 +377,7 @@ export default function NoticeListPage() {
                     variant={currentPage === pageNum ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNum)}
-                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white" : "border border-gray-200 text-gray-600"}
+                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
                   >
                     {pageNum + 1}
                   </Button>
@@ -388,7 +388,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handleNextGroup}
                   disabled={currentPage >= totalPages - 1}
-                  className="border border-gray-200 text-gray-600"
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -397,7 +397,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handleLastPage}
                   disabled={currentPage >= totalPages - 1}
-                  className="border border-gray-200 text-gray-600"
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronsRight className="h-4 w-4" />
                 </Button>

@@ -1,3 +1,386 @@
+// "use client"
+
+// import type React from "react"
+// import { useState, useEffect } from "react"
+// import { useRouter } from "next/navigation"
+// import { Button } from "@/components/ui/button"
+// import { Input } from "@/components/ui/input"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+// import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+// import { Badge } from "@/components/ui/badge"
+// import { Search, Plus, ChevronLeft, ChevronRight } from "lucide-react"
+// import AlertModal from "@/components/alert-modal"
+// import AdminSidebar from "@/components/admin-sidebar"
+// import Link from "next/link"
+
+// // Types for this page
+// interface Faq {
+//   id: number
+//   category: string
+//   question: string
+//   isActive: boolean
+//   createdAt: string
+// }
+
+// interface FaqListResponse {
+//   faqs: Faq[]
+//   totalCount: number
+//   page: number
+//   size: number
+//   totalPages: number
+// }
+
+// interface ApiResponse<T> {
+//   message: string
+//   data: T
+// }
+
+// // API functions for this page
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+
+// class ApiError extends Error {
+//   constructor(
+//     public status: number,
+//     message: string,
+//   ) {
+//     super(message)
+//     this.name = "ApiError"
+//   }
+// }
+
+// async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
+//   const url = `${API_BASE_URL}${endpoint}`
+
+//   const response = await fetch(url, {
+//     credentials: "include",
+//     headers: {
+//       "Content-Type": "application/json",
+//       ...options.headers,
+//     },
+//     ...options,
+//   })
+
+//   if (!response.ok) {
+//     throw new ApiError(response.status, `HTTP error! status: ${response.status}`)
+//   }
+
+//   return response.json()
+// }
+
+// const getFaqs = async (page: number, size: number, keyword?: string, categories?: string[]): Promise<ApiResponse<FaqListResponse>> => {
+//   const queryParams: string[] = [];
+
+//   if (keyword) {
+//     queryParams.push(`keyword=${encodeURIComponent(keyword)}`);
+//   }
+
+//   // 카테고리 필터링 추가: '전체'가 아닐 경우에만 추가
+//   if (categories && categories.length > 0 && !categories.includes("전체")) {
+//     categories.forEach(cat => {
+//       queryParams.push(`category=${encodeURIComponent(cat)}`);
+//     });
+//   }
+
+//   queryParams.push(`page=${page}`);
+//   queryParams.push(`size=${size}`);
+//   queryParams.push(`sortBy=createdAt`);
+
+//   let endpoint = `/admin/faqs`;
+//   // If keyword is present, use search endpoint
+//   if (keyword) {
+//       endpoint = `/admin/faqs/search`;
+//   }
+
+//   if (queryParams.length > 0) {
+//       endpoint += `?${queryParams.join('&')}`;
+//   }
+
+//   return fetchApi<FaqListResponse>(endpoint);
+// }
+
+// const CATEGORIES = ["전체", "워드프로젝트", "워드커네디어", "워드뉴스리터", "워드GIG", "기타"]
+// const PAGE_SIZE_OPTIONS = [
+//   { value: "10", label: "10개씩 보기" },
+//   { value: "30", label: "30개씩 보기" },
+//   { value: "50", label: "50개씩 보기" },
+// ]
+
+// export default function FaqListPage() {
+//   const router = useRouter()
+//   const [faqs, setFaqs] = useState<Faq[]>([])
+//   const [loading, setLoading] = useState(true)
+//   const [searchKeyword, setSearchKeyword] = useState("")
+//   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+//   const [currentPage, setCurrentPage] = useState(0)
+//   const [totalPages, setTotalPages] = useState(0)
+//   const [totalCount, setTotalCount] = useState(0)
+//   const [pageSize, setPageSize] = useState(10)
+
+//   // Alert modal state
+//   const [alertModal, setAlertModal] = useState({
+//     isOpen: false,
+//     title: "",
+//     message: "",
+//     type: "info" as "info" | "warning" | "error" | "success",
+//   })
+
+//   const fetchFaqs = async () => {
+//     try {
+//       setLoading(true)
+//       const response = await getFaqs(currentPage, pageSize, searchKeyword, selectedCategories)
+
+//       if (response.data) {
+//         setFaqs(response.data.faqs)
+//         setTotalPages(response.data.totalPages)
+//         setTotalCount(response.data.totalCount)
+//       }
+//     } catch (error) {
+//       console.error("Failed to fetch FAQs:", error)
+//       setAlertModal({
+//         isOpen: true,
+//         title: "오류",
+//         message: "FAQ를 불러오는데 실패했습니다.",
+//         type: "error",
+//       })
+//       setFaqs([])
+//       setTotalCount(0)
+//       setTotalPages(0)
+//     } finally {
+//       setLoading(false)
+//     }
+//   }
+
+//   useEffect(() => {
+//     fetchFaqs()
+//   }, [currentPage, pageSize, selectedCategories])
+
+//   const handleSearch = (e: React.FormEvent) => {
+//     e.preventDefault()
+//     setCurrentPage(0)
+//     fetchFaqs()
+//   }
+
+//   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+//     if (e.key === "Enter") {
+//       e.preventDefault()
+//       setCurrentPage(0)
+//       fetchFaqs()
+//     }
+//   }
+
+//   const handleCategoryChange = (category: string) => {
+//     setSelectedCategories((prev) => {
+//       if (category === "전체") {
+//         // '전체'를 선택하면 다른 모든 카테고리 선택 해제하고 '전체'만 선택
+//         return ["전체"];
+//       } else {
+//         // '전체'가 아닌 다른 카테고리를 선택
+//         const newSelection = prev.includes(category)
+//           ? prev.filter((c) => c !== category) // 이미 선택된 경우 해제
+//           : [...prev, category]; // 선택되지 않은 경우 추가
+
+//         // 만약 '전체'가 선택되어 있다면 해제
+//         if (newSelection.includes("전체")) {
+//           return newSelection.filter((c) => c !== "전체");
+//         }
+
+//         // 모든 카테고리가 해제되면 자동으로 '전체' 선택
+//         if (newSelection.length === 0) {
+//           return ["전체"];
+//         }
+
+//         return newSelection;
+//       }
+//     });
+//   };
+
+//   const handlePageSizeChange = (value: string) => {
+//     setPageSize(Number(value))
+//     setCurrentPage(0) // 페이지 크기가 변경되면 첫 페이지로 이동
+//   }
+
+//   const formatDate = (dateString: string) => {
+//     return new Date(dateString).toLocaleString("ko-KR", {
+//       year: "numeric",
+//       month: "2-digit",
+//       day: "2-digit",
+//       hour: "2-digit",
+//       minute: "2-digit",
+//     })
+//   }
+
+//   return (
+//     <div className="flex min-h-screen bg-gray-50">
+//       <AdminSidebar />
+//       <div className="flex-1 p-6">
+//         <div className="max-w-7xl mx-auto">
+//           <div className="flex justify-between items-center mb-6">
+//             <h1 className="text-2xl font-bold text-gray-900">FAQ 관리</h1>
+//             <div className="flex items-center gap-4">
+//               <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700 text-white">                
+//                 FAQ 작성
+//               </Button>
+//             </div>
+//           </div>
+
+//           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+//             <div className="p-6 pb-3">
+//               <p className="text-gray-600 mb-4">자주 묻는 질문을 작성하고 관리할 수 있습니다.</p>
+
+//               <div className="mb-6 space-y-4">
+//                 <form onSubmit={handleSearch} className="flex gap-4">
+//                   <div className="flex-1">
+//                     <Input
+//                       type="text"
+//                       placeholder="FAQ 검색"
+//                       value={searchKeyword}
+//                       onChange={(e) => setSearchKeyword(e.target.value)}
+//                       onKeyPress={handleKeyPress}
+//                       className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
+//                     />
+//                   </div>
+//                   <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white">
+//                     <Search className="h-4 w-4 mr-2" />
+//                     검색
+//                   </Button>
+//                 </form>
+//               </div>
+
+//               <div className="flex flex-wrap gap-2">
+//                 {CATEGORIES.map((category) => (
+//                   <Button
+//                     key={category}
+//                     variant={selectedCategories.includes(category) ? "default" : "outline"}
+//                     onClick={() => handleCategoryChange(category)}
+//                     className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50" 
+//                       : "text-gray-500 border-gray-200 hover:bg-gray-200 hover:cursor-pointer shadow-sm"}
+//                   >
+//                     {category}
+//                   </Button>
+//                 ))}
+//               </div>
+
+//               <div className="flex justify-between items-center mt-6">
+//                 <div className="text-base font-bold text-gray-400">총 {totalCount}건</div>
+//                 <div className="flex items-center gap-2">
+//                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
+//                     <SelectTrigger className="w-30 border border-gray-200 shadow-md">
+//                       <SelectValue />
+//                     </SelectTrigger>
+//                     <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50 w-30">
+//                       {PAGE_SIZE_OPTIONS.map((option) => (
+//                         <SelectItem key={option.value} value={option.value} className="hover:bg-gray-200">
+//                           {option.label}
+//                         </SelectItem>
+//                       ))}
+//                     </SelectContent>
+//                   </Select>
+//                 </div>
+//               </div>
+//             </div>
+
+//             <Table>
+//               <TableHeader className="bg-purple-600">
+//                 <TableRow>
+//                   <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
+//                   <TableHead className="text-white text-base font-medium text-center align-middle">질문</TableHead>
+//                   <TableHead className="text-white text-base font-medium text-center align-middle">작성일자</TableHead>
+//                   <TableHead className="text-white text-base font-medium text-center align-middle">상태</TableHead>
+//                 </TableRow>
+//               </TableHeader>
+//               <TableBody>
+//                 {loading ? (
+//                   <TableRow>
+//                     <TableCell colSpan={4} className="text-center py-8">
+//                       로딩 중...
+//                     </TableCell>
+//                   </TableRow>
+//                 ) : faqs.length === 0 ? (
+//                   <TableRow>
+//                     <TableCell colSpan={4} className="text-center py-8 text-gray-500">
+//                       {searchKeyword ? "검색 결과가 없습니다." : "등록된 FAQ가 없습니다."}
+//                     </TableCell>
+//                   </TableRow>
+//                 ) : (
+//                   faqs.map((faq) => (
+//                     <TableRow key={faq.id} className="hover:bg-gray-50 border-t border-gray-200">
+//                       <TableCell className="text-gray-600 font-medium text-center text-base align-middle py-3">{faq.category}</TableCell>
+//                       <TableCell className="text-center py-3">
+//                         <Link href={`/admin/faq/${faq.id}`} className="text-base text-blue-600 hover:underline">
+//                           {faq.question}
+//                         </Link>
+//                       </TableCell>
+//                       <TableCell className="text-gray-600 text-base text-center align-middle">{formatDate(faq.createdAt)}</TableCell>
+//                       <TableCell className="text-center">
+//                         <div className="flex justify-center">
+//                           <Badge
+//                             variant={faq.isActive ? "default" : "secondary"}
+//                             className={faq.isActive ? "text-sm bg-green-100 text-green-800 rounded-full w-15" : "text-sm bg-red-100 text-red-800 rounded-full w-15"}
+//                           >
+//                             {faq.isActive ? "활성" : "비활성"}
+//                           </Badge>
+//                         </div>
+//                       </TableCell>
+//                     </TableRow>
+//                   ))
+//                 )}
+//               </TableBody>
+//             </Table>
+
+//             {totalPages > 0 && (
+//               <div className="flex justify-center items-center gap-2 p-4 border-t border-gray-200">
+//                 <Button
+//                   variant="outline"
+//                   size="sm"
+//                   onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
+//                   disabled={currentPage === 0}
+//                   className="border border-gray-200 text-gray-600"
+//                 >
+//                   <ChevronLeft className="h-4 w-4" />
+//                 </Button>
+
+//                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+//                   const pageNum = i + 1
+//                   return (
+//                     <Button
+//                       key={pageNum}
+//                       variant={currentPage === pageNum - 1 ? "default" : "outline"}
+//                       size="sm"
+//                       onClick={() => setCurrentPage(pageNum - 1)}
+//                       className={currentPage === pageNum - 1 ? "bg-purple-600 hover:bg-purple-700 text-white" : "border border-gray-200 text-gray-600"}
+//                     >
+//                       {pageNum}
+//                     </Button>
+//                   )
+//                 })}
+
+//                 <Button
+//                   variant="outline"
+//                   size="sm"
+//                   onClick={() => setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))}
+//                   disabled={currentPage === totalPages - 1}
+//                   className="border border-gray-200 text-gray-600"
+//                 >
+//                   <ChevronRight className="h-4 w-4" />
+//                 </Button>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+
+//       <AlertModal
+//         isOpen={alertModal.isOpen}
+//         onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+//         title={alertModal.title}
+//         message={alertModal.message}
+//         type={alertModal.type}
+//       />
+//     </div>
+//   )
+// } 
+
+
 "use client"
 
 import type React from "react"
@@ -8,7 +391,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, Plus, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
 import Link from "next/link"
@@ -196,7 +579,7 @@ export default function FaqListPage() {
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(Number(value))
-    setCurrentPage(0) // 페이지 크기가 변경되면 첫 페이지로 이동
+    setCurrentPage(0)
   }
 
   const formatDate = (dateString: string) => {
@@ -209,6 +592,34 @@ export default function FaqListPage() {
     })
   }
 
+  // Pagination logic
+  const pagesPerGroup = 5;
+  const currentGroup = Math.floor(currentPage / pagesPerGroup);
+  const startPage = currentGroup * pagesPerGroup;
+  const endPage = Math.min(startPage + pagesPerGroup, totalPages);
+  const pageNumbers = Array.from(
+    { length: endPage - startPage },
+    (_, i) => startPage + i
+  );
+
+  const handlePrevGroup = () => {
+    const newPage = Math.max(0, startPage - pagesPerGroup);
+    setCurrentPage(newPage);
+  };
+
+  const handleNextGroup = () => {
+    const newPage = Math.min(totalPages - 1, startPage + pagesPerGroup);
+    setCurrentPage(newPage);
+  };
+
+  const handleFirstPage = () => {
+    setCurrentPage(0);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages - 1);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
@@ -217,7 +628,7 @@ export default function FaqListPage() {
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900">FAQ 관리</h1>
             <div className="flex items-center gap-4">
-              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700 text-white">                
+              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">                
                 FAQ 작성
               </Button>
             </div>
@@ -239,7 +650,7 @@ export default function FaqListPage() {
                       className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                     />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white">
+                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -283,9 +694,9 @@ export default function FaqListPage() {
               <TableHeader className="bg-purple-600">
                 <TableRow>
                   <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
-                  <TableHead className="text-white text-base font-medium text-center align-middle">질문</TableHead>
-                  <TableHead className="text-white text-base font-medium text-center align-middle">작성일자</TableHead>
-                  <TableHead className="text-white text-base font-medium text-center align-middle">상태</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">질문</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">상태</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -304,14 +715,14 @@ export default function FaqListPage() {
                 ) : (
                   faqs.map((faq) => (
                     <TableRow key={faq.id} className="hover:bg-gray-50 border-t border-gray-200">
-                      <TableCell className="text-gray-600 font-medium text-center text-base align-middle py-3">{faq.category}</TableCell>
+                      <TableCell className="text-gray-600 font-medium text-base text-center align-middle py-3">{faq.category}</TableCell>
                       <TableCell className="text-center py-3">
                         <Link href={`/admin/faq/${faq.id}`} className="text-base text-blue-600 hover:underline">
                           {faq.question}
                         </Link>
                       </TableCell>
-                      <TableCell className="text-gray-600 text-base text-center align-middle">{formatDate(faq.createdAt)}</TableCell>
-                      <TableCell className="text-center">
+                      <TableCell className="text-gray-600 text-base text-center align-middle py-3">{formatDate(faq.createdAt)}</TableCell>
+                      <TableCell className="text-center py-3">
                         <div className="flex justify-center">
                           <Badge
                             variant={faq.isActive ? "default" : "secondary"}
@@ -328,39 +739,55 @@ export default function FaqListPage() {
             </Table>
 
             {totalPages > 0 && (
-              <div className="flex justify-center items-center gap-2 p-4 border-t border-gray-200">
+              <div className="flex justify-center items-center gap-2 p-4 border-t border-gray-200 hover:cursor-pointer">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
+                  onClick={handleFirstPage}
                   disabled={currentPage === 0}
-                  className="border border-gray text-gray-300"
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
+                >
+                  <ChevronsLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrevGroup}
+                  disabled={currentPage === 0}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
 
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const pageNum = i + 1
-                  return (
-                    <Button
-                      key={pageNum}
-                      variant={currentPage === pageNum - 1 ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setCurrentPage(pageNum - 1)}
-                      className={currentPage === pageNum - 1 ? "bg-purple-600 hover:bg-purple-700" : ""}
-                    >
-                      {pageNum}
-                    </Button>
-                  )
-                })}
+                {pageNumbers.map((pageNum) => (
+                  <Button
+                    key={pageNum}
+                    variant={currentPage === pageNum ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
+                  >
+                    {pageNum + 1}
+                  </Button>
+                ))}
 
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))}
-                  disabled={currentPage === totalPages - 1}
+                  onClick={handleNextGroup}
+                  disabled={currentPage >= totalPages - 1}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLastPage}
+                  disabled={currentPage >= totalPages - 1}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
+                >
+                  <ChevronsRight className="h-4 w-4" />
                 </Button>
               </div>
             )}
@@ -377,4 +804,4 @@ export default function FaqListPage() {
       />
     </div>
   )
-} 
+}
