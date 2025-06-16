@@ -248,7 +248,7 @@ export default function HistoryManagePage() {
                     <h1 className="text-2xl font-bold mb-2">소개 관리</h1>
                     <p className="text-gray-600 mb-8">커넥플 소개 메뉴의 내용을 관리합니다.</p>
 
-                    <div className="bg-white rounded-lg shadow-sm border p-6">
+                    <div className="bg-white rounded-lg shadow-sm border-gray p-6">
                         <div className="flex items-center gap-2 mb-6">
                             <h2 className="text-lg font-semibold">연혁</h2>
                             <span className="text-red-500">*</span>
@@ -256,7 +256,7 @@ export default function HistoryManagePage() {
 
                         <button
                             onClick={addHistoryItem}
-                            className="flex items-center gap-2 w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-purple-300 hover:text-purple-600 transition-colors mb-6"
+                            className="flex items-center gap-2 w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-purple-300 hover:text-purple-600 transition-colors mb-6 hover:cursor-pointer"
                         >
                             <Plus size={20} />
                             <span>연혁 추가</span>
@@ -271,7 +271,7 @@ export default function HistoryManagePage() {
                                                 <select
                                                     value={item.historyYear}
                                                     onChange={(e) => updateHistoryItem(index, "historyYear", e.target.value)}
-                                                    className="appearance-none bg-white border border-gray-300 rounded px-3 py-2 pr-8 focus:outline-none focus:border-purple-500"
+                                                    className="appearance-none bg-white border border-gray-300 rounded px-3 py-2 pr-8 focus:outline-none focus:border-purple-500 hover:cursor-pointer"
                                                 >
                                                     {generateYearOptions().map((year) => (
                                                         <option key={year} value={year}>
@@ -295,7 +295,7 @@ export default function HistoryManagePage() {
 
                                             <button
                                                 onClick={() => removeHistoryItem(index)}
-                                                className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                                                className="p-1 text-gray-400 hover:text-red-500 transition-colors hover:cursor-pointer"
                                             >
                                                 <X size={20} />
                                             </button>
@@ -311,7 +311,7 @@ export default function HistoryManagePage() {
                             <button
                                 onClick={handleSubmit}
                                 disabled={isLoading}
-                                className="px-8 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                className="px-6 py-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer"
                             >
                                 {isLoading ? "등록 중..." : "등록하기"}
                             </button>
