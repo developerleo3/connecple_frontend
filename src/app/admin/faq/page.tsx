@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, Plus, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
 import Link from "next/link"
@@ -36,7 +36,7 @@ interface ApiResponse<T> {
 }
 
 // API functions for this page
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://connecple.agong.store"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 class ApiError extends Error {
   constructor(
@@ -100,9 +100,9 @@ const getFaqs = async (page: number, size: number, keyword?: string, categories?
 
 const CATEGORIES = ["전체", "워드프로젝트", "워드커네디어", "워드뉴스리터", "워드GIG", "기타"]
 const PAGE_SIZE_OPTIONS = [
-  { value: "10", label: "10개씩" },
-  { value: "30", label: "30개씩" },
-  { value: "50", label: "50개씩" },
+  { value: "10", label: "10개씩 보기" },
+  { value: "30", label: "30개씩 보기" },
+  { value: "50", label: "50개씩 보기" },
 ]
 
 export default function FaqListPage() {
@@ -196,7 +196,7 @@ export default function FaqListPage() {
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(Number(value))
-    setCurrentPage(0) // 페이지 크기가 변경되면 첫 페이지로 이동
+    setCurrentPage(0)
   }
 
   const formatDate = (dateString: string) => {
@@ -209,25 +209,53 @@ export default function FaqListPage() {
     })
   }
 
+  // Pagination logic
+  const pagesPerGroup = 5;
+  const currentGroup = Math.floor(currentPage / pagesPerGroup);
+  const startPage = currentGroup * pagesPerGroup;
+  const endPage = Math.min(startPage + pagesPerGroup, totalPages);
+  const pageNumbers = Array.from(
+    { length: endPage - startPage },
+    (_, i) => startPage + i
+  );
+
+  const handlePrevGroup = () => {
+    const newPage = Math.max(0, startPage - pagesPerGroup);
+    setCurrentPage(newPage);
+  };
+
+  const handleNextGroup = () => {
+    const newPage = Math.min(totalPages - 1, startPage + pagesPerGroup);
+    setCurrentPage(newPage);
+  };
+
+  const handleFirstPage = () => {
+    setCurrentPage(0);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages - 1);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-10">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-1">
             <h1 className="text-2xl font-bold text-gray-900">FAQ 관리</h1>
             <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-600">화면정의</div>
-              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">                
                 FAQ 작성
               </Button>
             </div>
+            
           </div>
+          <p className="text-gray-600 mb-6">자주 묻는 질문을 작성하고 관리할 수 있습니다.</p>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="p-6">
-              <p className="text-gray-600 mb-4">자주 묻는 질문을 작성하고 관리할 수 있습니다.</p>
+            <div className="p-6 pb-3">
+              <p className="text-gray-600 text-lg font-bold mb-6">FAQ</p>
 
               <div className="mb-6 space-y-4">
                 <form onSubmit={handleSearch} className="flex gap-4">
@@ -238,10 +266,10 @@ export default function FaqListPage() {
                       value={searchKeyword}
                       onChange={(e) => setSearchKeyword(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                     />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -254,7 +282,8 @@ export default function FaqListPage() {
                     key={category}
                     variant={selectedCategories.includes(category) ? "default" : "outline"}
                     onClick={() => handleCategoryChange(category)}
-                    className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700" : ""}
+                    className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50 hover:cursor-pointer" 
+                      : "text-gray-500 border-gray-200 hover:bg-gray-200 hover:cursor-pointer shadow-sm"}
                   >
                     {category}
                   </Button>
@@ -262,16 +291,15 @@ export default function FaqListPage() {
               </div>
 
               <div className="flex justify-between items-center mt-6">
-                <div className="text-sm text-gray-600">총 {totalCount}건</div>
+                <div className="text-base font-bold text-gray-400">총 {totalCount}건</div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">보기</span>
                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                    <SelectTrigger className="w-24">
+                    <SelectTrigger className="w-30 border border-gray-200 shadow-md hover:cursor-pointer">
                       <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
+                    </SelectTrigger> 
+                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50 w-30">
                       {PAGE_SIZE_OPTIONS.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
+                        <SelectItem key={option.value} value={option.value} className="hover:bg-gray-200 hover:cursor-pointer">
                           {option.label}
                         </SelectItem>
                       ))}
@@ -284,10 +312,10 @@ export default function FaqListPage() {
             <Table>
               <TableHeader className="bg-purple-600">
                 <TableRow>
-                  <TableHead className="text-white font-medium">카테고리</TableHead>
-                  <TableHead className="text-white font-medium">질문</TableHead>
-                  <TableHead className="text-white font-medium">작성일자</TableHead>
-                  <TableHead className="text-white font-medium">상태</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">질문</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">상태</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -305,21 +333,23 @@ export default function FaqListPage() {
                   </TableRow>
                 ) : (
                   faqs.map((faq) => (
-                    <TableRow key={faq.id} className="hover:bg-gray-50">
-                      <TableCell className="font-medium">{faq.category}</TableCell>
-                      <TableCell>
-                        <Link href={`/admin/faq/${faq.id}`} className="text-blue-600 hover:underline">
+                    <TableRow key={faq.id} className="hover:bg-gray-50 border-t border-gray-200">
+                      <TableCell className="text-gray-600 font-medium text-base text-center align-middle py-3">{faq.category}</TableCell>
+                      <TableCell className="text-center py-3">
+                        <Link href={`/admin/faq/${faq.id}`} className="text-base text-blue-600 hover:underline">
                           {faq.question}
                         </Link>
                       </TableCell>
-                      <TableCell className="text-gray-600">{formatDate(faq.createdAt)}</TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={faq.isActive ? "default" : "secondary"}
-                          className={faq.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}
-                        >
-                          {faq.isActive ? "활성" : "비활성"}
-                        </Badge>
+                      <TableCell className="text-gray-600 text-base text-center align-middle py-3">{formatDate(faq.createdAt)}</TableCell>
+                      <TableCell className="text-center py-3">
+                        <div className="flex justify-center">
+                          <Badge
+                            variant={faq.isActive ? "default" : "secondary"}
+                            className={faq.isActive ? "text-sm bg-green-100 text-green-800 rounded-full w-15" : "text-sm bg-red-100 text-red-800 rounded-full w-15"}
+                          >
+                            {faq.isActive ? "활성" : "비활성"}
+                          </Badge>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))
@@ -328,38 +358,55 @@ export default function FaqListPage() {
             </Table>
 
             {totalPages > 0 && (
-              <div className="flex justify-center items-center gap-2 p-4 border-t border-gray-200">
+              <div className="flex justify-center items-center gap-2 p-4 border-t border-gray-200 hover:cursor-pointer">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
+                  onClick={handleFirstPage}
                   disabled={currentPage === 0}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
+                >
+                  <ChevronsLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrevGroup}
+                  disabled={currentPage === 0}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
 
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const pageNum = i + 1
-                  return (
-                    <Button
-                      key={pageNum}
-                      variant={currentPage === pageNum - 1 ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setCurrentPage(pageNum - 1)}
-                      className={currentPage === pageNum - 1 ? "bg-purple-600 hover:bg-purple-700" : ""}
-                    >
-                      {pageNum}
-                    </Button>
-                  )
-                })}
+                {pageNumbers.map((pageNum) => (
+                  <Button
+                    key={pageNum}
+                    variant={currentPage === pageNum ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
+                  >
+                    {pageNum + 1}
+                  </Button>
+                ))}
 
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))}
-                  disabled={currentPage === totalPages - 1}
+                  onClick={handleNextGroup}
+                  disabled={currentPage >= totalPages - 1}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLastPage}
+                  disabled={currentPage >= totalPages - 1}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
+                >
+                  <ChevronsRight className="h-4 w-4" />
                 </Button>
               </div>
             )}
@@ -376,4 +423,4 @@ export default function FaqListPage() {
       />
     </div>
   )
-} 
+}

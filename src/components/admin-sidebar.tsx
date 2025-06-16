@@ -93,7 +93,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
               <Link
                 href="/admin/home"
                 className={cn(
-                  "flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
                   pathname === "/admin/home" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -102,7 +102,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
               <Link
                 href="/admin/link"
                 className={cn(
-                  "flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
                   pathname === "/admin/link" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -111,7 +111,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
               <Link
                 href="/admin/history"
                 className={cn(
-                  "flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
                   pathname === "/admin/history" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -120,7 +120,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
               <Link
                 href="/admin/faq"
                 className={cn(
-                  "flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
                   pathname === "/admin/faq" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -129,7 +129,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
               <Link
                 href="/admin/notice"
                 className={cn(
-                  "flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
                   pathname === "/admin/notice" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -138,7 +138,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
               <button
                 onClick={showLogoutConfirm}
                 disabled={isLoading}
-                className="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 w-full text-left text-red-600 disabled:opacity-50"
+                className="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 w-full text-left text-red-600 disabled:opacity-50"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 {isLoading ? "로그아웃 중..." : "로그아웃"}

@@ -86,11 +86,11 @@ const getNotices = async (page: number, size: number, keyword?: string, categori
 
   let endpoint = `/admin/notice`;
   if (keyword) {
-      endpoint = `/admin/notice/search`;
+    endpoint = `/admin/notice/search`;
   }
 
   if (queryParams.length > 0) {
-      endpoint += `?${queryParams.join('&')}`;
+    endpoint += `?${queryParams.join('&')}`;
   }
 
   return fetchApi<NoticeListResponse>(endpoint);
@@ -186,7 +186,7 @@ export default function NoticeListPage() {
         return newSelection;
       }
     });
-  };
+  }
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(Number(value))
@@ -234,20 +234,21 @@ export default function NoticeListPage() {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-10">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-1">
             <h1 className="text-2xl font-bold text-gray-900">공지사항 관리</h1>
-            <div className="flex items-center gap-4">             
-              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700">                
+            <div className="flex items-center gap-4">
+              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                 공지사항 작성
               </Button>
             </div>
           </div>
+          <p className="text-gray-600 mb-6">사용자에게 알리고 싶은 내용을 작성하고 관리할 수 있습니다.</p>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="p-6 border-b border-gray-200">
-              <p className="text-gray-600 mb-4">사용자에게 알리고 싶은 내용을 작성하고 관리할 수 있습니다.</p>
+            <div className="p-6 pb-3">
+              <p className="text-gray-600 font-bold mb-4 text-lg">공지사항</p>
 
               <div className="mb-6 space-y-4">
                 <form onSubmit={handleSearch} className="flex gap-4">
@@ -258,10 +259,10 @@ export default function NoticeListPage() {
                       value={searchKeyword}
                       onChange={(e) => setSearchKeyword(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                     />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -274,23 +275,25 @@ export default function NoticeListPage() {
                     key={category}
                     variant={selectedCategories.includes(category) ? "default" : "outline"}
                     onClick={() => handleCategoryChange(category)}
-                    className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700" : ""}
+                    className={selectedCategories.includes(category)
+                      ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50 hover:cursor-pointer"
+                      : "text-gray-500 border-gray-200 hover:bg-gray-200 hover:cursor-pointer shadow-sm"}
                   >
                     {category}
                   </Button>
                 ))}
               </div>
 
-              <div className="flex justify-between items-center mt-4">
-                <div className="text-sm text-gray-600">총 {totalCount}건</div>
-                <div className="flex items-center gap-2">                 
+              <div className="flex justify-between items-center mt-6">
+                <div className="text-base font-bold text-gray-400">총 {totalCount}건</div>
+                <div className="flex items-center gap-2">
                   <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                    <SelectTrigger className="w-30">
+                    <SelectTrigger className="w-30 border border-gray-200 shadow-md hover:cursor-pointer">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
+                    <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50 w-30">
                       {PAGE_SIZE_OPTIONS.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
+                        <SelectItem key={option.value} value={option.value} className="hover:bg-gray-200 hover:cursor-pointer">
                           {option.label}
                         </SelectItem>
                       ))}
@@ -303,10 +306,10 @@ export default function NoticeListPage() {
             <Table>
               <TableHeader className="bg-purple-600">
                 <TableRow>
-                  <TableHead className="text-white font-medium">카테고리</TableHead>
-                  <TableHead className="text-white font-medium">제목</TableHead>
-                  <TableHead className="text-white font-medium">작성일자</TableHead>
-                  <TableHead className="text-white font-medium">상태</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">제목</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                  <TableHead className="text-white text-base font-medium text-center align-middle py-3">상태</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -324,21 +327,23 @@ export default function NoticeListPage() {
                   </TableRow>
                 ) : (
                   notices.map((notice) => (
-                    <TableRow key={notice.id} className="hover:bg-gray-50">
-                      <TableCell className="font-medium">{notice.category}</TableCell>
-                      <TableCell>
-                        <Link href={`/admin/notice/${notice.id}`} className="text-blue-600 hover:underline">
+                    <TableRow key={notice.id} className="hover:bg-gray-50 border-t border-gray-200">
+                      <TableCell className="text-gray-600 font-medium text-base text-center align-middle py-3">{notice.category}</TableCell>
+                      <TableCell className="text-center py-3">
+                        <Link href={`/admin/notice/${notice.id}`} className="text-base text-blue-600 hover:underline">
                           {notice.title}
                         </Link>
                       </TableCell>
-                      <TableCell className="text-gray-600">{formatDate(notice.createdAt)}</TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={notice.isActive ? "default" : "secondary"}
-                          className={notice.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}
-                        >
-                          {notice.isActive ? "활성" : "비활성"}
-                        </Badge>
+                      <TableCell className="text-gray-600 text-base text-center align-middle py-3">{formatDate(notice.createdAt)}</TableCell>
+                      <TableCell className="text-center py-3">
+                        <div className="flex justify-center">
+                          <Badge
+                            variant={notice.isActive ? "default" : "secondary"}
+                            className={notice.isActive ? "text-sm bg-green-100 text-green-800 rounded-full w-15" : "text-sm bg-red-100 text-red-800 rounded-full w-15"}
+                          >
+                            {notice.isActive ? "활성" : "비활성"}
+                          </Badge>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))
@@ -353,6 +358,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handleFirstPage}
                   disabled={currentPage === 0}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronsLeft className="h-4 w-4" />
                 </Button>
@@ -361,6 +367,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handlePrevGroup}
                   disabled={currentPage === 0}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
@@ -371,7 +378,7 @@ export default function NoticeListPage() {
                     variant={currentPage === pageNum ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNum)}
-                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700" : ""}
+                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
                   >
                     {pageNum + 1}
                   </Button>
@@ -382,6 +389,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handleNextGroup}
                   disabled={currentPage >= totalPages - 1}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -390,6 +398,7 @@ export default function NoticeListPage() {
                   size="sm"
                   onClick={handleLastPage}
                   disabled={currentPage >= totalPages - 1}
+                  className="border border-gray-200 text-gray-600 hover:cursor-pointer"
                 >
                   <ChevronsRight className="h-4 w-4" />
                 </Button>
