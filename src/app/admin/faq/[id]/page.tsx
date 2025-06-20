@@ -267,48 +267,48 @@ export default function FaqDetailPage() {
 
                     {!isEditing ? (
                         // View Mode
-                        <div className="space-y-6 relative pb-12">
+                        <div className="p-6 space-y-13 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <Label>카테고리</Label>
-                                    <div className="mt-1 p-2 border rounded-md bg-gray-50">{faq.category}</div>
+                                    <Label className="text-gray-600 mb-2">카테고리</Label>
+                                    <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{faq.category}</div>
                                 </div>
                                 <div>
-                                    <Label>상태</Label>
-                                    <div className="mt-1 p-2 border rounded-md bg-gray-50">{faq.isActive ? "활성" : "비활성"}</div>
+                                    <Label className="text-gray-600 mb-2">상태</Label>
+                                    <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{faq.isActive ? "활성" : "비활성"}</div>
                                 </div>
                             </div>
 
                             <div>
-                                <Label>질문</Label>
-                                <div className="mt-1 p-2 border rounded-md bg-gray-50">{faq.question}</div>
+                                <Label className="text-gray-600 mb-2">질문</Label>
+                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{faq.question}</div>
                             </div>
 
                             <div>
-                                <Label>답변</Label>
+                                <Label className="text-gray-600 mb-2">답변</Label>
                                 <div
-                                    className="mt-1 p-4 border rounded-md bg-gray-50 min-h-[200px]"
+                                    className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[200px]"
                                     dangerouslySetInnerHTML={{ __html: faq.answer || "" }}
                                 />
                             </div>
 
                             <div>
-                                <Label>작성일시</Label>
-                                <div className="mt-1 p-2 border rounded-md bg-gray-50">{formatDate(faq.createdAt)}</div>
+                                <Label className="text-gray-600 mb-2">작성일시</Label>
+                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(faq.createdAt)}</div>
                             </div>
 
                             {/* Buttons at bottom-right */}
-                            <div className="absolute bottom-0 right-0 flex gap-2">
-                                <Button variant="outline" onClick={() => router.push("/admin/faq")} className="text-gray-600 border-gray-600 hover:bg-gray-50">
-                                    <List className="h-4 w-4 mr-2" />
+                            <div className="absolute bottom-6 right-6 flex gap-2">
+                                <Button variant="outline" onClick={() => router.push("/admin/faq")} className="text-gray-600 font-medium border-gray-600 hover:bg-gray-50 hover:cursor-pointer">
+                                    <List className="h-4 w-4 mr-1" />
                                     목록으로
                                 </Button>
-                                <Button variant="outline" onClick={handleDelete} className="text-red-600 border-red-600 hover:bg-red-50">
-                                    <Trash2 className="h-4 w-4 mr-2" />
+                                <Button variant="outline" onClick={handleDelete} className="text-red-600 font-medium border-red-600 hover:bg-red-50 hover:cursor-pointer">
+                                    <Trash2 className="h-4 w-4 mr-1" />
                                     삭제하기
                                 </Button>
-                                <Button onClick={() => setIsEditing(true)} className="bg-purple-600 hover:bg-purple-700">
-                                    <Edit className="h-4 w-4 mr-2" />
+                                <Button onClick={() => setIsEditing(true)} className="text-white font-medium bg-purple-600 hover:bg-purple-700 hover:cursor-pointer">
+                                    <Edit className="h-4 w-4 mr-1" />
                                     수정하기
                                 </Button>
                             </div>
