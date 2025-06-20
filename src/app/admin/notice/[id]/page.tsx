@@ -264,9 +264,10 @@ export default function NoticeDetailPage() {
             <AdminSidebar />
             <div className="flex-1 p-6">
                 <div className="max-w-4xl mx-auto">
-                    <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-2xl font-bold">{isEditing ? "공지사항 수정" : "공지사항 상세"}</h1>
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-2xl font-bold mb-2">{isEditing ? "공지사항 수정" : "공지사항 상세"}</h1>
                     </div>
+                    <p className="text-gray-600 mb-8">{isEditing ? "공지사항 수정 페이지 입니다." : "공지사항 상세 페이지 입니다."}</p>
 
                     {!isEditing ? (
                         // View Mode

@@ -261,9 +261,10 @@ export default function FaqDetailPage() {
             <AdminSidebar />
             <div className="flex-1 p-6">
                 <div className="max-w-4xl mx-auto">
-                    <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-2xl font-bold">{isEditing ? "FAQ 수정" : "FAQ 상세"}</h1>
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-2xl font-bold mb-2">{isEditing ? "FAQ 수정" : "FAQ 상세"}</h1>
                     </div>
+                    <p className="text-gray-600 mb-8">{isEditing ? "FAQ 수정 페이지 입니다." : "FAQ 상세 페이지 입니다."}</p>
 
                     {!isEditing ? (
                         // View Mode
