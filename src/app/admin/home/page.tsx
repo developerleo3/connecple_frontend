@@ -319,7 +319,7 @@ export default function AdminHomePage() {
 
                 if (!response.ok) {
                   // 서버가 4xx, 5xx 에러를 반환한 경우
-                  throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`)
+                  throw new Error(`이미지 업로드 수정정`)
                 }
                 const blob = await response.blob()
                 const filename = slide.image.substring(slide.image.lastIndexOf("/") + 1) || "image.png"
@@ -327,11 +327,11 @@ export default function AdminHomePage() {
               } catch (e) {
                 console.error(`Could not fetch image for re-uploading: ${slide.image}`, e)
                 // 더 자세한 오류 메시지를 생성합니다.
-                const detail = e instanceof Error ? e.message : "알 수 없는 오류"
+                const detail = "알 수 없는 오류"
                 throw new Error(
                   `기존 이미지(${
                     slide.title || "이름 없음"
-                  })를 불러올 수 없습니다. (오류: ${detail}) S3 CORS나 네트워크 설정을 확인해주세요.`,
+                  })를 불러올 수 없습니다. (오류: ${detail}) 네트워크 설정을 확인해주세요.`,
                 )
               }
             }
