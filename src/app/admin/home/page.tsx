@@ -6,7 +6,6 @@ import AdminSidebar from "@/components/admin-sidebar"
 import AlertModal from "@/components/alert-modal"
 import { ConfirmModal } from "@/components/confirm-modal"
 import LoginRequiredModal from "@/components/login-required-modal"
-import { useRouter, useParams } from "next/navigation"
 
 
 // API 응답 타입 정의
@@ -18,17 +17,11 @@ interface ImageSlideResponse {
   company: string
 }
 
-interface StatItemResponse {
-  statsName: string
-  statistic: number
-  unit: string
-  sortOrder?: number
-}
-
 // 컴포넌트 내부에서 사용할 타입 정의
 interface ImageSlide {
   id: number
   image: string
+  imageFile?: File
   title: string
   description: string
   organization: string
@@ -62,7 +55,6 @@ interface ValidationErrors {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function AdminHomePage() {
-  const router = useRouter()
   const [imageSlides, setImageSlides] = useState<ImageSlide[]>([])
   const [statItems, setStatItems] = useState<StatItem[]>([
     { id: 1, title: "", subtitle: "", count: "" },
@@ -72,7 +64,6 @@ export default function AdminHomePage() {
     { id: 5, title: "", subtitle: "", count: "" },
   ])
 
-  const [statistics, setStatistics] = useState<StatisticData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -99,80 +90,81 @@ export default function AdminHomePage() {
   const maxCount = 10
   const currentCount = imageSlides.length
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      setError(null)
+  // 데이터 가져오기 함수를 별도로 분리
+  const fetchData = async () => {
+    setIsLoading(true)
+    setError(null)
 
-      try {
-        // 이미지 슬라이드 데이터 가져오기
-        const slidesResponse = await fetch(`${API_BASE_URL}/admin/main-intro-images`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+    try {
+      // 이미지 슬라이드 데이터 가져오기
+      const slidesResponse = await fetch(`${API_BASE_URL}/admin/main-intro-images`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
 
-        if (slidesResponse.ok) {
-          const slidesData = await slidesResponse.json()
-          if (slidesData && Array.isArray(slidesData) && slidesData.length > 0) {
-            const mappedSlides = slidesData.map((item: ImageSlideResponse) => ({
-              id: item.id,
-              image: item.imagePath,
-              title: item.title,
-              sortOrder: item.sortOrder,
-              description: "",
-              organization: item.company,
-            }))
+      if (slidesResponse.ok) {
+        const slidesData = await slidesResponse.json()
+        if (slidesData && Array.isArray(slidesData) && slidesData.length > 0) {
+          const mappedSlides = slidesData.map((item: ImageSlideResponse) => ({
+            id: item.id,
+            image: item.imagePath,
+            title: item.title,
+            sortOrder: item.sortOrder,
+            description: "",
+            organization: item.company,
+          }))
 
-            mappedSlides.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
-            setImageSlides(mappedSlides)
-          }
+          mappedSlides.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+          setImageSlides(mappedSlides)
         }
-
-        // 통계 수치 데이터 가져오기
-        const statsResponse = await fetch(`${API_BASE_URL}/admin/stats`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-
-        if (statsResponse.ok) {
-          const { data } = await statsResponse.json()
-          if (data && Array.isArray(data)) {
-            const mappedStats = data.map((item: StatisticData, index: number) => ({
-              id: index + 1,
-              title: item.statsName,
-              subtitle: item.statistic.toString(),
-              count: item.unit,
-              sortOrder: item.sortOrder,
-            }))
-
-            mappedStats.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
-            const filledStats = [...mappedStats]
-            while (filledStats.length < 5) {
-              filledStats.push({
-                id: filledStats.length + 1,
-                title: "",
-                subtitle: "",
-                count: "",
-                sortOrder: 0,
-              })
-            }
-            setStatItems(filledStats.slice(0, 5))
-          }
-        }
-      } catch (error) {
-        console.error("데이터 로딩 중 오류 발생:", error)
-        setError(error instanceof Error ? error.message : "데이터를 불러오는 중 오류가 발생했습니다.")
-      } finally {
-        setIsLoading(false)
       }
-    }
 
+      // 통계 수치 데이터 가져오기
+      const statsResponse = await fetch(`${API_BASE_URL}/admin/stats`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (statsResponse.ok) {
+        const { data } = await statsResponse.json()
+        if (data && Array.isArray(data)) {
+          const mappedStats = data.map((item: StatisticData, index: number) => ({
+            id: index + 1,
+            title: item.statsName,
+            subtitle: item.statistic.toString(),
+            count: item.unit,
+            sortOrder: item.sortOrder,
+          }))
+
+          mappedStats.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+          const filledStats = [...mappedStats]
+          while (filledStats.length < 5) {
+            filledStats.push({
+              id: filledStats.length + 1,
+              title: "",
+              subtitle: "",
+              count: "",
+              sortOrder: 0,
+            })
+          }
+          setStatItems(filledStats.slice(0, 5))
+        }
+      }
+    } catch (error) {
+      console.error("데이터 로딩 중 오류 발생:", error)
+      setError(error instanceof Error ? error.message : "데이터를 불러오는 중 오류가 발생했습니다.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
     fetchData()
   }, [])
 
@@ -217,7 +209,9 @@ export default function AdminHomePage() {
     const reader = new FileReader()
     reader.onload = (e) => {
       setImageSlides(
-        imageSlides.map((slide) => (slide.id === id ? { ...slide, image: e.target?.result as string } : slide)),
+        imageSlides.map((slide) =>
+          slide.id === id ? { ...slide, image: e.target?.result as string, imageFile: file } : slide,
+        ),
       )
     }
     reader.readAsDataURL(file)
@@ -310,16 +304,46 @@ export default function AdminHomePage() {
       action: async () => {
         setIsLoading(true)
         try {
-          // API 요청 데이터 형식에 맞게 변환
-          const requestData = imageSlides.map((slide, index) => ({
-            id: slide.id,
-            imagePath: slide.image,
-            sortOrder: index + 1,
-            title: slide.title,
-            company: slide.organization,
-          }))
-
           const formData = new FormData()
+
+          // 순서를 보장하기 위해 순차적으로 처리
+          for (let index = 0; index < imageSlides.length; index++) {
+            const slide = imageSlides[index]
+            let fileToUpload: File | undefined = slide.imageFile
+
+            if (!fileToUpload && slide.image) {
+              try {
+                // 캐시 문제를 해결하기 위해, 요청 URL에 타임스탬프를 추가하고 no-store 옵션을 사용합니다.
+                const cacheBustedUrl = `${slide.image}?t=${new Date().getTime()}`
+                const response = await fetch(cacheBustedUrl, { cache: "no-store" })
+
+                if (!response.ok) {
+                  // 서버가 4xx, 5xx 에러를 반환한 경우
+                  throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`)
+                }
+                const blob = await response.blob()
+                const filename = slide.image.substring(slide.image.lastIndexOf("/") + 1) || "image.png"
+                fileToUpload = new File([blob], filename, { type: blob.type })
+              } catch (e) {
+                console.error(`Could not fetch image for re-uploading: ${slide.image}`, e)
+                // 더 자세한 오류 메시지를 생성합니다.
+                const detail = e instanceof Error ? e.message : "알 수 없는 오류"
+                throw new Error(
+                  `기존 이미지(${
+                    slide.title || "이름 없음"
+                  })를 불러올 수 없습니다. (오류: ${detail}) S3 CORS나 네트워크 설정을 확인해주세요.`,
+                )
+              }
+            }
+
+            if (fileToUpload) {
+              formData.append("images", fileToUpload)
+              formData.append("titles", slide.title)
+              formData.append("companies", slide.organization)
+              // 순서 정보를 명시적으로 추가 (0부터 시작)
+              formData.append("sortOrders", index.toString())
+            }
+          }
 
           const response = await fetch(`${API_BASE_URL}/admin/main-intro-images/reset`, {
             method: "POST",
@@ -328,14 +352,14 @@ export default function AdminHomePage() {
           })
 
           if (response.ok) {
-            const responseData = await response.json() // 서버 응답 데이터 파싱
-            
-            router.push("/admin/home")
+            await response.json() // 서버 응답 데이터 파싱
+            // 등록 성공 후 최신 데이터로 상태 업데이트
+            await fetchData()
           } else {
             throw new Error("이미지 슬라이드 저장에 실패했습니다.")
           }
         } catch (err) {
-          setError("이미지 슬라이드 저장에 실패했습니다.")
+          setError(err instanceof Error ? err.message : "이미지 슬라이드 저장에 실패했습니다.")
         } finally {
           setIsLoading(false)
           setConfirmModal({ ...confirmModal, isOpen: false })
@@ -385,13 +409,16 @@ export default function AdminHomePage() {
             throw new Error(errorData.message || "통계수치 등록에 실패했습니다")
           }
 
+          // 등록 성공 후 최신 데이터로 상태 업데이트
+          await fetchData()
+
           setAlertModal({
             isOpen: true,
             title: "등록 완료",
             message: "통계수치를 등록하였습니다.",
             type: "success",
           })
-        } catch (error) {
+        } catch {
           setAlertModal({
             isOpen: true,
             title: "등록 실패",
@@ -467,7 +494,7 @@ export default function AdminHomePage() {
               </div>
 
               {/* Image Slides */}
-              {imageSlides.map((slide, index) => (
+              {imageSlides.map((slide) => (
                 <div key={slide.id} className="border border-gray-200 rounded-lg p-6 mb-4">
                   <div className="flex gap-4">
                     {/* Drag Handle */}
@@ -580,7 +607,6 @@ export default function AdminHomePage() {
               <div className="space-y-6">
                 {statItems.map((item, index) => {
                   const hasError = validationErrors[index]
-                  const hasAnyValue = item.title.trim() || item.subtitle.trim() || item.count.trim()
                   const showError = hasError && (hasError.title || hasError.subtitle || hasError.count)
 
                   return (
