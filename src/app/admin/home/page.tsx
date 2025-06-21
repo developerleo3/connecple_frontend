@@ -6,6 +6,8 @@ import AdminSidebar from "@/components/admin-sidebar"
 import AlertModal from "@/components/alert-modal"
 import { ConfirmModal } from "@/components/confirm-modal"
 import LoginRequiredModal from "@/components/login-required-modal"
+import { useRouter, useParams } from "next/navigation"
+
 
 // API 응답 타입 정의
 interface ImageSlideResponse {
@@ -60,6 +62,7 @@ interface ValidationErrors {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function AdminHomePage() {
+  const router = useRouter()
   const [imageSlides, setImageSlides] = useState<ImageSlide[]>([])
   const [statItems, setStatItems] = useState<StatItem[]>([
     { id: 1, title: "", subtitle: "", count: "" },
@@ -316,17 +319,15 @@ export default function AdminHomePage() {
             company: slide.organization,
           }))
 
-          const response = await fetch(`${API_BASE_URL}/admin/main-intro-images`, {
+          const formData = new FormData()
+
+          const response = await fetch(`${API_BASE_URL}/admin/main-intro-images/reset`, {
             method: "POST",
             credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
             body: JSON.stringify(requestData),
           })
 
           if (response.ok) {
-            setAlertModal({
               isOpen: true,
               title: "성공",
               message: "이미지 슬라이드가 성공적으로 등록되었습니다.",
@@ -336,7 +337,7 @@ export default function AdminHomePage() {
             throw new Error("이미지 슬라이드 저장에 실패했습니다.")
           }
         } catch (err) {
-          setError(err instanceof Error ? err.message : "이미지 슬라이드 저장에 실패했습니다.")
+          setError("이미지 슬라이드 저장에 실패했습니다.")
         } finally {
           setIsLoading(false)
           setConfirmModal({ ...confirmModal, isOpen: false })
@@ -420,6 +421,13 @@ export default function AdminHomePage() {
     return <div className="text-center text-red-500">{error}</div>
   }
 
+  const getImageUrl = (image: string) => {
+    if (image.startsWith("data:")) {
+      return image // Base64 URL
+    }
+    return `${image}` // 서버 URL
+  }
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
@@ -474,7 +482,7 @@ export default function AdminHomePage() {
                       <div className="w-[280px] h-[160px] bg-gray-100 rounded-lg overflow-hidden relative">
                         {slide.image ? (
                           <img
-                            src={slide.image || "/logo_header.svg"}
+                            src={getImageUrl(slide.image) || "/logo_header.svg"}
                             alt="Preview"
                             className="w-full h-full object-cover"
                           />
