@@ -324,15 +324,13 @@ export default function AdminHomePage() {
           const response = await fetch(`${API_BASE_URL}/admin/main-intro-images/reset`, {
             method: "POST",
             credentials: "include",
-            body: JSON.stringify(requestData),
+            body: formData,
           })
 
           if (response.ok) {
-              isOpen: true,
-              title: "성공",
-              message: "이미지 슬라이드가 성공적으로 등록되었습니다.",
-              type: "success",
-            })
+            const responseData = await response.json() // 서버 응답 데이터 파싱
+            
+            router.push("/admin/home")
           } else {
             throw new Error("이미지 슬라이드 저장에 실패했습니다.")
           }
