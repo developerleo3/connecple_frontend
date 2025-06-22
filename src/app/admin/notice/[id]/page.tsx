@@ -382,7 +382,7 @@ export default function NoticeDetailPage() {
                                 </Label>
                                 <div className="mt-1">
                                     <RichTextEditor
-                                        content={formData.content}
+                                        content={formData.content ?? ""}
                                         onChange={(value) => setFormData({ ...formData, content: value })}
                                         placeholder="공지사항 내용을 작성해주세요"
                                     />
