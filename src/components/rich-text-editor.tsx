@@ -55,11 +55,11 @@ export function RichTextEditor({
     }
 
     return (
-        <div 
-            className="border rounded-lg min-h-[200px] cursor-text"
+        <div
+            className="bg-white shadow-sm border border-gray-200 rounded-lg min-h-[200px] cursor-text"
             onClick={() => editor.commands.focus()}
         >
-            <div className="border-b p-2 flex gap-1">
+            <div className="border-b border-gray-200 p-2 flex gap-1">
                 <Button
                     variant="ghost"
                     size="sm"

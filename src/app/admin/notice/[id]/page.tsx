@@ -327,12 +327,12 @@ export default function NoticeDetailPage() {
                                         value={formData.category}
                                         onValueChange={(value) => setFormData({ ...formData, category: value })}
                                     >
-                                        <SelectTrigger>
+                                        <SelectTrigger className="bg-white shadow-sm border border-gray-200 hover:cursor-pointer">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                             {CATEGORIES.map((category) => (
-                                                <SelectItem key={category} value={category}>
+                                                <SelectItem key={category} value={category} className="hover:bg-gray-50 hover:cursor-pointer">
                                                     {category}
                                                 </SelectItem>
                                             ))}
@@ -347,12 +347,12 @@ export default function NoticeDetailPage() {
                                         value={formData.isActive ? "active" : "inactive"}
                                         onValueChange={(value) => setFormData({ ...formData, isActive: value === "active" })}
                                     >
-                                        <SelectTrigger>
+                                        <SelectTrigger className="bg-white shadow-sm border border-gray-200 hover:cursor-pointer">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                            <SelectItem value="active">활성</SelectItem>
-                                            <SelectItem value="inactive">비활성</SelectItem>
+                                            <SelectItem value="active" className="hover:bg-gray-50 hover:cursor-pointer">활성</SelectItem>
+                                            <SelectItem value="inactive" className="hover:bg-gray-50 hover:cursor-pointer">비활성</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
@@ -368,9 +368,9 @@ export default function NoticeDetailPage() {
                                         value={formData.title || ""}
                                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                         maxLength={200}
-                                        className={errors.title ? "border-red-500" : ""}
+                                        className={errors.title ? "border-red-500 bg-white shadow-sm border border-gray-200" : "bg-white shadow-sm border border-gray-200"}
                                     />
-                                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-400">
+                                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-600">
                                         {(formData.title || "").length}/200
                                     </span>
                                 </div>
@@ -386,6 +386,7 @@ export default function NoticeDetailPage() {
                                         content={formData.content}
                                         onChange={(value) => setFormData({ ...formData, content: value })}
                                         placeholder="공지사항 내용을 작성해주세요"
+                                        className="bg-white shadow-sm border border-gray-200"
                                     />
                                 </div>
                                 {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}

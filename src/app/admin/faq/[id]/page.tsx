@@ -316,20 +316,20 @@ export default function FaqDetailPage() {
                         </div>
                     ) : (
                         // Edit Mode
-                        <div className="space-y-6">
+                        <div className="p-6 space-y-13 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <Label htmlFor="category">카테고리</Label>
+                                    <Label htmlFor="category" className="text-gray-600 mb-2">카테고리</Label>
                                     <Select
                                         value={formData.category}
                                         onValueChange={(value) => setFormData({ ...formData, category: value })}
                                     >
-                                        <SelectTrigger>
+                                        <SelectTrigger className="bg-white shadow-sm border border-gray-200 hover:cursor-pointer">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                             {CATEGORIES.map((category) => (
-                                                <SelectItem key={category} value={category}>
+                                                <SelectItem key={category} value={category} className="hover:bg-gray-50 hover:cursor-pointer">
                                                     {category}
                                                 </SelectItem>
                                             ))}
@@ -339,24 +339,24 @@ export default function FaqDetailPage() {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="status">상태</Label>
+                                    <Label htmlFor="status" className="text-gray-600 mb-2">상태</Label>
                                     <Select
                                         value={formData.isActive ? "active" : "inactive"}
                                         onValueChange={(value) => setFormData({ ...formData, isActive: value === "active" })}
                                     >
-                                        <SelectTrigger>
+                                        <SelectTrigger className="bg-white shadow-sm border border-gray-200 hover:cursor-pointer">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                            <SelectItem value="active">활성</SelectItem>
-                                            <SelectItem value="inactive">비활성</SelectItem>
+                                            <SelectItem value="active" className="hover:bg-gray-50 hover:cursor-pointer">활성</SelectItem>
+                                            <SelectItem value="inactive" className="hover:bg-gray-50 hover:cursor-pointer">비활성</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
                             </div>
 
                             <div>
-                                <Label htmlFor="question">
+                                <Label htmlFor="question" className="text-gray-600 mb-2">
                                     질문 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="relative">
@@ -365,9 +365,9 @@ export default function FaqDetailPage() {
                                         value={formData.question || ""}
                                         onChange={(e) => setFormData({ ...formData, question: e.target.value })}
                                         maxLength={200}
-                                        className={errors.question ? "border-red-500" : ""}
+                                        className={errors.question ? "border-red-500bg-white shadow-sm border border-gray-200" : "bg-white shadow-sm border border-gray-200"}
                                     />
-                                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-400">
+                                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-600">
                                         {(formData.question || "").length}/200
                                     </span>
                                 </div>
@@ -375,7 +375,7 @@ export default function FaqDetailPage() {
                             </div>
 
                             <div>
-                                <Label htmlFor="answer" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="answer" className="text-sm font-medium text-gray-600 mb-2">
                                     답변 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="mt-1">
@@ -383,6 +383,7 @@ export default function FaqDetailPage() {
                                         content={formData.answer}
                                         onChange={(value) => setFormData({ ...formData, answer: value })}
                                         placeholder="답변을 작성해주세요"
+                                        className="bg-white shadow-sm border border-gray-200"
                                     />
                                 </div>
                                 {errors.answer && <p className="mt-1 text-sm text-red-600">{errors.answer}</p>}
@@ -401,10 +402,12 @@ export default function FaqDetailPage() {
                                         })
                                         setErrors({})
                                     }}
+                                    className="hover:bg-gray-50 text-black-600 hover:cursor-pointer"
                                 >
                                     취소
                                 </Button>
-                                <Button onClick={handleUpdate} disabled={loading} className="bg-purple-600 hover:bg-purple-700">
+                                <Button onClick={handleUpdate} disabled={loading} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
+                                    <Edit className="h-4 w-4 mr-1" />
                                     {loading ? "수정 중..." : "수정하기"}
                                 </Button>
                             </div>
