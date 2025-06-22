@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import  AdminSidebar  from "@/components/admin-sidebar"
 import { Button } from "@/components/ui/button"
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { RichTextEditor } from "@/components/rich-text-editor"
+import { ConfirmModal } from "@/components/confirm-modal"
 
 interface FormData {
     category: string
@@ -34,6 +35,31 @@ export default function CreateFaqPage() {
     })
     const [errors, setErrors] = useState<FormErrors>({})
     const [loading, setLoading] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    
+    // 페이지 이동 확인 모달 상태
+    const [confirmLeaveModal, setConfirmLeaveModal] = useState({
+        isOpen: false,
+        title: "페이지 이동 확인",
+        message: "작성 중인 내용이 사라집니다. 정말 페이지를 이동하시겠습니까?",
+    })
+
+    // 페이지 이동 감지 및 확인
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            if (!isSubmitting) {
+                e.preventDefault()
+                e.returnValue = ''
+            }
+        }
+
+        // 브라우저 새로고침/닫기 감지
+        window.addEventListener('beforeunload', handleBeforeUnload)
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
+    }, [isSubmitting])
 
     const validateForm = (): boolean => {
         const newErrors: FormErrors = {}
@@ -60,6 +86,7 @@ export default function CreateFaqPage() {
         }
 
         setLoading(true)
+        setIsSubmitting(true)
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/faqs`, {
                 method: "POST",
@@ -83,6 +110,7 @@ export default function CreateFaqPage() {
         } catch (error) {
             console.error("FAQ 생성 실패:", error)
             alert("FAQ 생성에 실패했습니다. 다시 시도해주세요.")
+            setIsSubmitting(false)
         } finally {
             setLoading(false)
         }
@@ -96,9 +124,38 @@ export default function CreateFaqPage() {
         }
     }
 
+    const handleCancelClick = () => {
+        setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: true })
+    }
+
+    const handleConfirmLeave = () => {
+        setIsSubmitting(true)
+        setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+        router.push("/admin/faq")
+    }
+
+    const [pendingNavigation, setPendingNavigation] = useState<string | null>(null)
+
+    const handleNavigationRequest = (path: string): boolean => {
+        if (isSubmitting) return true
+        
+        setPendingNavigation(path)
+        setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: true })
+        return false // 일단 이동을 막음
+    }
+
+    const handleConfirmNavigation = () => {
+        setIsSubmitting(true)
+        setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+        if (pendingNavigation) {
+            router.push(pendingNavigation)
+        }
+        setPendingNavigation(null)
+    }
+
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <AdminSidebar />
+            <AdminSidebar onNavigate={handleNavigationRequest} />
             <div className="flex-1 p-6">
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-2xl font-bold text-gray-900 mb-6">FAQ 생성</h1>
@@ -177,7 +234,10 @@ export default function CreateFaqPage() {
                                 {errors.answer && <p className="mt-1 text-sm text-red-600">{errors.answer}</p>}
                             </div>
 
-                            <div className="flex justify-end">
+                            <div className="flex justify-end gap-2">
+                                <Button type="button" variant="outline" onClick={handleCancelClick}>
+                                    취소
+                                </Button>
                                 <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8" disabled={loading}>
                                     {loading ? "생성 중..." : "생성하기"}
                                 </Button>
@@ -186,6 +246,19 @@ export default function CreateFaqPage() {
                     </div>
                 </div>
             </div>
+
+            <ConfirmModal
+                isOpen={confirmLeaveModal.isOpen}
+                onClose={() => {
+                    setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+                    setPendingNavigation(null)
+                }}
+                onConfirm={pendingNavigation ? handleConfirmNavigation : handleConfirmLeave}
+                title={confirmLeaveModal.title}
+                message={confirmLeaveModal.message}
+                confirmText="이동하기"
+                cancelText="취소"
+            />
         </div>
     )
 }
