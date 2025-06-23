@@ -405,13 +405,13 @@ export default function NoticeDetailPage() {
                                         })
                                         setErrors({})
                                     }}
-                                    className="hover:bg-gray-50 text-black-600 hover:cursor-pointer"
+                                    className="border border-gray-600 hover:bg-gray-50 text-gray-600 hover:cursor-pointer"
                                 >
                                     취소
                                 </Button>
                                 <Button onClick={handleUpdate} disabled={loading} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                                     <Edit className="h-4 w-4 mr-1" />
-                                    {loading ? "수정 중..." : "수정하기"}
+                                    {loading ? "수정 중..." : "수정완료"}
                                 </Button>
                             </div>
                         </div>

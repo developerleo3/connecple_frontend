@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { RichTextEditor } from "@/components/rich-text-editor"
 import { ConfirmModal } from "@/components/confirm-modal"
+import { Trash2, Edit, List } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 
 interface FormData {
@@ -142,15 +143,15 @@ export default function CreateNoticePage() {
                   </Label>
                   <div className="relative">
                     <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                      <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
+                      <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500 hover:cursor-pointer" : "shadow-sm border border-gray-200 text-gray-600 hover:cursor-pointer"}`}>
                         <SelectValue placeholder="카테고리를 선택하세요" />
                       </SelectTrigger>
                       <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                        <SelectItem value="워드프로젝트">워드프로젝트</SelectItem>
-                        <SelectItem value="워드커네디어">워드커네디어</SelectItem>
-                        <SelectItem value="워드뉴스리터">워드뉴스리터</SelectItem>
-                        <SelectItem value="워드GIG">워드GIG</SelectItem>
-                        <SelectItem value="기타">기타</SelectItem>
+                        <SelectItem value="워드프로젝트" className="hover:bg-gray-50 hover:cursor-pointer">워드프로젝트</SelectItem>
+                        <SelectItem value="워드커네디어" className="hover:bg-gray-50 hover:cursor-pointer">워드커네디어</SelectItem>
+                        <SelectItem value="워드뉴스리터" className="hover:bg-gray-50 hover:cursor-pointer">워드뉴스리터</SelectItem>
+                        <SelectItem value="워드GIG" className="hover:bg-gray-50 hover:cursor-pointer">워드GIG</SelectItem>
+                        <SelectItem value="기타" className="hover:bg-gray-50 hover:cursor-pointer">기타</SelectItem>
                       </SelectContent>
                     </Select>
                     {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
@@ -162,12 +163,12 @@ export default function CreateNoticePage() {
                     상태
                   </Label>
                   <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 shadow-sm border border-gray-200 text-gray-600 hover:cursor-pointer">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                      <SelectItem value="활성">활성</SelectItem>
-                      <SelectItem value="비활성">비활성</SelectItem>
+                      <SelectItem value="활성" className="hover:bg-gray-50 hover:cursor-pointer">활성</SelectItem>
+                      <SelectItem value="비활성" className="hover:bg-gray-50 hover:cursor-pointer">비활성</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -183,7 +184,7 @@ export default function CreateNoticePage() {
                     placeholder="제목을 작성해주세요"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
-                    className={errors.title ? "border-red-500" : ""}
+                    className={errors.title ? "border-red-500" : "shadow-sm border border-gray-200 text-gray-600"}
                     maxLength={200}
                   />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
@@ -208,10 +209,11 @@ export default function CreateNoticePage() {
               </div>
 
               <div className="flex justify-end gap-2">
-                <Button onClick={() => router.push("/admin/notice")} variant="outline">
+                <Button onClick={() => router.push("/admin/notice")} variant="outline" className="border border-gray-600 text-gray-600 hover:cursor-pointer">
                   취소
                 </Button>
-                <Button type="submit" disabled={loading} className="bg-purple-600 hover:bg-purple-700">
+                <Button type="submit" disabled={loading} className="bg-purple-600 hover:bg-purple-700 text-whitefont-semi hover:cursor-pointer">
+                  <Edit className="h-4 w-4 mr-1" />
                   {loading ? "생성 중..." : "생성하기"}
                 </Button>
               </div>

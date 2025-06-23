@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
+import { Trash2, Edit, List } from "lucide-react"
 import { RichTextEditor } from "@/components/rich-text-editor"
 
 interface FormData {
@@ -112,15 +113,15 @@ export default function CreateFaqPage() {
                                     </Label>
                                     <div className="relative">
                                         <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                                            <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500" : ""}`}>
+                                            <SelectTrigger className={`mt-1 ${errors.category ? "border-red-500 hover:cursor-pointer" : "shadow-sm border border-gray-200 text-gray-600 hover:cursor-pointer"}`}>
                                                 <SelectValue placeholder="카테고리를 선택하세요" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                                <SelectItem value="워드프로젝트">워드프로젝트</SelectItem>
-                                                <SelectItem value="워드커네디어">워드커네디어</SelectItem>
-                                                <SelectItem value="워드뉴스리터">워드뉴스리터</SelectItem>
-                                                <SelectItem value="워드GIG">워드GIG</SelectItem>
-                                                <SelectItem value="기타">기타</SelectItem>
+                                                <SelectItem value="워드프로젝트" className="hover:bg-gray-50 hover:cursor-pointer">워드프로젝트</SelectItem>
+                                                <SelectItem value="워드커네디어" className="hover:bg-gray-50 hover:cursor-pointer">워드커네디어</SelectItem>
+                                                <SelectItem value="워드뉴스리터" className="hover:bg-gray-50 hover:cursor-pointer">워드뉴스리터</SelectItem>
+                                                <SelectItem value="워드GIG" className="hover:bg-gray-50 hover:cursor-pointer">워드GIG</SelectItem>
+                                                <SelectItem value="기타" className="hover:bg-gray-50 hover:cursor-pointer">기타</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
@@ -132,12 +133,12 @@ export default function CreateFaqPage() {
                                         상태
                                     </Label>
                                     <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
-                                        <SelectTrigger className="mt-1">
+                                        <SelectTrigger className="mt-1 shadow-sm border border-gray-200 text-gray-600 hover:cursor-pointer">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                            <SelectItem value="활성">활성</SelectItem>
-                                            <SelectItem value="비활성">비활성</SelectItem>
+                                            <SelectItem value="활성" className="hover:bg-gray-50 hover:cursor-pointer">활성</SelectItem>
+                                            <SelectItem value="비활성" className="hover:bg-gray-50 hover:cursor-pointer">비활성</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
@@ -153,7 +154,7 @@ export default function CreateFaqPage() {
                                         placeholder="질문을 작성해주세요"
                                         value={formData.question}
                                         onChange={(e) => handleInputChange("question", e.target.value)}
-                                        className={errors.question ? "border-red-500" : ""}
+                                        className={errors.question ? "border-red-500" : "shadow-sm border border-gray-200 text-gray-600"}
                                         maxLength={200}
                                     />
                                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
@@ -177,8 +178,12 @@ export default function CreateFaqPage() {
                                 {errors.answer && <p className="mt-1 text-sm text-red-600">{errors.answer}</p>}
                             </div>
 
-                            <div className="flex justify-end">
-                                <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8" disabled={loading}>
+                            <div className="flex justify-end gap-2">
+                                <Button onClick={() => router.push("/admin/faq")} variant="outline" className="border border-gray-600 text-gray-600 hover:cursor-pointer">
+                                    취소
+                                </Button>
+                                <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8 text-white font-semi hover:cursor-pointer" disabled={loading}>
+                                    <Edit className="h-4 w-4 mr-1" />
                                     {loading ? "생성 중..." : "생성하기"}
                                 </Button>
                             </div>
