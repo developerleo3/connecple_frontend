@@ -179,7 +179,7 @@ export default function CreateFaqPage() {
                             </div>
 
                             <div className="flex justify-end gap-2">
-                                <Button onClick={() => router.push("/admin/faq")} variant="outline" className="border border-gray-600 text-gray-600 hover:cursor-pointer">
+                                <Button onClick={() => router.push("/admin/faq")} variant="outline" className="border border-gray-600 text-gray-600 hover:bg-gray-50 hover:cursor-pointer">
                                     취소
                                 </Button>
                                 <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8 text-white font-semi hover:cursor-pointer" disabled={loading}>

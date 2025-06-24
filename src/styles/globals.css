@@ -168,3 +168,10 @@ body {
     margin: 0 9px !important;
   }
 }
+
+/* globals.css */
+.ProseMirror:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
