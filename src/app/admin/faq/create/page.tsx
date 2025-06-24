@@ -2,21 +2,32 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
-import  AdminSidebar  from "@/components/admin-sidebar"
+import AdminSidebar from "@/components/admin-sidebar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { Trash2, Edit, List } from "lucide-react"
+import { Trash2, Edit, List, Upload } from "lucide-react"
 import { RichTextEditor } from "@/components/rich-text-editor"
+
+interface FileAttachment {
+    id: number
+    originalFileName: string
+    storedFileName: string
+    filePath: string
+    fileSize: number
+    fileType: string
+    file: File
+}
 
 interface FormData {
     category: string
     status: string
     question: string
     answer: string
+    files?: string[]
 }
 
 interface FormErrors {
@@ -27,12 +38,15 @@ interface FormErrors {
 
 export default function CreateFaqPage() {
     const router = useRouter()
+    const inputRef = useRef<HTMLInputElement>(null)
     const [formData, setFormData] = useState<FormData>({
         category: "",
         status: "활성",
         question: "",
         answer: "",
+        files: [],
     })
+    const [filePreviews, setFilePreviews] = useState<FileAttachment[]>([])
     const [errors, setErrors] = useState<FormErrors>({})
     const [loading, setLoading] = useState(false)
 
@@ -62,18 +76,20 @@ export default function CreateFaqPage() {
 
         setLoading(true)
         try {
+            const formDataToSend = new FormData()
+            formDataToSend.append("category", formData.category)
+            formDataToSend.append("question", formData.question)
+            formDataToSend.append("answer", formData.answer)
+            formDataToSend.append("isActive", formData.status === "활성" ? "true" : "false")
+
+            filePreviews.forEach((fileObj) => {
+                formDataToSend.append("files", fileObj.file)
+            })
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/faqs`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
                 credentials: "include",
-                body: JSON.stringify({
-                    category: formData.category,
-                    question: formData.question,
-                    answer: formData.answer,
-                    isActive: formData.status === "활성",
-                }),
+                body: formDataToSend,
             })
 
             if (!response.ok) {
@@ -91,10 +107,36 @@ export default function CreateFaqPage() {
 
     const handleInputChange = (field: keyof FormData, value: string) => {
         setFormData((prev) => ({ ...prev, [field]: value }))
-        // 에러 메시지 제거
         if (errors[field as keyof FormErrors]) {
             setErrors((prev) => ({ ...prev, [field]: undefined }))
         }
+    }
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const newFiles = Array.from(e.target.files).map(file => ({
+                id: Date.now() + Math.random(),
+                originalFileName: file.name,
+                storedFileName: file.name,
+                filePath: URL.createObjectURL(file),
+                fileSize: file.size,
+                fileType: file.type,
+                file: file,
+            }))
+            setFilePreviews(prev => [...prev, ...newFiles])
+            setFormData(prev => ({
+                ...prev,
+                files: [...(prev.files || []), ...newFiles.map(f => f.originalFileName)],
+            }))
+        }
+    }
+
+    const removeFile = (id: number) => {
+        setFilePreviews(prev => prev.filter(file => file.id !== id))
+        setFormData(prev => ({
+            ...prev,
+            files: prev.files?.filter(fileName => !filePreviews.find(f => f.id === id)?.originalFileName === fileName),
+        }))
     }
 
     return (
@@ -118,7 +160,7 @@ export default function CreateFaqPage() {
                                             </SelectTrigger>
                                             <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
                                                 <SelectItem value="워드프로젝트" className="hover:bg-gray-50 hover:cursor-pointer">워드프로젝트</SelectItem>
-                                                <SelectItem value="워드커네디어" className="hover:bg-gray-50 hover:cursor-pointer">워드커네디어</SelectItem>
+                                                <SelectItem value="워드커네이어" className="hover:bg-gray-50 hover:cursor-pointer">워드커네이어</SelectItem>
                                                 <SelectItem value="워드뉴스리터" className="hover:bg-gray-50 hover:cursor-pointer">워드뉴스리터</SelectItem>
                                                 <SelectItem value="워드GIG" className="hover:bg-gray-50 hover:cursor-pointer">워드GIG</SelectItem>
                                                 <SelectItem value="기타" className="hover:bg-gray-50 hover:cursor-pointer">기타</SelectItem>
@@ -165,6 +207,53 @@ export default function CreateFaqPage() {
                             </div>
 
                             <div>
+                                <div className="flex items-center gap-2">
+                                    <Label htmlFor="files" className="text-sm font-medium text-gray-700">
+                                        파일 첨부
+                                    </Label>
+                                    <input
+                                        id="files"
+                                        type="file"
+                                        multiple
+                                        onChange={handleFileChange}
+                                        className="hidden"
+                                        ref={inputRef}
+                                    />
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => inputRef.current?.click()}
+                                        className="border border-gray-600 text-gray-600 hover:bg-gray-50"
+                                    >
+                                        <Upload className="h-4 w-4 mr-1" />
+                                        파일 선택
+                                    </Button>
+                                </div>
+                            </div>
+
+                            {filePreviews.length > 0 && (
+                                <div>
+                                    {/* <Label className="text-gray-600 mb-2">첨부 파일</Label> */}
+                                    <ul className="space-y-2">
+                                        {filePreviews.map((file) => (
+                                            <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
+                                                <span className="text-sm text-gray-600">{file.originalFileName}</span>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    onClick={() => removeFile(file.id)}
+                                                    className="text-red-600 hover:text-red-800"
+                                                >
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            <div>
                                 <Label htmlFor="answer" className="text-sm font-medium text-gray-700">
                                     FAQ 답변 <span className="text-red-500">*</span>
                                 </Label>
@@ -180,7 +269,8 @@ export default function CreateFaqPage() {
 
                             <div className="flex justify-end gap-2">
                                 <Button onClick={() => router.push("/admin/faq")} variant="outline" className="border border-gray-600 text-gray-600 hover:bg-gray-50 hover:cursor-pointer">
-                                    취소
+                                    <List className="h-4 w-4 mr-1" />
+                                    목록으로
                                 </Button>
                                 <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8 text-white font-semi hover:cursor-pointer" disabled={loading}>
                                     <Edit className="h-4 w-4 mr-1" />

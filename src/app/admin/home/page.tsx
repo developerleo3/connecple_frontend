@@ -319,7 +319,7 @@ export default function AdminHomePage() {
 
                 if (!response.ok) {
                   // 서버가 4xx, 5xx 에러를 반환한 경우
-                  throw new Error(`이미지 업로드 수정정`)
+                  throw new Error(`이미지 업로드 수정`)
                 }
                 const blob = await response.blob()
                 const filename = slide.image.substring(slide.image.lastIndexOf("/") + 1) || "image.png"
