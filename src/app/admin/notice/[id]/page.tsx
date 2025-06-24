@@ -113,6 +113,7 @@ export default function NoticeDetailPage() {
         files: [],
     })
     const [filePreviews, setFilePreviews] = useState<FileAttachment[]>([])
+    const [deletedFileIds, setDeletedFileIds] = useState<number[]>([]) // 삭제된 파일 ID 저장
     const [errors, setErrors] = useState<Record<string, string>>({})
 
     const [confirmModal, setConfirmModal] = useState({
@@ -149,7 +150,8 @@ export default function NoticeDetailPage() {
                     isActive: response.data.isActive,
                     files: response.data.files.map(file => file.originalFileName),
                 })
-                setFilePreviews(response.data.files) // 기존 파일은 file 객체 없이 유지
+                setFilePreviews(response.data.files)
+                setDeletedFileIds([]) // 공지사항 로드 시 삭제된 파일 ID 초기화
             }
         } catch (error) {
             console.error("Failed to fetch notice:", error)
@@ -220,11 +222,11 @@ export default function NoticeDetailPage() {
                 formDataToSend.append("content", formData.content || "")
                 formDataToSend.append("isActive", String(formData.isActive || false))
 
-                // 기존 파일 모두 포함 (삭제된 파일 제외)
+                // 기존 파일 중 삭제되지 않은 파일만 포함
                 if (notice?.files) {
                     notice.files.forEach((file) => {
-                        if (filePreviews.some(f => f.id === file.id)) {
-                            formDataToSend.append("files", file.originalFileName) // 기존 파일 이름
+                        if (!deletedFileIds.includes(file.id) && filePreviews.some(f => f.id === file.id)) {
+                            formDataToSend.append("files", file.originalFileName)
                         }
                     })
                 }
@@ -232,12 +234,20 @@ export default function NoticeDetailPage() {
                 // 새로 추가된 파일 (File 객체 전송)
                 filePreviews.forEach((fileObj) => {
                     if (fileObj.file && !notice?.files.find(f => f.id === fileObj.id)) {
-                        formDataToSend.append("files", fileObj.file) // 새 파일 업로드
+                        formDataToSend.append("files", fileObj.file)
                     }
                 })
 
-                await updateNotice(noticeId, formDataToSend)
+                // 삭제된 파일 ID 전송
+                const uniqueDeletedFileIds = [...new Set(deletedFileIds)]
+                if (uniqueDeletedFileIds.length > 0) {
+                    console.log("Sending deleted file IDs:", uniqueDeletedFileIds)
+                    uniqueDeletedFileIds.forEach((id) => {
+                        formDataToSend.append("deleteFileIds", String(id))
+                    })
+                }
 
+                await updateNotice(noticeId, formDataToSend)
                 setIsEditing(false)
                 fetchNotice()
                 router.push("/admin/notice")
@@ -261,7 +271,7 @@ export default function NoticeDetailPage() {
 
     const handleDownload = (file: FileAttachment) => {
         const link = document.createElement('a')
-        link.href = `${file.filePath}`
+        link.href = `${API_BASE_URL}${file.filePath}`
         link.download = encodeURIComponent(file.originalFileName)
         document.body.appendChild(link)
         link.click()
@@ -277,7 +287,7 @@ export default function NoticeDetailPage() {
                 filePath: URL.createObjectURL(file),
                 fileSize: file.size,
                 fileType: file.type,
-                file: file, // File 객체 저장
+                file: file,
             }))
             setFilePreviews(prev => [...prev, ...newFiles])
             setFormData(prev => ({
@@ -288,11 +298,18 @@ export default function NoticeDetailPage() {
     }
 
     const removeFile = (id: number) => {
-        setFilePreviews(prev => prev.filter(file => file.id !== id))
-        setFormData(prev => ({
-            ...prev,
-            files: prev.files?.filter(fileName => !filePreviews.find(f => f.id === id)?.originalFileName === fileName),
-        }))
+        const fileToRemove = filePreviews.find(file => file.id === id)
+        if (fileToRemove && fileToRemove.id !== undefined) {
+            setFilePreviews(prev => prev.filter(file => file.id !== id))
+            setFormData(prev => ({
+                ...prev,
+                files: prev.files?.filter(fileName => fileName !== fileToRemove.originalFileName) || [],
+            }))
+            if (notice?.files.some(file => file.id === id)) {
+                setDeletedFileIds(prev => [...new Set([...prev, id])])
+            }
+            console.log("Removed file ID:", id, "Deleted IDs:", [...new Set([...deletedFileIds, id])])
+        }
     }
 
     const formatDate = (dateString: string) => {
@@ -543,6 +560,7 @@ export default function NoticeDetailPage() {
                                             files: notice.files.map(file => file.originalFileName),
                                         })
                                         setFilePreviews(notice.files)
+                                        setDeletedFileIds([])
                                         setErrors({})
                                     }}
                                     className="border border-gray-600 hover:bg-gray-50 text-gray-600 hover:cursor-pointer"
