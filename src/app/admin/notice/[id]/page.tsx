@@ -96,6 +96,11 @@ const deleteNotice = async (id: number): Promise<ApiResponse<null>> => {
 
 const CATEGORIES = ["워드프로젝트", "워드커네이어", "워드뉴스리터", "워드GIG", "기타"]
 
+// 함수 추가
+const formatContentForView = (content: string) => {
+    return content.replace(/<p><\/p>/g, '<p><br/></p>');
+}
+
 export default function NoticeDetailPage() {
     const router = useRouter()
     const params = useParams()
@@ -206,7 +211,12 @@ export default function NoticeDetailPage() {
         setConfirmModal({
             isOpen: true,
             title: "삭제하기",
-            message: "정말로 이 공지사항을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+            message: (
+                <>
+                    <span style={{ color: 'red' }}>정말로 이 공지사항을 삭제하시겠습니까?</span><br />
+                    <span style={{ color: 'red' }}>이 작업은 되돌릴 수 없습니다.</span>
+                </>
+            ),
             action: "delete",
         })
     }
@@ -271,7 +281,7 @@ export default function NoticeDetailPage() {
 
     const handleDownload = (file: FileAttachment) => {
         const link = document.createElement('a')
-        link.href = `${API_BASE_URL}${file.filePath}`
+        link.href = `${file.filePath}`
         link.download = encodeURIComponent(file.originalFileName)
         document.body.appendChild(link)
         link.click()
@@ -360,7 +370,7 @@ export default function NoticeDetailPage() {
                     <p className="text-gray-600 mb-8">{isEditing ? "공지사항 수정 페이지 입니다." : "공지사항 상세 페이지 입니다."}</p>
 
                     {!isEditing ? (
-                        <div className="p-6 space-y-6 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div className="p-6 space-y-10 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <Label className="text-gray-600 mb-2">카테고리</Label>
@@ -380,8 +390,9 @@ export default function NoticeDetailPage() {
                             <div>
                                 <Label className="text-gray-600 mb-2">공지사항 내용</Label>
                                 <div
-                                    className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[200px]"
-                                    dangerouslySetInnerHTML={{ __html: notice.content || "" }}
+                                    className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[300px] max-h-[300px]"
+                                    style={{ maxHeight: '300px', overflowY: 'auto', whiteSpace: 'pre-wrap' }} // 스크롤 및 빈 줄 표시
+                                    dangerouslySetInnerHTML={{ __html: formatContentForView(notice.content || "") }}
                                 />
                             </div>
 
@@ -391,7 +402,7 @@ export default function NoticeDetailPage() {
                                     <ul className="space-y-2">
                                         {notice.files.map((file) => (
                                             <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
-                                                <span className="text-sm text-gray-600">{file.originalFileName}</span>
+                                                <span className="text-sm text-gray-600 truncate max-w-[500px]" title={file.originalFileName}>{file.originalFileName}</span>
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
@@ -494,7 +505,6 @@ export default function NoticeDetailPage() {
                                         content={formData.content || ""}
                                         onChange={(value) => setFormData({ ...formData, content: value })}
                                         placeholder="공지사항 내용을 작성해주세요"
-                                        className="bg-white shadow-sm border border-gray-200"
                                     />
                                 </div>
                                 {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
@@ -506,7 +516,7 @@ export default function NoticeDetailPage() {
                                     <ul className="space-y-2">
                                         {filePreviews.map((file) => (
                                             <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
-                                                <span className="text-sm text-gray-600">{file.originalFileName}</span>
+                                                <span className="text-sm text-gray-600 truncate max-w-[500px]" title={file.originalFileName}>{file.originalFileName}</span>
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
