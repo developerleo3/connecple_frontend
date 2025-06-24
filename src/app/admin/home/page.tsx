@@ -6,6 +6,7 @@ import AdminSidebar from "@/components/admin-sidebar"
 import AlertModal from "@/components/alert-modal"
 import { ConfirmModal } from "@/components/confirm-modal"
 import LoginRequiredModal from "@/components/login-required-modal"
+import LoadingSpinner from "@/components/loading-spinner"
 
 
 // API 응답 타입 정의
@@ -439,7 +440,7 @@ export default function AdminHomePage() {
   }
 
   if (isLoading) {
-    return <div className="text-center">로딩 중...</div>
+    return <LoadingSpinner />
   }
 
   if (error) {
