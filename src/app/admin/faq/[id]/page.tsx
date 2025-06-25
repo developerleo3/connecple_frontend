@@ -111,6 +111,7 @@ export default function FaqDetailPage() {
     const [faq, setFaq] = useState<Faq | null>(null)
     const [loading, setLoading] = useState(true)
     const [isEditing, setIsEditing] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [formData, setFormData] = useState<FaqUpdateRequest>({
         category: "",
         question: "",
@@ -137,11 +138,37 @@ export default function FaqDetailPage() {
         type: "success" as "success" | "error" | "warning",
     })
 
+    // 페이지 이동 확인 모달 상태
+    const [confirmLeaveModal, setConfirmLeaveModal] = useState({
+        isOpen: false,
+        title: "페이지 이동 확인",
+        message: "수정 중인 내용이 사라집니다. 정말 페이지를 이동하시겠습니까?",
+    })
+
+    const [pendingNavigation, setPendingNavigation] = useState<string | null>(null)
+
     useEffect(() => {
         if (faqId) {
             fetchFaq()
         }
     }, [faqId])
+
+    // 페이지 이동 감지 및 확인
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            if (isEditing && !isSubmitting) {
+                e.preventDefault()
+                e.returnValue = ''
+            }
+        }
+
+        // 브라우저 새로고침/닫기 감지
+        window.addEventListener('beforeunload', handleBeforeUnload)
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
+    }, [isEditing, isSubmitting])
 
     const fetchFaq = async () => {
         try {
@@ -226,6 +253,7 @@ export default function FaqDetailPage() {
     const handleConfirmAction = async () => {
         try {
             setLoading(true)
+            setIsSubmitting(true)
 
             if (confirmModal.action === "update") {
                 const formDataToSend = new FormData()
@@ -269,7 +297,35 @@ export default function FaqDetailPage() {
             })
         } finally {
             setLoading(false)
+            setIsSubmitting(false)
             setConfirmModal({ ...confirmModal, isOpen: false })
+        }
+    }
+
+    const handleNavigationRequest = (path: string): boolean => {
+        if (isEditing && !isSubmitting) {
+            setPendingNavigation(path)
+            setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: true })
+            return false // 일단 이동을 막음
+        }
+        return true
+    }
+
+    const handleConfirmNavigation = () => {
+        setIsSubmitting(true)
+        setIsEditing(false)
+        setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+        if (pendingNavigation) {
+            router.push(pendingNavigation)
+        }
+        setPendingNavigation(null)
+    }
+
+    const handleCancelEdit = () => {
+        if (isEditing) {
+            setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: true })
+        } else {
+            router.push("/admin/faq")
         }
     }
 
