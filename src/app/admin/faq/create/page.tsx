@@ -5,11 +5,12 @@ import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import AdminSidebar from "@/components/admin-sidebar"
+import LoadingSpinner from "@/components/loading-spinner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { Trash2, Edit, List, Upload } from "lucide-react"
+import { Trash2, Edit, Upload } from "lucide-react"
 import { RichTextEditor } from "@/components/rich-text-editor"
 import { ConfirmModal } from "@/components/confirm-modal"
 
@@ -195,6 +196,10 @@ export default function CreateFaqPage() {
             router.push(pendingNavigation)
         }
         setPendingNavigation(null)
+    }
+
+    if (loading) {
+        return <LoadingSpinner />
     }
 
     return (

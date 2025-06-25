@@ -11,6 +11,7 @@ import { ConfirmModal } from "@/components/confirm-modal"
 import AlertModal from "@/components/alert-modal"
 import { Trash2, Edit, List, Download, Upload } from "lucide-react"
 import AdminSidebar from "@/components/admin-sidebar"
+import LoadingSpinner from "@/components/loading-spinner"
 
 // Types for this page
 interface FileAttachment {
@@ -329,7 +330,7 @@ export default function FaqDetailPage() {
                 <AdminSidebar />
                 <div className="flex-1 p-6">
                     <div className="flex justify-center items-center h-64">
-                        <div className="text-lg">로딩 중...</div>
+                        <LoadingSpinner />
                     </div>
                 </div>
             </div>

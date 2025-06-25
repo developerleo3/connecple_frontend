@@ -4,13 +4,14 @@ import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import AdminSidebar from "@/components/admin-sidebar"
+import LoadingSpinner from "@/components/loading-spinner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { RichTextEditor } from "@/components/rich-text-editor"
 import { ConfirmModal } from "@/components/confirm-modal"
-import { Trash2, Edit, List, X, Upload } from "lucide-react"
+import { Edit, X, Upload } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 
 interface FormData {
@@ -225,6 +226,10 @@ export default function CreateNoticePage() {
 
   const triggerFileInput = () => {
     fileInputRef.current?.click()
+  }
+
+  if (loading) {
+    return <LoadingSpinner />
   }
 
   return (

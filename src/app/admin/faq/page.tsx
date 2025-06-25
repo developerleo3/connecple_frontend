@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
+import LoadingSpinner from "@/components/loading-spinner"
 import Link from "next/link"
 
 // Types for this page
@@ -262,7 +263,7 @@ export default function FaqListPage() {
                   <div className="flex-1">
                     <Input
                       type="text"
-                      placeholder="FAQ 검색"
+                      placeholder="제목또는 내용을 입력해주세요."
                       value={searchKeyword}
                       onChange={(e) => setSearchKeyword(e.target.value)}
                       onKeyPress={handleKeyPress}
@@ -322,7 +323,7 @@ export default function FaqListPage() {
                 {loading ? (
                   <TableRow>
                     <TableCell colSpan={4} className="text-center py-8">
-                      로딩 중...
+                      <LoadingSpinner />
                     </TableCell>
                   </TableRow>
                 ) : faqs.length === 0 ? (

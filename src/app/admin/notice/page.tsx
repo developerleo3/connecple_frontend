@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
+import LoadingSpinner from "@/components/loading-spinner"
 import Link from "next/link"
 
 // Types for this page
@@ -253,14 +254,14 @@ export default function NoticeListPage() {
               <div className="mb-6 space-y-4">
                 <form onSubmit={handleSearch} className="flex gap-4">
                   <div className="flex-1">
-                    <Input
-                      type="text"
-                      placeholder="공지사항 검색"
-                      value={searchKeyword}
-                      onChange={(e) => setSearchKeyword(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
-                    />
+                                      <Input
+                    type="text"
+                    placeholder="제목또는 내용을 입력해주세요."
+                    value={searchKeyword}
+                    onChange={(e) => setSearchKeyword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
+                  />
                   </div>
                   <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
@@ -316,7 +317,7 @@ export default function NoticeListPage() {
                 {loading ? (
                   <TableRow>
                     <TableCell colSpan={4} className="text-center py-8">
-                      로딩 중...
+                      <LoadingSpinner />
                     </TableCell>
                   </TableRow>
                 ) : notices.length === 0 ? (

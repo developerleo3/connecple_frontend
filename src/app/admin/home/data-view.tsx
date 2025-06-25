@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import LoadingSpinner from "@/components/loading-spinner"
 
 interface IntroImage {
   id: number
@@ -69,7 +70,7 @@ export function DataView() {
   }, [])
 
   if (isLoading) {
-    return <div className="flex items-center justify-center h-full">로딩 중...</div>
+    return <LoadingSpinner />
   }
 
   if (error) {

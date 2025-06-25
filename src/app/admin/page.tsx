@@ -4,6 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/components/auth-provider"
+import LoadingSpinner from "@/components/loading-spinner"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -46,11 +47,15 @@ export default function LoginPage() {
         setError("알 수 없는 오류가 발생했습니다.")
       }
 
-    } catch (err) {
+    } catch {
       setError("서버 연결이 원활하지 않습니다.")
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner />
   }
 
   return (
