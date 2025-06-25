@@ -278,7 +278,7 @@ import {
     Bold,
     Italic,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 const PreserveWhitespace = Extension.create({
     name: 'preserveWhitespace',
@@ -323,8 +323,7 @@ export function RichTextEditor({ content, onChange, placeholder = '내용을 입
         },
     });
 
-    const imageInputRef = useRef<HTMLInputElement>(null);
-    const [uploading, setUploading] = useState(false);
+
 
     useEffect(() => {
         if (editor && content !== editor.getHTML()) {
@@ -344,16 +343,16 @@ export function RichTextEditor({ content, onChange, placeholder = '내용을 입
             onClick={() => editor.commands.focus()}
         >
             <div className="border-b border-gray-200 p-2 flex flex-wrap gap-1">
-                <Button onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'bg-muted' : ''}>
+                <Button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'bg-muted' : ''}>
                     <Bold className="h-4 w-4" />
                 </Button>
-                <Button onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'bg-muted' : ''}>
+                <Button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'bg-muted' : ''}>
                     <Italic className="h-4 w-4" />
                 </Button>
-                <Button onClick={() => editor.chain().focus().toggleUnderline().run()} className={editor.isActive('underline') ? 'bg-muted' : ''}>
+                <Button type="button" onClick={() => editor.chain().focus().toggleUnderline().run()} className={editor.isActive('underline') ? 'bg-muted' : ''}>
                     <u className="text-sm">U</u>
                 </Button>
-                <Button onClick={() => editor.chain().focus().toggleStrike().run()} className={editor.isActive('strike') ? 'bg-muted' : ''}>
+                <Button type="button" onClick={() => editor.chain().focus().toggleStrike().run()} className={editor.isActive('strike') ? 'bg-muted' : ''}>
                     <s className="text-sm">S</s>
                 </Button>
 
@@ -361,6 +360,7 @@ export function RichTextEditor({ content, onChange, placeholder = '내용을 입
                 {['left', 'center', 'right'].map((align) => (
                     <Button
                         key={align}
+                        type="button"
                         onClick={() => editor.chain().focus().setTextAlign(align).run()}
                         className={editor.isActive({ textAlign: align }) ? 'bg-muted' : ''}
                     >
@@ -377,7 +377,7 @@ export function RichTextEditor({ content, onChange, placeholder = '내용을 입
             </div>
 
 
-            {uploading && <div className="p-2 text-center text-sm text-gray-600">업로드 중...</div>}
+
         </div>
     );
 }
