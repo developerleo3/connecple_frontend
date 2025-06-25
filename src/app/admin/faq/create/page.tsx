@@ -57,7 +57,12 @@ export default function CreateFaqPage() {
     const [confirmLeaveModal, setConfirmLeaveModal] = useState({
         isOpen: false,
         title: "페이지 이동 확인",
-        message: "작성 중인 내용이 사라집니다. 정말 페이지를 이동하시겠습니까?",
+        message: (
+            <>
+                <span style={{ color: 'red' }}>정말로 이 공지사항을 삭제하시겠습니까?</span><br />
+                <span style={{ color: 'red' }}>이 작업은 되돌릴 수 없습니다.</span>
+            </>
+        ),
     })
 
     // 페이지 이동 감지 및 확인
