@@ -689,6 +689,27 @@ export default function FaqDetailPage() {
                         message={alertModal.message}
                         type={alertModal.type}
                     />
+
+                    {/* Page Leave Confirmation Modal */}
+                    <ConfirmModal
+                        isOpen={confirmLeaveModal.isOpen}
+                        onClose={() => {
+                            setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+                            setPendingNavigation(null)
+                        }}
+                        onConfirm={() => {
+                            if (pendingNavigation) {
+                                setIsEditing(false)
+                                setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+                                router.push(pendingNavigation)
+                            }
+                            setPendingNavigation(null)
+                        }}
+                        title={confirmLeaveModal.title}
+                        message={confirmLeaveModal.message}
+                        confirmText="이동하기"
+                        cancelText="취소"
+                    />
                 </div>
             </div>
         </div>
