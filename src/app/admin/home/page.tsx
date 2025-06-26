@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { Plus, X } from "lucide-react"
+import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd"
 import AdminSidebar from "@/components/admin-sidebar"
 import AlertModal from "@/components/alert-modal"
 import { ConfirmModal } from "@/components/confirm-modal"
 import LoginRequiredModal from "@/components/login-required-modal"
 import LoadingSpinner from "@/components/loading-spinner"
-
 
 // API 응답 타입 정의
 interface ImageSlideResponse {
@@ -237,6 +237,16 @@ export default function AdminHomePage() {
     }
   }
 
+  // 드래그 앤 드롭 핸들러
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) return
+
+    const reorderedSlides = Array.from(imageSlides)
+    const [movedSlide] = reorderedSlides.splice(result.source.index, 1)
+    reorderedSlides.splice(result.destination.index, 0, movedSlide)
+    setImageSlides(reorderedSlides)
+  }
+
   // 통계 수치 유효성 검사 함수
   const validateForm = () => {
     const newErrors: ValidationErrors = {}
@@ -314,12 +324,10 @@ export default function AdminHomePage() {
 
             if (!fileToUpload && slide.image) {
               try {
-                // 캐시 문제를 해결하기 위해, 요청 URL에 타임스탬프를 추가하고 no-store 옵션을 사용합니다.
                 const cacheBustedUrl = `${slide.image}?t=${new Date().getTime()}`
                 const response = await fetch(cacheBustedUrl, { cache: "no-store" })
 
                 if (!response.ok) {
-                  // 서버가 4xx, 5xx 에러를 반환한 경우
                   throw new Error(`이미지 업로드 수정`)
                 }
                 const blob = await response.blob()
@@ -327,7 +335,6 @@ export default function AdminHomePage() {
                 fileToUpload = new File([blob], filename, { type: blob.type })
               } catch (e) {
                 console.error(`Could not fetch image for re-uploading: ${slide.image}`, e)
-                // 더 자세한 오류 메시지를 생성합니다.
                 const detail = "알 수 없는 오류"
                 throw new Error(
                   `기존 이미지(${
@@ -341,7 +348,6 @@ export default function AdminHomePage() {
               formData.append("images", fileToUpload)
               formData.append("titles", slide.title)
               formData.append("companies", slide.organization)
-              // 순서 정보를 명시적으로 추가 (0부터 시작)
               formData.append("sortOrders", index.toString())
             }
           }
@@ -353,8 +359,7 @@ export default function AdminHomePage() {
           })
 
           if (response.ok) {
-            await response.json() // 서버 응답 데이터 파싱
-            // 등록 성공 후 최신 데이터로 상태 업데이트
+            await response.json()
             await fetchData()
           } else {
             throw new Error("이미지 슬라이드 저장에 실패했습니다.")
@@ -410,7 +415,6 @@ export default function AdminHomePage() {
             throw new Error(errorData.message || "통계수치 등록에 실패했습니다")
           }
 
-          // 등록 성공 후 최신 데이터로 상태 업데이트
           await fetchData()
 
           setAlertModal({
@@ -449,9 +453,9 @@ export default function AdminHomePage() {
 
   const getImageUrl = (image: string) => {
     if (image.startsWith("data:")) {
-      return image // Base64 URL
+      return image
     }
-    return `${image}` // 서버 URL
+    return `${image}`
   }
 
   return (
@@ -459,7 +463,6 @@ export default function AdminHomePage() {
       <AdminSidebar />
 
       <div className="bg-gray flex-1 p-6">
-        {/* Header */}
         <div className="bg-gray border-gray-200 px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-black">홈 관리</h1>
@@ -467,11 +470,8 @@ export default function AdminHomePage() {
           <p className="text-gray-600 pt-4">메인 페이지의 슬라이드 이미지와 통계 수치, 메뉴별 메인 링크를 변경할 수 있습니다.</p>
         </div>
 
-        {/* Main Content */}
         <div className="p-8 pt-0">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        
-            {/* Image Slides Section */}
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-black">
@@ -482,7 +482,6 @@ export default function AdminHomePage() {
                 </span>
               </div>
 
-              {/* Add Image Button */}
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-6 hover:cursor-pointer hover:border-purple-600">
                 <button
                   onClick={handleAddSlide}
@@ -494,99 +493,117 @@ export default function AdminHomePage() {
                 </button>
               </div>
 
-              {/* Image Slides */}
-              {imageSlides.map((slide) => (
-                <div key={slide.id} className="border border-gray-200 rounded-lg p-6 mb-4">
-                  <div className="flex gap-4">
-                    {/* Drag Handle */}
-                    <div className="flex flex-col items-center">
-                      <div className="text-gray-400 cursor-move">↕</div>
-                    </div>
+              <DragDropContext onDragEnd={handleDragEnd}>
+                <Droppable droppableId="imageSlides">
+                  {(provided) => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                      {imageSlides.map((slide, index) => (
+                        <Draggable key={slide.id} draggableId={slide.id.toString()} index={index}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              className={`border border-gray-200 rounded-lg p-6 mb-4 ${
+                                snapshot.isDragging ? "bg-gray-100" : ""
+                              }`}
+                            >
+                              <div className="flex gap-4">
+                                <div className="flex flex-col items-center">
+                                  <div
+                                    {...provided.dragHandleProps}
+                                    className="text-gray-400 cursor-move"
+                                  >
+                                    ↕
+                                  </div>
+                                </div>
 
-                    {/* Image Preview */}
-                    <div className="relative">
-                      <div className="w-[280px] h-[160px] bg-gray-100 rounded-lg overflow-hidden relative">
-                        {slide.image ? (
-                          <img
-                            src={getImageUrl(slide.image) || "/logo_header.svg"}
-                            alt="Preview"
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                            <span className="text-gray-400">이미지 없음</span>
-                          </div>
-                        )}
+                                <div className="relative">
+                                  <div className="w-[280px] h-[160px] bg-gray-100 rounded-lg overflow-hidden relative">
+                                    {slide.image ? (
+                                      <img
+                                        src={getImageUrl(slide.image) || "/logo_header.svg"}
+                                        alt="Preview"
+                                        className="w-full h-full object-cover"
+                                      />
+                                    ) : (
+                                      <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                        <span className="text-gray-400">이미지 없음</span>
+                                      </div>
+                                    )}
 
-                        {/* Upload Button Overlay */}
-                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                          <label className="cursor-pointer">
-                            <input
-                              type="file"
-                              accept="image/*"
-                              className="hidden"
-                              onChange={(e) => {
-                                const file = e.target.files?.[0]
-                                if (file) handleImageUpload(slide.id, file)
-                              }}
-                              disabled={isLoading}
-                            />
-                            <div className="bg-white text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2">
-                              <Plus size={16} />
-                              <span>{isLoading ? "업로드중..." : "이미지 업로드"}</span>
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                      <label className="cursor-pointer">
+                                        <input
+                                          type="file"
+                                          accept="image/*"
+                                          className="hidden"
+                                          onChange={(e) => {
+                                            const file = e.target.files?.[0]
+                                            if (file) handleImageUpload(slide.id, file)
+                                          }}
+                                          disabled={isLoading}
+                                        />
+                                        <div className="bg-white text-gray-600 px-4 py-2 rounded-lg flex items-center gap-2">
+                                          <Plus size={16} />
+                                          <span>{isLoading ? "업로드중..." : "이미지 업로드"}</span>
+                                        </div>
+                                      </label>
+                                    </div>
+                                  </div>
+
+                                  <button
+                                    onClick={() => handleRemoveSlide(slide.id)}
+                                    className="absolute -top-2 -right-2 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 hover:cursor-pointer"
+                                    disabled={isLoading}
+                                  >
+                                    <X size={14} />
+                                  </button>
+                                </div>
+
+                                <div className="flex-1">
+                                  <div className="mb-4">
+                                    <p className="text-sm text-gray-500 mb-1">사이즈: 1250x720px 권장 치수입니다.</p>
+                                    <p className="text-sm text-gray-500 mb-4">
+                                      파일이 업로드되는 순서에 맞춰 슬라이드가 보여지며, 비율이 일정하지 않는 경우 잘리거나 찌그러질
+                                      수 있습니다.
+                                    </p>
+                                  </div>
+
+                                  <div className="space-y-4">
+                                    <div>
+                                      <input
+                                        type="text"
+                                        placeholder="기관명 (최대 30자)"
+                                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        value={slide.organization}
+                                        onChange={(e) => handleSlideChange(slide.id, "organization", e.target.value)}
+                                        maxLength={30}
+                                        disabled={isLoading}
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <input
+                                        type="text"
+                                        placeholder="사업명 (최대 100자)"
+                                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        value={slide.title}
+                                        onChange={(e) => handleSlideChange(slide.id, "title", e.target.value)}
+                                        disabled={isLoading}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </label>
-                        </div>
-                      </div>
-
-                      {/* Delete Button */}
-                      <button
-                        onClick={() => handleRemoveSlide(slide.id)}
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 hover:cursor-pointer"
-                        disabled={isLoading}
-                      >
-                        <X size={14} />
-                      </button>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
                     </div>
-
-                    {/* Form Fields */}
-                    <div className="flex-1">
-                      <div className="mb-4">
-                        <p className="text-sm text-gray-500 mb-1">사이즈: 1250x720px 권장 치수입니다.</p>
-                        <p className="text-sm text-gray-500 mb-4">
-                          파일이 업로드되는 순서에 맞춰 슬라이드가 보여지며, 비율이 일정하지 않는 경우 잘리거나 찌그러질
-                          수 있습니다.
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div>
-                          <input
-                            type="text"
-                            placeholder="기관명 (최대 30자)"
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            value={slide.organization}
-                            onChange={(e) => handleSlideChange(slide.id, "organization", e.target.value)}
-                            maxLength={30}
-                            disabled={isLoading}
-                          />
-                        </div>
-
-                        <div>
-                          <input
-                            type="text"
-                            placeholder="사업명 (최대 100자)"
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            value={slide.title}
-                            onChange={(e) => handleSlideChange(slide.id, "title", e.target.value)}
-                            disabled={isLoading}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  )}
+                </Droppable>
+              </DragDropContext>
 
               <div className="flex justify-end">
                 <button
@@ -599,7 +616,6 @@ export default function AdminHomePage() {
               </div>
             </div>
 
-            {/* Statistics Section */}
             <div>
               <h2 className="text-lg font-semibold mb-6 text-black">
                 통계 수치 관리 <span className="text-red-500">*</span>
@@ -679,30 +695,30 @@ export default function AdminHomePage() {
             </div>
           </div>
         </div>
+
+        <AlertModal
+          isOpen={alertModal.isOpen}
+          onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+          title={alertModal.title}
+          message={alertModal.message}
+          type={alertModal.type}
+        />
+
+        <ConfirmModal
+          isOpen={confirmModal.isOpen}
+          onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
+          onConfirm={confirmModal.action || (() => {})}
+          title={confirmModal.title}
+          message={confirmModal.message}
+          isLoading={isLoading}
+        />
+
+        <LoginRequiredModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
       </div>
-
-      {/* Modals */}
-      <AlertModal
-        isOpen={alertModal.isOpen}
-        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
-        title={alertModal.title}
-        message={alertModal.message}
-        type={alertModal.type}
-      />
-
-      <ConfirmModal
-        isOpen={confirmModal.isOpen}
-        onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
-        onConfirm={confirmModal.action || (() => {})}
-        title={confirmModal.title}
-        message={confirmModal.message}
-        isLoading={isLoading}
-      />
-
-      <LoginRequiredModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
     </div>
   )
 }
+
