@@ -26,7 +26,7 @@ export default function AlertModal({
     const getTypeStyles = () => {
         switch (type) {
             case "success":
-                return "bg-purple-50 text-purple-800"
+                return "bg-[#541E80] text-white"
             case "error":
                 return "bg-red-50 text-red-800"
             case "warning":
@@ -64,7 +64,7 @@ export default function AlertModal({
                             type === "error"
                                 ? "bg-red-600 hover:bg-red-700"
                                 : type === "success"
-                                ? "bg-purple-600 hover:bg-purple-700"
+                                ? "bg-[#541E80] hover:bg-purple-700"
                                 : type === "warning"
                                 ? "bg-yellow-600 hover:bg-yellow-700"
                                 : "bg-blue-600 hover:bg-blue-700"
