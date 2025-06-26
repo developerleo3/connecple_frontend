@@ -134,7 +134,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
                 onClick={() => handleNavigation("/admin/faq")}
                 className={cn(
                   "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
-                  pathname === "/admin/faq" ? "bg-gray-100" : "transparent"
+                  pathname.startsWith("/admin/faq") ? "bg-gray-100" : "transparent"
                 )}
               >
                 FAQ 관리
@@ -143,7 +143,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
                 onClick={() => handleNavigation("/admin/notice")}
                 className={cn(
                   "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
-                  pathname === "/admin/notice" ? "bg-gray-100" : "transparent"
+                  pathname.startsWith("/admin/notice") ? "bg-gray-100" : "transparent"
                 )}
               >
                 공지사항 관리
