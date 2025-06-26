@@ -207,6 +207,18 @@ export default function AdminHomePage() {
   }
 
   const handleImageUpload = (id: number, file: File) => {
+    // 클라이언트 사이드 파일 검증
+    const validationError = validateImageFile(file)
+    if (validationError) {
+      setAlertModal({
+        isOpen: true,
+        title: "파일 업로드 오류",
+        message: validationError,
+        type: "error",
+      })
+      return
+    }
+
     const reader = new FileReader()
     reader.onload = (e) => {
       setImageSlides(
@@ -216,6 +228,31 @@ export default function AdminHomePage() {
       )
     }
     reader.readAsDataURL(file)
+  }
+
+  // 이미지 파일 검증 함수
+  const validateImageFile = (file: File): string | null => {
+    // 파일 크기 검증 (10MB 제한)
+    if (file.size > 10 * 1024 * 1024) {
+      return "이미지 파일 크기는 10MB를 초과할 수 없습니다."
+    }
+
+    // 파일 확장자 검증
+    const allowedExtensions = ['jpg', 'jpeg', 'png']
+    const fileName = file.name.toLowerCase()
+    const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1)
+    
+    if (!allowedExtensions.includes(fileExtension)) {
+      return "이미지 파일만 업로드 가능합니다. (jpg, jpeg, png만 허용)"
+    }
+
+    // MIME 타입 검증
+    const allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
+    if (!allowedMimeTypes.includes(file.type)) {
+      return "이미지 파일만 업로드 가능합니다. (jpg, jpeg, png만 허용)"
+    }
+
+    return null
   }
 
   const handleSlideChange = (id: number, field: keyof ImageSlide, value: string) => {
@@ -361,11 +398,51 @@ export default function AdminHomePage() {
           if (response.ok) {
             await response.json()
             await fetchData()
+            setAlertModal({
+              isOpen: true,
+              title: "등록 완료",
+              message: "홈 화면 이미지가 성공적으로 등록되었습니다.",
+              type: "success",
+            })
           } else {
-            throw new Error("이미지 슬라이드 저장에 실패했습니다.")
+            // 서버에서 오는 상세한 에러 메시지 처리
+            let errorMessage = "이미지 슬라이드 저장에 실패했습니다."
+            
+            try {
+              const errorData = await response.json()
+              if (errorData.message) {
+                errorMessage = errorData.message
+              }
+            } catch {
+              // JSON 파싱 실패 시 상태코드별 기본 메시지
+              switch (response.status) {
+                case 400:
+                  errorMessage = "잘못된 요청입니다. 파일 형식과 크기를 확인해주세요."
+                  break
+                case 413:
+                  errorMessage = "파일 크기가 너무 큽니다. 10MB 이하의 파일을 업로드해주세요."
+                  break
+                case 415:
+                  errorMessage = "지원하지 않는 파일 형식입니다. jpg, jpeg, png 파일만 업로드 가능합니다."
+                  break
+                case 500:
+                  errorMessage = "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+                  break
+                default:
+                  errorMessage = `업로드 실패 (${response.status})`
+              }
+            }
+            
+            throw new Error(errorMessage)
           }
         } catch (err) {
-          setError(err instanceof Error ? err.message : "이미지 슬라이드 저장에 실패했습니다.")
+          const errorMessage = err instanceof Error ? err.message : "이미지 슬라이드 저장에 실패했습니다."
+          setAlertModal({
+            isOpen: true,
+            title: "업로드 실패",
+            message: errorMessage,
+            type: "error",
+          })
         } finally {
           setIsLoading(false)
           setConfirmModal({ ...confirmModal, isOpen: false })
@@ -493,6 +570,7 @@ export default function AdminHomePage() {
                 </button>
               </div>
 
+<<<<<<< feat/drag_image
               <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId="imageSlides">
                   {(provided) => (
@@ -595,6 +673,48 @@ export default function AdminHomePage() {
                                   </div>
                                 </div>
                               </div>
+=======
+              {/* Image Slides */}
+              {imageSlides.map((slide) => (
+                <div key={slide.id} className="border border-gray-200 rounded-lg p-6 mb-4">
+                  <div className="flex gap-4">
+                    {/* Drag Handle */}
+                    <div className="flex flex-col items-center">
+                      <div className="text-gray-400 cursor-move">↕</div>
+                    </div>
+
+                    {/* Image Preview */}
+                    <div className="relative">
+                      <div className="w-[280px] h-[160px] bg-gray-100 rounded-lg overflow-hidden relative">
+                        {slide.image ? (
+                          <img
+                            src={getImageUrl(slide.image) || "/logo_header.svg"}
+                            alt="Preview"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                            <span className="text-gray-400">이미지 없음</span>
+                          </div>
+                        )}
+
+                        {/* Upload Button Overlay */}
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                          <label className="cursor-pointer">
+                            <input
+                              type="file"
+                              accept="image/jpeg,image/jpg,image/png"
+                              className="hidden"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0]
+                                if (file) handleImageUpload(slide.id, file)
+                              }}
+                              disabled={isLoading}
+                            />
+                            <div className="bg-white text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                              <Plus size={16} />
+                              <span>{isLoading ? "업로드중..." : "이미지 업로드"}</span>
+>>>>>>> develop
                             </div>
                           )}
                         </Draggable>
