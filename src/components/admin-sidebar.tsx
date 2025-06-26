@@ -95,7 +95,8 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
             alt="CONNECPLE 로고"
             width={160}
             height={40}
-            className="h-10 w-auto"
+            className="h-10 w-auto hover:cursor-pointer"
+            onClick={() => router.push("/admin/home")}
           />
         </div>
 

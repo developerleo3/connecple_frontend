@@ -58,6 +58,7 @@ export default function CreateFaqPage() {
         isOpen: false,
         title: "페이지 이동 확인",
         message: ( <> <span style={{ color: 'red' }}>작성중인 공지사항이 사라집니다.</span><br /> <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span> </> ),
+
     })
 
     // 페이지 이동 감지 및 확인
