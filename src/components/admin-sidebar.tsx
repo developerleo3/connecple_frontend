@@ -7,6 +7,8 @@ import { LogOut } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import AlertModal from "@/components/alert-modal"
+import LoadingSpinner from "@/components/loading-spinner"
+
 
 interface AdminSidebarProps {
   className?: string
@@ -38,6 +40,9 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
 
   const handleLogout = async () => {
     setIsLoading(true)
+    if (isLoading) {
+      return <LoadingSpinner />
+    }
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/logout`, {
         method: "POST",
@@ -49,9 +54,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
 
       if (response.ok) {
         // 로그아웃 성공 시 로그인 페이지로 리다이렉트
-        setTimeout(() => {
-          router.push("/admin")
-        }, 1500)
+        router.push("/admin")
       } else {
         setAlertModal({
           isOpen: true,
