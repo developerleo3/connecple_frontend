@@ -96,6 +96,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
             width={160}
             height={40}
             className="h-10 w-auto"
+            onClick={() => router.push("/admin/home")}
           />
         </div>
 
