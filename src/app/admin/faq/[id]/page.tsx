@@ -142,7 +142,7 @@ export default function FaqDetailPage() {
     const [confirmLeaveModal, setConfirmLeaveModal] = useState({
         isOpen: false,
         title: "페이지 이동 확인",
-        message: "수정 중인 내용이 사라집니다. 정말 페이지를 이동하시겠습니까?",
+        message: ( <> <span style={{ color: 'red' }}>작성중인 공지사항이 사라집니다.</span><br /> <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span> </> )
     })
 
     const [pendingNavigation, setPendingNavigation] = useState<string | null>(null)
@@ -338,22 +338,54 @@ export default function FaqDetailPage() {
         document.body.removeChild(link)
     }
 
+    // 파일 검증 함수
+    const validateFile = (file: File): string | null => {
+        // 파일 크기 검증 (100MB 제한)
+        if (file.size > 100 * 1024 * 1024) {
+            return `${file.name}: 파일 크기는 100MB를 초과할 수 없습니다.`
+        }
+        return null
+    }
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const newFiles = Array.from(e.target.files).map(file => ({
-                id: Date.now() + Math.random(),
-                originalFileName: file.name,
-                storedFileName: file.name,
-                filePath: URL.createObjectURL(file),
-                fileSize: file.size,
-                fileType: file.type,
-                file: file,
-            }))
-            setFilePreviews(prev => [...prev, ...newFiles])
-            setFormData(prev => ({
-                ...prev,
-                files: [...(prev.files || []), ...newFiles.map(f => f.originalFileName)],
-            }))
+            const files = Array.from(e.target.files)
+            const validFiles: FileAttachment[] = []
+            let hasError = false
+
+            // 각 파일에 대해 검증 수행
+            for (const file of files) {
+                const validationError = validateFile(file)
+                if (validationError) {
+                    setAlertModal({
+                        isOpen: true,
+                        title: "파일 업로드 오류",
+                        message: validationError,
+                        type: "error",
+                    })
+                    hasError = true
+                    break
+                } else {
+                    validFiles.push({
+                        id: Date.now() + Math.random(),
+                        originalFileName: file.name,
+                        storedFileName: file.name,
+                        filePath: URL.createObjectURL(file),
+                        fileSize: file.size,
+                        fileType: file.type,
+                        file: file,
+                    })
+                }
+            }
+
+            // 검증 통과한 파일들만 추가
+            if (!hasError && validFiles.length > 0) {
+                setFilePreviews(prev => [...prev, ...validFiles])
+                setFormData(prev => ({
+                    ...prev,
+                    files: [...(prev.files || []), ...validFiles.map(f => f.originalFileName)],
+                }))
+            }
         }
     }
 
@@ -409,7 +441,7 @@ export default function FaqDetailPage() {
 
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <AdminSidebar />
+            <AdminSidebar onNavigate={handleNavigationRequest} />
             <div className="flex-1 p-6">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex justify-between items-center">
@@ -556,7 +588,6 @@ export default function FaqDetailPage() {
                                         content={formData.answer || ""}
                                         onChange={(value) => setFormData({ ...formData, answer: value })}
                                         placeholder="답변을 작성해주세요"
-                                        className="bg-white shadow-sm border border-gray-200"
                                     />
                                 </div>
                                 {errors.answer && <p className="mt-1 text-sm text-red-600">{errors.answer}</p>}
@@ -607,6 +638,9 @@ export default function FaqDetailPage() {
                                         파일 선택
                                     </Button>
                                 </div>
+                                <p className="text-xs text-gray-500 mt-1">
+                                    * 파일 크기는 개당 100MB를 초과할 수 없습니다.
+                                </p>
                             </div>
 
                             <div className="flex justify-end gap-2">
@@ -654,6 +688,27 @@ export default function FaqDetailPage() {
                         title={alertModal.title}
                         message={alertModal.message}
                         type={alertModal.type}
+                    />
+
+                    {/* Page Leave Confirmation Modal */}
+                    <ConfirmModal
+                        isOpen={confirmLeaveModal.isOpen}
+                        onClose={() => {
+                            setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+                            setPendingNavigation(null)
+                        }}
+                        onConfirm={() => {
+                            if (pendingNavigation) {
+                                setIsEditing(false)
+                                setConfirmLeaveModal({ ...confirmLeaveModal, isOpen: false })
+                                router.push(pendingNavigation)
+                            }
+                            setPendingNavigation(null)
+                        }}
+                        title={confirmLeaveModal.title}
+                        message={confirmLeaveModal.message}
+                        confirmText="이동하기"
+                        cancelText="취소"
                     />
                 </div>
             </div>

@@ -67,12 +67,7 @@ export default function CreateNoticePage() {
   const [confirmLeaveModal, setConfirmLeaveModal] = useState({
     isOpen: false,
     title: "페이지 이동 확인",
-    message: (
-      <>
-          <span style={{ color: 'red' }}>작성중인 공지사항이 사라집니다.</span><br />
-          <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span>
-      </>
-    ),
+    message: ( <> <span style={{ color: 'red' }}>작성중인 공지사항이 사라집니다.</span><br /> <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span> </> ),
   })
 
   // 페이지 이동 감지 및 확인
@@ -207,17 +202,49 @@ export default function CreateNoticePage() {
     }
   }
 
+  // 파일 검증 함수
+  const validateFile = (file: File): string | null => {
+    // 파일 크기 검증 (100MB 제한)
+    if (file.size > 100 * 1024 * 1024) {
+      return `${file.name}: 파일 크기는 100MB를 초과할 수 없습니다.`
+    }
+    return null
+  }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = Array.from(e.target.files).map((file) => ({
-        file,
-        name: file.name,
-      }))
-      setFilePreviews((prev) => [...prev, ...newFiles])
-      setFormData((prev) => ({
-        ...prev,
-        files: [...prev.files, ...newFiles.map((f) => f.name)],
-      }))
+      const files = Array.from(e.target.files)
+      const validFiles: FileWithPreview[] = []
+      let hasError = false
+
+      // 각 파일에 대해 검증 수행
+      for (const file of files) {
+        const validationError = validateFile(file)
+        if (validationError) {
+          setAlertModal({
+            isOpen: true,
+            title: "파일 업로드 오류",
+            message: validationError,
+            type: "error",
+          })
+          hasError = true
+          break
+        } else {
+          validFiles.push({
+            file,
+            name: file.name,
+          })
+        }
+      }
+
+      // 검증 통과한 파일들만 추가
+      if (!hasError && validFiles.length > 0) {
+        setFilePreviews((prev) => [...prev, ...validFiles])
+        setFormData((prev) => ({
+          ...prev,
+          files: [...prev.files, ...validFiles.map((f) => f.name)],
+        }))
+      }
     }
   }
 
@@ -320,6 +347,9 @@ export default function CreateNoticePage() {
                     파일 선택
                   </Button>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  * 파일 크기는 개당 100MB를 초과할 수 없습니다.
+                </p>
                 <Input
                   id="files"
                   type="file"
