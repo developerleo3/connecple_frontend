@@ -26,7 +26,7 @@ export default function AlertModal({
     const getTypeStyles = () => {
         switch (type) {
             case "success":
-                return "bg-[#541E80] text-white"
+                return "bg-purple-50 text-[#541E80]"
             case "error":
                 return "bg-red-50 text-red-800"
             case "warning":
