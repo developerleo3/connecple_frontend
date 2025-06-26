@@ -345,22 +345,54 @@ export default function NoticeDetailPage() {
         document.body.removeChild(link)
     }
 
+    // 파일 검증 함수
+    const validateFile = (file: File): string | null => {
+        // 파일 크기 검증 (100MB 제한)
+        if (file.size > 100 * 1024 * 1024) {
+            return `${file.name}: 파일 크기는 100MB를 초과할 수 없습니다.`
+        }
+        return null
+    }
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const newFiles = Array.from(e.target.files).map(file => ({
-                id: Date.now() + Math.random(),
-                originalFileName: file.name,
-                storedFileName: file.name,
-                filePath: URL.createObjectURL(file),
-                fileSize: file.size,
-                fileType: file.type,
-                file: file,
-            }))
-            setFilePreviews(prev => [...prev, ...newFiles])
-            setFormData(prev => ({
-                ...prev,
-                files: [...(prev.files || []), ...newFiles.map(f => f.originalFileName)],
-            }))
+            const files = Array.from(e.target.files)
+            const validFiles: FileAttachment[] = []
+            let hasError = false
+
+            // 각 파일에 대해 검증 수행
+            for (const file of files) {
+                const validationError = validateFile(file)
+                if (validationError) {
+                    setAlertModal({
+                        isOpen: true,
+                        title: "파일 업로드 오류",
+                        message: validationError,
+                        type: "error",
+                    })
+                    hasError = true
+                    break
+                } else {
+                    validFiles.push({
+                        id: Date.now() + Math.random(),
+                        originalFileName: file.name,
+                        storedFileName: file.name,
+                        filePath: URL.createObjectURL(file),
+                        fileSize: file.size,
+                        fileType: file.type,
+                        file: file,
+                    })
+                }
+            }
+
+            // 검증 통과한 파일들만 추가
+            if (!hasError && validFiles.length > 0) {
+                setFilePreviews(prev => [...prev, ...validFiles])
+                setFormData(prev => ({
+                    ...prev,
+                    files: [...(prev.files || []), ...validFiles.map(f => f.originalFileName)],
+                }))
+            }
         }
     }
 
@@ -612,6 +644,9 @@ export default function NoticeDetailPage() {
                                         파일 선택
                                     </Button>
                                 </div>
+                                <p className="text-xs text-gray-500 mt-1">
+                                    * 파일 크기는 개당 100MB를 초과할 수 없습니다.
+                                </p>
                             </div>
 
                             <div className="flex justify-end gap-2">
