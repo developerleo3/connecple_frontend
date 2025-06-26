@@ -570,7 +570,7 @@ export default function AdminHomePage() {
                 </button>
               </div>
 
-<<<<<<< feat/drag_image
+
               <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId="imageSlides">
                   {(provided) => (
@@ -673,48 +673,6 @@ export default function AdminHomePage() {
                                   </div>
                                 </div>
                               </div>
-=======
-              {/* Image Slides */}
-              {imageSlides.map((slide) => (
-                <div key={slide.id} className="border border-gray-200 rounded-lg p-6 mb-4">
-                  <div className="flex gap-4">
-                    {/* Drag Handle */}
-                    <div className="flex flex-col items-center">
-                      <div className="text-gray-400 cursor-move">↕</div>
-                    </div>
-
-                    {/* Image Preview */}
-                    <div className="relative">
-                      <div className="w-[280px] h-[160px] bg-gray-100 rounded-lg overflow-hidden relative">
-                        {slide.image ? (
-                          <img
-                            src={getImageUrl(slide.image) || "/logo_header.svg"}
-                            alt="Preview"
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                            <span className="text-gray-400">이미지 없음</span>
-                          </div>
-                        )}
-
-                        {/* Upload Button Overlay */}
-                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                          <label className="cursor-pointer">
-                            <input
-                              type="file"
-                              accept="image/jpeg,image/jpg,image/png"
-                              className="hidden"
-                              onChange={(e) => {
-                                const file = e.target.files?.[0]
-                                if (file) handleImageUpload(slide.id, file)
-                              }}
-                              disabled={isLoading}
-                            />
-                            <div className="bg-white text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2">
-                              <Plus size={16} />
-                              <span>{isLoading ? "업로드중..." : "이미지 업로드"}</span>
->>>>>>> develop
                             </div>
                           )}
                         </Draggable>
