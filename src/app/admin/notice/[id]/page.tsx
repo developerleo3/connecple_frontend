@@ -141,7 +141,12 @@ export default function NoticeDetailPage() {
     const [confirmLeaveModal, setConfirmLeaveModal] = useState({
         isOpen: false,
         title: "페이지 이동 확인",
-        message: "수정 중인 내용이 사라집니다. 정말 페이지를 이동하시겠습니까?",
+        message: (
+            <>
+            <span style={{ color: 'red' }}>수정중인 공지사항이 사라집니다.</span><br />
+            <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span>
+            </>
+        ),
     })
 
     const [pendingNavigation, setPendingNavigation] = useState<string | null>(null)

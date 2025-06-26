@@ -59,8 +59,8 @@ export default function CreateFaqPage() {
         title: "페이지 이동 확인",
         message: (
             <>
-                <span style={{ color: 'red' }}>정말로 이 공지사항을 삭제하시겠습니까?</span><br />
-                <span style={{ color: 'red' }}>이 작업은 되돌릴 수 없습니다.</span>
+                <span style={{ color: 'red' }}>작성중인 FAQ가 사라집니다.</span><br />
+                <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span>
             </>
         ),
     })
