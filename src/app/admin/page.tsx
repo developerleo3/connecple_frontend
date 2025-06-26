@@ -83,7 +83,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="아이디를 입력해주세요."
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#541E80] focus:border-transparent text-black"
                 disabled={isLoading}
               />
             </div>
@@ -100,7 +100,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="비밀번호를 입력해주세요."
-                  className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black"
+                  className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#541E80] focus:border-transparent text-black"
                   disabled={isLoading}
                 />
                 <button
@@ -137,7 +137,7 @@ export default function LoginPage() {
               type="submit"
               className={`w-full py-2 px-4 rounded-md font-medium transition-colors ${
                 isLoading || (username && password)
-                  ? "bg-purple-700 hover:bg-purple-800 text-white"
+                  ? "bg-[#541E80] hover:bg-purple-800 text-white"
                   : "bg-gray-300 hover:bg-gray-400 text-gray-700"
               }`}
               disabled={isLoading || !username || !password}

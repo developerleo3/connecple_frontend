@@ -554,15 +554,15 @@ export default function AdminHomePage() {
                 <h2 className="text-lg font-semibold text-black">
                   홈 화면 소개 이미지 <span className="text-red-500">*</span>
                 </h2>
-                <span className="text-sm text-gray-500">
+                <span className="text-base text-gray-500">
                   {currentCount}/{maxCount}
                 </span>
               </div>
-
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-6 hover:cursor-pointer hover:border-purple-600">
+              
+              <div className="border-3 border-dashed border-gray-300 rounded-lg p-6 mb-6 hover:cursor-pointer hover:border-[#541E80]">
                 <button
                   onClick={handleAddSlide}
-                  className="w-full flex items-center justify-center gap-2 text-purple-600 hover:text-purple-700 hover:cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 text-[#541E80] hover:text-[#541E80] hover:cursor-pointer"
                   disabled={isLoading}
                 >
                   <Plus size={20} />
@@ -687,7 +687,7 @@ export default function AdminHomePage() {
                 <button
                   onClick={handleSaveSlides}
                   disabled={isLoading}
-                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 hover:cursor-pointer"
+                  className="bg-[#541E80] font-bold text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 hover:cursor-pointer"
                 >
                   {isLoading ? "저장중..." : "등록하기"}
                 </button>
@@ -765,7 +765,7 @@ export default function AdminHomePage() {
                 <button
                   onClick={handleSaveStats}
                   disabled={isLoading}
-                  className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 hover:cursor-pointer"
+                  className="bg-[#541E80] font-bold text-white px-6 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 hover:cursor-pointer"
                 >
                   {isLoading ? "저장중..." : "등록하기"}
                 </button>

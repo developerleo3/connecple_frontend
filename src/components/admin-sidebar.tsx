@@ -7,6 +7,8 @@ import { LogOut } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import AlertModal from "@/components/alert-modal"
+import LoadingSpinner from "@/components/loading-spinner"
+
 
 interface AdminSidebarProps {
   className?: string
@@ -38,6 +40,9 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
 
   const handleLogout = async () => {
     setIsLoading(true)
+    if (isLoading) {
+      return <LoadingSpinner />
+    }
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/logout`, {
         method: "POST",
@@ -49,9 +54,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
 
       if (response.ok) {
         // 로그아웃 성공 시 로그인 페이지로 리다이렉트
-        setTimeout(() => {
-          router.push("/admin")
-        }, 1500)
+        router.push("/admin")
       } else {
         setAlertModal({
           isOpen: true,
@@ -106,7 +109,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
               <button
                 onClick={() => handleNavigation("/admin/home")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
                   pathname === "/admin/home" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -115,7 +118,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
               <button
                 onClick={() => handleNavigation("/admin/link")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
                   pathname === "/admin/link" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -124,7 +127,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
               <button
                 onClick={() => handleNavigation("/admin/history")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
                   pathname === "/admin/history" ? "bg-gray-100" : "transparent"
                 )}
               >
@@ -133,8 +136,8 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
               <button
                 onClick={() => handleNavigation("/admin/faq")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left",
-                  pathname === "/admin/faq" ? "bg-gray-100" : "transparent"
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
+                  pathname.startsWith("/admin/faq") ? "bg-gray-100" : "transparent"
                 )}
               >
                 FAQ 관리
@@ -142,8 +145,8 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
               <button
                 onClick={() => handleNavigation("/admin/notice")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left",
-                  pathname === "/admin/notice" ? "bg-gray-100" : "transparent"
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
+                  pathname.startsWith("/admin/notice") ? "bg-gray-100" : "transparent"
                 )}
               >
                 공지사항 관리
@@ -151,7 +154,7 @@ export default function AdminSidebar({ className, onNavigate }: AdminSidebarProp
               <button
                 onClick={showLogoutConfirm}
                 disabled={isLoading}
-                className="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 w-full text-left text-red-600 disabled:opacity-50"
+                className="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 w-full text-left text-red-600 disabled:opacity-50 hover:cursor-pointer"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 {isLoading ? "로그아웃 중..." : "로그아웃"}

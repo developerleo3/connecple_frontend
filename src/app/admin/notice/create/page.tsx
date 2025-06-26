@@ -67,7 +67,6 @@ export default function CreateNoticePage() {
   const [confirmLeaveModal, setConfirmLeaveModal] = useState({
     isOpen: false,
     title: "페이지 이동 확인",
-
     message: ( <> <span style={{ color: 'red' }}>작성중인 공지사항이 사라집니다.</span><br /> <span style={{ color: 'red' }}>정말로 페이지를 이동하시겠습니까?</span> </> ),
   })
 
@@ -395,10 +394,10 @@ export default function CreateNoticePage() {
               </div>
 
               <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={handleCancelClick}>
+                <Button type="button" variant="outline" onClick={handleCancelClick} className="hover:cursor-pointer hover:bg-gray-50">
                   취소
                 </Button>
-                <Button type="submit" disabled={loading} className="bg-purple-600 hover:bg-purple-700 text-white font-semibold hover:cursor-pointer">
+                <Button type="submit" disabled={loading} className="bg-[#541E80] hover:bg-purple-700 text-white font-semibold hover:cursor-pointer">
                   <Edit className="h-4 w-4 mr-1" />
                   {loading ? "생성 중..." : "생성하기"}
                 </Button>

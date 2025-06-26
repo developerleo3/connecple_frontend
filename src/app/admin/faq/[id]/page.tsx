@@ -513,7 +513,7 @@ export default function FaqDetailPage() {
                                     <Trash2 className="h-4 w-4 mr-1" />
                                     삭제하기
                                 </Button>
-                                <Button onClick={() => setIsEditing(true)} className="text-white font-medium bg-purple-600 hover:bg-purple-700 hover:cursor-pointer">
+                                <Button onClick={() => setIsEditing(true)} className="text-white font-medium bg-[#541E80] hover:bg-purple-700 hover:cursor-pointer">
                                     <Edit className="h-4 w-4 mr-1" />
                                     수정하기
                                 </Button>
@@ -663,7 +663,7 @@ export default function FaqDetailPage() {
                                 >
                                     취소
                                 </Button>
-                                <Button onClick={handleUpdate} disabled={loading} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
+                                <Button onClick={handleUpdate} disabled={loading} className="bg-[#541E80] hover:bg-purple-700 text-white hover:cursor-pointer">
                                     <Edit className="h-4 w-4 mr-1" />
                                     {loading ? "수정 중..." : "수정완료"}
                                 </Button>

@@ -26,7 +26,7 @@ export default function AlertModal({
     const getTypeStyles = () => {
         switch (type) {
             case "success":
-                return "bg-purple-50 text-purple-800"
+                return "bg-purple-50 text-[#541E80]"
             case "error":
                 return "bg-red-50 text-red-800"
             case "warning":
@@ -38,7 +38,7 @@ export default function AlertModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-10" onClick={onClose} />
+            <div className="fixed inset-0 bg-black/50 bg-opacity-30" onClick={onClose} />
             <div className="relative bg-white rounded-lg p-6 max-w-md w-full mx-4">
                 <div className={`p-4 rounded-lg ${getTypeStyles()}`}>
                     <h3 className="text-lg font-semibold mb-2">{title}</h3>
@@ -48,7 +48,7 @@ export default function AlertModal({
                     {showCancel && (
                         <button
                             onClick={onClose}
-                            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+                            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 hover:cursor-pointer"
                         >
                             취소
                         </button>
@@ -60,11 +60,11 @@ export default function AlertModal({
                             }
                             onClose()
                         }}
-                        className={`px-4 py-2 text-sm font-medium text-white rounded-lg ${
+                        className={`px-4 py-2 text-sm font-medium text-white rounded-lg hover:cursor-pointer ${
                             type === "error"
                                 ? "bg-red-600 hover:bg-red-700"
                                 : type === "success"
-                                ? "bg-purple-600 hover:bg-purple-700"
+                                ? "bg-[#541E80] hover:bg-purple-700"
                                 : type === "warning"
                                 ? "bg-yellow-600 hover:bg-yellow-700"
                                 : "bg-blue-600 hover:bg-blue-700"
