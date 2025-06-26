@@ -207,7 +207,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordProject")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
@@ -234,7 +234,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordConnecday")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
@@ -261,7 +261,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordNewsletter")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기
@@ -288,7 +288,7 @@ export default function AdminLinkPage() {
                                     </div>
                                     <Button
                                         onClick={() => handleSubmit("wordGig")}
-                                        className="bg-purple-600 hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
                                         등록하기

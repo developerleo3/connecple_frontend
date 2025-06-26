@@ -336,12 +336,12 @@ export default function CreateFaqPage() {
                             </div>
 
                             <div className="flex justify-end gap-2">
-                                <Button type="button" variant="outline" onClick={handleCancelClick}>
+                                <Button type="button" variant="outline" onClick={handleCancelClick} className="hover:cursor-pointer hover:bg-gray-50">
                                     취소
                                 </Button>
-                                <Button type="submit" className="bg-purple-600 hover:bg-purple-700 px-8 text-white font-semi hover:cursor-pointer" disabled={loading}>
-                                  <Edit className="h-4 w-4 mr-1" />  
-                                  {loading ? "생성 중..." : "생성하기"}
+                                <Button type="submit" className="bg-[#541E80] hover:bg-purple-700 px-8 text-white font-semi hover:cursor-pointer" disabled={loading}>
+                                    <Edit className="h-4 w-4 mr-1" />  
+                                    {loading ? "생성 중..." : "생성하기"}
                                 </Button>
                             </div>
                         </form>

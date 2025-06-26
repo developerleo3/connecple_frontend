@@ -240,7 +240,7 @@ export default function NoticeListPage() {
           <div className="flex justify-between items-center mb-1">
             <h1 className="text-2xl font-bold text-gray-900">공지사항 관리</h1>
             <div className="flex items-center gap-4">
-              <Button onClick={() => router.push("/admin/notice/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
+              <Button onClick={() => router.push("/admin/notice/create")} className="bg-[#541E80] hover:bg-purple-700 font-bold text-white hover:cursor-pointer">
                 공지사항 작성
               </Button>
             </div>
@@ -263,7 +263,7 @@ export default function NoticeListPage() {
                     className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                   />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
+                  <Button type="submit" className="bg-[#541E80] hover:bg-purple-700 text-white font-bold hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -305,7 +305,7 @@ export default function NoticeListPage() {
             </div>
 
             <Table>
-              <TableHeader className="bg-purple-600">
+              <TableHeader className="bg-[#541E80]">
                 <TableRow>
                   <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
                   <TableHead className="text-white text-base font-medium text-center align-middle py-3">제목</TableHead>
@@ -379,7 +379,7 @@ export default function NoticeListPage() {
                     variant={currentPage === pageNum ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNum)}
-                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
+                    className={currentPage === pageNum ? "bg-[#541E80] hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
                   >
                     {pageNum + 1}
                   </Button>
