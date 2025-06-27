@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 /**
  * font-thin        100
@@ -108,8 +107,8 @@ export default function WithProjectPage() {
 
         <h1 className="font-black text-[#541E80]
           lg:mt-[25px] lg:text-[45px]">
-            ICT 융합분야 교육 운영 매니저, 행사를 직접 기획<br />
-            운영하는 프로젝트 매니저까지
+          ICT 융합분야 교육 운영 매니저, 행사를 직접 기획<br />
+          운영하는 프로젝트 매니저까지
         </h1>
         <h2 className="font-black
           lg:mt-[20px] lg:text-[27px]">
@@ -117,41 +116,89 @@ export default function WithProjectPage() {
         </h2>
         {/* 하단 아이콘 지표 */}
         <div className="flex flex-row w-full h-auto justify-between
-          lg:mt-[63px]">
+          lg:mt-[63px] lg:mb-[209px]">
           {[
             {
               icon: "/withProject/icon_career_gap.svg",
               label: "위드프로젝트<br /> 평균 경력단절기간",
               value: "5.7년",
-              href: "/with-project"
             },
             {
               icon: "/withProject/icon_education_rate.svg",
               label: "위드프로젝트<br /> 교육 수료율",
               value: "95%",
-              href: "/with-project"
             },
             {
               icon: "/withProject/icon_satisfaction.svg",
               label: "위드프로젝트<br /> 수강 만족도",
               value: "98점",
-              href: "/with-project"
             },
             {
               icon: "/withProject/icon_project_link.svg",
               label: "위드프로젝트<br /> 실무 프로젝트 연계",
               value: "100%",
-              href: "/with-project"
             }
           ].map((item, idx) => (
-            <Link key={idx} href={item.href} className="flex flex-col items-center text-center group">
+            <div key={idx} className="flex flex-col items-center text-center group">
               <div className="flex items-center justify-center bg-white shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] rounded-full transition group-hover:scale-105
                 lg:w-[170px] lg:h-[170px]">
-                <Image src={item.icon} alt={item.label} width={34} height={34} className="lg:w-[90px] lg:h-[90px]"/>
+                <Image src={item.icon} alt={item.label} width={34} height={34} className="lg:w-[90px] lg:h-[90px]" />
               </div>
               <p className="font-semibold lg:text-[20px] lg:mt-[37px]" dangerouslySetInnerHTML={{ __html: item.label }}></p>
               <p className="font-extrabold text-[#541E80] lg:text-[35px] lg:mt-[28px]">{item.value}</p>
-            </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* section3 */}
+      <section className="flex flex-col w-full h-auto bg-[#C0AED1B2]
+        lg:px-[136px]"
+        style={{
+          background: "linear-gradient(to bottom, rgba(192, 174, 209, 0.7), rgba(255, 255, 255, 1))",
+        }}>
+        <h2 className="font-bold lg:mt-[122px] lg:text-[27px]">
+          ICT 융합 분야 프로젝트 기획 및 운영 전문기업 커넥플이 자체 개발한
+        </h2>
+        <h2 className="font-bold lg:mt-[10px] lg:text-[27px]">
+          <span className="font-black lg:text-[45px] text-[#541E80]">[경력보유여성 커리어 재도약 프로그램]</span> 입니다.
+        </h2>
+        <div className="flex flex-row justify-between
+            lg:mt-[73px] lg:mb-[218px]">
+          {[
+            {
+              picture: "/withProject/program1.png",
+              label: "경력보유여성",
+            },
+            {
+              picture: "/withProject/program2.png",
+              label: "미취업여성",
+            },
+            {
+              picture: "/withProject/program3.png",
+              label: "그 밖의 열의 가득한<br /> 누.구.나",
+            }
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col justify-between items-center bg-white text-center
+             w-[87px] h-[87px] rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]
+             lg:w-[275px] lg:h-[270px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px]"
+            >
+              <Image
+                src={item.picture}
+                alt={item.label}
+                width={275}
+                height={182}
+                className="object-cover w-full h-[182px] rounded-tl-[20px] rounded-tr-[20px]"
+              />
+              <div className="flex w-full h-[88px] justify-center items-center">
+                <p
+                  className="font-extrabold text-[#541E80] lg:text-[25px]"
+                  dangerouslySetInnerHTML={{ __html: item.label }}
+                />
+              </div>
+            </div>
           ))}
         </div>
       </section>
