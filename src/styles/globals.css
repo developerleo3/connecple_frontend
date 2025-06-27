@@ -175,3 +175,8 @@ body {
   box-shadow: none !important;
   border-color: inherit !important;
 }
+
+/* 말풍선 꼬리 */
+.clip-polygon {
+  clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+}
