@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
+import Link from "next/link";
 
 /**
  * font-thin        100
@@ -92,10 +93,12 @@ export default function WithProjectPage() {
             인생변화를 위한 당신의 선택! 도전!<br />
             <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
           </h3>
-          <button className="bg-[#541E80] text-white self-center font-extrabold
+          <Link 
+            href="/with-project"
+            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
             lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px]">
             지금 바로 가능성을 현실로 만들기
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -473,7 +476,8 @@ export default function WithProjectPage() {
       </section>
 
       {/* section6 */}
-      <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px] lg:px-[136px] lg:mt-[439px] lg:pb-[195px]">
+      <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px] 
+        lg:px-[136px] lg:mt-[439px] lg:pb-[195px]">
         <div className="relative w-full h-auto lg:mt-[-209px]">
           {/* 배경 */}
           <Image
@@ -555,6 +559,122 @@ export default function WithProjectPage() {
             <p className="absolute font-extrabold text-[#C3B2D4] lg:text-[22px] lg:bottom-[16px] lg:right-[21px]">{`A${idx + 1}.`}</p>
           </div>
         ))}
+      </section>
+
+      {/* section7 */}
+      <section className="flex flex-col w-full h-auto rounded-tr-[120px] bg-white justify-between
+        lg:px-[146px] lg:mt-[-80px]">
+        <h1 className="font-black text-[#541E80] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
+        <div className="flex flex-row w-full h-auto lg:mt-[26px]">
+          {/* 네비게이션 */}
+          <div>
+            <Image
+              src={"/withProject/section7_capture.png"}
+              alt={"image"}
+              width={487}
+              height={525}
+              className="lg:w-auto lg:h-[531px]"
+            />
+          </div>
+          {/* 제목, 소제목, 전문성, 포인트 */}
+          <div className="flex flex-col justify-center lg:w-auto lg:h-[531px] lg:px-[43px]">
+            <h2 className="font-bold lg:text-[28px]">실습 중심 기본기 함양 온라인 교육</h2>
+            <h3 className="font-bold text-[#541E80] lg:text-[25px] lg:mt-[10px]">이러닝 + 실시간 온라인 강의 병행</h3>
+            <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]" />
+            <div className="flex flex-row items-center lg:mt-[35px]">
+              <Image
+                src={"/withProject/check_purple.png"}
+                alt={"check_purple.png"}
+                width={25}
+                height={25}
+                className="lg:w-[25px] lg:h-[25px]"
+              />
+              <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">전문성</p>
+            </div>
+            <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]">ICT MICE 실무자 특강부터 AI 협업툴 활용 워크숍까지</p>
+            <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]" />
+            <div className="flex flex-row items-center lg:mt-[35px]">
+              <Image
+                src={"/withProject/check_purple.png"}
+                alt={"check_purple.png"}
+                width={25}
+                height={25}
+                className="lg:w-[25px] lg:h-[25px]"
+              />
+              <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">포인트</p>
+            </div>
+            <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]">아이를 돌보며 집에서도 수강 가능한, 유연한 학습 시스템</p>
+          </div>
+          {/* 이미지 */}
+          <div className="relative bg-[#D9D9D9] rounded-[20px] lg:w-[493px] lg:h-[531px]">
+            <Image
+              src={"/withProject/section7_image1.png"}
+              alt={"image"}
+              width={487}
+              height={525}
+              className="lg:w-[487px] lg:h-[525px]"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* section8 */}
+      <section className="flex flex-col w-full h-auto lg:px-[146px] lg:mt-[138px]">
+        <h1 className="text-center font-black text-[#541E80] lg:text-[45px] lg:mt-[59px]">위드프로젝트 어떻게 들을 수 있나요?</h1>
+        <Image
+          src={"/withProject/section8_capture.png"}
+          alt={"image"}
+          width={487}
+          height={525}
+          className="lg:w-full lg:h-auto lg:mt-[50px]"
+        />
+        <div className="flex justify-center items-center">
+          <Link
+            href="/with-project"
+            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+            rounded-[30px]
+            w-[141px] h-[25px] text-[10px]
+            lg:rounded-[30px]
+            lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:mt-[60px]"
+          >
+            위드프로젝트 신청서 작성하러 가기
+          </Link>
+        </div>
+      </section>
+
+      {/* section9 */}
+      <section className="flex flex-col w-full h-auto lg:px-[146px] lg:mt-[207px] lg:mb-[50px]">
+        <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
+          <h1 className="text-center
+            text-[18px] font-black
+            lg:text-[30px] lg:font-extrabold">
+            W.I.T.H Project
+          </h1>
+          <h1 className="text-center
+            lg:text-[27px] lg:font-semibold lg:mt-[20px]">
+            경력보유여성 재도약 프로젝트(Women In The Hope)
+          </h1>
+        </div>
+        <div className="flex w-full h-auto justify-center">
+          <Image
+            src="/withProject/logo_with_project.svg"
+            alt="with project logo"
+            width="310"
+            height="192"
+            className="object-contain lg:w-[581px] lg:h-[361px]"
+          />
+        </div>
+        <h3 className="text-center font-extrabold
+            lg:text-[25px] lg:mt-[62px]">
+            인생변화를 위한 당신의 선택! 도전!<br />
+            <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
+          </h3>
+          <Link 
+            href="/with-project"
+            className="bg-[#541E80] text-white self-center flex items-center justify-center font-extrabold
+              lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px]">
+            지금 바로 가능성을 현실로 만들기
+          </Link>
       </section>
     </main>
   );
