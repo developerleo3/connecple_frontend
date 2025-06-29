@@ -418,10 +418,10 @@ export default function WithProjectPage() {
               5일이었지만 매우 알차게 교육을 받은 것 같습니다.<br />
               과제 피드백과 중간 소통을 하는 교육이였기에 집중이 가능했고,<br />
               특히나 강사님이 교육생의 답에도 잘 호응을 해주셔서 자신감이<br />
-              생겼던 것 같습니다. 긍정적이고 좋은 교육 감사드립니다.<br />
-              전체적으로 저도 어떻게 시스템이 돌아가는 지에 대해 알게 되었던 부분이라<br />
+                            생겼던 것 같습니다. 긍정적이고 좋은 교육 감사드립니다.<br />
+전체적으로 저도 어떻게 시스템이 돌아가는 지에 대해 알게 되었던 부분이라<br />
               좋은 기회였습니다.
-            </p>
+                          </p>
             <Image
               src={"/withProject/comment1.png"}
               alt={"comment1.png"}
@@ -430,46 +430,131 @@ export default function WithProjectPage() {
             />
           </div>
 
-          <div className="absolute top-[379px] left-[125px] flex flex-row justify-center items-center bg-[#F8F8F8]
+            <div className="absolute top-[379px] left-[125px] flex flex-row justify-center items-center bg-[#F8F8F8]
             lg:w-[309px] lg:h-[71px] lg:rounded-[30px] lg:px-[13px] shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
-            data-animate>
-            <p className="font-bold lg:text-[13px]">
-              교육 행사나 전반적인 운영체제나 관심이 있다면<br />
-              꼭 알아야 되는 부분이라 생각됩니다.
-            </p>
-          </div>
+              data-animate>
+              <p className="font-bold lg:text-[13px]">
+                교육 행사나 전반적인 운영체제나 관심이 있다면<br />
+                꼭 알아야 되는 부분이라 생각됩니다.
+              </p>
+            </div>
 
-          <div className="absolute top-[473px] right-[187px] flex flex-row justify-center items-center bg-[#FCF9FF]
+            <div className="absolute top-[473px] right-[187px] flex flex-row justify-center items-center bg-[#FCF9FF]
             lg:w-[398px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
-            data-animate>
-            <p className="font-bold lg:text-[13px]">
-              이론 뿐 아니라 과제를 통해 실무 스킬까지 익힐 수 있어서 좋은 것 같음.
-            </p>
-          </div>
+              data-animate>
+              <p className="font-bold lg:text-[13px]">
+                이론 뿐 아니라 과제를 통해 실무 스킬까지 익힐 수 있어서 좋은 것 같음.
+              </p>
+            </div>
 
-          <div className="absolute bottom-0 right-0 flex flex-row justify-center items-center bg-[#F8F8F8]
+            <div className="absolute bottom-0 right-0 flex flex-row justify-center items-center bg-[#F8F8F8]
             lg:w-[545px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
-            data-animate>
-            <p className="font-bold lg:text-[13px]">
-              전문가 양성 교육이라 내용 대비 타이트한 일정이였지만 엑기스로 배울 수 있어 좋았습니다.
-            </p>
-          </div>
+              data-animate>
+              <p className="font-bold lg:text-[13px]">
+                전문가 양성 교육이라 내용 대비 타이트한 일정이였지만 엑기스로 배울 수 있어 좋았습니다.
+              </p>
+            </div>
 
-          <div className="absolute bottom-0 left-0 flex flex-row justify-between items-center bg-[#FCF9FF]
+            <div className="absolute bottom-0 left-0 flex flex-row justify-between items-center bg-[#FCF9FF]
             lg:w-[365px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
-            data-animate>
+              data-animate>
+              <Image
+                src={"/withProject/comment1.png"}
+                alt={"comment1.png"}
+                width={55}
+                height={55}
+              />
+              <p className="font-bold lg:text-[13px]">
+                경험해 보지 못한 새로운 분야를 수강하면서<br />
+                과제도 해보고 유익하고 흥미로운 시간이였습니다.
+              </p>
+            </div>
+        </div>
+      </section>
+
+      {/* section6 */}
+      <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px] lg:px-[136px] lg:mt-[439px] lg:pb-[195px]">
+        <div className="relative w-full h-auto lg:mt-[-209px]">
+          {/* 배경 */}
+          <Image
+            src="/withProject/section6_image.png" // 이미지 경로
+            alt="section6 background"
+            width={1020}
+            height={432}
+            className="lg:w-full lg:h-auto object-cover rounded-[50px] lg:mb-[26px]"
+          />
+          {/* 오버레이 및 텍스트 */}
+          <div className="absolute inset-0 flex flex-col justify-center
+            lg:px-[62px]">
+            {/* 로고 + 텍스트 */}
             <Image
-              src={"/withProject/comment1.png"}
-              alt={"comment1.png"}
-              width={55}
-              height={55}
+              src="/withProject/logo_section6.svg" // 흰색 로고 사용
+              alt="connecple logo"
+              width={30}
+              height={30}
+              className="lg:w-[157px] lg:h-[35px]"
             />
-            <p className="font-bold lg:text-[13px]">
-              경험해 보지 못한 새로운 분야를 수강하면서<br />
-              과제도 해보고 유익하고 흥미로운 시간이였습니다.
+            {/* 타이틀 */}
+            <h1 className="font-black text-white
+              lg:text-[45px] lg:mt-[32px]">
+              재도약에 성공한 그녀의<br />
+              이야기를 들어보다
+            </h1>
+
+            {/* 가로 선 */}
+            <div className="w-full h-[2px] bg-white
+              lg:mt-[35px]" />
+
+            {/* 서브 텍스트 */}
+            <p className="font-semibold text-white 
+              lg:mt-[31px] lg:text-[20px]">
+              위드프로젝트 수료생 인터뷰<br />
+              3~5레벨 수료생의 변화
             </p>
           </div>
         </div>
+        {[
+          {
+            question: "위드프로젝트를 시작하시게 된 계기가 있나요?",
+            answer: "아이가 어린이집에 들어가니 저도 여유가 생기게 되었어요. 다시 일을 시작하고 싶었지만 3년이라는 공백으로 혼자 뒤처진 건 아닌지 걱정이 많아지더라구요.<br />어린이집 친구 엄마에게 위드 프로젝트를 소개받아 연락하게 되었습니다.",
+          },
+          {
+            question: "위드프로젝트를 수강하면서 어떤 점이 가장 좋으셨어요?",
+            answer: "궁금한 부분들을 바로 확인하여 가이드해 주시는 점이요.  제가 이런 질문을 해도 되나 싶을 만큼 사소한 부분이었는데도<br />늘 친절하게 답변해 주셨어요. 덕분에 금방 적응했구요!",
+          },
+          {
+            question: "위드프로젝트 전체 레벨을 수강하셨던데요!",
+            answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했구요, 레벨 3이 되니 커뮤니케이션 역량이 많이 필요하다는 생각이<br />들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
+          },
+          {
+            question: "위드프로젝트와 타교육의 차이점이 있나요?",
+            answer: "효율적인 교육 운영 방식이요! 경력 보유 여성 입장을 누구보다 잘 아는 분들이 설계해서 그런지 저희가 가장 자유로운 오전 10시부터 오후 3시까지 교육을<br />진행하시더라구요! 이해 못하고 넘어간 부분은 다시 공부해 볼 수 있도록 온라인 영상 학습도 지원해 주셨어요!",
+          },
+          {
+            question: "위드프로젝트 수료 후 달라진 점이 있나요?",
+            answer: "무엇보다 자신감이 아닐까요? 저는 망고보드, 노션, 슬랙... 모두 낯설기만 했거든요. 위드프로젝트 교육을 들으며 과제도 해보고 실무 프로젝트에서 직접<br />사용해 보니까 너무 재밌더라구요! 이제 그런거 다 사용할 수 있다고 어딜가서든 자신있게 말해요!",
+          },
+        ].map((item, idx) => (
+          <div
+            key={idx}
+            className="relative flex flex-col w-full h-[108px] rounded-[20px] border-[2px] border-[#E7E2EC] lg:mt-[20px]"
+          >
+            <div className="flex items-center w-full h-[42px] bg-[#E2E2E2] rounded-[20px]">
+              <div className="absolute flex items-center justify-center bg-[#541E80] rounded-[20px] lg:w-[65px] h-[42px]">
+                <p className="font-extrabold text-white lg:text-[22px]">{`Q${idx + 1}.`}</p>
+              </div>
+              <p
+                className="font-extrabold text-[#541E80] lg:text-[22px] lg:ml-[72px]"
+                dangerouslySetInnerHTML={{ __html: item.question }}
+              />
+            </div>
+            <p
+              className="absolute font-medium lg:text-[15px] lg:ml-[29px] lg:bottom-[9px]"
+              dangerouslySetInnerHTML={{ __html: item.answer }}
+            />
+            <p className="absolute font-extrabold text-[#C3B2D4] lg:text-[22px] lg:bottom-[16px] lg:right-[21px]">{`A${idx + 1}.`}</p>
+          </div>
+        ))}
       </section>
     </main>
   );
