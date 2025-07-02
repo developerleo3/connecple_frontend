@@ -477,7 +477,7 @@ export default function WithProjectPage() {
 
       {/* section6 */}
       <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px] 
-        lg:px-[136px] lg:mt-[439px] lg:pb-[195px]">
+        lg:px-[146px] lg:mt-[439px] lg:pb-[195px]">
         <div className="relative w-full h-auto lg:mt-[-209px]">
           {/* 배경 */}
           <Image
