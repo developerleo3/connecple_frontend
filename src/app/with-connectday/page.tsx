@@ -55,6 +55,73 @@ export default function WithConnectdayPage() {
           </h3>
         </div>
       </section>
+
+      {/* section2 */}
+      <section className="flex flex-col w-full h-auto lg:mt-[88px] lg:px-[123px]">
+        <h1 className="font-black text-[#541E80] lg:text-[45px] lg:mt-[143px]">
+          한 걸음 내디뎠다면, 이제 연결이 필요한 순간입니다.
+        </h1>
+        <h2 className="font-extrabold lg:text-[27px] lg:mt-[26px]">
+          같은 길을 걷는 동료들, 실무에서 찾는 기업들,<br />
+          내 가능성을 믿어주는 멘토들과 서로 연결되는 단 하루의 기회!
+        </h2>
+        <div className="flex flex-row justify-between lg:mt-[64px]">
+          <div className="flex justify-center items-center rounded-full bg-[#F6F6F6] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+            lg:w-[296px] lg:h-[296px]">
+            <p className="font-bold text-center lg:text-[27px] leading-relaxed">
+              위드프로젝트<br />
+              설명회<br />
+              <span className="inline-flex items-center justify-center">
+                <Image
+                  src="/withConnecDay/triangle_bottom.svg"
+                  alt="triangle_bottom"
+                  width={27}
+                  height={27}
+                  className="inline-block align-middle"
+                />
+              </span>
+              <br />
+              <span className="font-extrabold">정보</span>
+            </p>
+          </div>
+          <div className="flex justify-center items-center rounded-full bg-[#ECECEC] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+            lg:w-[296px] lg:h-[296px]">
+            <p className="font-bold text-center lg:text-[27px] leading-relaxed">
+              인사이트<br />
+              특강<br />
+              <span className="inline-flex items-center justify-center">
+                <Image
+                  src="/withConnecDay/triangle_bottom.svg"
+                  alt="triangle_bottom"
+                  width={27}
+                  height={27}
+                  className="inline-block align-middle"
+                />
+              </span>
+              <br />
+              <span className="font-extrabold">동기부여</span>
+            </p>
+          </div>
+          <div className="flex justify-center items-center rounded-full bg-[#F6F6F6] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+            lg:w-[296px] lg:h-[296px]">
+            <p className="font-bold text-center lg:text-[27px] leading-relaxed">
+              네트워킹<br />
+              티타임<br />
+              <span className="inline-flex items-center justify-center">
+                <Image
+                  src="/withConnecDay/triangle_bottom.svg"
+                  alt="triangle_bottom"
+                  width={27}
+                  height={27}
+                  className="inline-block align-middle"
+                />
+              </span>
+              <br />
+              <span className="font-extrabold">관계 형성</span>
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
