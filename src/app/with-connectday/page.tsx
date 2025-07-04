@@ -124,7 +124,7 @@ export default function WithConnectdayPage() {
             </section>
 
             {/* section3 */}
-            <section className="flex flex-row w-full justify-between h-auto lg:px-[130px] lg:py-[90px] lg:mt-[300px]">
+            <section className="flex flex-row w-full justify-between h-auto lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[157px]">
                 <div className="flex flex-col">
                     <h1 className="font-black text-[#541E80] lg:text-[45px]">
                         PROGRAM
