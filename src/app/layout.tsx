@@ -11,7 +11,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     const pathname = usePathname()
     const isAdminPage = pathname?.startsWith('/admin')
     const useFooter2 = [
-        '/with-connectday',
+        '/with-connecday',
         '/with-newsletter',
         '/with-gig',
         '/about',

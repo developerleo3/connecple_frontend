@@ -623,7 +623,7 @@ export default function Home() {
 
             <div className="relative col-span-5 h-full flex items-center justify-end lg:mt-[16px]">
               <Link
-                href="/with-connectday"
+                href="/with-connecday"
                 className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
                   rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
                   w-[139px] h-[25px] text-[10px]
@@ -883,7 +883,7 @@ export default function Home() {
               {
                 labelEng: "W.I.T.H Connecday",
                 labelKor: "바로 함께하기",
-                href: "/with-connectday"
+                href: "/with-connecday"
               },
               {
                 labelEng: "W.I.T.H News letter",

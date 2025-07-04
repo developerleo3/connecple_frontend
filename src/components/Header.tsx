@@ -15,7 +15,7 @@ export default function Header() {
 
   const menus = [
     { text: "위드프로젝트", path: "/with-project" },
-    { text: "위드커넥데이", path: "/with-connectday" },
+    { text: "위드커넥데이", path: "/with-connecday" },
     { text: "위드뉴스레터", path: "/with-newsletter" },
     { text: "위드GIG", path: "/with-gig" },
     { text: "커넥플소개", path: "/about" },
