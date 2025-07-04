@@ -2,8 +2,48 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import {useState} from "react";
+
+const programData = [
+    {
+        title: "인사이트 특강",
+        subTitle: "나보다 먼저 걸어간 이야기에서 영감을",
+        slogun: "누군가의 경험은 나의 가능성이 됩니다.",
+        content:
+            "경력보유여성 선배 또는 업계 실무자의 진솔한 커리어 스토리<br />ICT·교육 ·행사 기획 분야 등 다양한 분야 경험 공유",
+        comment1: "다시 일하고 싶은 마음에 용기를 더해주는 현실 조언",
+        comment2: "단절 이후에도 ‘가능성은 있다'는 실제 사례로 동기부여",
+        comment3: "내가 가고 싶은 길을 상상해보는 시간",
+        image_path: "/withConnecDay/picture1.png",
+    },
+    {
+        title: "위드프로젝트 프로그램 설명회",
+        subTitle: "나에게 맞는 기회를 정확하게",
+        slogun: "제대로 알고 시작하는것이 가장 빠른 길입니다.",
+        content:
+            "워트프로젝트 커리큘럼 안내 (교육-실습-멘토링-프로젝트)<br />수료생 후기, 실무 투입 사례 소개, 신청방법 및 참여조건 안내",
+        comment1: "프로그램 전 과정을 한눈에 이해할 수 있는 기회",
+        comment2: "실제 수료생 경험 공유로 현실적인 기대치 설정 가능",
+        comment3: "내 상황에 맞는 참여 가능성 직접 확인",
+        image_path: "/withConnecDay/picture2.png",
+    },
+    {
+        title: "네트워킹 티타임",
+        subTitle: "혼자 아닌, 함께하는 커리어 여정",
+        slogun: "사람이 연결되면, 기회는 그 안에서 생깁니다.",
+        content:
+            "참석자 간 자유 네트워킹<br />멘토·수료생·운영진과 1:1 또는 소규모 소통<br />커피/다과와 함께하는캐주얼한 대화 분위기",
+        comment1: "경력단절, 재취업을 고민하는 사람들과의 공감 형성",
+        comment2: "부담 없는 분위기에서 궁금한 점을 자유롭게 질문",
+        comment3: "실전 커리어를 준비하는 과정에서 동료 &멘토 확보",
+        image_path: "/withConnecDay/picture3.png",
+    },
+];
 
 export default function WithConnecdayPage() {
+    const [selected, setSelected] = useState(0);
+    const current = programData[selected];
+
     return (
         <main>
             {/* section1 */}
@@ -66,30 +106,46 @@ export default function WithConnecdayPage() {
                     내 가능성을 믿어주는 멘토들과 서로 연결되는 단 하루의 기회!
                 </h2>
                 <div className="flex flex-row justify-between lg:mt-[64px]">
-                    <div className="flex justify-center items-center rounded-full bg-[#F6F6F6] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:w-[296px] lg:h-[296px]">
-                        <p className="font-bold text-center lg:text-[27px] leading-relaxed">
-                            위드프로젝트<br/>
-                            설명회<br/>
-                            <span className="inline-flex items-center justify-center">
-                                <Image
-                                    src="/withConnecDay/triangle_bottom.svg"
-                                    alt="triangle_bottom"
-                                    width={27}
-                                    height={27}
-                                    className="inline-block align-middle"
-                                />
-                            </span>
-                            <br/>
-                            <span className="font-extrabold">정보</span>
-                        </p>
+                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+                        lg:w-[296px] lg:h-[296px] hover:bg-[#2F0D4B] transition-all duration-300">
+                        <div className="text-center">
+                            {/* 일반 상태 */}
+                            <p className="font-bold lg:text-[27px] leading-relaxed group-hover:hidden">
+                                위드프로젝트<br/>설명회<br/>
+                                <span className="inline-flex items-center justify-center">
+                                    <Image
+                                        src="/withConnecDay/triangle_bottom.svg"
+                                        alt="triangle_bottom"
+                                        width={27}
+                                        height={27}
+                                        className="inline-block align-middle"
+                                    />
+                                </span>
+                                <br/>
+                                <span className="font-extrabold">정보</span>
+                            </p>
+
+                            {/* 호버 상태 */}
+                            <div className="hidden group-hover:flex flex-col items-center text-white">
+                                <p className="font-black lg:text-[20px]">Check Point</p>
+                                <div className="border-[1px] border-white lg:w-[40px] lg:my-[13px]"/>
+                                <p className="lg:text-[18px] font-semibold">
+                                    전문가의 생생한 이야기와<br/>
+                                    실무 중심의 내용을 통해<br/>
+                                    현장에서 바로 활용할 수<br/>
+                                    있는 <span className="font-black text-[#C0AED1]">깊이 있는 정보</span>를<br/>
+                                    얻을 수 있어요!
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex justify-center items-center rounded-full bg-[#ECECEC] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:w-[296px] lg:h-[296px]">
-                        <p className="font-bold text-center lg:text-[27px] leading-relaxed">
-                            인사이트<br/>
-                            특강<br/>
-                            <span className="inline-flex items-center justify-center">
+
+                    <div className="group flex justify-center items-center rounded-full bg-[#ECECEC] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+                        lg:w-[296px] lg:h-[296px] hover:bg-[#2F0D4B] transition-all duration-300">
+                        <div className="text-center">
+                            <p className="font-bold text-center lg:text-[27px] leading-relaxed group-hover:hidden">
+                                인사이트<br/>특강<br/>
+                                <span className="inline-flex items-center justify-center">
                                 <Image
                                     src="/withConnecDay/triangle_bottom.svg"
                                     alt="triangle_bottom"
@@ -97,17 +153,29 @@ export default function WithConnecdayPage() {
                                     height={27}
                                     className="inline-block align-middle"
                                 />
-                            </span>
-                            <br/>
-                            <span className="font-extrabold">동기부여</span>
-                        </p>
+                                </span>
+                                <br/>
+                                <span className="font-extrabold">동기부여</span>
+                            </p>
+                            <div className="hidden group-hover:flex flex-col items-center text-white">
+                                <p className="font-black lg:text-[20px]">Check Point</p>
+                                <div className="border-[1px] border-white lg:w-[40px] lg:my-[13px]"/>
+                                <p className="lg:text-[18px] font-semibold">
+                                    멘토들의 진솔한 경험을<br/>
+                                    통해 <span className="font-black text-[#C0AED1]">나만의 가능성과<br/>
+                                    열정</span>을 다시 떠올리게 되는<br/>
+                                    소중한 시간이 될거에요!
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex justify-center items-center rounded-full bg-[#F6F6F6] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:w-[296px] lg:h-[296px]">
-                        <p className="font-bold text-center lg:text-[27px] leading-relaxed">
-                            네트워킹<br/>
-                            티타임<br/>
-                            <span className="inline-flex items-center justify-center">
+
+                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]
+                        lg:w-[296px] lg:h-[296px] hover:bg-[#2F0D4B] transition-all duration-300">
+                        <div className="text-center">
+                            <p className="font-bold text-center lg:text-[27px] leading-relaxed group-hover:hidden">
+                                네트워킹<br/>티타임<br/>
+                                <span className="inline-flex items-center justify-center">
                                 <Image
                                     src="/withConnecDay/triangle_bottom.svg"
                                     alt="triangle_bottom"
@@ -115,71 +183,78 @@ export default function WithConnecdayPage() {
                                     height={27}
                                     className="inline-block align-middle"
                                 />
-                            </span>
-                            <br/>
-                            <span className="font-extrabold">관계 형성</span>
-                        </p>
+                                </span>
+                                <br/>
+                                <span className="font-extrabold">관계 형성</span>
+                            </p>
+                            <div className="hidden group-hover:flex flex-col items-center text-white">
+                                <p className="font-black lg:text-[20px]">Check Point</p>
+                                <div className="border-[1px] border-white lg:w-[40px] lg:my-[13px]"/>
+                                <p className="lg:text-[18px] font-semibold">
+                                    다양한 사람들과의<br/>
+                                    <span className="font-black text-[#C0AED1]">편안한 소통</span> 속에서 공감과<br/>
+                                    자극을 얻으며 자연스럽게<br/>
+                                    <span className="font-black text-[#C0AED1]">동기부여</span>가 생겨요!
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* section3 */}
+            {/* section3 - 버튼 클릭에 따라 콘텐츠 변경 */}
             <section className="flex flex-row w-full justify-between h-auto lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[157px]">
                 <div className="flex flex-col">
-                    <h1 className="font-black text-[#541E80] lg:text-[45px]">
-                        PROGRAM
-                    </h1>
+                    <h1 className="font-black text-[#541E80] lg:text-[45px]">PROGRAM</h1>
                     <div className="flex flex-row lg:mt-[38px]">
-                        <p className="flex justify-center items-center bg-[#D9D9D9] font-extrabold rounded-full
-                            lg:text-[30px] lg:w-[50px] lg:h-[50px]">1</p>
-                        <p className="flex justify-center items-center bg-[#D9D9D9] font-extrabold rounded-full
-                            lg:text-[30px] lg:w-[50px] lg:h-[50px] lg:ml-[17px]">2</p>
-                        <p className="flex justify-center items-center bg-[#D9D9D9] font-extrabold rounded-full
-                            lg:text-[30px] lg:w-[50px] lg:h-[50px] lg:ml-[17px]">3</p>
+                        {[1, 2, 3].map((num, idx) => (
+                            <button
+                                key={num}
+                                onClick={() => setSelected(idx)}
+                                className={`flex justify-center items-center font-extrabold rounded-full lg:text-[30px] lg:w-[50px] lg:h-[50px] ${
+                                    selected === idx ? "bg-[#541E80] text-white" : "bg-[#D9D9D9]"
+                                } ${idx !== 0 ? "lg:ml-[17px]" : ""}`}
+                            >
+                                {num}
+                            </button>
+                        ))}
                     </div>
-                    <h2 className="font-extrabold lg:text-[32px] lg:mt-[46px]">인사이트 특강</h2>
-                    <h3 className="font-bold lg:text-[28px]">: 나보다 먼저 걸어간 이야기에서 영감을</h3>
-                    <h2 className="font-tvn-medium text-[#541E80] lg:text-[35px] lg:mt-[16px]">누군가의 경험은 나의 가능성이 됩니다.</h2>
+
+                    <h2 className="font-extrabold lg:text-[32px] lg:mt-[46px]">{current.title}</h2>
+                    <h3 className="font-bold lg:text-[28px]">: {current.subTitle}</h3>
+                    <h2 className="font-tvn-medium text-[#541E80] lg:text-[35px] lg:mt-[16px]">
+                        {current.slogun}
+                    </h2>
+
                     <div className="lg:w-[446px] border-t-3 border-dotted lg:mt-[17px]"/>
-                    <p className="font-extrabold lg:text-[19px] lg:mt-[29px]">
-                        경력보유여성 선배 또는 업계 실무자의 진솔한 커리어 스토리<br/>
-                        ICT·교육 ·행사 기획 분야 등 다양한 분야 경험 공유
-                    </p>
+
+                    <p
+                        className="font-extrabold lg:text-[19px] lg:mt-[29px]"
+                        dangerouslySetInnerHTML={{__html: current.content}}
+                    />
+
                     <div className="lg:w-[446px] border-t-3 border-dotted lg:mt-[29px]"/>
-                    <div className="flex flex-row items-center lg:mt-[18px]">
-                        <Image
-                            src={"/withConnecDay/check_purple.png"}
-                            alt={"check_purple.png"}
-                            width={25}
-                            height={25}
-                            className="lg:w-[25px] lg:h-[25px]"/>
-                        <p className="font-bold text-[#541E80] lg:text-[18px] lg:ml-[10px]">다시 일하고 싶은 마음에 용기를 더해주는 현실 조언</p>
-                    </div>
-                    <div className="flex flex-row items-center lg:mt-[15px]">
-                        <Image
-                            src={"/withConnecDay/check_purple.png"}
-                            alt={"check_purple.png"}
-                            width={25}
-                            height={25}
-                            className="lg:w-[25px] lg:h-[25px]"/>
-                        <p className="font-bold text-[#541E80] lg:text-[18px] lg:ml-[10px]">단절 이후에도 ‘가능성은 있다'는 실제 사례로 동기부여</p>
-                    </div>
-                    <div className="flex flex-row items-center lg:mt-[15px]">
-                        <Image
-                            src={"/withConnecDay/check_purple.png"}
-                            alt={"check_purple.png"}
-                            width={25}
-                            height={25}
-                            className="lg:w-[25px] lg:h-[25px]"/>
-                        <p className="font-bold text-[#541E80] lg:text-[18px] lg:ml-[10px]">내가 가고 싶은 길을 상상해보는 시간</p>
-                    </div>
+
+                    {[current.comment1, current.comment2, current.comment3].map((cmt, i) => (
+                        <div key={i} className="flex flex-row items-center lg:mt-[15px]">
+                            <Image
+                                src="/withConnecDay/check_purple.png"
+                                alt="check_purple.png"
+                                width={25}
+                                height={25}
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-bold text-[#541E80] lg:text-[18px] lg:ml-[10px]">{cmt}</p>
+                        </div>
+                    ))}
                 </div>
+
                 <Image
-                    src={"/withConnecDay/image1.png"}
-                    alt={"image1.png"}
-                    width={50}
-                    height={50}
-                    className="lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
+                    src={current.image_path}
+                    alt={current.title}
+                    width={514}
+                    height={636}
+                    className="object-cover lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
                 />
             </section>
         </main>
