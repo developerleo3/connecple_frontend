@@ -36,6 +36,7 @@ export default function Footer() {
             alt="CONNECPLE"
             width={90}
             height={21}
+            unoptimized
             className="lg:w-[272px] lg:h-[61px] mt-[3px]"
           />
           {/* 대표 정보 */}

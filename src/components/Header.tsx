@@ -58,6 +58,7 @@ export default function Header() {
               alt="Logo"
               width={90}
               height={20}
+              unoptimized
               className="object-contain lg:w-[160px] lg:h-[36px]"
             />
           </Link>

@@ -15,6 +15,7 @@ export default function Footer() {
             alt="CONNECPLE"
             width={90}
             height={21}
+            unoptimized
             className="lg:w-[156px] lg:h-[35px]"
         />
         <div className="flex font-bold

@@ -45,7 +45,7 @@ export default function ImageUpload({
         <div className="relative w-full max-w-[250px] h-[150px] bg-gray-100 rounded-lg overflow-hidden">
           {preview && (
             <div className="relative w-full h-full">
-              <Image src={preview || "/placeholder.svg"} alt="Preview" fill className="object-cover" />
+              <Image src={preview || "/placeholder.svg"} alt="Preview" fill unoptimized className="object-cover" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <button onClick={handleFileSelect} className="bg-white/80 p-2 rounded-lg">
                   <Plus size={20} />

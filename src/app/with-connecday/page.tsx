@@ -118,6 +118,7 @@ export default function WithConnecdayPage() {
                                         alt="triangle_bottom"
                                         width={27}
                                         height={27}
+                                        unoptimized
                                         className="inline-block align-middle"
                                     />
                                 </span>
@@ -151,6 +152,7 @@ export default function WithConnecdayPage() {
                                     alt="triangle_bottom"
                                     width={27}
                                     height={27}
+                                    unoptimized
                                     className="inline-block align-middle"
                                 />
                                 </span>
@@ -181,6 +183,7 @@ export default function WithConnecdayPage() {
                                     alt="triangle_bottom"
                                     width={27}
                                     height={27}
+                                    unoptimized
                                     className="inline-block align-middle"
                                 />
                                 </span>
@@ -242,6 +245,7 @@ export default function WithConnecdayPage() {
                                 alt="check_purple.png"
                                 width={25}
                                 height={25}
+                                unoptimized
                                 className="lg:w-[25px] lg:h-[25px]"
                             />
                             <p className="font-bold text-[#541E80] lg:text-[18px] lg:ml-[10px]">{cmt}</p>
@@ -254,6 +258,7 @@ export default function WithConnecdayPage() {
                     alt={current.title}
                     width={514}
                     height={636}
+                    unoptimized
                     className="object-cover lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
                 />
             </section>

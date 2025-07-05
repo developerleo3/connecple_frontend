@@ -209,6 +209,7 @@ export default function Home() {
           src="/picture_main.png" // public 폴더에 넣은 이미지 경로
           alt="Main Background"
           fill
+          unoptimized
           className="object-cover z-0"
           priority
         />
@@ -253,6 +254,7 @@ export default function Home() {
             src="/logo_main_picture.svg"
             alt="Logo-white"
             fill
+            unoptimized
             className="object-contain"
           />
         </div>
@@ -276,6 +278,7 @@ export default function Home() {
                   src={slide.src}
                   alt={`슬라이드 ${index + 1}`}
                   fill
+                  unoptimized
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
 
@@ -492,6 +495,7 @@ export default function Home() {
                   src="/picture_with_project.png"
                   alt="WITH Project Banner"
                   fill
+                  unoptimized
                   className="object-cover object-top"
                 />
                 {/* 우측 하단 로고 */}
@@ -500,6 +504,7 @@ export default function Home() {
                   alt="Logo"
                   width={109}
                   height={57}
+                  unoptimized
                   className="absolute bottom-[13px] right-[20px] 
                     lg:bottom-[30px] lg:right-[23px] lg:w-[274px] lg:h-[144px]"
                 />
@@ -522,6 +527,7 @@ export default function Home() {
                         alt="화살표"
                         width={10}
                         height={6.7}
+                        unoptimized
                         className={`absolute object-contain
                           right-[8px] bottom-[15px]
                           lg:right-[14px] lg:bottom-[23px] lg:w-[20px] lg:h-[20px]`}
@@ -592,6 +598,7 @@ export default function Home() {
                   src={item.src}
                   alt={`image-${idx + 1}`}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
 
@@ -637,6 +644,7 @@ export default function Home() {
                     alt="화살표"
                     width={10}
                     height={6.7}
+                    unoptimized
                     className="object-contain lg:w-[20px] lg:h-[20px]"
                   />
                 </span>
@@ -676,6 +684,7 @@ export default function Home() {
                 alt="왼쪽 화살표"
                 width={9}
                 height={9}
+                unoptimized
                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index === 0 ? "" : "rotate-180"}`}
               />
             </button>
@@ -691,6 +700,7 @@ export default function Home() {
                 alt="오른쪽 화살표"
                 width={9}
                 height={9}
+                unoptimized
                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
               />
             </button>
@@ -710,6 +720,7 @@ export default function Home() {
                   src={item.image}
                   alt={item.title}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
 
@@ -767,6 +778,7 @@ export default function Home() {
                   alt="화살표"
                   width={10}
                   height={6.7}
+                  unoptimized
                   className="object-contain lg:w-[20px] lg:h-[20px]"
                 />
               </span>
@@ -822,6 +834,7 @@ export default function Home() {
                       alt={`logos1-${i}`}
                       width={128}
                       height={79}
+                      unoptimized
                       className="object-contain max-w-full max-h-full"
                     />
                   </div>
@@ -839,6 +852,7 @@ export default function Home() {
                       alt={`logos2-${i}`}
                       width={128}
                       height={79}
+                      unoptimized
                       className="object-contain max-w-full max-h-full"
                     />
                   </div>
@@ -856,6 +870,7 @@ export default function Home() {
           src="/picture_main_link_bg.png" // public 폴더에 넣은 이미지 경로
           alt="Main Detail Background"
           fill
+          unoptimized
           className="object-contain"
           priority
         />
@@ -913,6 +928,7 @@ export default function Home() {
                     alt="화살표"
                     width={10}
                     height={6.7}
+                    unoptimized
                     className="object-contain lg:w-[20px] lg:h-[20px]"
                   />
                 </span>
