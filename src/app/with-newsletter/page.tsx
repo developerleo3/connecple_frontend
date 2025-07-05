@@ -16,7 +16,7 @@ export default function WithNewsletterPage() {
                 <div className="relative flex justify-center items-center lg:h-[456px] lg:mt-[43px]">
                     {/* 배경 이미지 */}
                     <Image
-                        src="/withNewsletter/image_main.png"
+                        src="/withNewsletter/section1_image.png"
                         alt="image_main"
                         width={123}
                         height={123}
@@ -53,7 +53,108 @@ export default function WithNewsletterPage() {
                         뉴스레터 파트너 문의하기
                     </Link>
                 </div>
+            </section>
+            {/* section2 */}
+            <section className="w-full h-auto lg:px-[200px] lg:mt-[300px]">
+                {/* 상단: 로고 + 문구 */}
+                <div className="flex flex-row items-center">
+                    {/* 왼쪽 로고 */}
+                    <Image
+                        src="/withProject/logo_mini_C.svg"
+                        alt="미니 로고"
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className="lg:w-[36px] lg:h-[36px]"
+                    />
+                    {/* 말풍선 (꼬리 포함) */}
+                    <div className="relative lg:ml-[25px]">
+                        {/* 꼬리 */}
+                        <div className="absolute left-[-4px] top-1/2 transform -translate-y-1/2
+                            lg:w-[10px] lg:h-[10px] bg-[#C0AED1] rotate-45" />
 
+                        {/* 말풍선 본문 */}
+                        <div className="bg-[#C0AED1] text-white font-tvn-medium
+                            lg:px-[28px] lg:py-[3px] lg:rounded-[20px] text-[15px] lg:text-[25px]">
+                            W.I.T.H Newsletter 란?
+                        </div>
+                    </div>
+                </div>
+                <h1 className="font-black text-[#541E80]
+                    lg:mt-[25px] lg:text-[45px]">
+                    일과 삶 사이, 다시 시작을 준비하는<br />
+                    당신을 위한 뉴스레터.
+                </h1>
+                <h2 className="font-black
+                    lg:mt-[20px] lg:text-[27px]">
+                    국내 최초 경력보유여성 대상 뉴스레터인 위드뉴스레터는 경력보유여성을 위해<br />
+                    유익한 정보, 최신소식, 실전 팁을 담아 매주 한 번, 당신의 메일함으로 찾아갑니다.
+                </h2>
+
+                <div className="flex flex-row w-full h-auto bg-[#2C0E59] lg:mt-[40px] lg:rounded-[50px]">
+                    <Image
+                        src={"/withNewsletter/section2_image.png"}
+                        alt={"section2_image"}
+                        width={100}
+                        height={100}
+                        unoptimized
+                        className="lg:w-[438px] lg:h-[432px] lg:rounded-tl-[50px] lg:rounded-bl-[50px]"
+                    />
+                    <div className="flex flex-col w-full h-full">
+                        <div className="flex items-center justify-center border-[2px] border-white
+                            lg:w-[142px] lg:h-[36px] lg:mt-[27px] lg:ml-[28px] lg:rounded-[20px]">
+                            <p className="font-bold text-white lg:text-[20px]">Newsletter</p>
+                        </div>
+                        {/* 1번 벌꿀 */}
+                        <div className="flex flex-row w-full h-auto
+                            lg:mt-[25px] lg:ml-[50px] lg:gap-x-[15px]">
+                            <p className="lg:text-[20px]">🐝</p>
+                            <div className="flex flex-col lg:gap-y-[14px]">
+                                <p className="font-bold text-white lg:text-[20px]">
+                                    바쁜 당신을 위해, 여러분 대신 바쁘게 꿀정보 꿀소식<br />
+                                    찾아 돌아다니는 커넥플 허니비의 꿀정보 큐레이션!
+                                </p>
+                                <p className="font-normal text-white lg:text-[17px]">
+                                    위드뉴스레터는 시간이 부족한 워킹맘과<br />
+                                    경력보유여성을 위해 꼭 필요한 정보를 한눈에 전달합니다.
+                                </p>
+                            </div>
+                        </div>
+                        {/* 점선 */}
+                        <div className="flex justify-center border-white border-t-3 border-dotted
+                            lg:my-[19px] lg:mx-[50px]"/>
+                        {/* 2번 벌꿀 */}
+                        <div className="flex flex-row w-full h-auto
+                            lg:ml-[50px] lg:gap-x-[15px]">
+                            <p className="lg:text-[20px]">🐝</p>
+                            <div className="flex flex-col">
+                                <p className="font-bold text-white lg:text-[20px] lg:mb-[10px]">
+                                    뉴스레터의 하이라이트!
+                                </p>
+                                {[
+                                    "맞춤형 꿀정보 · 꿀뉴스 : 우리에게 딱 맞는 최신 뉴스와 정보",
+                                    "일자리·채용·지원 혜택 소식 : 놓치면 아쉬운 기회들",
+                                    "당첨 확률 높은 이벤트 소식 : 참여만 해도 득템 찬스 UP!",
+                                    "허니비 BJ의 힐링 플레이리스트 : 바쁜 일상 속 작은 쉼표",
+                                ].map((text, idx) => (
+                                    <div key={idx} className="flex flex-row items-center lg:mt-[5px]">
+                                        <Image
+                                            src="/withNewsletter/check_white.svg"
+                                            alt="check_white.svg"
+                                            width={25}
+                                            height={25}
+                                            unoptimized
+                                            className="lg:w-[15px] lg:h-[20px]"
+                                        />
+                                        <p className="font-normal text-white lg:text-[14px] lg:ml-[10px]">
+                                            {text}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     );
