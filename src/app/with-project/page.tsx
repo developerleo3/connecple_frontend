@@ -67,6 +67,7 @@ export default function WithProjectPage() {
             alt="with project logo"
             width="310"
             height="192"
+            unoptimized
             className="object-contain lg:w-[581px] lg:h-[361px]"
           />
         </div>
@@ -113,6 +114,7 @@ export default function WithProjectPage() {
             alt="미니 로고"
             width={20}
             height={20}
+            unoptimized
             className="lg:w-[36px] lg:h-[36px]"
           />
           {/* 말풍선 (꼬리 포함) */}
@@ -214,6 +216,7 @@ export default function WithProjectPage() {
                 alt={item.label}
                 width={275}
                 height={182}
+                unoptimized
                 className="object-cover w-full h-[182px] rounded-tl-[20px] rounded-tr-[20px]"
               />
               <div className="flex w-full h-[88px] justify-center items-center">
@@ -302,6 +305,7 @@ export default function WithProjectPage() {
                       alt={item.title}
                       width={275}
                       height={182}
+                      unoptimized
                       className="group-hover:hidden w-full h-[182px] rounded-tl-[20px] rounded-tr-[20px]
                         lg:w-[62px] lg:h-[62px] lg:mt-[28px]"
                     />
@@ -310,6 +314,7 @@ export default function WithProjectPage() {
                       alt={"recommend_line"}
                       width={168}
                       height={3}
+                      unoptimized
                       className="group-hover:hidden lg:w-full lg:h-auto lg:px-[23px] lg:mt-[23px]"
                     />
                     <div className="group-hover:hidden flex w-full h-auto justify-center items-center text-center lg:mt-[30px]">
@@ -345,6 +350,7 @@ export default function WithProjectPage() {
               alt={"comment1.png"}
               width={55}
               height={55}
+              unoptimized
             />
             <p className="font-bold lg:text-[13px]">
               첫 날이라 시스템 환경이 어수선한 참가자들도 많았음에도 불구하고<br />
@@ -364,6 +370,7 @@ export default function WithProjectPage() {
               alt={"comment1.png"}
               width={55}
               height={55}
+              unoptimized
             />
           </div>
 
@@ -375,6 +382,7 @@ export default function WithProjectPage() {
               alt={"comment1.png"}
               width={55}
               height={55}
+              unoptimized
             />
             <p className="font-bold lg:text-[13px]">
               행사나 교육운영의 전체적인 프로세스를 알 수 있었고<br />
@@ -430,6 +438,7 @@ export default function WithProjectPage() {
               alt={"comment1.png"}
               width={55}
               height={55}
+              unoptimized
             />
           </div>
 
@@ -466,6 +475,7 @@ export default function WithProjectPage() {
                 alt={"comment1.png"}
                 width={55}
                 height={55}
+                unoptimized
               />
               <p className="font-bold lg:text-[13px]">
                 경험해 보지 못한 새로운 분야를 수강하면서<br />
@@ -485,6 +495,7 @@ export default function WithProjectPage() {
             alt="section6 background"
             width={1020}
             height={432}
+            unoptimized
             className="lg:w-full lg:h-auto object-cover rounded-[50px] lg:mb-[26px]"
           />
           {/* 오버레이 및 텍스트 */}
@@ -496,6 +507,7 @@ export default function WithProjectPage() {
               alt="connecple logo"
               width={30}
               height={30}
+              unoptimized
               className="lg:w-[157px] lg:h-[35px]"
             />
             {/* 타이틀 */}
@@ -573,6 +585,7 @@ export default function WithProjectPage() {
               alt={"image"}
               width={487}
               height={525}
+              unoptimized
               className="lg:w-auto lg:h-[531px]"
             />
           </div>
@@ -587,6 +600,7 @@ export default function WithProjectPage() {
                 alt={"check_purple.png"}
                 width={25}
                 height={25}
+                unoptimized
                 className="lg:w-[25px] lg:h-[25px]"
               />
               <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">전문성</p>
@@ -599,6 +613,7 @@ export default function WithProjectPage() {
                 alt={"check_purple.png"}
                 width={25}
                 height={25}
+                unoptimized
                 className="lg:w-[25px] lg:h-[25px]"
               />
               <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">포인트</p>
@@ -612,6 +627,7 @@ export default function WithProjectPage() {
               alt={"image"}
               width={487}
               height={525}
+              unoptimized
               className="lg:w-[487px] lg:h-[525px]"
             />
           </div>
@@ -626,6 +642,7 @@ export default function WithProjectPage() {
           alt={"image"}
           width={487}
           height={525}
+          unoptimized
           className="lg:w-full lg:h-auto lg:mt-[50px]"
         />
         <div className="flex justify-center items-center">
@@ -661,6 +678,7 @@ export default function WithProjectPage() {
             alt="with project logo"
             width="310"
             height="192"
+            unoptimized
             className="object-contain lg:w-[581px] lg:h-[361px]"
           />
         </div>
