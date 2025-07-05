@@ -212,7 +212,7 @@ export default function WithConnecdayPage() {
                                 key={num}
                                 onClick={() => setSelected(idx)}
                                 className={`flex justify-center items-center font-extrabold rounded-full lg:text-[30px] lg:w-[50px] lg:h-[50px] ${
-                                    selected === idx ? "bg-[#541E80] text-white" : "bg-[#D9D9D9]"
+                                    selected === idx ? "bg-[#541E80] text-white" : "bg-[#D9D9D9] cursor-pointer"
                                 } ${idx !== 0 ? "lg:ml-[17px]" : ""}`}
                             >
                                 {num}
