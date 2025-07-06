@@ -30,6 +30,47 @@ export default function WithGigPage() {
                     재택 · 유연 · 단기 중심의 프로젝트형 일자리를 연결해주는 커리어 플랫폼입니다.
                 </p>
             </section>
+            {/* section2 */}
+            <section className={"flex flex-col w-full h-auto lg:px-[200px] lg:mt-[169px]"}>
+                <h1 className={"font-black text-[#541E80] lg:text-[45px]"}>이런 분들을 위해 만들어졌습니다.</h1>
+                <div className={"flex flex-col w-full h-auto lg:mt-[46px] lg:gap-y-[23px]"}>
+                    {[
+                        {
+                            index : "01",
+                            title : "잠시 일을 쉬었지만, 다시 시작해보고 싶은 분",
+                            content : "육아나 가족 돌봄 등으로 경력이 비었어도, 다시 나만의 일을 찾고 싶은 당신을 응원합니다."
+                        },
+                        {
+                            index : "02",
+                            title : "정해진 출퇴근보다 나에게 맞는 방식으로 일하고 싶은 분",
+                            content : "시간과 장소에 구애받지 않고, 내 삶의 리듬에 맞춰 일하고 싶다면 위드긱이 함께합니다."
+                        },
+                        {
+                            index : "03",
+                            title : "그동안 쌓은 경험을 프로젝트로 풀어내고 싶은 분",
+                            content : "디자인, 마케팅, 콘텐츠 등 다양한 분야에서 당신의 전문성이 다시 빛날 수 있어요."
+                        },
+                        {
+                            index : "04",
+                            title : "내가 하는 일의 가치를 존중받고, 정당한 보상을 받고 싶은 분",
+                            content : "불투명한 일 대신, 조건이 명확하고 신뢰할 수 있는 일로 다시 시작해보세요."
+                        },
+                    ].map((item, idx) => (
+                        <div
+                            key={idx}
+                            className={`${idx % 2 === 0 ? "bg-[#F6F6F6]" : "bg-[#ECECEC]"} group
+                                flex flex-row justify-between items-center w-full h-auto shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)] 
+                                lg:rounded-[20px] lg:pl-[45px] lg:pr-[20px] lg:py-[10px]`}
+                        >
+                            <div className={"flex flex-col group-hover:lg:mt-[10px]"}>
+                                <p className={"font-bold lg:text-[25px]"}>{item.title}</p>
+                                <p className={"hidden group-hover:block text-[#9E9E9E] font-normal lg:text-[20px] lg:mt-[20px]"}>{item.content}</p>
+                            </div>
+                            <p className={"font-extrabold text-[#C0AED166] lg:text-[45px] group-hover:lg:text-[65px]"}>{item.index}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
         </main>
     )
 }
