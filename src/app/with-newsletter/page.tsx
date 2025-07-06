@@ -226,10 +226,64 @@ export default function WithNewsletterPage() {
                             />
                         </div>
                         {idx !== items.length - 1 && (
-                            <div className="flex justify-center border-t-3 border-dotted lg:my-[45px]" />
+                            <div className="flex justify-center border-t-3 border-dotted lg:my-[45px]"/>
                         )}
                     </div>
                 ))}
+            </section>
+            {/* section4 */}
+            <section className="flex w-full h-auto lg:mt-[213px] lg:px-[200px]">
+                <div className="flex flex-row w-full h-auto items-center justify-between">
+                    <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
+                        lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
+                        <p className="font-bold lg:text-[25px]">정보통 꿀단지 위드뉴스레터</p>
+                        <Image src={"/withNewsletter/honey_bee.svg"} alt={"honey_bee"}
+                               width={123}
+                               height={123}
+                               unoptimized
+                               className="lg:w-[254px] lg:h-[164px] lg:mt-[18px]"/>
+                        <p className="font-bold text-center lg:text-[17px] lg:mt-[29px]">
+                            바쁜 꿀벌 커넥플 허니비가<br/>
+                            맞춤형 꿀정보 꿀소식을 전해드려요.
+                        </p>
+                    </div>
+                    {[
+                        {
+                            img_url: "/withNewsletter/section4_image1.png",
+                            img_alt: "section4_image1.png",
+                            title: "벚꽃의 계절인가 봄",
+                            content: "시국이 어수선하고 마냥 좋을 수만은 없는 현실이긴 하지만 벚꽃의 계절이 온만큼 시국이 안정되면 벚꽃 야경으로 마음을 달래보아요.",
+                        },
+                        {
+                            img_url: "/withNewsletter/section4_image2.png",
+                            img_alt: "section4_image1.png",
+                            title: "커넥플, 경력보유(단절)..",
+                            content: "동네 육아친구를 찾아주는 육아크루는 3월 27일부터 30일까지 열린 ‘2025 마이비 마곡 베이비페어'에 참여하여...",
+                        },
+                        {
+                            img_url: "/withNewsletter/section4_image3.png",
+                            img_alt: "section4_image1.png",
+                            title: "남부여성새로일하기센터..",
+                            content: "서울시 남부여성발전센터와 남부여성새로일하기 센터는 여성의 경력단절 예방과 경제활동 참여를 지원...",
+                        }
+                    ].map((item, idx) => (
+                        <div key={idx} className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
+                        lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
+                            <Image src={item.img_url}
+                                   alt={item.img_alt}
+                                   width={123}
+                                   height={123}
+                                   unoptimized
+                                   className="lg:w-[159px] lg:h-[126px]"/>
+                            <p className="font-bold text-center lg:text-[15px] lg:mt-[12px]">{item.title}</p>
+                            <p className="font-semibold lg:text-[12px] lg:mt-[12px]">{item.content}</p>
+                        </div>
+                    ))}
+                    <div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
+                        lg:w-[42px] lg:h-[307px] lg:rounded-[15px]">
+                        <p className="font-semibold lg:text-[20px]">{">"}</p>
+                    </div>
+                </div>
             </section>
         </main>
     );
