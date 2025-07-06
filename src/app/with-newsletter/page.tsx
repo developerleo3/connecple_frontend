@@ -285,6 +285,61 @@ export default function WithNewsletterPage() {
                     </div>
                 </div>
             </section>
+            {/* section5 */}
+            <section className="flex flex-col w-full h-auto lg:mt-[274px] lg:mb-[213px] lg:px-[200px]">
+                <h1 className="text-center
+                        text-[18px] font-black
+                        lg:text-[30px] lg:font-extrabold">
+                    W.I.T.H Newsletter
+                </h1>
+                <h2 className="text-center font-semibold lg:text-[25px] lg:mt-[44px]">
+                    최신 뉴스 정보와 커넥플 경력단절여성 지원 프로그램 소식을 만나보세요!
+                </h2>
+                <div className="flex flex-row bg-[#F1F1F1] w-full items-center justify-center
+                    lg:h-[208px] lg:mt-[56px] lg:rounded-[20px]">
+                    <div className="flex flex-col justify-center items-end lg:gap-y-[32px]">
+                        <p className="font-bold lg:text-[20px]">이름<span className="text-[#D02121] lg:text-[25px] lg:ml-[9px]">*</span></p>
+                        <p className="font-bold lg:text-[20px]">이메일<span className="text-[#D02121] lg:text-[25px] lg:ml-[9px]">*</span></p>
+                    </div>
+                    <div className="flex flex-col justify-center items-center lg:ml-[14px] lg:gap-y-[32px]">
+                        <input
+                            type={"text"}
+                            placeholder={"이름을 입력해주세요."}
+                            className={"lg:border-[2px] border-[#BDBDBD] lg:w-[395px] lg:h-[40px] lg:rounded-[10px] lg:pl-[19px]"}
+                        />
+                        <input
+                            type={"text"}
+                            placeholder={"이메일을 입력해주세요."}
+                            className={"lg:border-[2px] border-[#BDBDBD] lg:w-[395px] lg:h-[40px] lg:rounded-[10px] lg:pl-[19px]"}
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-row w-full h-auto items-center justify-center lg:mt-[49px] lg:gap-x-[30px]">
+                    <label className="flex flex-row justify-center items-center">
+                        <input
+                            type={"checkbox"}
+                            className={"accent-[#541E80] lg:w-[20px] lg:h-[20px]"}
+                        />
+                        <span className="font-bold lg:text-[15px] lg:ml-[10px]">(필수) 개인정보 수집 및 이용에 동의합니다.</span>
+                    </label>
+                    <label className="flex flex-row justify-center items-center">
+                        <input
+                            type={"checkbox"}
+                            className={"accent-[#541E80] lg:w-[20px] lg:h-[20px]"}
+                        />
+                        <span className="font-bold lg:text-[15px] lg:ml-[10px]">(선택) 광고성 정보 수신에 동의합니다.</span>
+                    </label>
+                </div>
+                <h2 className="flex justify-center items-center font-extrabold text-[#541E80] lg:text-[25px] lg:mt-[86px]">
+                    가능성을 향한 첫 걸음
+                </h2>
+                <Link
+                    href="/with-newsletter"
+                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
+                        lg:mt-[21px] lg:w-[388px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
+                    위드뉴스레터 무료 구독
+                </Link>
+            </section>
         </main>
     );
 }
