@@ -115,6 +115,163 @@ export default function WithGigPage() {
                     </div>
                 </div>
             </section>
+            {/* section4 */}
+            <section className={"flex flex-col w-full h-auto bg-[#EAEAEA] " +
+                "lg:mt-[159px] lg:rounded-tl-[150px] lg:px-[200px]"}>
+                <div className="flex flex-row items-center lg:mt-[110px]">
+                    {/* 왼쪽 로고 */}
+                    <Image
+                        src="/withProject/logo_mini_C.svg"
+                        alt="미니 로고"
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className="lg:w-[36px] lg:h-[36px]"
+                    />
+                    {/* 말풍선 (꼬리 포함) */}
+                    <div className="relative lg:ml-[25px]">
+                        {/* 꼬리 */}
+                        <div className="absolute left-[-4px] top-1/2 transform -translate-y-1/2
+                            lg:w-[10px] lg:h-[10px] bg-[#C0AED1] rotate-45"/>
+
+                        {/* 말풍선 본문 */}
+                        <div className="bg-[#C0AED1] text-white font-tvn-medium
+                            lg:px-[28px] lg:py-[3px] lg:rounded-[20px] text-[15px] lg:text-[25px]">
+                            다시 일하고 싶지만, 내 삶의 방식도 지키고 싶다면?
+                        </div>
+                    </div>
+                </div>
+                <h1 className={"font-black text-[#541E80] lg:text-[45px] lg:mt-[29px]"}>
+                    구직자를 위한 GIG
+                </h1>
+                <h3 className={"font-extrabold lg:text-[27px] lg:mt-[14px]"}>
+                    위드긱은 정규직 중심의 채용 시장이 부담스러운 경력보유여성에게 맞춘<br/>
+                    유연한 ‘실전 커리어' 방식입니다.
+                </h3>
+                <div className={"flex flex-col lg:mt-[74px] lg:gap-y-[29px]"}>
+                    {[
+                        {
+                            logo: "/withGIG/section4_logo1.svg",
+                            alt: "section4_logo1.svg",
+                            title: "시간제, 재택, 단기 프로젝트 등 맞춤 근무 가능",
+                            sub: "아이를 돌보면서도, 나만의 속도로 일할 수 있는 환경"
+                        },
+                        {
+                            logo: "/withGIG/section4_logo2.svg",
+                            alt: "section4_logo2.svg",
+                            title: "실무 역할 기반 투입으로 성취감과 보람 모두 챙김",
+                            sub: "기획서 작성, 콘텐츠 제작, 행사 준비 등 일한 만큼 결과가 보이는 구조"
+                        },
+                        {
+                            logo: "/withGIG/section4_logo3.svg",
+                            alt: "section4_logo3.svg",
+                            title: "나의 커리어를 끊기지 않게, 유연하게 이어가기",
+                            sub: "짧은 공백 후 자신감을 회복하고 다시 사회와 연결되는 방법"
+                        }
+                    ].map((item, idx) => (
+                        <div key={idx}
+                             className={"relative z-0 flex flex-row bg-white shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] " +
+                                 "lg:rounded-[40px] lg:px-[41px] lg:h-[94px] lg:py-[22px]"}>
+                            <Image src={item.logo} alt={item.alt}
+                                   width={123}
+                                   height={123}
+                                   unoptimized
+                                   className={"lg:w-[49px] lg:h-[49px]"}/>
+                            <div className={"flex flex-col justify-center lg:ml-[64px]"}>
+                                <p className={"font-extrabold text-[#541E80] lg:text-[24px]"}>{item.title}</p>
+                                <p className={"font-semibold text-[#171717] lg:text-[20px]"}>{item.sub}</p>
+                            </div>
+                            <div className={"absolute flex items-center justify-center border-[#C0AED1] border-[1px] " +
+                                "lg:right-[37px] lg:rounded-[10px] lg:w-[40px] lg:h-[40px]"}>
+                                <Image
+                                    src={"/withGIG/check_purple_thin.svg"}
+                                    alt={"check_purple_thin.svg"}
+                                    width={123}
+                                    height={123}
+                                    unoptimized
+                                    className={"lg:w-[38px] lg:h-[39px] lg:mb-[25px]"}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className={"flex flex-row justify-between items-center w-full h-auto lg:mt-[126px]"}>
+                    <div className="border-[#541E80] lg:w-[32px] lg:h-[117px] lg:rounded-l-[10px]
+                        lg:border-t-[2px] lg:border-l-[2px] lg:border-b-[2px]"></div>
+                    <p className="font-extrabold text-[#541E80] text-center lg:text-[28px]">
+                        풀타임이 아니어도 괜찮아요.<br/>
+                        내 시간, 내 방식으로 일할 수 있어야 지속 가능하니까요.
+                    </p>
+                    <div className="border-[#541E80] lg:w-[32px] lg:h-[117px] lg:rounded-r-[10px]
+                        lg:border-t-[2px] lg:border-r-[2px] lg:border-b-[2px]"></div>
+                </div>
+            </section>
+            {/* section5 */}
+            <section className="flex flex-col w-full h-auto bg-[#EAEAEA] lg:pt-[141px] lg:pb-[302px]">
+                <div className="relative w-full lg:h-[480px]">
+                    <Image
+                        src={"/withGIG/section4_picture.png"}
+                        alt={"section4_picture.png"}
+                        fill
+                        unoptimized
+                        className="absolute z-0 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/50"/>
+                    <div className="absolute z-10 flex justify-center items-center
+                        lg:top-[144px] lg:left-[133px] lg:w-[305px] lg:h-[80px]">
+                        <Image
+                            src={"/withGIG/speech_bubble_white1.png"}
+                            alt={"speech_bubble_white1.png"}
+                            fill
+                            unoptimized
+                            className="absolute z-10"
+                        />
+                        <p className="absolute z-20 font-extrabold lg:text-[20px] lg:mt-[5px]">
+                            육아 중이라도 다시 일하고 싶어요.
+                        </p>
+                    </div>
+                    <div className="absolute z-10 flex justify-center items-center
+                        lg:bottom-[102px] lg:left-[235px] lg:w-[305px] lg:h-[104px]">
+                        <Image
+                            src={"/withGIG/speech_bubble_white2.png"}
+                            alt={"speech_bubble_white1.png"}
+                            fill
+                            unoptimized
+                            className="absolute z-10"
+                        />
+                        <p className="absolute z-20 font-extrabold lg:text-[20px] lg:mt-[5px]">
+                            풀타임은 어려워요.<br />
+                            내 시간에 맞춰 일할 수 없을까요?
+                        </p>
+                    </div>
+                    <div className="absolute z-10 flex justify-center items-center
+                        lg:bottom-[63px] lg:right-[228px] lg:w-[317px] lg:h-[197px]">
+                        <Image
+                            src={"/withGIG/speech_bubble_purple1.png"}
+                            alt={"speech_bubble_white1.png"}
+                            fill
+                            unoptimized
+                            className="absolute z-10"
+                        />
+                        <div className="absolute z-20 flex flex-col ">
+                            <p className="font-extrabold lg:text-[20px] lg:mt-[5px]">
+                                정규직이 아니어도 괜찮아요.<br />
+                                단기, 재택, 유연 근무로 내 삶의<br />
+                                방식에 맞는 커리어를 시작하세요.
+                            </p>
+                            <p className="font-black text-[#541E80] lg:text-[23px] lg:mt-[15px]">
+                                바로 위드긱에서 가능합니다!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <Link
+                    href="/with-gig"
+                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
+                        lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
+                    참여자 지원하기
+                </Link>
+            </section>
         </main>
-    )
+    );
 }
