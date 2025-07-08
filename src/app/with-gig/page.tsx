@@ -366,7 +366,7 @@ export default function WithGigPage() {
                 </div>
             </section>
             {/* section7 */}
-            <section className="flex flex-col w-full h-auto bg-[#EAEAEA] lg:pt-[141px]">
+            <section className="flex flex-col w-full h-auto lg:pt-[141px]">
                 <div className="relative w-full lg:h-[480px]">
                     <Image
                         src={"/withGIG/section7_picture1.png"}
@@ -427,6 +427,32 @@ export default function WithGigPage() {
                         lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
                     기업 의뢰하기
                 </Link>
+            </section>
+            {/* section8 */}
+            <section className="flex flex-col w-full h-auto justify-center items-center
+                lg:px-[200px] lg:mt-[286px] lg:mb-[196px]">
+                <h1 className="font-black text-[#541E80] text-center lg:text-[45px]">
+                    작지만 진짜 일,<br />
+                    위드긱 어떻게 참여하나요?
+                </h1>
+                <div className="relative w-full aspect-video">
+                    <Image
+                        src={"/withGIG/section8_image.png"}
+                        alt={"section8_image.png"}
+                        fill
+                        unoptimized
+                        className={"object-contain w-full"}
+                    />
+                </div>
+                <div className="flex flex-col justify-center items-center bg-[#D9D9D9] w-full
+                    lg:h-[126px] lg:rounded-[30px]">
+                    <p className="font-bold text-[#6C6C6C] text-center lg:text-[15px]">기업은 간단히 요청서 제출, 참여자는 제안서 등록 후 맞춤 매칭</p>
+                    <div className="w-full border-t-2 border-dotted lg:my-[10px] lg:mx-[100px]" />
+                    <p className="font-bold text-[#6C6C6C] text-center lg:text-[15px]">
+                        프로젝트 예시 : 교육 콘텐츠 기획 및 자료 제작, 행사 운영보조, 참가자 응대 업무, 디자인 / 문서 작업 / 홍보 콘텐츠 기획,<br />
+                        제안서 및 보고서 작성 지원, 교육 운영/진행 어시스턴트
+                    </p>
+                </div>
             </section>
         </main>
     );
