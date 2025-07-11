@@ -79,14 +79,14 @@ const storyLabels = [
 
 const newsLetters = [
     {
-        image: "/picture_main_with_news_letter_1.png",
+        image: "/main/section7_picture1.png",
         title: "기업이 찾는 실무형 인재, W.I.T.H 프로젝트에서 나온다",
         content:
             "\"바로 채용하고 싶을 정도였어요.\" 프로젝트 파트너 기업의 솔직한 이야기. 이들이 주목한 건 단순한 스펙이 아닌, 실무에 강한 팀워크형 ...",
         href: "/",
     },
     {
-        image: "/picture_main_with_news_letter_2.png",
+        image: "/main/section7_picture2.png",
         title: "육아와 커리어, 두마리 토끼를 잡은 그녀의 하루",
         content:
             "오전엔 아이 등원, 오후엔 실무 교육, 저녁엔 나만의 성장 시간. 육아와 커리어를 동시에 이끌어가는 한 엄마의 진짜 이야기를 ...",
@@ -220,7 +220,7 @@ export default function Home() {
                 <div className="absolute left-1/2 -translate-x-1/2 transform bottom-[20px] w-[71px] h-[16px]
                     lg:bottom-[37px] lg:w-[175px] lg:h-[40px] z-20">
                     <Image
-                        src="/logo_main_picture.svg"
+                        src="/main/section1_logo_white.svg"
                         alt="Logo-white"
                         fill
                         unoptimized
@@ -440,7 +440,7 @@ export default function Home() {
                                 />
                                 {/* 우측 하단 로고 */}
                                 <Image
-                                    src="/logo_with_project.svg" // 원하는 로고 이미지 경로로 바꾸세요
+                                    src="/main/section5_logo_with_project.svg"
                                     alt="Logo"
                                     width={109}
                                     height={57}
@@ -463,7 +463,7 @@ export default function Home() {
                                         만들기&nbsp;&nbsp;&nbsp;
                                         <span>
                                             <Image
-                                                src={"/vector_right_white.svg"}
+                                                src={"/main/vector_right_white.svg"}
                                                 alt="화살표"
                                                 width={10}
                                                 height={6.7}
@@ -502,17 +502,17 @@ export default function Home() {
                         lg:grid-cols-3 lg:rounded-[50px] lg:h-[280px]">
                         {[
                             {
-                                src: "/picture_main_with_connectday_1.png",
+                                src: "/main/section6_picture1.png",
                                 title: "성장의 여정을 공유하는 자리",
                                 content: "위드프로젝트 수료생들과의 만남",
                             },
                             {
-                                src: "/picture_main_with_connectday_2.png",
+                                src: "/main/section6_picture2.png",
                                 title: "새로운 커리어 기회를 연결하는 네트워킹",
                                 content: "다양한 분야 전문가들과의 만남",
                             },
                             {
-                                src: "/picture_main_with_connectday_3.png",
+                                src: "/main/section6_picture3.png",
                                 title: "단절을 넘어 함께 그리는 미래",
                                 content: "성장 선언 챌린지, 테이블 멘토링",
                             },
@@ -553,7 +553,7 @@ export default function Home() {
                             나의 성장 가능성 연결하기&nbsp;&nbsp;&nbsp;
                             <span>
                                 <Image
-                                    src="/vector_right_white.svg"
+                                    src="/main/vector_right_white.svg"
                                     alt="화살표"
                                     width={10}
                                     height={6.7}
@@ -589,7 +589,7 @@ export default function Home() {
                             className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                         >
                             <Image
-                                src={index === 0 ? "/vector_left_gray.svg" : "/vector_right_black.svg"}
+                                src={index === 0 ? "/main/vector_left_gray.svg" : "/main/vector_right_black.svg"}
                                 alt="왼쪽 화살표"
                                 width={9}
                                 height={9}
@@ -604,7 +604,7 @@ export default function Home() {
                             className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                         >
                             <Image
-                                src={index >= newsLetters.length - 2 ? "/vector_left_gray.svg" : "/vector_right_black.svg"}
+                                src={index >= newsLetters.length - 2 ? "/main/vector_left_gray.svg" : "/main/vector_right_black.svg"}
                                 alt="오른쪽 화살표"
                                 width={9}
                                 height={9}
@@ -666,7 +666,7 @@ export default function Home() {
                             성장의 첫 걸음, 지금 시작&nbsp;&nbsp;&nbsp;
                             <span>
                                 <Image
-                                    src="/vector_right_white.svg"
+                                    src="/main/vector_right_white.svg"
                                     alt="화살표"
                                     width={10}
                                     height={6.7}
@@ -758,7 +758,7 @@ export default function Home() {
             <section className="relative bg-white w-full aspect-video">
                 {/* 꽉 찬 배경 이미지 */}
                 <Image
-                    src="/picture_main_link_bg.png" // public 폴더에 넣은 이미지 경로
+                    src="/main/section9_bg.png"
                     alt="Main Detail Background"
                     fill
                     unoptimized
@@ -767,12 +767,10 @@ export default function Home() {
                 />
                 {/* 콘텐츠 영역 */}
                 <div className="absolute inset-0 flex items-start justify-center
-          px-[34px] mt-[47px]
-          lg:px-[100px] lg:mt-[150px]">
+                    px-[34px] mt-[47px] lg:px-[100px] lg:mt-[150px]">
                     {/* 왼쪽 텍스트 (세로줄 포함, 3/5) */}
-                    <div className="flex-[3] text-white border-white
-            pl-[11px] space-y-[5px] border-l-[1px]
-            lg:pl-[32px] lg:space-y-[16px] lg:border-l-[3px]">
+                    <div className="flex-[3] text-white border-white pl-[11px] space-y-[5px] border-l-[1px]
+                        lg:pl-[32px] lg:space-y-[16px] lg:border-l-[3px]">
                         <p className="font-bold text-[10px] lg:text-[45px]">당신의 재도약을 응원합니다</p>
                         <h2 className="font-black text-[15px] lg:text-[60px]">Women In The Hope</h2>
                         <p className="font-bold text-[8px] lg:text-[25px]">경력보유여성 재도약 프로젝트</p>
@@ -801,28 +799,27 @@ export default function Home() {
                                 key={idx}
                                 href={btn.href}
                                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold
-                  rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px] 
-                  px-[11px] w-[132px] h-[20px] text-[9px]
-                  lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px] 
-                  lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
+                                    rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px]
+                                    px-[11px] w-[132px] h-[20px] text-[9px]
+                                    lg:rounded-tl-[16px] lg:rounded-tr-[16px] lg:rounded-bl-[16px]
+                                    lg:px-[33px] lg:w-[500px] lg:h-[60px] lg:text-[20px] transition"
                             >
-                <span className="truncate flex items-center gap-x-[2px]">
-                  {/* 영어는 항상 보이고 */}
-                    <span>{btn.labelEng}</span>
-
-                    {/* 한글은 PC(lg 이상)일 때만 보이게 */}
-                    <span className="hidden lg:inline">&nbsp;{btn.labelKor}</span>
-                </span>
+                                <span className="truncate flex items-center gap-x-[2px]">
+                                    {/* 영어는 항상 보이고 */}
+                                    <span>{btn.labelEng}</span>
+                                    {/* 한글은 PC(lg 이상)일 때만 보이게 */}
+                                    <span className="hidden lg:inline">&nbsp;{btn.labelKor}</span>
+                                </span>
                                 <span>
-                  <Image
-                      src={"/vector_right_white.svg"}
-                      alt="화살표"
-                      width={10}
-                      height={6.7}
-                      unoptimized
-                      className="object-contain lg:w-[20px] lg:h-[20px]"
-                  />
-                </span>
+                                    <Image
+                                        src={"/main/vector_right_white.svg"}
+                                        alt="화살표"
+                                        width={10}
+                                        height={6.7}
+                                        unoptimized
+                                        className="object-contain lg:w-[20px] lg:h-[20px]"
+                                    />
+                                </span>
                             </Link>
                         ))}
                     </div>
