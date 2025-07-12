@@ -41,5 +41,7 @@ yarn-error.log*
 next-env.d.ts
 certificates
 
+.idea
+
 # IntelliJ 설정
 .idea/
