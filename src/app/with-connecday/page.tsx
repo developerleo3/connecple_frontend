@@ -232,13 +232,13 @@ export default function WithConnecdayPage() {
                         "<span className=\"font-black text-[#C0AED1]\">동기부여</span>가 생겨요!<br/><br/>"
                     ].map((item, idx) => (
                         <div key={idx}
-                            className="flex justify-center items-center rounded-full bg-white border-[0.7px] border-[#541E80]
+                             className="flex justify-center items-center rounded-full bg-white border-[0.7px] border-[#541E80]
                                 w-[85px] h-[85px]">
                             <div className="flex flex-col items-center stext-white">
                                 <p className="font-bold text-[7px]">Check Point</p>
                                 <div className="border-[0.5px] border-[#541E80] w-[15px] my-[7px]"/>
                                 <p className="text-[5px] font-bold text-center"
-                                    dangerouslySetInnerHTML={{ __html: item }}>
+                                   dangerouslySetInnerHTML={{__html: item}}>
 
                                 </p>
                             </div>
@@ -250,7 +250,7 @@ export default function WithConnecdayPage() {
             {/* section3 - 버튼 클릭에 따라 콘텐츠 변경 */}
             <section className="flex flex-row w-full justify-between h-auto
                     px-[30px] mt-[88px] mb-[84px] gap-x-[10px]
-                    lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[157px]">
+                    lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[300px]">
                 <div className="flex flex-col">
                     <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">PROGRAM</h1>
                     <div className="flex flex-row mt-[27px] lg:mt-[38px]">
@@ -281,7 +281,7 @@ export default function WithConnecdayPage() {
                         dangerouslySetInnerHTML={{__html: current.content}}
                     />
 
-                    <div className="w-[189px] lg:w-[446px] border-t-1 border-dotted mt-[18px] lg:mt-[17px]"/>
+                    <div className="w-[189px] lg:w-[446px] border-t-1 border-dotted mt-[8px] lg:mt-[17px]"/>
 
                     {[current.comment1, current.comment2, current.comment3].map((cmt, i) => (
                         <div key={i} className="flex flex-row items-center mt-[6px] lg:mt-[15px]">
@@ -297,7 +297,6 @@ export default function WithConnecdayPage() {
                         </div>
                     ))}
                 </div>
-
                 <Image
                     src={current.image_path}
                     alt={current.title}

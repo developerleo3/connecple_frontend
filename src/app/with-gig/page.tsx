@@ -60,14 +60,14 @@ export default function WithGigPage() {
                         <div
                             key={idx}
                             className={`${idx % 2 === 0 ? "bg-[#F6F6F6]" : "bg-[#ECECEC]"} group
-                                flex flex-row justify-between items-center w-full h-auto shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]
-                                rounded-[10px] pl-[14px] pr-[10px] py-[5px]
+                                flex flex-row justify-between items-center w-full h-auto shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]
+                                rounded-[10px] pl-[14px] pr-[10px] pt-[5px] pb-[10px]
                                 lg:rounded-[20px] lg:pl-[45px] lg:pr-[20px] lg:py-[10px]`}
                         >
                             <div className={"flex flex-col mt-[5px] group-hover:lg:mt-[10px]"}>
                                 <p className={"font-extrabold lg:font-bold text-[9px] lg:text-[25px]"}>{item.title}</p>
-                                <p className="lg:hidden lg:group-hover:block text-[#9E9E9E] font-normal
-                                    text-[7px] mt-[10px] lg:text-[20px] lg:mt-[20px]">{item.content}</p>
+                                <p className="lg:hidden lg:group-hover:block text-[#878787] lg:text-[#9E9E9E] font-bold lg:font-normal
+                                    text-[7px] mt-[5px] lg:text-[20px] lg:mt-[20px]">{item.content}</p>
                             </div>
                             <p className={"font-extrabold text-[#C0AED166] lg:text-[45px] group-hover:lg:text-[65px]"}>{item.index}</p>
                         </div>
@@ -194,7 +194,7 @@ export default function WithGigPage() {
                                     width={11}
                                     height={12}
                                     unoptimized
-                                    className={"lg:w-[38px] lg:h-[39px] mb-[8px] lg:mb-[25px]"}
+                                    className={"lg:w-[38px] lg:h-[39px] mb-[8px] lg:mb-[25px] ml-[3px] lg:ml-[10px]"}
                                 />
                             </div>
                         </div>
@@ -240,7 +240,7 @@ export default function WithGigPage() {
                     </div>
                     <div className="absolute z-10 flex justify-center items-center
                         top-[82px] left-[58px] w-[126px] h-[45px]
-                        lg:bottom-[102px] lg:left-[235px] lg:w-[305px] lg:h-[104px]">
+                        lg:top-auto lg:bottom-[102px] lg:left-[235px] lg:w-[305px] lg:h-[104px]">
                         <Image
                             src={"/withGIG/speech_bubble_white2.png"}
                             alt={"speech_bubble_white1.png"}
@@ -255,7 +255,7 @@ export default function WithGigPage() {
                     </div>
                     <div className="absolute z-10 flex justify-center items-center
                         top-[50px] right-[21px] w-[141px] h-[73px]
-                        lg:bottom-[63px] lg:right-[228px] lg:w-[317px] lg:h-[197px]">
+                        lg:top-auto lg:bottom-[63px] lg:right-[228px] lg:w-[317px] lg:h-[197px]">
                         <Image
                             src={"/withGIG/speech_bubble_purple1.png"}
                             alt={"speech_bubble_white1.png"}
@@ -361,7 +361,7 @@ export default function WithGigPage() {
                                         width={11}
                                         height={12}
                                         unoptimized
-                                        className={"lg:w-[38px] lg:h-[39px] mb-[8px] lg:mb-[25px]"}
+                                        className={"lg:w-[38px] lg:h-[39px] mb-[8px] lg:mb-[25px] ml-[3px] lg:ml-[10px]"}
                                     />
                                 </div>
                             </div>
@@ -423,7 +423,7 @@ export default function WithGigPage() {
                     </div>
                     <div className="absolute z-10 flex justify-center items-center
                         top-[79px] right-[24px] w-[199px] h-[30px]
-                        lg:bottom-[139px] lg:right-[162px] lg:w-[473px] lg:h-[87px]">
+                        lg:top-auto lg:bottom-[139px] lg:right-[162px] lg:w-[473px] lg:h-[87px]">
                         <Image
                             src={"/withGIG/speech_bubble_purple3.png"}
                             alt={"speech_bubble_purple3.png"}

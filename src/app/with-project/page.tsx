@@ -28,7 +28,7 @@ const contents = [
     {
         title: "실습 중심 기본기 함양 온라인 교육",
         sub: "이러닝 + 실시간 온라인 강의 병행",
-        content1: "ICT MICE 실무자 특강부터 AI 협업툴 활용 워크숍까지<br /><br />",
+        content1: "ICT MICE 실무자 특강부터<br />AI 협업툴 활용 워크숍까지",
         content2: "아이를 돌보며 집에서도 수강 가능한, 유연한 학습 시스템",
         img: "/withProject/section7_image11.png"
     },
@@ -904,16 +904,16 @@ export default function WithProjectPage() {
                 <Image
                     src={`${selected2 === 'reg' ? "/withProject/section8_image3.png" : "/withProject/section8_image4.png"}`}
                     alt={"image"}
-                    width={487}
-                    height={525}
+                    width={250}
+                    height={263}
                     unoptimized
-                    className="block lg:hidden w-full h-[180px] mt-[15px]"
+                    className="block lg:hidden w-full h-[135px] mt-[15px]"
                 />
                 <div className="flex justify-center items-center">
                     <Link
                         href="/with-project"
                         className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
-                            font-bold rounded-[10px] text-[7px] w-[121px] h-[17px] mt-[21px]
+                            font-bold rounded-[30px] text-[10px] w-[159px] h-[25px] mt-[21px]
                             lg:font-extrabold lg:rounded-[30px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:mt-[60px]"
                     >
                         위드프로젝트 신청서 작성하러 가기
@@ -923,7 +923,7 @@ export default function WithProjectPage() {
 
             {/* section9 */}
             <section className="flex flex-col w-full h-auto
-                mt-[113px] mb-[67px] lg:px-[146px] lg:mt-[207px] lg:mb-[50px]">
+                mt-[113px] mb-[67px] lg:px-[146px] lg:mt-[207px] lg:mb-[300px]">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
                     <h1 className="text-center text-[15px] font-black lg:text-[30px] lg:font-extrabold">
                         W.I.T.H Project
@@ -949,7 +949,7 @@ export default function WithProjectPage() {
                 <Link
                     href="/with-project"
                     className="bg-[#541E80] text-white self-center flex items-center justify-center
-                        mt-[17px] w-[121px] h-[17px] text-[7px] rounded-[10px] font-bold
+                        mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
                         lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
                         지금 바로 가능성을 현실로 만들기
                 </Link>

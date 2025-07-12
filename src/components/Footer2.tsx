@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="w-full h-auto flex flex-col bg-[#B1B1B1] text-white
-      pt-[31px] px-[34px]
-      lg:py-[50px] lg:px-[130px]">
+      py-[31px] px-[34px]
+      lg:py-[100px] lg:px-[130px]">
       {/* 메뉴 */}
       <div className="flex flex-row justify-between">
         <Image

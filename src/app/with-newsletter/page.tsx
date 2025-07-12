@@ -208,7 +208,7 @@ export default function WithNewsletterPage() {
                             {/* 말풍선 (꼬리 포함) */}
                             <div className="relative ml-[10px] lg:ml-[25px]">
                                 {/* 꼬리 */}
-                                <div className="absolute left-[-4px] top-1/2 transform -translate-y-1/2 rotate-45
+                                <div className="absolute left-[-2px] lg:left-[-4px] top-1/2 transform -translate-y-1/2 rotate-45
                                     w-[6px] h-[6px] lg:w-[12px] lg:h-[12px] bg-white shadow-[4px_4px_4px_0_rgba(0,0,0,0.15)] z-0"/>
                                 {/* 말풍선 본문 */}
                                 <div className="relative bg-white text-[#541E80] font-bold shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)] z-10
@@ -302,7 +302,7 @@ export default function WithNewsletterPage() {
             </section>
             {/* section5 */}
             <section className="flex flex-col w-full h-auto
-                mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[213px] lg:px-[200px]">
+                mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[300px] lg:px-[200px]">
                 <h1 className="text-center
                         text-[18px] font-black lg:text-[30px] lg:font-extrabold">
                     W.I.T.H Newsletter

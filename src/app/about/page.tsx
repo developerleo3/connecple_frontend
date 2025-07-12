@@ -72,12 +72,12 @@ export default function AboutPage() {
         <main>
             {/* section1 */}
             <section className="relative flex flex-col w-full h-auto
-                pl-[30px] pr-[20px] mt-[46px] lg:pl-[146px] lg:pr-[76px] lg:mt-[180px]">
+                pl-[30px] pr-[20px] mt-[46px] lg:pl-[106px] lg:pr-[76px] lg:mt-[180px]">
                 <h2 className="font-extrabold text-end text-[15px] mr-[30px] lg:text-[60px] lg:mr-[100px]">
                     <span className="text-[#541E80]">커넥플은 함께 </span>
-                    만들어 가는&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;과정 속에서
+                    만들어 가는&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;과정 속에서
                 </h2>
-                <h1 className="font-extrabold text-end text-[20px] lg:text-[70px] lg:mr-[30px]">
+                <h1 className="font-extrabold text-end text-[20px] lg:text-[70px] lg:mr-[20px]">
                     즐거움을&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span className="text-[#541E80]">찾아갑니다.</span>
                 </h1>
@@ -101,12 +101,12 @@ export default function AboutPage() {
                        width={153}
                        height={226}
                        unoptimized
-                       className="absolute right-[76px] lg:right-[380px] bottom-0 lg:w-[395px] lg:h-[581px]"
+                       className="absolute right-[71px] lg:right-[340px] bottom-0 lg:w-[450px] lg:h-[680px]"
                 />
             </section>
             {/* section2 */}
             <section className="flex flex-col w-full h-auto
-                px-[30px] mt-[59px] mb-[60px] lg:px-[200px] lg:mt-[225px] lg:mb-[229px]">
+                px-[30px] mt-[59px] mb-[60px] lg:px-[157px] lg:mt-[225px] lg:mb-[229px]">
                 <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">
                     협력과 소통으로 이루어진 우리 팀을 소개합니다.
                 </h1>
@@ -119,27 +119,24 @@ export default function AboutPage() {
                             img_url: "/about/profile_pjh.png",
                             position: "대표",
                             name: "박지희",
-                            des: "성과 중심의 마케팅 전략과 브랜딩 디자인을 담당하는 ",
-                            depart: "홍보사업부"
+                            des: '성과 중심의 마케팅 전략과<br /> 브랜딩 디자인을 담당하는<br /><span class="font-black text-[#541E80]">홍보사업부</span>',
                         },
                         {
                             img_url: "/about/profile_ksg.png",
                             position: "팀장",
                             name: "권슬기",
-                            des: "다양한 규모 행사 기획·실행을 전문으로 하는 ",
-                            depart: "MICE 사업부"
+                            des: '다양한 규모 행사<br />기획·실행을 전문으로 하는<br /><span class="font-black text-[#541E80]">MICE 사업부</span>',
                         },
                         {
                             img_url: "/about/profile_ahi.png",
                             position: "팀장",
                             name: "안혜인",
-                            des: "10년 이상의 현장 경험을 바탕으로 한 교육 기획·운영 전문가 조직 ",
-                            depart: "교육사업부"
+                            des: '10년 이상의 현장 경험을<br />바탕으로 한 교육 기획·운영<br />전문가 조직 <span class="font-black text-[#541E80]">교육사업부</span>'
                         }
                     ].map((item, idx) => (
                         <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]
                             w-[92px] h-[104px] rounded-[10px] lg:w-[296px] lg:h-[318px] lg:rounded-[50px]">
-                            <div className="flex flex-row w-full h-auto items-center px-[3px] lg:px-[14px]">
+                            <div className="flex flex-row w-full h-auto items-center px-[3px] lg:px-[14px] lg:mt-[-15px]">
                                 <div className="overflow-hidden rounded-full w-[44px] h-[44px] lg:w-[157px] lg:h-[157px]">
                                     <Image
                                         src={item.img_url}
@@ -155,11 +152,11 @@ export default function AboutPage() {
                                     <p className="font-black text-[10px] lg:text-[30px]">{item.name}</p>
                                 </div>
                             </div>
-                            <div className="w-full px-[10px] lg:px-[24px]">
-                                <div className="border-[#C0AED1] border-[0.5px] lg:border-[3px] w-full"/>
+                            <div className="w-full px-[5px] lg:px-[24px]">
+                                <div className="border-[#C0AED1] border-[0.5px] lg:border-[1.5px] w-full"/>
                             </div>
-                            <p className="font-bold text-[7px] px-[8px] mt-[10px] lg:text-[20px] lg:px-[40px] lg:mt-[19px]">{item.des}
-                                <span className="font-black text-[#541E80]">{item.depart}</span>
+                            <p className="font-bold text-[7px] mt-[10px] lg:text-[20px] lg:px-[24px] lg:mt-[19px]"
+                                dangerouslySetInnerHTML={{__html:item.des}}>
                             </p>
                         </div>
                     ))}
@@ -233,7 +230,7 @@ export default function AboutPage() {
                 </div>
             </section>
             {/* section4 */}
-            <section className="flex w-full h-auto px-[30px] lg:px-[200px]">
+            <section className="flex w-full h-auto px-[30px] lg:px-[157px]">
                 <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
                     {[
                         {
@@ -278,7 +275,7 @@ export default function AboutPage() {
             </section>
             {/* section5 */}
             <section className="flex flex-col w-full h-auto bg-gradient-to-b from-[#C0AED1B2] to-white
-                px-[30px] lg:px-[200px] pb-[50px] lg:pb-[100px]">
+                px-[30px] lg:px-[157px] pb-[50px] lg:pb-[100px]">
                 <h1 className="font-black text-[#541E80] text-[15px] mt-[35px] lg:text-[45px] lg:mt-[78px]">
                     우리가 행복해야 회사도 잘된다!
                 </h1>
@@ -388,7 +385,7 @@ export default function AboutPage() {
                 </div>
             </section>
             {/* section6 */}
-            <section className="flex flex-col w-full h-auto px-[30px] pb-[50px] lg:px-[200px] lg:pb-[220px]">
+            <section className="flex flex-col w-full h-auto px-[30px] pb-[50px] lg:px-[157px] lg:pb-[220px]">
                 <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px] lg:mt-[78px]">
                     당신을 맞이할 준비가 되어 있는 곳
                 </h1>
@@ -474,7 +471,7 @@ export default function AboutPage() {
                                     <p className="font-bold text-[10px] lg:text-[18px]">지하철</p>
                                     <div className="flex flex-row items-center justify-center gap-x-[6px] lg:gap-x-[12px]">
                                         <Image
-                                            src={"/about/icon_bus_green.svg"}
+                                            src={"/about/icon_subway_green.svg"}
                                             alt={"icon_bus_green"}
                                             width={9}
                                             height={10}
@@ -548,7 +545,7 @@ export default function AboutPage() {
                                     <p className="font-bold text-[10px] lg:text-[18px]">지하철</p>
                                     <div className="flex flex-row items-center justify-center gap-x-[6px] lg:gap-x-[12px]">
                                         <Image
-                                            src={"/about/icon_bus_green.svg"}
+                                            src={"/about/icon_subway_green.svg"}
                                             alt={"icon_bus_green"}
                                             width={9}
                                             height={10}
