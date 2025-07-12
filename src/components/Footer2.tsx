@@ -11,7 +11,7 @@ export default function Footer() {
       {/* 메뉴 */}
       <div className="flex flex-row justify-between">
         <Image
-            src="/logo_main_picture.svg"
+            src="/main/section1_logo_white.svg"
             alt="CONNECPLE"
             width={90}
             height={21}
