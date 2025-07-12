@@ -47,11 +47,13 @@ export default function AboutPage() {
     };
 
     const scrollLeft = () => {
-        scrollRef.current?.scrollBy({left: -800, behavior: "smooth"});
+        const scrollAmount = window.innerWidth >= 1024 ? 800 : 300; // lg 기준
+        scrollRef.current?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     };
 
     const scrollRight = () => {
-        scrollRef.current?.scrollBy({left: 800, behavior: "smooth"});
+        const scrollAmount = window.innerWidth >= 1024 ? 800 : 300;
+        scrollRef.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     };
 
     useEffect(() => {
@@ -69,45 +71,49 @@ export default function AboutPage() {
     return (
         <main>
             {/* section1 */}
-            <section className="relative flex flex-col w-full h-auto lg:px-[146px] lg:mt-[180px]">
-                <h2 className="font-extrabold text-end lg:text-[60px] lg:mr-[80px]">
+            <section className="relative flex flex-col w-full h-auto
+                pl-[30px] pr-[20px] mt-[46px] lg:pl-[146px] lg:pr-[76px] lg:mt-[180px]">
+                <h2 className="font-extrabold text-end text-[15px] mr-[30px] lg:text-[60px] lg:mr-[100px]">
                     <span className="text-[#541E80]">커넥플은 함께 </span>
-                    만들어 가는&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;과정 속에서
+                    만들어 가는&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;과정 속에서
                 </h2>
-                <h1 className="font-extrabold text-end lg:text-[70px] lg:mr-[30px]">
-                    즐거움을&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <h1 className="font-extrabold text-end text-[20px] lg:text-[70px] lg:mr-[30px]">
+                    즐거움을&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span className="text-[#541E80]">찾아갑니다.</span>
                 </h1>
-                <p className="font-normal lg:text-[18px] lg:mt-[131px]">
+                <p className="font-normal z-10 text-[6px] mt-[60px] lg:text-[18px] lg:mt-[131px]">
                     커넥플은 사람과 일, 성장을 잇는 작은 연결을 만듭니다.<br/>
                     경력보유여성을 위한 커리어 프로그램을 직접 기획하고, 함께 성장해갑니다.<br/>
                     우리는 서로의 삶을 존중하고, 일하는 방식을 다양하게 인정합니다.
                 </p>
-                <p className="font-extrabold lg:text-[20px] lg:mt-[51px]">
-                    “경보녀, 당신의 가치를 응원합니다"
+                <p className="font-extrabold text-[8px] mt-[16px] lg:text-[20px] lg:mt-[51px]">
+                    “경보녀, 당신의 가치를 응원합니다&#34;
                 </p>
-                <Link href={"/about"}
-                      className="flex font-bold justify-center items-center text-[#541E80] border-[2px]
-                    lg:rounded-[20px] lg:w-[262px] lg:h-[36px] lg:text-[20px] lg:mt-[14px] lg:mb-[26px]
-                    hover:bg-[#541E80] hover:text-white hover:border-[2px] border-[#541E80]">
+                <Link
+                    href={"/about"}
+                    className="flex font-bold justify-center items-center text-[#541E80]
+                        rounded-[10px] w-[96px] h-[17px] text-[7px] mt-[3px] mb-[5px] border-[0.5px]
+                        lg:rounded-[20px] lg:w-[262px] lg:h-[36px] lg:text-[20px] lg:mt-[14px] lg:mb-[26px] lg:border-[2px]
+                        hover:bg-[#541E80] hover:text-white hover:border-[2px] border-[#541E80]">
                     이슈메이커 기사 보러가기
                 </Link>
                 <Image src={"/about/ceo_picture.png"} alt={"ceo"}
-                       width={123}
-                       height={123}
+                       width={153}
+                       height={226}
                        unoptimized
-                       className="absolute lg:right-[380px] bottom-0 lg:w-[395px] lg:h-[581px]"
+                       className="absolute right-[76px] lg:right-[380px] bottom-0 lg:w-[395px] lg:h-[581px]"
                 />
             </section>
             {/* section2 */}
-            <section className="flex flex-col w-full h-auto lg:px-[200px] lg:mt-[225px] lg:mb-[229px]">
-                <h1 className="font-black text-[#541E80] lg:text-[45px]">
+            <section className="flex flex-col w-full h-auto
+                px-[30px] mt-[59px] mb-[60px] lg:px-[200px] lg:mt-[225px] lg:mb-[229px]">
+                <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">
                     협력과 소통으로 이루어진 우리 팀을 소개합니다.
                 </h1>
-                <p className="font-extrabold lg:text-[27px] lg:mt-[12px]">
+                <p className="font-extrabold text-[10px] mt-[11px] lg:text-[27px] lg:mt-[12px]">
                     각자의 전문성을 바탕으로 유기적인 협업 체계를 이루고 있습니다
                 </p>
-                <div className="flex flex-row w-full h-auto justify-between lg:mt-[76px]">
+                <div className="flex flex-row w-full h-auto justify-between mt-[24px] lg:mt-[76px]">
                     {[
                         {
                             img_url: "/about/profile_pjh.png",
@@ -132,27 +138,27 @@ export default function AboutPage() {
                         }
                     ].map((item, idx) => (
                         <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]
-                            lg:w-[296px] lg:h-[318px] lg:rounded-[50px]">
-                            <div className="flex flex-row w-full h-auto items-center lg:px-[14px]">
-                                <div className="overflow-hidden rounded-full lg:w-[157px] h-[157px]">
+                            w-[92px] h-[104px] rounded-[10px] lg:w-[296px] lg:h-[318px] lg:rounded-[50px]">
+                            <div className="flex flex-row w-full h-auto items-center px-[3px] lg:px-[14px]">
+                                <div className="overflow-hidden rounded-full w-[44px] h-[44px] lg:w-[157px] lg:h-[157px]">
                                     <Image
                                         src={item.img_url}
                                         alt={"alt"}
-                                        width={123}
-                                        height={123}
+                                        width={44}
+                                        height={44}
                                         unoptimized
                                         className="object-cover w-full h-full"
                                     />
                                 </div>
-                                <div className="flex flex-col justify-center lg:mt-[20px]">
-                                    <p className="font-bold lg:text-[20px]">{item.position}</p>
-                                    <p className="font-black lg:text-[30px]">{item.name}</p>
+                                <div className="flex flex-col justify-center mt-[8px] lg:mt-[20px]">
+                                    <p className="font-bold text-[8px] lg:text-[20px]">{item.position}</p>
+                                    <p className="font-black text-[10px] lg:text-[30px]">{item.name}</p>
                                 </div>
                             </div>
-                            <div className="w-full lg:px-[24px]">
-                                <div className="border-[#C0AED1] border-[3px] w-full"/>
+                            <div className="w-full px-[10px] lg:px-[24px]">
+                                <div className="border-[#C0AED1] border-[0.5px] lg:border-[3px] w-full"/>
                             </div>
-                            <p className="font-bold lg:text-[20px] lg:px-[40px] lg:mt-[19px]">{item.des}
+                            <p className="font-bold text-[7px] px-[8px] mt-[10px] lg:text-[20px] lg:px-[40px] lg:mt-[19px]">{item.des}
                                 <span className="font-black text-[#541E80]">{item.depart}</span>
                             </p>
                         </div>
@@ -160,26 +166,26 @@ export default function AboutPage() {
                 </div>
             </section>
             {/* section3 */}
-            <section className="flex flex-col w-full h-auto bg-[#F6F6F6] lg:px-[157px] lg:pb-[109px]">
-                <h1 className="font-black text-[#541E80] text-[28px] lg:text-[45px] lg:mt-[108px]">
+            <section className="flex flex-col w-full h-auto bg-[#F6F6F6] px-[30px] pb-[50px] lg:px-[157px] lg:pb-[109px]">
+                <h1 className="font-black text-[#541E80] text-[15px] mt-[33px] lg:text-[45px] lg:mt-[108px]">
                     더 나은 내일을 꿈꿔온 우리
                 </h1>
-                <p className="font-extrabold text-[#383838] text-[18px] lg:text-[27px] lg:mt-[12px]">
+                <p className="font-extrabold text-[#383838] text-[10px] lg:text-[27px] lg:mt-[12px]">
                     커넥플이 걸어온 길
                 </p>
                 {/* 화살표 */}
-                <div className="flex justify-end gap-[10px] lg:gap-[44px]">
+                <div className="flex justify-end gap-[22px] lg:gap-[44px]">
                     {/* 왼쪽 화살표 */}
                     <button onClick={scrollLeft}
                             disabled={!canScrollLeft}
                             className={`${canScrollLeft ? "cursor-pointer" : "cursor-not-allowed"}`}
                     >
                         <Image
-                            src={canScrollLeft ? "/vector_right_black.svg" : "/vector_left_gray.svg"}
+                            src={canScrollLeft ? "/main/vector_right_black.svg" : "/main/vector_left_gray.svg"}
                             alt="left"
-                            width={22}
-                            height={16}
-                            className={`object-contain ${canScrollLeft ? "rotate-180" : ""}`}
+                            width={12}
+                            height={8}
+                            className={`object-contain ${canScrollLeft ? "rotate-180" : ""} lg:w-[22px] lg:h-[16px]}]`}
                         />
                     </button>
                     {/* 오른쪽 화살표 */}
@@ -189,34 +195,34 @@ export default function AboutPage() {
                         className={`${canScrollRight ? "cursor-pointer" : "cursor-not-allowed"}`}
                     >
                         <Image
-                            src={canScrollRight ? "/vector_right_black.svg" : "/vector_left_gray.svg"}
+                            src={canScrollRight ? "/main/vector_right_black.svg" : "/main/vector_left_gray.svg"}
                             alt="right"
-                            width={22}
-                            height={16}
-                            className={`object-contain ${!canScrollRight ? "rotate-180" : ""}`}
+                            width={12}
+                            height={8}
+                            className={`object-contain ${!canScrollRight ? "rotate-180" : ""} lg:w-[22px] lg:h-[16px]`}
                         />
                     </button>
                 </div>
                 {/* 타임라인 바 */}
                 <div ref={scrollRef} className="overflow-x-auto scroll-smooth no-scrollbar">
-                    <div className="flex flex-row items-start relative min-w-fit lg:mt-[70px]">
+                    <div className="flex flex-row items-start relative min-w-fit mt-[16px] lg:mt-[70px]">
                         {timelineItems.map((item, idx) => (
                             <div
                                 key={idx}
                                 className="min-w-fit flex flex-col items-start">
                                 {/* 연도 */}
-                                <div className="text-[#541E80] font-black text-[22px]
-                                    lg:text-[35px]">
+                                <div className="text-[#541E80] font-black text-[13px] lg:text-[35px]">
                                     {item.year}
                                 </div>
                                 {/* 점 */}
-                                <div className="bg-[#541E80] rounded-full w-[12px] h-[12px]
+                                <div className="bg-[#541E80] rounded-full w-[6px] h-[6px]
                                     lg:w-[13px] lg:h-[13px] lg:mt-[27px]"/>
                                 {/* 선 */}
-                                <div className="border-[#541E80] lg:border-[2px] w-full lg:mt-[-9px]"/>
+                                <div className="border-[#541E80] border-[1px] lg:border-[2px] w-full mt-[-4px] lg:mt-[-9px]"/>
                                 {/* 내용 */}
                                 <div className="flex flex-col font-semibold text-start text-[#9A9A9A]
-                                    lg:gap-[4px] lg:text-[20px] lg:mt-[33px] lg:mr-[170px]">
+                                    gap-y-[2px] text-[7px] mt-[13px] mr-[40px]
+                                    lg:gap-y-[4px] lg:text-[20px] lg:mt-[33px] lg:mr-[170px]">
                                     {item.contents.map((line, i) => (
                                         <span key={i}>{line}</span>
                                     ))}
@@ -227,8 +233,8 @@ export default function AboutPage() {
                 </div>
             </section>
             {/* section4 */}
-            <section className="flex w-full h-auto lg:px-[200px]">
-                <div className="flex flex-row justify-between w-full h-auto lg:my-[203px]">
+            <section className="flex w-full h-auto px-[30px] lg:px-[200px]">
+                <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
                     {[
                         {
                             path: "/about/section4_picture1.png",
@@ -248,37 +254,39 @@ export default function AboutPage() {
                     ].map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col w-full h-auto justify-between items-center">
-                            <Image
-                                src={item.path}
-                                alt={"alt"}
-                                width={123}
-                                height={123}
-                                unoptimized
-                                className="object-cover lg:w-[314px] lg:h-[279px] lg:rounded-[30px]"
-                            />
-                            <div className="flex w-full lg:h-[84px] justify-center items-center">
-                                <p className="font-extrabold lg:text-[15px] text-center"
+                            className="flex flex-col w-[98px] lg:w-[314px]  h-auto items-center">
+                            <div className="relative w-full h-[87px] lg:h-[279px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
+                                <Image
+                                    src={item.path}
+                                    alt="alt"
+                                    fill
+                                    unoptimized
+                                    className="object-fill rounded-[10px] lg:rounded-[30px]"
+                                />
+                            </div>
+                            <div className="flex w-full h-[40px] lg:h-[84px] justify-center items-center">
+                                <p className="font-extrabold text-[7px] lg:text-[15px] text-center"
                                    dangerouslySetInnerHTML={{__html: item.title}}/>
                             </div>
 
-                            <p className="w-full h-auto text-center font-semibold lg:text-[16px] lg:px-[40px]"
+                            <p className="w-full h-auto text-center font-semibold
+                                text-[6px] lg:text-[16px]"
                                dangerouslySetInnerHTML={{__html: item.content}}/>
                         </div>
                     ))}
                 </div>
             </section>
             {/* section5 */}
-            <section className="flex flex-col w-full h-auto bg-gradient-to-b from-[#C0AED1B2] to-white lg:px-[200px]">
-                <h1 className="font-black text-[#541E80] text-[28px] lg:text-[45px] lg:mt-[78px]">
+            <section className="flex flex-col w-full h-auto bg-gradient-to-b from-[#C0AED1B2] to-white
+                px-[30px] lg:px-[200px] pb-[50px] lg:pb-[100px]">
+                <h1 className="font-black text-[#541E80] text-[15px] mt-[35px] lg:text-[45px] lg:mt-[78px]">
                     우리가 행복해야 회사도 잘된다!
                 </h1>
-                <p className="font-extrabold text-[#383838] text-[18px] lg:text-[27px] lg:mt-[12px]">
+                <p className="font-extrabold text-[#383838] text-[10px] mt-[10px] lg:text-[27px] lg:mt-[12px]">
                     커넥플에서 제공하는 복지 혜택
                 </p>
-                <div className="flex flex-col w-full h-auto lg:mt-[46px] lg:gap-y-[23px]">
-                    <div className="flex flex-row w-full h-auto justify-center items-center
-                        lg:gap-x-[18px]">
+                <div className="flex flex-col w-full h-auto mt-[23px] gap-y-[11px] lg:mt-[46px] lg:gap-y-[23px]">
+                    <div className="flex flex-row w-full h-auto justify-between items-center">
                         {[
                             {
                                 title: "우리가 행복해야<br />회사도 잘된다",
@@ -300,48 +308,53 @@ export default function AboutPage() {
                         ].map((item, idx) => (
                             <div
                                 key={idx}
-                                className="flex flex-col bg-[#F9F9F9] shadow-[2px_2px_4px_0_rgba(0,0,0,0.25)]
-                                    lg:w-[236px] lg:h-[108px] lg:rounded-[15px]">
-                                <p className="font-extrabold text-start lg:text-[18px] lg:mt-[16px] lg:ml-[21px]"
+                                className="flex flex-col bg-[#F9F9F9] shadow-[2px_2px_4px_0_rgba(0,0,0,0.25)] h-auto
+                                    w-[70px] rounded-[10px] p-[5px] lg:w-[256px] lg:rounded-[15px] lg:p-[10px]">
+                                <p className="font-extrabold text-start text-[7px] lg:text-[18px]"
                                    dangerouslySetInnerHTML={{__html: item.title}}/>
-                                <p className="font-bold text-end lg:text-[15px] lg:mt-[8px] lg:mr-[10px]"
+                                <p className="font-bold text-end text-[6px] mt-[5px] lg:text-[15px] lg:mt-[12px]"
                                    dangerouslySetInnerHTML={{__html: item.main}}/>
                             </div>
                         ))}
                     </div>
-                    <div className="flex flex-row w-full h-auto justify-center items-center
-                        lg:gap-x-[18px]">
+                    <div className="flex flex-row w-full h-auto justify-between items-center">
                         <div className="relative bg-[#F9F9F9] shadow-[2px_2px_4px_0_rgba(0,0,0,0.25)]
-                            lg:w-[236px] lg:h-[260px] lg:rounded-[15px]">
-                            <p className="absolute font-extrabold text-start lg:text-[18px] lg:top-[23px] lg:left-[21px]">
+                            w-[70px] h-[80px] rounded-[10px] p-[5px]
+                            lg:w-[250px] lg:h-[260px] lg:rounded-[15px] lg:p-[12px]">
+                            <p className="absolute font-extrabold text-start text-[7px] lg:text-[18px]">
                                 재충전이 필요할 땐<br/>
                                 눈치보지 말고
                             </p>
-                            <p className="absolute font-bold text-end lg:text-[15px] lg:bottom-[8px] lg:right-[10px]">
+                            <p className="absolute font-bold text-end
+                                text-[6px] lg:text-[15px] bottom-[5px] right-[5px] lg:bottom-[12px] lg:right-[12px]">
                                 연말/연초 리프레쉬 휴가
                             </p>
                         </div>
-                        <Image
-                            src={"/about/section5_image.png"}
-                            alt={"section5_image.png"}
-                            width={123}
-                            height={123}
-                            unoptimized
-                            className="lg:w-[488px] lg:h-[260px]"
-                        />
+                        <div>
+                            <Image
+                                src={"/about/section5_image.png"}
+                                alt={"section5_image.png"}
+                                width={150}
+                                height={130}
+                                unoptimized
+                                className="object-contain lg:w-[500px] lg:h-[260px]"
+                            />
+                        </div>
+
                         <div className="relative bg-[#F9F9F9] shadow-[2px_2px_4px_0_rgba(0,0,0,0.25)]
-                            lg:w-[236px] lg:h-[260px] lg:rounded-[15px]">
-                            <p className="absolute font-extrabold text-start lg:text-[18px] lg:top-[23px] lg:left-[21px]">
+                            w-[70px] h-[80px] rounded-[10px] p-[5px]
+                            lg:w-[250px] lg:h-[260px] lg:rounded-[15px] lg:p-[12px]">
+                            <p className="absolute font-extrabold text-start text-[7px] lg:text-[18px]">
                                 아프지마<br/>
                                 건강히 일해야지
                             </p>
-                            <p className="absolute font-bold text-end lg:text-[15px] lg:bottom-[8px] lg:right-[10px]">
+                            <p className="absolute font-bold text-end
+                                text-[6px] lg:text-[15px] bottom-[5px] right-[5px] lg:bottom-[12px] lg:right-[12px]">
                                 정기 건강검진
                             </p>
                         </div>
                     </div>
-                    <div className="flex flex-row w-full h-auto justify-center items-center
-                        lg:gap-x-[18px] lg:mb-[134px]">
+                    <div className="flex flex-row w-full h-auto justify-between items-center">
                         {[
                             {
                                 title: "스팸, 한방샴푸<br />그게 뭐죠?",
@@ -363,11 +376,11 @@ export default function AboutPage() {
                         ].map((item, idx) => (
                             <div
                                 key={idx}
-                                className="flex flex-col bg-[#F9F9F9] shadow-[2px_2px_4px_0_rgba(0,0,0,0.25)]
-                                    lg:w-[236px] lg:h-[108px] lg:rounded-[15px]">
-                                <p className="font-extrabold text-start lg:text-[18px] lg:mt-[16px] lg:ml-[21px]"
+                                className="flex flex-col bg-[#F9F9F9] shadow-[2px_2px_4px_0_rgba(0,0,0,0.25)] h-auto
+                                    w-[70px] rounded-[10px] p-[5px] lg:w-[256px] lg:rounded-[15px] lg:p-[10px]">
+                                <p className="font-extrabold text-start text-[7px] lg:text-[18px]"
                                    dangerouslySetInnerHTML={{__html: item.title}}/>
-                                <p className="font-bold text-end lg:text-[15px] lg:mt-[8px] lg:mr-[10px]"
+                                <p className="font-bold text-end text-[6px] mt-[5px] lg:text-[15px] lg:mt-[12px]"
                                    dangerouslySetInnerHTML={{__html: item.main}}/>
                             </div>
                         ))}
@@ -375,35 +388,36 @@ export default function AboutPage() {
                 </div>
             </section>
             {/* section6 */}
-            <section className="flex flex-col w-full h-auto lg:px-[200px] lg:pb-[220px]">
-                <h1 className="font-black text-[#541E80] text-[28px] lg:text-[45px] lg:mt-[78px]">
+            <section className="flex flex-col w-full h-auto px-[30px] pb-[50px] lg:px-[200px] lg:pb-[220px]">
+                <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px] lg:mt-[78px]">
                     당신을 맞이할 준비가 되어 있는 곳
                 </h1>
-                <p className="font-extrabold text-[#383838] text-[18px] lg:text-[27px] lg:mt-[12px]">
+                <p className="font-extrabold text-[#383838] text-[12px] mt-[6px] lg:text-[27px] lg:mt-[12px]">
                     커넥플로 오시는 길
                 </p>
-                <div className="flex flex-row w-full h-auto justify-between items-center lg:mt-[48px] lg:gap-x-[39px]">
+                <div className="flex flex-row w-full h-auto justify-between items-center
+                    mt-[24px] gap-x-[20px] lg:mt-[48px] lg:gap-x-[39px]">
                     <button onClick={() => setSelected('office')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px]
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px]
                         ${selected === 'office' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
-                        lg:text-[25px] lg:pb-[17px]`}
+                        text-[10px] pb-[5px] lg:text-[25px] lg:pb-[17px] cursor-pointer`}
                     >
                         사무실
                     </button>
                     <button onClick={() => setSelected('class')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px]
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px]
                         ${selected === 'class' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
-                        lg:text-[25px] lg:pb-[17px]`}
+                        text-[10px] pb-[5px] lg:text-[25px] lg:pb-[17px] cursor-pointer`}
                     >
                         교육장
                     </button>
                 </div>
                 {/* 탭 콘텐츠 영역 */}
-                <div className="w-full h-auto lg:mt-[44px]">
+                <div className="w-full h-auto mt-[22px] lg:mt-[44px]">
                     {selected === 'office' && (
-                        <div className="flex flex-row w-full h-auto justify-between lg:gap-x-[39px]">
+                        <div className="flex flex-col w-full h-auto aspect-video gap-y-[10px] lg:gap-y-[20px]">
                             {/* 지도 */}
-                            <div className="flex w-full aspect-video">
+                            <div className="flex w-full h-auto aspect-video">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.378272641362!2d126.84948147596894!3d37.522579426647354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9dced2e3ccd9%3A0xce8b9f57f744560e!2z7ISc7Jq47Yq567OE7IucIOyWkeyynOq1rCDspJHslZnroZwgMjk0!5e0!3m2!1sko!2skr!4v1752243346640!5m2!1sko!2skr"
                                     width="100%"
@@ -414,67 +428,70 @@ export default function AboutPage() {
                                     referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             {/* 정보 */}
-                            <div className="flex flex-col w-full h-auto justify-end lg:gap-y-[8px]">
-                                {/* 주소*/}
-                                <div className="flex flex-row w-full h-auto lg:gap-x-[26px]">
-                                    <p className="font-bold lg:text-[18px]">주&nbsp;&nbsp;&nbsp;&nbsp;소</p>
-                                    <div className="flex flex-row items-center justify-center lg:gap-x-[12px]">
-                                        <p className="font-normal lg:text-[18px]">서울시 양천구 중앙로294, 명성빌딩 6층 6-50호</p>
+                            <div className="flex flex-col w-full h-auto justify-end gap-y-[4px] lg:gap-y-[8px]">
+                                {/* 주소 */}
+                                <div className="flex flex-row w-full h-auto gap-x-[13px] lg:gap-x-[26px]">
+                                    <p className="font-bold text-[10px] lg:text-[18px]">주&nbsp;&nbsp;&nbsp;&nbsp;소</p>
+                                    <div className="flex flex-row items-center justify-center gap-x-[6px] lg:gap-x-[12px]">
+                                        <p className="font-normal text-[10px] lg:text-[18px]">서울시 양천구 중앙로294, 명성빌딩 6층 6-50호</p>
                                     </div>
                                 </div>
                                 {/* 버스 */}
-                                <div className="flex flex-row w-full h-auto lg:gap-x-[26px]">
-                                    <p className="font-bold lg:text-[18px]">버&nbsp;&nbsp;&nbsp;&nbsp;스</p>
-                                    <div className="flex flex-col lg:gap-y-[8px]">
-                                        <div className="flex flex-row items-center justify-start lg:gap-x-[12px]">
+                                <div className="flex flex-row w-full h-auto gap-x-[13px] lg:gap-x-[26px]">
+                                    <p className="font-bold text-[10px] lg:text-[18px]">버&nbsp;&nbsp;&nbsp;&nbsp;스</p>
+                                    <div className="flex flex-col gap-y-[4px] lg:gap-y-[8px]">
+                                        <div className="flex flex-row items-center justify-start gap-x-[6px] lg:gap-x-[12px]">
                                             <Image
                                                 src={"/about/icon_bus_blue.svg"}
                                                 alt={"icon_bus_green"}
-                                                width={123}
-                                                height={123}
+                                                width={9}
+                                                height={10}
                                                 unoptimized
                                                 className="lg:w-[16px] lg:h-[19px]"
                                             />
-                                            <p className="font-bold text-[#476FF3] lg:text-[18px]">603</p>
-                                            <p className="font-normal lg:text-[18px]">신정네거리역 하차, 도보 2분</p>
+                                            <p className="font-bold text-[#476FF3] text-[10px] lg:text-[18px]">603</p>
+                                            <p className="font-normal text-[10px] lg:text-[18px]">신정네거리역 하차, 도보 2분</p>
                                         </div>
-                                        <div className="flex flex-row items-center justify-start lg:gap-x-[12px]">
+                                        <div className="flex flex-row items-center justify-start gap-x-[6px] lg:gap-x-[12px]">
                                             <Image
                                                 src={"/about/icon_bus_green.svg"}
                                                 alt={"icon_bus_green"}
-                                                width={123}
-                                                height={123}
+                                                width={9}
+                                                height={10}
                                                 unoptimized
                                                 className="lg:w-[16px] lg:h-[19px]"
                                             />
-                                            <p className="font-bold text-[#43C478] lg:text-[18px]">6514, 98, 5012,6614, 6714, 양천03, 6617</p>
+                                            <p className="font-bold text-[#43C478] text-[10px] lg:text-[18px]">6514, 98, 5012,6614, 6714, 양천03, 6617</p>
                                         </div>
-                                        <p className="font-semibold text-[#4A4A4A] lg:text-[18px] lg:ml-[28px]">신정네거리역 3번출구, 도보 3분</p>
+                                        <p className="font-semibold text-[#4A4A4A]
+                                            text-[10px] ml-[14px] lg:text-[18px] lg:ml-[28px]">
+                                            신정네거리역 3번출구, 도보 3분
+                                        </p>
                                     </div>
                                 </div>
                                 {/* 지하철 */}
-                                <div className="flex flex-row w-full h-auto lg:gap-x-[26px]">
-                                    <p className="font-bold lg:text-[18px]">지하철</p>
-                                    <div className="flex flex-row items-center justify-center lg:gap-x-[12px]">
+                                <div className="flex flex-row w-full h-auto gap-x-[13px] lg:gap-x-[26px]">
+                                    <p className="font-bold text-[10px] lg:text-[18px]">지하철</p>
+                                    <div className="flex flex-row items-center justify-center gap-x-[6px] lg:gap-x-[12px]">
                                         <Image
                                             src={"/about/icon_bus_green.svg"}
                                             alt={"icon_bus_green"}
-                                            width={123}
-                                            height={123}
+                                            width={9}
+                                            height={10}
                                             unoptimized
                                             className="lg:w-[16px] lg:h-[19px]"
                                         />
-                                        <p className="font-bold text-[#43C478] lg:text-[18px]">2호선</p>
-                                        <p className="font-normal lg:text-[18px]">신정네거리역</p>
+                                        <p className="font-bold text-[#43C478] text-[10px] lg:text-[18px]">2호선</p>
+                                        <p className="font-normal text-[10px] lg:text-[18px]">신정네거리역</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
                     {selected === 'class' && (
-                        <div className="flex flex-row w-full h-auto justify-between lg:gap-x-[39px]">
+                        <div className="flex flex-col w-full h-auto aspect-video gap-y-[10px] lg:gap-y-[20px]">
                             {/* 지도 */}
-                            <div className="flex w-full aspect-video">
+                            <div className="flex w-full h-auto aspect-video">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.448622010018!2d126.85253017596872!3d37.520920726742325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9dcfacf9f7f3%3A0x35655742a1e20836!2z7ISc7Jq47Yq567OE7IucIOyWkeyynOq1rCDsnYDtlonsoJXroZw16ri4IDQy!5e0!3m2!1sko!2skr!4v1752249782288!5m2!1sko!2skr"
                                     width="100%"
@@ -485,58 +502,61 @@ export default function AboutPage() {
                                     referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             {/* 정보 */}
-                            <div className="flex flex-col w-full h-auto justify-end lg:gap-y-[8px]">
-                                {/* 주소*/}
-                                <div className="flex flex-row w-full h-auto lg:gap-x-[26px]">
-                                    <p className="font-bold lg:text-[18px]">주&nbsp;&nbsp;&nbsp;&nbsp;소</p>
-                                    <div className="flex flex-row items-center justify-center lg:gap-x-[12px]">
-                                        <p className="font-normal lg:text-[18px]">서울시 양천구 은행정로5길 42, 2층 커넥플아카데미</p>
+                            <div className="flex flex-col w-full h-auto justify-end gap-y-[4px] lg:gap-y-[8px]">
+                                {/* 주소 */}
+                                <div className="flex flex-row w-full h-auto gap-x-[13px] lg:gap-x-[26px]">
+                                    <p className="font-bold text-[10px] lg:text-[18px]">주&nbsp;&nbsp;&nbsp;&nbsp;소</p>
+                                    <div className="flex flex-row items-center justify-center gap-x-[6px] lg:gap-x-[12px]">
+                                        <p className="font-normal text-[10px] lg:text-[18px]">서울시 양천구 은행정로5길 42, 2층 커넥플아카데미</p>
                                     </div>
                                 </div>
                                 {/* 버스 */}
-                                <div className="flex flex-row w-full h-auto lg:gap-x-[26px]">
-                                    <p className="font-bold lg:text-[18px]">버&nbsp;&nbsp;&nbsp;&nbsp;스</p>
-                                    <div className="flex flex-col lg:gap-y-[8px]">
-                                        <div className="flex flex-row items-center justify-start lg:gap-x-[12px]">
+                                <div className="flex flex-row w-full h-auto gap-x-[13px] lg:gap-x-[26px]">
+                                    <p className="font-bold text-[10px] lg:text-[18px]">버&nbsp;&nbsp;&nbsp;&nbsp;스</p>
+                                    <div className="flex flex-col gap-y-[4px] lg:gap-y-[8px]">
+                                        <div className="flex flex-row items-center justify-start gap-x-[6px] lg:gap-x-[12px]">
                                             <Image
                                                 src={"/about/icon_bus_blue.svg"}
                                                 alt={"icon_bus_green"}
-                                                width={123}
-                                                height={123}
+                                                width={9}
+                                                height={10}
                                                 unoptimized
                                                 className="lg:w-[16px] lg:h-[19px]"
                                             />
-                                            <p className="font-bold text-[#476FF3] lg:text-[18px]">603</p>
-                                            <p className="font-normal lg:text-[18px]">신정네거리역 하차, 도보 2분</p>
+                                            <p className="font-bold text-[#476FF3] text-[10px] lg:text-[18px]">603</p>
+                                            <p className="font-normal text-[10px] lg:text-[18px]">신정네거리역 하차, 도보 2분</p>
                                         </div>
-                                        <div className="flex flex-row items-center justify-start lg:gap-x-[12px]">
+                                        <div className="flex flex-row items-center justify-start gap-x-[6px] lg:gap-x-[12px]">
                                             <Image
                                                 src={"/about/icon_bus_green.svg"}
                                                 alt={"icon_bus_green"}
-                                                width={123}
-                                                height={123}
+                                                width={9}
+                                                height={10}
                                                 unoptimized
                                                 className="lg:w-[16px] lg:h-[19px]"
                                             />
-                                            <p className="font-bold text-[#43C478] lg:text-[18px]">6514, 98, 5012,6614, 6714, 양천03, 6617</p>
+                                            <p className="font-bold text-[#43C478] text-[10px] lg:text-[18px]">6514, 98, 5012,6614, 6714, 양천03, 6617</p>
                                         </div>
-                                        <p className="font-semibold text-[#4A4A4A] lg:text-[18px] lg:ml-[28px]">신정네거리역 3번출구, 도보 3분</p>
+                                        <p className="font-semibold text-[#4A4A4A]
+                                            text-[10px] ml-[14px] lg:text-[18px] lg:ml-[28px]">
+                                            신정네거리역 3번출구, 도보 3분
+                                        </p>
                                     </div>
                                 </div>
                                 {/* 지하철 */}
-                                <div className="flex flex-row w-full h-auto lg:gap-x-[26px]">
-                                    <p className="font-bold lg:text-[18px]">지하철</p>
-                                    <div className="flex flex-row items-center justify-center lg:gap-x-[12px]">
+                                <div className="flex flex-row w-full h-auto gap-x-[13px] lg:gap-x-[26px]">
+                                    <p className="font-bold text-[10px] lg:text-[18px]">지하철</p>
+                                    <div className="flex flex-row items-center justify-center gap-x-[6px] lg:gap-x-[12px]">
                                         <Image
                                             src={"/about/icon_bus_green.svg"}
                                             alt={"icon_bus_green"}
-                                            width={123}
-                                            height={123}
+                                            width={9}
+                                            height={10}
                                             unoptimized
                                             className="lg:w-[16px] lg:h-[19px]"
                                         />
-                                        <p className="font-bold text-[#43C478] lg:text-[18px]">2호선</p>
-                                        <p className="font-normal lg:text-[18px]">신정네거리역</p>
+                                        <p className="font-bold text-[#43C478] text-[10px] lg:text-[18px]">2호선</p>
+                                        <p className="font-normal text-[10px] lg:text-[18px]">신정네거리역</p>
                                     </div>
                                 </div>
                             </div>

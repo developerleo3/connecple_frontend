@@ -153,7 +153,7 @@ export default function WithProjectPage() {
             </section>
 
             {/* section2 */}
-            <section className="w-full h-auto px-[60px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
+            <section className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
                     {/* 왼쪽 로고 */}
@@ -237,7 +237,7 @@ export default function WithProjectPage() {
             </section>
 
             {/* section3 */}
-            <section className="flex flex-col w-full h-auto bg-[#C0AED1B2] px-[60px] lg:px-[146px]"
+            <section className="flex flex-col w-full h-auto bg-[#C0AED1B2] px-[30px] lg:px-[146px]"
                      style={{
                          background: "linear-gradient(to bottom, rgba(192, 174, 209, 0.7), rgba(255, 255, 255, 1))",
                      }}>
@@ -290,7 +290,7 @@ export default function WithProjectPage() {
 
             {/* section4 */}
             <section
-                className="flex flex-col w-full h-auto justify-center mt-[23px] px-[60px] lg:mt-[83px] lg:px-[146px]">
+                className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[83px] lg:px-[146px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     이런분들께 추천합니다.
                 </h1>
@@ -398,7 +398,7 @@ export default function WithProjectPage() {
 
             {/* section5 */}
             <section
-                className="flex flex-col w-full h-auto justify-center mt-[58px] px-[60px] lg:mt-[250px] lg:px-[200px]">
+                className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[200px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     교육생들의 생생후기
                 </h1>
@@ -596,7 +596,7 @@ export default function WithProjectPage() {
 
             {/* section6 */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px]
-                px-[52px] mt-[78px] pb-[62px] lg:px-[146px] lg:mt-[439px] lg:pb-[195px]">
+                px-[30px] mt-[78px] pb-[62px] lg:px-[146px] lg:mt-[439px] lg:pb-[195px]">
                 <div className="relative w-full h-auto lg:mt-[-209px]">
                     {/* 배경 */}
                     <Image
@@ -695,7 +695,7 @@ export default function WithProjectPage() {
             <section className="flex w-full h-auto bg-[#EAEAEA80]">
                 <div className="flex flex-col w-full h-auto bg-white justify-between
                     rounded-tr-[50px] px-[53px] lg:rounded-tr-[120px] lg:px-[146px]">
-                    <h1 className="font-black text-[#541E80] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
+                    <h1 className="font-black text-[#541E80] text-[15px] mt-[55px] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
                     {/* pc 레이아웃 */}
                     <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px]">
                         <div className="flex flex-col w-auto justify-center lg:mt-[26px] lg:gap-y-[60px]">

@@ -101,7 +101,7 @@ export default function WithConnecdayPage() {
             </section>
 
             {/* section2 */}
-            <section className="flex flex-col w-full h-auto mt-[99px] px-[54px] lg:mt-[88px] lg:px-[123px]">
+            <section className="flex flex-col w-full h-auto mt-[99px] px-[30px] lg:mt-[88px] lg:px-[123px]">
                 <h1 className="hidden lg:block font-black text-[#541E80] lg:text-[45px] lg:mt-[143px]">
                     한 걸음 내디뎠다면, 이제 연결이 필요한 순간입니다.
                 </h1>
@@ -249,7 +249,7 @@ export default function WithConnecdayPage() {
 
             {/* section3 - 버튼 클릭에 따라 콘텐츠 변경 */}
             <section className="flex flex-row w-full justify-between h-auto
-                    px-[45px] mt-[88px] mb-[84px]
+                    px-[30px] mt-[88px] mb-[84px] gap-x-[10px]
                     lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[157px]">
                 <div className="flex flex-col">
                     <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">PROGRAM</h1>

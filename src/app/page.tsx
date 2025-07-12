@@ -293,7 +293,7 @@ export default function Home() {
                         <div
                             key={idx}
                             className="flex flex-col items-center justify-center w-[176px] h-[176px]
-                                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[5px_5px_10px_0_rgba(0,0,0,0.5)]"
+                                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]"
                         >
                             <div className="flex-[3] flex items-center justify-center text-center">
                                 <p
@@ -317,7 +317,7 @@ export default function Home() {
                             <div
                                 key={idx}
                                 className="flex flex-col items-center justify-center w-[87px] h-[87px]
-                                    rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
+                                    rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]"
                             >
                                 <div className="flex-[3] flex items-center justify-center text-center">
                                     <p
@@ -340,7 +340,7 @@ export default function Home() {
                             <div
                                 key={idx}
                                 className="flex flex-col items-center justify-center w-[87px] h-[87px]
-                                    rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
+                                    rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]"
                             >
                                 <div className="flex-[3] flex items-center justify-center text-center">
                                     <p
@@ -450,7 +450,7 @@ export default function Home() {
                             <div>
                                 <Link
                                     href="/with-project"
-                                    className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                                    className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]
                                         right-[49px] top-[-34px] text-[10px] space-y-[8px] w-[68px] h-[68px]
                                         rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
                                         lg:top-auto lg:right-auto lg:left-[0px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]

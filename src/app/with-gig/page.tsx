@@ -15,7 +15,7 @@ export default function WithGigPage() {
                     unoptimized
                     className={"z-0"}
                 />
-                <div className={"absolute z-10 flex flex-col left-[46px] top-[43px] lg:left-[140px] lg:top-[132px]"}>
+                <div className={"absolute z-10 flex flex-col left-[26px] top-[23px] lg:left-[140px] lg:top-[132px]"}>
                     <h3 className={"font-extrabold text-[9.2px] lg:font-bold text-[#D8AEFF] lg:text-[23px]"}>
                         경력, 일, 삶의 균형을 위한 새로운 일의 방식
                     </h3>
@@ -25,16 +25,16 @@ export default function WithGigPage() {
                     </h1>
                 </div>
                 <p className="absolute z-10 text-white font-bold leading-loose
-                    text-[8px] left-[46px] bottom-[41px] lg:text-[25px] lg:left-[140px] lg:bottom-[123px]">
+                    text-[8px] left-[26px] bottom-[21px] lg:text-[25px] lg:left-[140px] lg:bottom-[123px]">
                     위드긱은 ‘긱(GIG)’ 근무 방식을 기반으로,<br/>
                     경력보유여성들이 자신만의 속도로 다시 일할 수 있도록<br/>
                     재택 · 유연 · 단기 중심의 프로젝트형 일자리를 연결해주는 커리어 플랫폼입니다.
                 </p>
             </section>
             {/* section2 */}
-            <section className={"flex flex-col w-full h-auto px-[45px] mt-[52px] lg:px-[200px] lg:mt-[169px]"}>
+            <section className={"flex flex-col w-full h-auto px-[30px] mt-[52px] lg:px-[200px] lg:mt-[169px]"}>
                 <h1 className={"font-black text-[#541E80] lg:text-[45px]"}>이런 분들을 위해 만들어졌습니다.</h1>
-                <div className={"flex flex-col w-full h-auto mt-[20px] gap-y-[7px] lg:mt-[46px] lg:gap-y-[23px]"}>
+                <div className={"flex flex-col w-full h-auto mt-[20px] gap-y-[15px] lg:mt-[46px] lg:gap-y-[23px]"}>
                     {[
                         {
                             index: "01",
@@ -75,7 +75,7 @@ export default function WithGigPage() {
                 </div>
             </section>
             {/* section3 */}
-            <section className={"flex flex-col w-full h-auto px-[45px] mt-[63px] lg:px-[200px] lg:mt-[455px]"}>
+            <section className={"flex flex-col w-full h-auto px-[30px] mt-[63px] lg:px-[200px] lg:mt-[455px]"}>
                 <h1 className={"font-black text-[#541E80] text-[15px] lg:text-[45px]"}>
                     위드GIG 성공사례
                 </h1>
@@ -120,7 +120,7 @@ export default function WithGigPage() {
             </section>
             {/* section4 */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA]
-                mt-[61px] rounded-tl-[60px] px-[45px] lg:mt-[159px] lg:rounded-tl-[150px] lg:px-[200px]">
+                mt-[61px] rounded-tl-[60px] px-[30px] lg:mt-[159px] lg:rounded-tl-[150px] lg:px-[200px]">
                 <div className="flex flex-row items-center mt-[72px] lg:mt-[110px]">
                     {/* 왼쪽 로고 */}
                     <Image
@@ -285,7 +285,7 @@ export default function WithGigPage() {
             </section>
             {/* section6 */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA]">
-                <div className="bg-white rounded-tr-[60px] px-[45px] mt-[60px]
+                <div className="bg-white rounded-tr-[60px] px-[30px] mt-[60px]
                     lg:rounded-tr-[150px] lg:px-[200px] lg:mt-[108px]">
                     <div className="flex flex-row items-center mt-[51px] lg:mt-[110px]">
                         {/* 왼쪽 로고 */}
@@ -450,7 +450,7 @@ export default function WithGigPage() {
             </section>
             {/* section8 */}
             <section className="flex flex-col w-full h-auto justify-center items-center
-                px-[60px] mt-[102px] mb-[102px] lg:px-[200px] lg:mt-[286px] lg:mb-[196px]">
+                px-[30px] mt-[102px] mb-[102px] lg:px-[200px] lg:mt-[286px] lg:mb-[196px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     작지만 진짜 일,<br />
                     위드긱 어떻게 참여하나요?

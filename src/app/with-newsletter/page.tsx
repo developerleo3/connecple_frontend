@@ -61,7 +61,7 @@ export default function WithNewsletterPage() {
                 </div>
             </section>
             {/* section2 */}
-            <section className="w-full h-auto px-[45px] mt-[96px] lg:px-[200px] lg:mt-[300px]">
+            <section className="w-full h-auto px-[30px] mt-[96px] lg:px-[200px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
                     {/* 왼쪽 로고 */}
@@ -169,7 +169,7 @@ export default function WithNewsletterPage() {
             </section>
             {/* section3 */}
             <section className="flex flex-col w-full h-auto bg-gradient-to-b from-white via-[#C0AED1] to-white
-                mt-[53px] px-[45px] pb-[57px] lg:mt-[286px] lg:px-[200px] lg:pb-[74px]">
+                mt-[53px] px-[30px] pb-[57px] lg:mt-[286px] lg:px-[200px] lg:pb-[74px]">
                 <h1 className="font-black text-[#541E80] text-center
                     text-[15px] mt-[32px] mb-[50px] lg:text-[45px] lg:mb-[117px]">
                     이런 분들이 구독하고 계세요!
@@ -246,7 +246,7 @@ export default function WithNewsletterPage() {
                 ))}
             </section>
             {/* section4 */}
-            <section className="flex w-full h-auto mt-[47px] px-[45px] lg:mt-[213px] lg:px-[200px]">
+            <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
                     <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
                         w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
@@ -302,7 +302,7 @@ export default function WithNewsletterPage() {
             </section>
             {/* section5 */}
             <section className="flex flex-col w-full h-auto
-                mt-[81px] mb-[74px] px-[45px] lg:mt-[274px] lg:mb-[213px] lg:px-[200px]">
+                mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[213px] lg:px-[200px]">
                 <h1 className="text-center
                         text-[18px] font-black lg:text-[30px] lg:font-extrabold">
                     W.I.T.H Newsletter
