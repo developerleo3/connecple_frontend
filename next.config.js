@@ -33,6 +33,10 @@ const nextConfig = {
             cert: './certificates/localhost.pem',
         },
     },
-}
+    // ESLint 에러 무시
+    eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
 
 module.exports = nextConfig

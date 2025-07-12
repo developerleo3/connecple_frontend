@@ -352,7 +352,7 @@ export default function CreateFaqPage() {
                                 </Label>
                                 <div className="mt-1">
                                     <RichTextEditor
-                                        content={formData.answer}
+                                        content={formData.answer ?? ""}
                                         onChange={(value) => handleInputChange("answer", value)}
                                         placeholder="답변을 작성해주세요"
                                     />
