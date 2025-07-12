@@ -256,7 +256,7 @@ export default function HistoryManagePage() {
 
                         <button
                             onClick={addHistoryItem}
-                            className="flex items-center gap-2 w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-purple-300 hover:text-purple-600 transition-colors mb-6 hover:cursor-pointer"
+                            className="flex items-center gap-2 w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-[#541E80] hover:text-[#541E80] transition-colors mb-6 hover:cursor-pointer"
                         >
                             <Plus size={20} />
                             <span>연혁 추가</span>
@@ -271,7 +271,7 @@ export default function HistoryManagePage() {
                                                 <select
                                                     value={item.historyYear}
                                                     onChange={(e) => updateHistoryItem(index, "historyYear", e.target.value)}
-                                                    className="appearance-none bg-white border border-gray-300 rounded px-3 py-2 pr-8 focus:outline-none focus:border-purple-500 hover:cursor-pointer"
+                                                    className="appearance-none bg-white border border-gray-300 rounded px-3 py-2 pr-8 focus:outline-none focus:border-[#541E80] hover:cursor-pointer"
                                                 >
                                                     {generateYearOptions().map((year) => (
                                                         <option key={year} value={year}>
@@ -287,7 +287,7 @@ export default function HistoryManagePage() {
                                                     value={item.content}
                                                     onChange={(e) => updateHistoryItem(index, "content", e.target.value)}
                                                     placeholder="연혁 내용을 작성해주세요.&#10;연혁 내용은 엔터를 기준으로 구분됩니다."
-                                                    className={`w-full p-3 border rounded resize-none focus:outline-none focus:border-purple-500 ${errors[index] ? "border-red-300" : "border-gray-300"
+                                                    className={`w-full p-3 border rounded resize-none focus:outline-none focus:border-[#541E80] ${errors[index] ? "border-red-300" : "border-gray-300"
                                                         }`}
                                                     rows={6}
                                                 />
@@ -311,7 +311,7 @@ export default function HistoryManagePage() {
                             <button
                                 onClick={handleSubmit}
                                 disabled={isLoading}
-                                className="px-6 py-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer"
+                                className="px-6 py-2.5 bg-[#541E80] font-bold text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer"
                             >
                                 {isLoading ? "등록 중..." : "등록하기"}
                             </button>

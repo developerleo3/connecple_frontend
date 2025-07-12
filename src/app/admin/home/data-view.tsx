@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import LoadingSpinner from "@/components/loading-spinner"
 
 interface IntroImage {
   id: number
@@ -28,7 +29,13 @@ export function DataView() {
     const fetchData = async () => {
       try {
         // 소개 이미지 데이터 조회
-        const imagesResponse = await fetch(`${API_BASE_URL}/admin/main-intro-images`)
+        const imagesResponse = await fetch(`${API_BASE_URL}/admin/main-intro-images`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
         if (imagesResponse.ok) {
           const imagesData = await imagesResponse.json()
           setIntroImages(imagesData)
@@ -37,7 +44,13 @@ export function DataView() {
         console.log(imagesResponse)
 
         // 통계 수치 데이터 조회
-        const statsResponse = await fetch(`${API_BASE_URL}/admin/stats`)
+        const statsResponse = await fetch(`${API_BASE_URL}/admin/stats`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
         if (statsResponse.ok) {
           const statsData = await statsResponse.json()
           setStats(statsData)
@@ -57,7 +70,7 @@ export function DataView() {
   }, [])
 
   if (isLoading) {
-    return <div className="flex items-center justify-center h-full">로딩 중...</div>
+    return <LoadingSpinner />
   }
 
   if (error) {

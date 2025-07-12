@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -8,12 +7,15 @@ import { LogOut } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import AlertModal from "@/components/alert-modal"
+import LoadingSpinner from "@/components/loading-spinner"
+
 
 interface AdminSidebarProps {
   className?: string
+  onNavigate?: (path: string) => Promise<boolean> | boolean // 페이지 이동 전 확인 콜백
 }
 
-export default function AdminSidebar({ className }: AdminSidebarProps) {
+export default function AdminSidebar({ className, onNavigate }: AdminSidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -25,8 +27,22 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
     onConfirm: undefined as (() => void) | undefined,
   })
 
+  const handleNavigation = async (path: string) => {
+    if (pathname === path) return // 현재 페이지면 이동하지 않음
+    
+    if (onNavigate) {
+      const canNavigate = await onNavigate(path)
+      if (!canNavigate) return
+    }
+    
+    router.push(path)
+  }
+
   const handleLogout = async () => {
     setIsLoading(true)
+    if (isLoading) {
+      return <LoadingSpinner />
+    }
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/logout`, {
         method: "POST",
@@ -38,9 +54,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
 
       if (response.ok) {
         // 로그아웃 성공 시 로그인 페이지로 리다이렉트
-        setTimeout(() => {
-          router.push("/admin")
-        }, 1500)
+        router.push("/admin")
       } else {
         setAlertModal({
           isOpen: true,
@@ -51,6 +65,7 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
         })
       }
     } catch (error) {
+      console.error("로그아웃 오류:", error)
       setAlertModal({
         isOpen: true,
         title: "오류",
@@ -83,62 +98,64 @@ export default function AdminSidebar({ className }: AdminSidebarProps) {
             alt="CONNECPLE 로고"
             width={160}
             height={40}
-            className="h-10 w-auto"
+            unoptimized
+            className="h-10 w-auto hover:cursor-pointer"
+            onClick={() => router.push("/admin/home")}
           />
         </div>
 
         <div className="space-y-4 py-4">
           <div className="px-3 py-2">
             <div className="space-y-1">
-              <Link
-                href="/admin/home"
+              <button
+                onClick={() => handleNavigation("/admin/home")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
                   pathname === "/admin/home" ? "bg-gray-100" : "transparent"
                 )}
               >
                 홈 관리
-              </Link>
-              <Link
-                href="/admin/link"
+              </button>
+              <button
+                onClick={() => handleNavigation("/admin/link")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
                   pathname === "/admin/link" ? "bg-gray-100" : "transparent"
                 )}
               >
                 메인 링크 관리
-              </Link>
-              <Link
-                href="/admin/history"
+              </button>
+              <button
+                onClick={() => handleNavigation("/admin/history")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
                   pathname === "/admin/history" ? "bg-gray-100" : "transparent"
                 )}
               >
                 소개 관리
-              </Link>
-              <Link
-                href="/admin/faq"
+              </button>
+              <button
+                onClick={() => handleNavigation("/admin/faq")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
-                  pathname === "/admin/faq" ? "bg-gray-100" : "transparent"
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
+                  pathname.startsWith("/admin/faq") ? "bg-gray-100" : "transparent"
                 )}
               >
                 FAQ 관리
-              </Link>
-              <Link
-                href="/admin/notice"
+              </button>
+              <button
+                onClick={() => handleNavigation("/admin/notice")}
                 className={cn(
-                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2",
-                  pathname === "/admin/notice" ? "bg-gray-100" : "transparent"
+                  "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
+                  pathname.startsWith("/admin/notice") ? "bg-gray-100" : "transparent"
                 )}
               >
                 공지사항 관리
-              </Link>
+              </button>
               <button
                 onClick={showLogoutConfirm}
                 disabled={isLoading}
-                className="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 w-full text-left text-red-600 disabled:opacity-50"
+                className="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 w-full text-left text-red-600 disabled:opacity-50 hover:cursor-pointer"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 {isLoading ? "로그아웃 중..." : "로그아웃"}

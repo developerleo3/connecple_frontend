@@ -11,6 +11,7 @@ export default function ComingSoon({ title }: { title: string }) {
           src="/circle-check.svg"
           alt="Check Icon"
           fill
+          unoptimized
           className="object-contain"
         />
       </div>

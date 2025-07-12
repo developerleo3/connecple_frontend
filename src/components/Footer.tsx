@@ -36,6 +36,7 @@ export default function Footer() {
             alt="CONNECPLE"
             width={90}
             height={21}
+            unoptimized
             className="lg:w-[272px] lg:h-[61px] mt-[3px]"
           />
           {/* 대표 정보 */}
@@ -45,10 +46,16 @@ export default function Footer() {
             <p>주식회사커넥플</p>
           </div>
 
-          {/* 주소 정보 */}
+          {/* 본사 정보 */}
           <div className="flex gap-x-[10px] lg:gap-x-[44px]">
-            <p className="font-bold">주소</p>
-            <p>서울시 양천구 은행정로5길 42 2층</p>
+            <p className="font-bold">본사</p>
+            <p>서울시 양천구 중앙로294 명성빌딩 6층 6-50호</p>
+          </div>
+
+          {/* 교육장 정보 */}
+          <div className="flex gap-x-[10px] lg:gap-x-[27px]">
+            <p className="font-bold">교육장</p>
+            <p>서울시 양천구 은행정로5길 42 알파인타워 2층</p>
           </div>
 
           {/* 사업자정보 */}

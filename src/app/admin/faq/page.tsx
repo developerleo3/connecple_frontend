@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Search, Plus, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
+import LoadingSpinner from "@/components/loading-spinner"
 import Link from "next/link"
 
 // Types for this page
@@ -245,7 +246,7 @@ export default function FaqListPage() {
           <div className="flex justify-between items-center mb-1">
             <h1 className="text-2xl font-bold text-gray-900">FAQ 관리</h1>
             <div className="flex items-center gap-4">
-              <Button onClick={() => router.push("/admin/faq/create")} className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">                
+              <Button onClick={() => router.push("/admin/faq/create")} className="bg-[#541E80] hover:bg-purple-700 text-white font-bold hover:cursor-pointer">                
                 FAQ 작성
               </Button>
             </div>
@@ -262,14 +263,14 @@ export default function FaqListPage() {
                   <div className="flex-1">
                     <Input
                       type="text"
-                      placeholder="FAQ 검색"
+                      placeholder="제목또는 내용을 입력해주세요."
                       value={searchKeyword}
                       onChange={(e) => setSearchKeyword(e.target.value)}
                       onKeyPress={handleKeyPress}
                       className="w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-300 shadow-md"
                     />
                   </div>
-                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer">
+                  <Button type="submit" className="bg-[#541E80] hover:bg-purple-700 text-white font-bold hover:cursor-pointer">
                     <Search className="h-4 w-4 mr-2" />
                     검색
                   </Button>
@@ -282,7 +283,7 @@ export default function FaqListPage() {
                     key={category}
                     variant={selectedCategories.includes(category) ? "default" : "outline"}
                     onClick={() => handleCategoryChange(category)}
-                    className={selectedCategories.includes(category) ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50 hover:cursor-pointer" 
+                    className={selectedCategories.includes(category) ? "bg-[#541E80] hover:bg-purple-700 text-white border-purple-600 ring-2 ring-purple-400 ring-opacity-50 hover:cursor-pointer" 
                       : "text-gray-500 border-gray-200 hover:bg-gray-200 hover:cursor-pointer shadow-sm"}
                   >
                     {category}
@@ -310,7 +311,7 @@ export default function FaqListPage() {
             </div>
 
             <Table>
-              <TableHeader className="bg-purple-600">
+              <TableHeader className="bg-[#541E80]">
                 <TableRow>
                   <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
                   <TableHead className="text-white text-base font-medium text-center align-middle py-3">질문</TableHead>
@@ -322,7 +323,7 @@ export default function FaqListPage() {
                 {loading ? (
                   <TableRow>
                     <TableCell colSpan={4} className="text-center py-8">
-                      로딩 중...
+                      <LoadingSpinner />
                     </TableCell>
                   </TableRow>
                 ) : faqs.length === 0 ? (
@@ -384,7 +385,7 @@ export default function FaqListPage() {
                     variant={currentPage === pageNum ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNum)}
-                    className={currentPage === pageNum ? "bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
+                    className={currentPage === pageNum ? "bg-[#541E80] hover:bg-purple-700 text-white hover:cursor-pointer" : "border border-gray-200 text-gray-600 hover:cursor-pointer"}
                   >
                     {pageNum + 1}
                   </Button>

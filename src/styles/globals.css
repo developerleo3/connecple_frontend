@@ -168,3 +168,46 @@ body {
     margin: 0 9px !important;
   }
 }
+
+/* globals.css */
+.ProseMirror:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+/* 말풍선 꼬리 */
+.clip-polygon {
+  clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+}
+
+/* fade in up 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* 스크롤바 숨기기 */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@layer utilities {
+  .clip-trapezoid {
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  }
+}

@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+
 import {
     Dialog,
     DialogContent,
@@ -43,11 +44,11 @@ export function ConfirmModal({
                         variant="outline"
                         onClick={onClose}
                         disabled={isLoading}
-                        className="flex-1 border-purple-600 text-purple-600 hover:bg-purple-50"
+                        className="flex-1 border-[#541E80] text-[#541E80] hover:bg-purple-50 hover:cursor-pointer"
                     >
                         {cancelText}
                     </Button>
-                    <Button onClick={onConfirm} disabled={isLoading} className="flex-1 bg-purple-600 hover:bg-purple-700">
+                    <Button onClick={onConfirm} disabled={isLoading} className="flex-1 bg-[#541E80] hover:bg-purple-700 text-white hover:cursor-pointer">
                         {isLoading ? "처리중..." : confirmText}
                     </Button>
                 </DialogFooter>
