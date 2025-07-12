@@ -284,8 +284,7 @@ export default function Home() {
                 </div>
 
                 <h1 className="flex flex-col w-full items-center justify-center text-center text-[#541E80] font-black
-          text-[15px] mt-[12px]
-          lg:text-[45px] lg:mt-[34px]">
+                    text-[15px] mt-[12px] lg:text-[45px] lg:mt-[34px]">
                     Connect to Grow. Connect to Society
                 </h1>
 
@@ -293,9 +292,8 @@ export default function Home() {
                     {storyLabels.map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col items-center justify-center
-                w-[176px] h-[176px] 
-                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[5px_5px_10px_0_rgba(0,0,0,0.5)]"
+                            className="flex flex-col items-center justify-center w-[176px] h-[176px]
+                                rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[5px_5px_10px_0_rgba(0,0,0,0.5)]"
                         >
                             <div className="flex-[3] flex items-center justify-center text-center">
                                 <p
@@ -319,7 +317,7 @@ export default function Home() {
                             <div
                                 key={idx}
                                 className="flex flex-col items-center justify-center w-[87px] h-[87px]
-                  rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
+                                    rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
                             >
                                 <div className="flex-[3] flex items-center justify-center text-center">
                                     <p
@@ -342,7 +340,7 @@ export default function Home() {
                             <div
                                 key={idx}
                                 className="flex flex-col items-center justify-center w-[87px] h-[87px]
-                  rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
+                                    rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
                             >
                                 <div className="flex-[3] flex items-center justify-center text-center">
                                     <p
