@@ -12,6 +12,7 @@ import AlertModal from "@/components/alert-modal"
 import { Trash2, Edit, List, Download, Upload } from "lucide-react"
 import AdminSidebar from "@/components/admin-sidebar"
 import LoadingSpinner from "@/components/loading-spinner"
+import { ReactNode } from "react";
 
 // Types for this page
 interface FileAttachment {
@@ -123,12 +124,17 @@ export default function NoticeDetailPage() {
     const [deletedFileIds, setDeletedFileIds] = useState<number[]>([]) // 삭제된 파일 ID 저장
     const [errors, setErrors] = useState<Record<string, string>>({})
 
-    const [confirmModal, setConfirmModal] = useState({
+    const [confirmModal, setConfirmModal] = useState<{
+        isOpen: boolean;
+        title: string;
+        message: ReactNode;
+        action: "update" | "delete";
+    }>({
         isOpen: false,
         title: "",
-        message: "",
-        action: "" as "update" | "delete",
-    })
+        message: "", // ReactNode 안에 string 포함되므로 OK
+        action: "update",
+    });
 
     const [alertModal, setAlertModal] = useState({
         isOpen: false,
