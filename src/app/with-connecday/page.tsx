@@ -98,12 +98,12 @@ export default function WithConnecdayPage() {
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
                             mt-[9px] w-[159px] h-[25px] text-[10px]
                             lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
-                        나의 성장 가능성 연결하기
+                        위드커넥데이 무료 신청
                     </Link>
                     <h3 className="flex self-center font-bold
                         text-[9px] mt-[13px]
                         lg:text-[20px] lg:mt-[25px]">
-                        가능성은 연결될 때 빛이 납니다.
+                        매월 둘째주 금요일 운영
                     </h3>
                 </div>
             </section>
@@ -255,8 +255,8 @@ export default function WithConnecdayPage() {
             </section>
             {/* section3 - 버튼 클릭에 따라 콘텐츠 변경 */}
             <section className="flex flex-row w-full justify-between h-auto
-                    px-[30px] mt-[88px] gap-x-[10px]
-                    lg:px-[130px] lg:py-[90px] lg:mt-[300px]">
+                    px-[30px] mt-[88px] gap-x-[10px] mb-[84px]
+                    lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[300px]">
                 <div className="flex flex-col">
                     <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">PROGRAM</h1>
                     <div className="flex flex-row mt-[27px] lg:mt-[38px]">
@@ -290,7 +290,7 @@ export default function WithConnecdayPage() {
                     <div className="w-[189px] lg:w-[446px] border-t-1 border-dotted mt-[8px] lg:mt-[17px]"/>
 
                     {[current.comment1, current.comment2, current.comment3].map((cmt, i) => (
-                        <div key={i} className="flex flex-row items-center justify-center mt-[6px] lg:mt-[15px]">
+                        <div key={i} className="flex flex-row items-center mt-[6px] lg:mt-[15px]">
                             <Image
                                 src="/withConnecDay/check_purple.png"
                                 alt="check_purple.png"
@@ -311,21 +311,6 @@ export default function WithConnecdayPage() {
                     unoptimized
                     className="object-contain rounded-[20px] lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
                 />
-            </section>
-            <section className="flex flex-col items-center justify-center w-full">
-                <Link
-                    href="https://forms.gle/HWXpfoB6Me3wsNaa7"
-                    target="_blank"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
-                            mt-[39px] w-[159px] h-[25px] text-[10px]
-                            lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
-                    위드커넥데이 무료 신청
-                </Link>
-                <h3 className="flex items-center justify-center font-bold
-                        text-[9px] mt-[13px] mb-[84px]
-                        lg:text-[20px] lg:mt-[25px] lg:mb-[300px]">
-                    매월 둘째주 금요일 운영
-                </h3>
             </section>
         </main>
     );
