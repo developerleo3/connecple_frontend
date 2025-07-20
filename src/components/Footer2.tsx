@@ -22,12 +22,6 @@ export default function Footer() {
           text-[7px] gap-x-[11px]
           lg:text-[20px] lg:gap-x-[48px]">
           <Link href="#" className="hover:text-gray-600">
-            개인정보 처리방침
-          </Link>
-          <Link href="#" className="hover:text-gray-600">
-            이용약관
-          </Link>
-          <Link href="#" className="hover:text-gray-600">
             문의하기
           </Link>
         </div>
