@@ -52,14 +52,14 @@ export default function WithNewsletterPage() {
                     <Link
                         href="https://forms.gle/Ujx2ishv4DTiv9tE9"
                         target="_blank"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         위드뉴스레터 무료 구독
                     </Link>
                     <Link
                         href="/with-newsletter" // TODO: 이메일 바로가기?
-                        className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         뉴스레터 파트너 문의하기
@@ -251,8 +251,8 @@ export default function WithNewsletterPage() {
             <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
                     <Link href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
-                        <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
-                        w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
+                        <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                            w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
                             <p className="font-extrabold lg:font-bold text-[8px] lg:text-[25px]">정보통 꿀단지 위드뉴스레터</p>
                             <Image src={"/withNewsletter/honey_bee.svg"} alt={"honey_bee"}
                                    width={80}
@@ -286,9 +286,9 @@ export default function WithNewsletterPage() {
                         }
                     ].map((item, idx) => (
                         <Link key={idx} href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
-                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
-                            w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
-                            lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
+                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                                w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
+                                lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
                                 <Image src={item.img_url}
                                        alt={item.img_alt}
                                        width={123}
@@ -345,14 +345,14 @@ export default function WithNewsletterPage() {
                     <label className="flex flex-row justify-center items-center">
                         <input
                             type={"checkbox"}
-                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px]"}
+                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px] cursor-pointer"}
                         />
                         <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(필수) 개인정보 수집 및 이용에 동의합니다.</span>
                     </label>
                     <label className="flex flex-row justify-center items-center">
                         <input
                             type={"checkbox"}
-                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px]"}
+                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px] cursor-pointer"}
                         />
                         <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(선택) 광고성 정보 수신에 동의합니다.</span>
                     </label>
@@ -363,7 +363,7 @@ export default function WithNewsletterPage() {
                 <Link
                     href="https://forms.gle/Ujx2ishv4DTiv9tE9"
                     target="_blank"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
+                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[7px] w-[159px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[21px] lg:w-[388px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
                     위드뉴스레터 무료 구독

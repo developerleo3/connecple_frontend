@@ -4,6 +4,8 @@ import Image from "next/image";
 import {useEffect} from "react";
 import Link from "next/link";
 import {useState} from "react";
+import {useInView} from "react-intersection-observer";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 /**
  * font-thin        100
@@ -63,6 +65,11 @@ const contents = [
 ]
 
 export default function WithProjectPage() {
+    const {ref: counterSectionRef, inView} = useInView({
+        triggerOnce: true,  // 한 번만 실행
+        threshold: 0.3,     // 30% 보이면 발동
+    });
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -95,7 +102,7 @@ export default function WithProjectPage() {
 
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 위드프로젝트 소개 */}
             <section className="flex flex-col w-full h-auto">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
                     <h1 className="text-center
@@ -147,7 +154,7 @@ export default function WithProjectPage() {
                     <Link
                         href="https://forms.gle/HWXpfoB6Me3wsNaa7"
                         target="_blank"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             mt-[20px] w-[159px] h-[25px] text-[10px]
                             lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px]">
                         지금 바로 가능성을 현실로 만들기
@@ -155,7 +162,9 @@ export default function WithProjectPage() {
                 </div>
             </section>
             {/* section2 - 수치 */}
-            <section className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
+            <section
+                ref={counterSectionRef} // 여기에 ref 걸어줌
+                className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
                     {/* 왼쪽 로고 */}
@@ -232,7 +241,10 @@ export default function WithProjectPage() {
                             </div>
                             <p className="font-semibold text-[8px] mt-[16px] lg:text-[20px] lg:mt-[37px]"
                                dangerouslySetInnerHTML={{__html: item.label}}></p>
-                            <p className="font-extrabold text-[#541E80] text-[13px] mt-[11px] lg:text-[35px] lg:mt-[28px]">{item.value}</p>
+                            <p className="font-extrabold text-[#541E80] text-[13px] mt-[11px] lg:text-[35px] lg:mt-[28px]">
+                                <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                                 duration={1 + idx * 0.3}/>
+                            </p>
                         </div>
                     ))}
                 </div>
@@ -266,7 +278,7 @@ export default function WithProjectPage() {
                     ].map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col justify-between items-center bg-white text-center
+                            className="flex flex-col justify-between items-center bg-white text-center transition hover:scale-105
                                 w-[80px] h-[89px] rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[10px] shadow-[4px_4px_10px_0_rgba(0,0,0,0.25)]
                                 lg:w-[275px] lg:h-[270px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
                         >
@@ -353,7 +365,7 @@ export default function WithProjectPage() {
                                 return (
                                     <div
                                         key={idx}
-                                        className={`group flex flex-col items-center shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
+                                        className={`group flex flex-col items-center shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                                             w-[68px] h-[114px] rounded-[30px]
                                             lg:w-[214px] lg:h-[270px] lg:rounded-[20px] 
                                             ${isBgGray ? "bg-white" : "bg-[#F7F7F7]"} hover:bg-[#E2D5F1] transition-all duration-300`}
@@ -699,7 +711,7 @@ export default function WithProjectPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setSelected(idx)}
-                                    className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer 
+                                    className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer hover:scale-110 transition
                                 ${
                                         selected === idx ? "bg-[#541E80] z-10" : "bg-[#D9D9D9] z-0"
                                     }`}
@@ -745,7 +757,7 @@ export default function WithProjectPage() {
                                dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
                         </div>
                         {/* 이미지 */}
-                        <div className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px]">
+                        <div className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px] cursor-pointer">
                             <Image
                                 src={contents[selected].img}
                                 alt="image"
@@ -874,14 +886,14 @@ export default function WithProjectPage() {
                 <div className="flex flex-row w-full h-auto justify-between items-center
                     mt-[20px] gap-x-[11px] lg:mt-[48px] lg:gap-x-[39px]">
                     <button onClick={() => setSelected2('reg')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer hover:scale-105 transition
                         ${selected2 === 'reg' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[12px] pb-[6px] lg:text-[25px] lg:pb-[17px]`}
                     >
                         신청절차
                     </button>
                     <button onClick={() => setSelected2('class')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer hover:scale-105 transition
                         ${selected2 === 'class' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[12px] pb-[6px] lg:text-[25px] lg:pb-[17px]`}
                     >
@@ -908,7 +920,7 @@ export default function WithProjectPage() {
                     <Link
                         href="https://forms.gle/HWXpfoB6Me3wsNaa7"
                         target="_blank"
-                        className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                        className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                             font-bold rounded-[30px] text-[10px] w-[159px] h-[25px] mt-[21px]
                             lg:font-extrabold lg:rounded-[30px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:mt-[60px]"
                     >
@@ -916,7 +928,7 @@ export default function WithProjectPage() {
                     </Link>
                 </div>
             </section>
-            {/* section9 */}
+            {/* section9 - 프로젝트 신청 */}
             <section className="flex flex-col w-full h-auto
                 mt-[113px] mb-[67px] lg:px-[146px] lg:mt-[207px] lg:mb-[300px]">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
@@ -944,7 +956,7 @@ export default function WithProjectPage() {
                 <Link
                     href="https://forms.gle/HWXpfoB6Me3wsNaa7"
                     target="_blank"
-                    className="bg-[#541E80] text-white self-center flex items-center justify-center
+                    className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
                         mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
                         lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
                         위드프로젝트 신청

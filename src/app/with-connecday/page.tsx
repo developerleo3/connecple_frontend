@@ -46,7 +46,7 @@ export default function WithConnecdayPage() {
 
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 위드커넥데이 신청 */}
             <section className="flex flex-col w-full h-auto">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
                     <h1 className="text-center
@@ -95,7 +95,7 @@ export default function WithConnecdayPage() {
                     <Link
                         href="https://forms.gle/HWXpfoB6Me3wsNaa7"
                         target="_blank"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             mt-[9px] w-[159px] h-[25px] text-[10px]
                             lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         위드커넥데이 무료 신청
@@ -107,7 +107,7 @@ export default function WithConnecdayPage() {
                     </h3>
                 </div>
             </section>
-            {/* section2 */}
+            {/* section2 -  */}
             <section className="flex flex-col w-full h-auto mt-[99px] px-[30px] lg:mt-[88px] lg:px-[123px]">
                 <h1 className="hidden lg:block font-black text-[#541E80] lg:text-[45px] lg:mt-[143px]">
                     한 걸음 내디뎠다면, 이제 연결이 필요한 순간입니다.
@@ -120,7 +120,7 @@ export default function WithConnecdayPage() {
                     내 가능성을 믿어주는 멘토들과 서로 연결되는 단 하루의 기회!
                 </h2>
                 <div className="flex flex-row justify-between mt-[27px] lg:mt-[64px]">
-                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300
+                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300 hover:scale-110
                         w-[85px] h-[85px] shadow-[1px_1px_3.7px_0_rgba(0,0,0,0.11)]
                         lg:w-[296px] lg:h-[296px] lg:hover:bg-[#2F0D4B] lg:shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="text-center pt-[5px]">
@@ -156,7 +156,7 @@ export default function WithConnecdayPage() {
                         </div>
                     </div>
 
-                    <div className="group flex justify-center items-center rounded-full bg-[#ECECEC] transition-all duration-300
+                    <div className="group flex justify-center items-center rounded-full bg-[#ECECEC] transition-all duration-300 hover:scale-110
                         w-[85px] h-[85px] shadow-[1px_1px_3.7px_0_rgba(0,0,0,0.11)]
                         lg:w-[296px] lg:h-[296px] lg:hover:bg-[#2F0D4B] lg:shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="text-center pt-[5px]">
@@ -188,7 +188,7 @@ export default function WithConnecdayPage() {
                         </div>
                     </div>
 
-                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300
+                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300 hover:scale-110
                         w-[85px] h-[85px] shadow-[1px_1px_3.7px_0_rgba(0,0,0,0.11)]
                         lg:w-[296px] lg:h-[296px] lg:hover:bg-[#2F0D4B] lg:shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="text-center">
@@ -264,7 +264,7 @@ export default function WithConnecdayPage() {
                             <button
                                 key={num}
                                 onClick={() => setSelected(idx)}
-                                className={`flex justify-center items-center font-extrabold rounded-full 
+                                className={`flex justify-center items-center font-extrabold rounded-full hover:scale-110 transition
                                     text-[8px] w-[20px] h-[20px] lg:text-[30px] lg:w-[50px] lg:h-[50px] 
                                     ${selected === idx ? "bg-[#541E80] text-white" : "bg-[#D9D9D9] cursor-pointer"} 
                                     ${idx !== 0 ? "ml-[10px] lg:ml-[17px]" : ""}`}

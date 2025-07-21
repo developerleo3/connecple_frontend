@@ -87,7 +87,7 @@ export default function AboutPage() {
 
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 커넥플 소개 메인 */}
             <section className="relative flex flex-col w-full h-auto
                 pl-[30px] pr-[20px] mt-[46px] lg:pl-[106px] lg:pr-[76px] lg:mt-[180px]">
                 <h2 className="font-extrabold text-end text-[15px] mr-[30px] lg:text-[60px] lg:mr-[100px]">
@@ -122,7 +122,7 @@ export default function AboutPage() {
                        className="absolute right-[71px] lg:right-[340px] bottom-0 lg:w-[450px] lg:h-[680px]"
                 />
             </section>
-            {/* section2 */}
+            {/* section2 - 팀 소개 */}
             <section className="flex flex-col w-full h-auto
                 px-[30px] mt-[59px] mb-[60px] lg:px-[157px] lg:mt-[225px] lg:mb-[229px]">
                 <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">
@@ -152,7 +152,7 @@ export default function AboutPage() {
                             des: '10년 이상의 현장 경험을<br />바탕으로 한 교육 기획·운영<br />전문가 조직 <span class="font-black text-[#541E80]">교육사업부</span>'
                         }
                     ].map((item, idx) => (
-                        <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]
+                        <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                             w-[92px] h-[104px] rounded-[10px] lg:w-[296px] lg:h-[318px] lg:rounded-[50px]">
                             <div className="flex flex-row w-full h-auto items-center px-[3px] lg:px-[14px] lg:mt-[-15px]">
                                 <div className="overflow-hidden rounded-full w-[44px] h-[44px] lg:w-[157px] lg:h-[157px]">
@@ -180,7 +180,7 @@ export default function AboutPage() {
                     ))}
                 </div>
             </section>
-            {/* section3 */}
+            {/* section3 - 연혁 */}
             <section className="flex flex-col w-full h-auto bg-[#F6F6F6] px-[30px] pb-[50px] lg:px-[157px] lg:pb-[109px]">
                 <h1 className="font-black text-[#541E80] text-[15px] mt-[33px] lg:text-[45px] lg:mt-[108px]">
                     더 나은 내일을 꿈꿔온 우리
@@ -193,7 +193,7 @@ export default function AboutPage() {
                     {/* 왼쪽 화살표 */}
                     <button onClick={scrollLeft}
                             disabled={!canScrollLeft}
-                            className={`${canScrollLeft ? "cursor-pointer" : "cursor-not-allowed"}`}
+                            className={`${canScrollLeft ? "cursor-pointer" : "cursor-not-allowed"} hover:scale-120 transition`}
                     >
                         <Image
                             src={canScrollLeft ? "/main/vector_right_black.svg" : "/main/vector_left_gray.svg"}
@@ -207,7 +207,7 @@ export default function AboutPage() {
                     <button
                         onClick={scrollRight}
                         disabled={!canScrollRight}
-                        className={`${canScrollRight ? "cursor-pointer" : "cursor-not-allowed"}`}
+                        className={`${canScrollRight ? "cursor-pointer" : "cursor-not-allowed"} hover:scale-120 transition`}
                     >
                         <Image
                             src={canScrollRight ? "/main/vector_right_black.svg" : "/main/vector_left_gray.svg"}
@@ -247,7 +247,7 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-            {/* section4 */}
+            {/* section4 - 사진 */}
             <section className="flex w-full h-auto px-[30px] lg:px-[157px]">
                 <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
                     {[
@@ -269,7 +269,7 @@ export default function AboutPage() {
                     ].map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center">
+                            className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center hover:scale-110 transition">
                             <div className="relative w-full h-[87px] lg:h-[279px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
                                 <Image
                                     src={item.path}
@@ -291,7 +291,7 @@ export default function AboutPage() {
                     ))}
                 </div>
             </section>
-            {/* section5 */}
+            {/* section5 - 복지 소개 */}
             <section className="flex flex-col w-full h-auto bg-gradient-to-b from-[#C0AED1B2] to-white
                 px-[30px] lg:px-[157px] pb-[50px] lg:pb-[100px]">
                 <h1 className="font-black text-[#541E80] text-[15px] mt-[35px] lg:text-[45px] lg:mt-[78px]">
@@ -352,7 +352,7 @@ export default function AboutPage() {
                                 width={150}
                                 height={130}
                                 unoptimized
-                                className="object-contain lg:w-[500px] lg:h-[260px]"
+                                className="object-contain lg:w-[500px] lg:h-[260px] hover:scale-120 transition"
                             />
                         </div>
 
@@ -413,14 +413,14 @@ export default function AboutPage() {
                 <div className="flex flex-row w-full h-auto justify-between items-center
                     mt-[24px] gap-x-[20px] lg:mt-[48px] lg:gap-x-[39px]">
                     <button onClick={() => setSelected('office')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px]
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px] hover:scale-110 transition
                         ${selected === 'office' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[10px] pb-[5px] lg:text-[25px] lg:pb-[17px] cursor-pointer`}
                     >
                         사무실
                     </button>
                     <button onClick={() => setSelected('class')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px]
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px] hover:scale-110 transition
                         ${selected === 'class' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[10px] pb-[5px] lg:text-[25px] lg:pb-[17px] cursor-pointer`}
                     >

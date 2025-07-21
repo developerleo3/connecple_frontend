@@ -303,7 +303,7 @@ export default function Home() {
                     {stats.map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col items-center justify-center w-[176px] h-[176px]
+                            className="flex flex-col items-center justify-center w-[176px] h-[176px] hover:scale-105 transition
                                 rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]"
                         >
                             <div className="flex-[3] flex items-center justify-center text-center">
@@ -458,7 +458,7 @@ export default function Home() {
                                 <Link
                                     href="https://forms.gle/HWXpfoB6Me3wsNaa7"
                                     target="_blank"
-                                    className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]
+                                    className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                         right-[49px] top-[-34px] text-[10px] space-y-[8px] w-[68px] h-[68px]
                                         rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
                                         lg:top-auto lg:right-auto lg:left-[0px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]
@@ -522,7 +522,7 @@ export default function Home() {
                                 content: "성장 선언 챌린지, 테이블 멘토링",
                             },
                         ].map((item, idx) => (
-                            <div key={idx} className="relative group">
+                            <div key={idx} className="relative group hover:scale-105 transition">
                                 {/* 배경 이미지 */}
                                 <Image
                                     src={item.src}
@@ -554,7 +554,7 @@ export default function Home() {
                         <Link
                             href="https://forms.gle/ud4xy9A8FejjwbsE9"
                             target="_blank"
-                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[139px] h-[25px] text-[10px]
                                 lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:w-[307px] lg:h-[52px] lg:text-[20px]"
                         >
@@ -593,7 +593,7 @@ export default function Home() {
                         <button
                             onClick={prev}
                             disabled={index === 0}
-                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:scale-120 transition`}
                         >
                             <Image
                                 src={index === 0 ? "/main/vector_left_gray.svg" : "/main/vector_right_black.svg"}
@@ -608,7 +608,7 @@ export default function Home() {
                         <button
                             onClick={next}
                             disabled={index >= newsLetters.length - 2}
-                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-120 transition'}`}
                         >
                             <Image
                                 src={index >= newsLetters.length - 2 ? "/main/vector_left_gray.svg" : "/main/vector_right_black.svg"}
@@ -625,7 +625,7 @@ export default function Home() {
                         {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
                             <div
                                 key={i}
-                                className="relative overflow-hidden group h-[118px] rounded-[12px]
+                                className="relative overflow-hidden group h-[118px] rounded-[12px] hover:scale-105 transition
                                     lg:h-[300px] lg:rounded-[30px]"
                             >
                                 {/* 이미지 */}
@@ -669,7 +669,7 @@ export default function Home() {
                         <Link
                             href="https://forms.gle/Ujx2ishv4DTiv9tE9"
                             target="_blank"
-                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[141px] h-[25px] text-[10px]
                                 lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:w-[295px] lg:h-[52px] lg:text-[20px]"
                         >
