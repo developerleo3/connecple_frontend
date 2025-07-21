@@ -4,6 +4,8 @@ import Image from "next/image";
 import {useEffect} from "react";
 import Link from "next/link";
 import {useState} from "react";
+import {useInView} from "react-intersection-observer";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 /**
  * font-thin        100
@@ -63,6 +65,11 @@ const contents = [
 ]
 
 export default function WithProjectPage() {
+    const {ref: counterSectionRef, inView} = useInView({
+        triggerOnce: true,  // 한 번만 실행
+        threshold: 0.3,     // 30% 보이면 발동
+    });
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -95,7 +102,7 @@ export default function WithProjectPage() {
 
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 위드프로젝트 소개 */}
             <section className="flex flex-col w-full h-auto">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
                     <h1 className="text-center
@@ -121,39 +128,43 @@ export default function WithProjectPage() {
                 </div>
                 <div className="flex flex-col w-full h-auto justify-center">
                     <h1 className="text-center font-extrabold text-[13px] lg:text-[35px]">
-                        경력보유여성, 이런 고민해보셨나요?
+                        경력보유여성, 다시 시작이 두려우신가요?
                     </h1>
                     <p className="text-center font-semibold
                         text-[9px] mt-[32px]
                         lg:text-[23px] lg:mt-[54px]">
-                        자신감 저하, 빠르게 변하는 트렌드에 대한 거리감,<br/>
-                        부족한 네트워크, 육아와의 병행, 유연근무 기회의 부족까지,<br/>
-                        커리어를 다시 시작하려는 경력보유여성 앞에 놓여진 다양한 심리적·현실적 장벽<br/><br/>
+                        자신감 저하, 빠르게 변하는 트렌드,<br/>
+                        단절된 네트워크와 육아의 병행,<br/>
+                        그리고 유연한 일자리의 부족까지.<br/><br/>
 
-                        누구보다 그 마음을 잘 알기에<br/>
-                        재도약의 시작이 가벼워질 수 있도록 맞춤형 솔루션을 준비했습니다.<br/>
-                        심리적 장벽을 낮추고, 다시 걸음을 내딛을 수 있도록<br/>
-                        ‘교육’, ‘네트워크’, ‘실전 프로젝트’까지 함께하는 커리어 재도약 프로그램<br/>
-                        바로 위드프로젝트입니다.
+                        커리어를 다시 시작하려는 분들에게<br/>
+                        심리적·현실적인 장벽은 생각보다 높습니다.<br/><br/>
+
+                        커넥플은 그 마음을 누구보다 잘 알기에,<br/>
+                        재도약의 시작이 가벼워질 수 있도록<br/>
+                        ‘교육’, ‘네트워크’, ‘실전 프로젝트’ 를 한데 모은<br/>
+                        <span className="font-extrabold">“커리어 재도약 프로그램 – 위드프로젝트”</span>를 준비했습니다.
                     </p>
                     <h3 className="text-center font-extrabold
                         text-[10px] mt-[40px]
                         lg:text-[25px] lg:mt-[62px]">
-                        인생변화를 위한 당신의 선택! 도전!<br/>
+                        이제, 경력의 획을 추가 할 시간입니다.<br/>
                         <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
                     </h3>
                     <Link
-                        href="/with-project"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                        target="_blank"
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             mt-[20px] w-[159px] h-[25px] text-[10px]
                             lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px]">
                         지금 바로 가능성을 현실로 만들기
                     </Link>
                 </div>
             </section>
-
-            {/* section2 */}
-            <section className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
+            {/* section2 - 수치 */}
+            <section
+                ref={counterSectionRef} // 여기에 ref 걸어줌
+                className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
                     {/* 왼쪽 로고 */}
@@ -230,13 +241,15 @@ export default function WithProjectPage() {
                             </div>
                             <p className="font-semibold text-[8px] mt-[16px] lg:text-[20px] lg:mt-[37px]"
                                dangerouslySetInnerHTML={{__html: item.label}}></p>
-                            <p className="font-extrabold text-[#541E80] text-[13px] mt-[11px] lg:text-[35px] lg:mt-[28px]">{item.value}</p>
+                            <p className="font-extrabold text-[#541E80] text-[13px] mt-[11px] lg:text-[35px] lg:mt-[28px]">
+                                <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                                 duration={1 + idx * 0.3}/>
+                            </p>
                         </div>
                     ))}
                 </div>
             </section>
-
-            {/* section3 */}
+            {/* section3 - [경력보유여성 커리어 재도약 프로그램] */}
             <section className="flex flex-col w-full h-auto bg-[#C0AED1B2] px-[30px] lg:px-[146px]"
                      style={{
                          background: "linear-gradient(to bottom, rgba(192, 174, 209, 0.7), rgba(255, 255, 255, 1))",
@@ -265,7 +278,7 @@ export default function WithProjectPage() {
                     ].map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col justify-between items-center bg-white text-center
+                            className="flex flex-col justify-between items-center bg-white text-center transition hover:scale-105
                                 w-[80px] h-[89px] rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[10px] shadow-[4px_4px_10px_0_rgba(0,0,0,0.25)]
                                 lg:w-[275px] lg:h-[270px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:shadow-[3px_3px_10px_0_rgba(0,0,0,0.5)]"
                         >
@@ -288,9 +301,8 @@ export default function WithProjectPage() {
                 </div>
             </section>
 
-            {/* section4 */}
-            <section
-                className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[83px] lg:px-[146px]">
+            {/* section4 - 이런분들께 추천합니다. */}
+            <section className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[83px] lg:px-[146px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     이런분들께 추천합니다.
                 </h1>
@@ -336,8 +348,8 @@ export default function WithProjectPage() {
                             },
                             {
                                 picture: "/withProject/recommend8.svg",
-                                title: "단순한 취업이<br />아닌, <span class='font-black'>나답게</span><br />일하고 싶으신 분",
-                                content: "단지 ‘일’을 찾는 게 아니라,<br />나의 삶을 다시 설계하는 여정<br />그 시작을 위드프로젝트가<br />함께합니다."
+                                title: "또 다른 경력의<br /> <span class='font-black'>획을 긋고 </span><br />싶으신 분",
+                                content: "새로운 경험과 도전은<br />나를 성장시킵니다.<br />당신의 다음 경력은?"
                             },
                         ],
                     ].map((row, rowIndex) => (
@@ -353,7 +365,7 @@ export default function WithProjectPage() {
                                 return (
                                     <div
                                         key={idx}
-                                        className={`group flex flex-col items-center shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
+                                        className={`group flex flex-col items-center shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                                             w-[68px] h-[114px] rounded-[30px]
                                             lg:w-[214px] lg:h-[270px] lg:rounded-[20px] 
                                             ${isBgGray ? "bg-white" : "bg-[#F7F7F7]"} hover:bg-[#E2D5F1] transition-all duration-300`}
@@ -395,10 +407,8 @@ export default function WithProjectPage() {
                     ))}
                 </div>
             </section>
-
-            {/* section5 */}
-            <section
-                className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[200px]">
+            {/* section5 - 생생후기 */}
+            <section className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[200px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     교육생들의 생생후기
                 </h1>
@@ -427,7 +437,7 @@ export default function WithProjectPage() {
                         lg:top-[0px] lg:right-[13px] lg:w-[415px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
                          data-animate>
                         <p className="font-bold text-[5px] lg:text-[13px]">
-                            무슨 업무인지 감 잡을 수 있게 스스로 판단해서<br/>
+                            무슨 업무인지 스스로 판단해보며,<br/>
                             설문처럼 답하는 방식의 교육이 즐거웠습니다.
                         </p>
                         <Image
@@ -485,11 +495,11 @@ export default function WithProjectPage() {
                     </div>
 
                     <div className="absolute  flex flex-row justify-center items-center bg-[#F8F8F8]
-                        top-[96px] right-[16px] w-[149px] h-[16px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[244px] lg:left-[77px] lg:w-[309px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
+                        top-[96px] right-[16px] w-[179px] h-[16px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
+                        lg:top-[244px] lg:left-[77px] lg:w-[429px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
                          data-animate>
                         <p className="font-bold text-[5px] lg:text-[13px]">
-                            한 주가 빠르게 흘러 교육 놓치지 않고 들어 좋았습니다.
+                            한 주가 빠르게 지나갔지만, 교육을 놓치지 않고 들을 수 있어서 좋았습니다.
                         </p>
                     </div>
 
@@ -538,13 +548,13 @@ export default function WithProjectPage() {
                         lg:top-[379px] lg:left-[125px] lg:w-[309px] lg:h-[71px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
                          data-animate>
                         <p className="hidden lg:block font-bold text-[13px]">
-                            교육 행사나 전반적인 운영체제나 관심이 있다면<br/>
-                            꼭 알아야 되는 부분이라 생각됩니다.
+                            교육 행사나 전반적인 운영 체계에 관심이 있다면,<br/>
+                            꼭 알아야 할 내용이라고 생각합니다.
                         </p>
                         <p className="block lg:hidden font-bold text-[5px]">
-                            교육 행사나 전반적인 운영체제나<br/>
-                            관심이 있다면 꼭 알아야 되는 부분이라<br/>
-                            생각됩니다.
+                            교육 행사나 전반적인 운영 체계에<br/>
+                            관심이 있다면, 꼭 알아야 할 내용이라고<br/>
+                            생각합니다.
                         </p>
                     </div>
 
@@ -593,8 +603,7 @@ export default function WithProjectPage() {
                     </div>
                 </div>
             </section>
-
-            {/* section6 */}
+            {/* section6 - 질문&응답 */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px]
                 px-[30px] mt-[78px] pb-[62px] lg:px-[146px] lg:mt-[439px] lg:pb-[195px]">
                 <div className="relative w-full h-auto lg:mt-[-209px]">
@@ -638,23 +647,23 @@ export default function WithProjectPage() {
                 {[
                     {
                         question: "위드프로젝트를 시작하시게 된 계기가 있나요?",
-                        answer: "아이가 어린이집에 들어가니 저도 여유가 생기게 되었어요. 다시 일을 시작하고 싶었지만 3년이라는 공백으로 혼자 뒤처진 건 아닌지 걱정이 많아지더라구요.<br />어린이집 친구 엄마에게 위드 프로젝트를 소개받아 연락하게 되었습니다.",
+                        answer: "아이가 어린이집에 들어가니 저도 여유가 생기게 되었어요. 다시 일을 시작하고 싶었지만 3년이라는 공백으로 혼자 뒤처진 건 아닌지 걱정이 많아지더라구요.<br />어린이집 친구 엄마에게 위드 프로젝트를 소개받아 연락하게 되었습니다.",
                     },
                     {
                         question: "위드프로젝트를 수강하면서 어떤 점이 가장 좋으셨어요?",
-                        answer: "궁금한 부분들을 바로 확인하여 가이드해 주시는 점이요.  제가 이런 질문을 해도 되나 싶을 만큼 사소한 부분이었는데도<br />늘 친절하게 답변해 주셨어요. 덕분에 금방 적응했구요!",
+                        answer: "궁금한 부분들을 바로 확인하여 가이드해 주시는 점이요.  제가 이런 질문을 해도 되나 싶을 만큼 사소한 부분이었는데도<br />늘 친절하게 답변해 주셨어요. 덕분에 금방 적응했어요!",
                     },
                     {
                         question: "위드프로젝트 전체 레벨을 수강하셨던데요!",
-                        answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했구요, 레벨 3이 되니 커뮤니케이션 역량이 많이 필요하다는 생각이<br />들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
+                        answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했습니다. 레벨 3이 되니 커뮤니케이션 역량이 많이 필요하다는 생각이<br />들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
                     },
                     {
                         question: "위드프로젝트와 타교육의 차이점이 있나요?",
-                        answer: "효율적인 교육 운영 방식이요! 경력 보유 여성 입장을 누구보다 잘 아는 분들이 설계해서 그런지 저희가 가장 자유로운 오전 10시부터 오후 3시까지 교육을<br />진행하시더라구요! 이해 못하고 넘어간 부분은 다시 공부해 볼 수 있도록 온라인 영상 학습도 지원해 주셨어요!",
+                        answer: "효율적인 교육 운영 방식이요! 경력 보유 여성 입장을 누구보다 잘 아는 분들이 설계해서 그런지 저희가 가장 자유로운 오전 10시부터 오후 3시까지 교육을<br />진행하시더라구요! 이해 못하고 넘어간 부분은 다시 공부해 볼 수 있도록 온라인 영상 학습도 지원해 주셨어요!",
                     },
                     {
                         question: "위드프로젝트 수료 후 달라진 점이 있나요?",
-                        answer: "무엇보다 자신감이 아닐까요? 저는 망고보드, 노션, 슬랙... 모두 낯설기만 했거든요. 위드프로젝트 교육을 들으며 과제도 해보고 실무 프로젝트에서 직접<br />사용해 보니까 너무 재밌더라구요! 이제 그런거 다 사용할 수 있다고 어딜가서든 자신있게 말해요!",
+                        answer: "무엇보다 자신감이 아닐까요? 저는 망고보드, 노션, 슬랙... 모두 낯설기만 했거든요. 위드프로젝트 교육을 들으며 과제도 해보고 실무 프로젝트에서 직접<br />사용해 보니까 너무 재밌더라구요! 이제 그런거 다 사용할 수 있다고 어디에서든 자신있게 말해요!",
                     },
                 ].map((item, idx) => (
                     <div
@@ -690,8 +699,7 @@ export default function WithProjectPage() {
                     </div>
                 ))}
             </section>
-
-            {/* section7 */}
+            {/* section7 - 프로그램 5개 */}
             <section className="flex w-full h-auto bg-[#EAEAEA80]">
                 <div className="flex flex-col w-full h-auto bg-white justify-between
                     rounded-tr-[50px] px-[53px] lg:rounded-tr-[120px] lg:px-[146px]">
@@ -703,7 +711,7 @@ export default function WithProjectPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setSelected(idx)}
-                                    className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer 
+                                    className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer hover:scale-110 transition
                                 ${
                                         selected === idx ? "bg-[#541E80] z-10" : "bg-[#D9D9D9] z-0"
                                     }`}
@@ -749,7 +757,7 @@ export default function WithProjectPage() {
                                dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
                         </div>
                         {/* 이미지 */}
-                        <div className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px]">
+                        <div className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px] cursor-pointer">
                             <Image
                                 src={contents[selected].img}
                                 alt="image"
@@ -870,8 +878,7 @@ export default function WithProjectPage() {
                     </div>
                 </div>
             </section>
-
-            {/* section8 */}
+            {/* section8 - 신청/수강 절차 */}
             <section className="flex flex-col w-full h-auto px-[52px] mt-[69px] lg:px-[200px] lg:mt-[138px]">
                 <h1 className="text-center font-black text-[#541E80] text-[15px] mt-[25px] lg:text-[45px] lg:mt-[59px]">
                     위드프로젝트 어떻게 들을 수 있나요?
@@ -879,14 +886,14 @@ export default function WithProjectPage() {
                 <div className="flex flex-row w-full h-auto justify-between items-center
                     mt-[20px] gap-x-[11px] lg:mt-[48px] lg:gap-x-[39px]">
                     <button onClick={() => setSelected2('reg')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer hover:scale-105 transition
                         ${selected2 === 'reg' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[12px] pb-[6px] lg:text-[25px] lg:pb-[17px]`}
                     >
                         신청절차
                     </button>
                     <button onClick={() => setSelected2('class')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[2px] cursor-pointer hover:scale-105 transition
                         ${selected2 === 'class' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[12px] pb-[6px] lg:text-[25px] lg:pb-[17px]`}
                     >
@@ -911,8 +918,9 @@ export default function WithProjectPage() {
                 />
                 <div className="flex justify-center items-center">
                     <Link
-                        href="/with-project"
-                        className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                        href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                        target="_blank"
+                        className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                             font-bold rounded-[30px] text-[10px] w-[159px] h-[25px] mt-[21px]
                             lg:font-extrabold lg:rounded-[30px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:mt-[60px]"
                     >
@@ -920,8 +928,7 @@ export default function WithProjectPage() {
                     </Link>
                 </div>
             </section>
-
-            {/* section9 */}
+            {/* section9 - 프로젝트 신청 */}
             <section className="flex flex-col w-full h-auto
                 mt-[113px] mb-[67px] lg:px-[146px] lg:mt-[207px] lg:mb-[300px]">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
@@ -947,11 +954,12 @@ export default function WithProjectPage() {
                     <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
                 </h3>
                 <Link
-                    href="/with-project"
-                    className="bg-[#541E80] text-white self-center flex items-center justify-center
+                    href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                    target="_blank"
+                    className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
                         mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
                         lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
-                        지금 바로 가능성을 현실로 만들기
+                        위드프로젝트 신청
                 </Link>
             </section>
         </main>

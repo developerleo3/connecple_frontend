@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function WithGigPage() {
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 위드GIG 소개 */}
             <section className={"relative w-full aspect-video"}>
                 <Image
                     src={"/withGIG/bg_image.png"}
@@ -31,7 +31,7 @@ export default function WithGigPage() {
                     재택 · 유연 · 단기 중심의 프로젝트형 일자리를 연결해주는 커리어 플랫폼입니다.
                 </p>
             </section>
-            {/* section2 */}
+            {/* section2 - 이런 분들을 위해 만들어 졌습니다 */}
             <section className={"flex flex-col w-full h-auto px-[30px] mt-[52px] lg:px-[200px] lg:mt-[169px]"}>
                 <h1 className={"font-black text-[#541E80] lg:text-[45px]"}>이런 분들을 위해 만들어졌습니다.</h1>
                 <div className={"flex flex-col w-full h-auto mt-[20px] gap-y-[15px] lg:mt-[46px] lg:gap-y-[23px]"}>
@@ -59,7 +59,7 @@ export default function WithGigPage() {
                     ].map((item, idx) => (
                         <div
                             key={idx}
-                            className={`${idx % 2 === 0 ? "bg-[#F6F6F6]" : "bg-[#ECECEC]"} group
+                            className={`${idx % 2 === 0 ? "bg-[#F6F6F6]" : "bg-[#ECECEC]"} group hover:scale-110 transition
                                 flex flex-row justify-between items-center w-full h-auto shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]
                                 rounded-[10px] pl-[14px] pr-[10px] pt-[5px] pb-[10px]
                                 lg:rounded-[20px] lg:pl-[45px] lg:pr-[20px] lg:py-[10px]`}
@@ -74,7 +74,7 @@ export default function WithGigPage() {
                     ))}
                 </div>
             </section>
-            {/* section3 */}
+            {/* section3 - 위드GIG 성공사례 */}
             <section className={"flex flex-col w-full h-auto px-[30px] mt-[63px] lg:px-[200px] lg:mt-[455px]"}>
                 <h1 className={"font-black text-[#541E80] text-[15px] lg:text-[45px]"}>
                     위드GIG 성공사례
@@ -118,7 +118,7 @@ export default function WithGigPage() {
                     </div>
                 </div>
             </section>
-            {/* section4 */}
+            {/* section4 - 구직자를 위한 GIG */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA]
                 mt-[61px] rounded-tl-[60px] px-[30px] lg:mt-[159px] lg:rounded-tl-[150px] lg:px-[200px]">
                 <div className="flex flex-row items-center mt-[72px] lg:mt-[110px]">
@@ -213,7 +213,7 @@ export default function WithGigPage() {
                         lg:w-[32px] lg:h-[117px] lg:rounded-r-[10px] lg:border-t-[2px] lg:border-r-[2px] lg:border-b-[2px]"></div>
                 </div>
             </section>
-            {/* section5 */}
+            {/* section5 - 구직자 말풍선 */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA] pt-[45px] lg:pt-[141px]">
                 <div className="relative w-full h-[147px] lg:h-[480px]">
                     <Image
@@ -277,13 +277,14 @@ export default function WithGigPage() {
                 </div>
                 <Link
                     href="/with-gig"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
+                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[19px] w-[131px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
-                        참여자 지원하기
+                        위드긱 ‘참여자’ 신청
+
                 </Link>
             </section>
-            {/* section6 */}
+            {/* section6 - 기업을 위한 GIG */}
             <section className="flex flex-col w-full h-auto bg-[#EAEAEA]">
                 <div className="bg-white rounded-tr-[60px] px-[30px] mt-[60px]
                     lg:rounded-tr-[150px] lg:px-[200px] lg:mt-[108px]">
@@ -381,7 +382,7 @@ export default function WithGigPage() {
                     </div>
                 </div>
             </section>
-            {/* section7 */}
+            {/* section7 - 기업 말풍선*/}
             <section className="flex flex-col w-full h-auto pt-[45px] lg:pt-[141px]">
                 <div className="relative w-full h-[147px] lg:h-[480px]">
                     <Image
@@ -433,7 +434,7 @@ export default function WithGigPage() {
                         />
                         <div className="absolute z-20 flex flex-col ">
                             <p className="font-extrabold text-[8px] mt-[2px] lg:text-[20px] lg:mt-[5px]">
-                                지금, 필요한 역할만 ‘딱' 맡길 수 있는 방법이 있습니다!
+                                지금, 필요한 역할만 '딱' 맡길 수 있는 방법이 있습니다!
                             </p>
                         </div>
                     </div>
@@ -442,10 +443,10 @@ export default function WithGigPage() {
                 <h3 className="font-black text-center text-[#541E80] text-[10px] mt-[8px] lg:text-[25px] lg:mt-[16px]">단기 프로젝트 중심의 검증된 실무 인재 매칭</h3>
                 <Link
                     href="/with-gig"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
+                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[26px] w-[131px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
-                    기업 의뢰하기
+                    위드긱 ‘수요기업’ 신청
                 </Link>
             </section>
             {/* section8 */}
@@ -459,7 +460,7 @@ export default function WithGigPage() {
                     text-[12px] mt-[26px] w-[137px] border-b-[1px] pb-[6px]
                     lg:text-[25px] lg:mt-[71px] lg:w-[477px] lg:border-b-[2px] lg:pb-[17px]">
                     신청절차</h1>
-                <div className="hidden lg:block relative w-full h-[300px] mt-[50px]">
+                <div className="hidden lg:block relative w-full aspect-video">
                     <Image
                         src={"/withGIG/section8_image1.png"}
                         alt={"section8_image.png"}
@@ -468,7 +469,7 @@ export default function WithGigPage() {
                         className={"object-contain w-full"}
                     />
                 </div>
-                <div className="relative lg:hidden w-full h-[140px] mt-[20px]">
+                <div className="relative lg:hidden w-full aspect-video">
                     <Image
                         src={"/withGIG/section8_image2.png"}
                         alt={"section8_image.png"}

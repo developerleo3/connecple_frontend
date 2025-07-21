@@ -46,7 +46,7 @@ export default function WithConnecdayPage() {
 
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 위드커넥데이 신청 */}
             <section className="flex flex-col w-full h-auto">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
                     <h1 className="text-center
@@ -68,7 +68,7 @@ export default function WithConnecdayPage() {
                         text-[9px] mt-[25px]
                         lg:text-[23px] lg:mt-[77px]">
                         워드커넥데이는 교육 수료생, 참여 기업, 전문가, 참여 동기들과<br/>
-                        소통하고 연결하며 새로운 기회를 만드는 네트워킹 행사입니다.
+                        소통하며 새로운 기회를 만드는 네트워킹 행사입니다.
                     </p>
                     <h3 className="text-center font-extrabold
                         text-[10px] mt-[25px]
@@ -76,6 +76,13 @@ export default function WithConnecdayPage() {
                         연결을 통해 커리어를 확장하는 날.<br/>
                         <span className="text-[#541E80]">사람과 사회를 잇는 진짜 네트워킹의 장.</span>
                     </h3>
+                    <p className="text-center font-semibold
+                        text-[9px] mt-[25px]
+                        lg:text-[23px] lg:mt-[77px]">
+                        매년 3월, 6월, 9월 운영<br/>
+                        ‘위드프로젝트 교육 접수’
+                    </p>
+
                     <div className="relative flex flex-col items-center">
                         <h1 className="relative z-10 text-center font-tvn-medium text-[#541E80]
                             text-[13px] mt-[38px] lg:text-[35px] lg:mt-[97px]">
@@ -86,21 +93,21 @@ export default function WithConnecdayPage() {
                             lg:w-[174px] lg:h-[25px] lg:mt-[120px]"/>
                     </div>
                     <Link
-                        href="/with-project"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                        target="_blank"
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             mt-[9px] w-[159px] h-[25px] text-[10px]
                             lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
-                        나의 성장 가능성 연결하기
+                        위드커넥데이 무료 신청
                     </Link>
                     <h3 className="flex self-center font-bold
                         text-[9px] mt-[13px]
                         lg:text-[20px] lg:mt-[25px]">
-                        가능성은 연결될 때 빛이 납니다.
+                        매월 둘째주 금요일 운영
                     </h3>
                 </div>
             </section>
-
-            {/* section2 */}
+            {/* section2 -  */}
             <section className="flex flex-col w-full h-auto mt-[99px] px-[30px] lg:mt-[88px] lg:px-[123px]">
                 <h1 className="hidden lg:block font-black text-[#541E80] lg:text-[45px] lg:mt-[143px]">
                     한 걸음 내디뎠다면, 이제 연결이 필요한 순간입니다.
@@ -113,7 +120,7 @@ export default function WithConnecdayPage() {
                     내 가능성을 믿어주는 멘토들과 서로 연결되는 단 하루의 기회!
                 </h2>
                 <div className="flex flex-row justify-between mt-[27px] lg:mt-[64px]">
-                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300
+                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300 hover:scale-110
                         w-[85px] h-[85px] shadow-[1px_1px_3.7px_0_rgba(0,0,0,0.11)]
                         lg:w-[296px] lg:h-[296px] lg:hover:bg-[#2F0D4B] lg:shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="text-center pt-[5px]">
@@ -149,7 +156,7 @@ export default function WithConnecdayPage() {
                         </div>
                     </div>
 
-                    <div className="group flex justify-center items-center rounded-full bg-[#ECECEC] transition-all duration-300
+                    <div className="group flex justify-center items-center rounded-full bg-[#ECECEC] transition-all duration-300 hover:scale-110
                         w-[85px] h-[85px] shadow-[1px_1px_3.7px_0_rgba(0,0,0,0.11)]
                         lg:w-[296px] lg:h-[296px] lg:hover:bg-[#2F0D4B] lg:shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="text-center pt-[5px]">
@@ -181,7 +188,7 @@ export default function WithConnecdayPage() {
                         </div>
                     </div>
 
-                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300
+                    <div className="group flex justify-center items-center rounded-full bg-[#F6F6F6] transition-all duration-300 hover:scale-110
                         w-[85px] h-[85px] shadow-[1px_1px_3.7px_0_rgba(0,0,0,0.11)]
                         lg:w-[296px] lg:h-[296px] lg:hover:bg-[#2F0D4B] lg:shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
                         <div className="text-center">
@@ -246,10 +253,9 @@ export default function WithConnecdayPage() {
                     ))}
                 </div>
             </section>
-
             {/* section3 - 버튼 클릭에 따라 콘텐츠 변경 */}
             <section className="flex flex-row w-full justify-between h-auto
-                    px-[30px] mt-[88px] mb-[84px] gap-x-[10px]
+                    px-[30px] mt-[88px] gap-x-[10px] mb-[84px]
                     lg:px-[130px] lg:py-[90px] lg:mt-[300px] lg:mb-[300px]">
                 <div className="flex flex-col">
                     <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">PROGRAM</h1>
@@ -258,7 +264,7 @@ export default function WithConnecdayPage() {
                             <button
                                 key={num}
                                 onClick={() => setSelected(idx)}
-                                className={`flex justify-center items-center font-extrabold rounded-full 
+                                className={`flex justify-center items-center font-extrabold rounded-full hover:scale-110 transition
                                     text-[8px] w-[20px] h-[20px] lg:text-[30px] lg:w-[50px] lg:h-[50px] 
                                     ${selected === idx ? "bg-[#541E80] text-white" : "bg-[#D9D9D9] cursor-pointer"} 
                                     ${idx !== 0 ? "ml-[10px] lg:ml-[17px]" : ""}`}
@@ -303,7 +309,7 @@ export default function WithConnecdayPage() {
                     width={124}
                     height={195}
                     unoptimized
-                    className="object-cover rounded-[20px] lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
+                    className="object-contain rounded-[20px] lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
                 />
             </section>
         </main>

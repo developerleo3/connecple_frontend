@@ -12,70 +12,32 @@ import AnimatedCounter from '../components/AnimatedCounter';
 import {useInView} from "react-intersection-observer";
 import Link from "next/link";
 
-import {useState} from "react";
+import { useEffect, useState } from "react"
 
 import {motion} from "framer-motion";
+import LoadingSpinner from "@/components/loading-spinner";
 
-const slides = [
-    {
-        src: "/pictures/picture1.png",
-        company: "과학기술정보통신부/한국데이터산업진흥원",
-        title: "2024 데이터 안심구역 활용<br />공동경진대회 시상식",
-    },
-    {
-        src: "/pictures/picture2.png",
-        company: "과학기술정보통신부/한국데이터산업진흥원",
-        title: "2024 데이터안심구역 활용<br />공동경진대회 성과발표회",
-    },
-    {
-        src: "/pictures/picture3.png",
-        company: "과학기술정보통신부/한국데이터산업진흥원",
-        title: "2023 데이터안심구역<br />대전센터 개소식",
-    },
-    {
-        src: "/pictures/picture4.png",
-        company: "과학기술정보통신부/한국지능정보사회진흥원",
-        title: "2023 SW우수인재 시상식",
-    },
-    {
-        src: "/pictures/picture5.png",
-        company: "과학기술정보통신부/한국지능정보사회진흥원",
-        title: "2023 SW여성인재 데모데이",
-    },
-    {
-        src: "/pictures/picture6.png",
-        company: "국립외교원/국민외교아카데미",
-        title: "2024 제 7기 대학생<br />외교연수 과정",
-    },
-    {
-        src: "/pictures/picture7.png",
-        company: "국립외교원/국민외교아카데미",
-        title: "2024 대국민 특강",
-    },
-    {
-        src: "/pictures/picture8.png",
-        company: "국립외교원/국민외교아카데미",
-        title: "2024 국민외교아카데미<br />제 6기 서포터스",
-    },
-    {
-        src: "/pictures/picture9.png",
-        company: "개인정보보호위원회/한국인터넷진흥원",
-        title: "2022 가명정보 전문가 풀<br />워크숍",
-    },
-    {
-        src: "/pictures/picture10.png",
-        company: "서울시청",
-        title: "2022 서울시청 서울런<br />입시설명회 행사",
-    },
-];
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
-const storyLabels = [
-    {label: "커넥플과 함께<br />성장한 고객사", value: "21개"},
-    {label: "커넥플과 함께<br />성공한 프로젝트", value: "34개"},
-    {label: "커넥플과 함께<br />기대한 사업 만족도", value: "97.3%"},
-    {label: "커넥플과 함께<br />걸어온 경력보유여성", value: "575명"},
-    {label: "커넥플과 함께<br />재도약에 성공한<br />경력보유여성", value: "81명"},
-];
+interface imageSlides {
+    id: number
+    imagePath: string
+    sortOrder?: number
+    title: string
+    company: string
+}
+
+interface StatsResponse {
+    sortOrder?: number
+    statsName: string
+    statistic: number
+    unit: string
+}
+
+interface Stats {
+    statsName: string
+    statistic: string
+}
 
 const newsLetters = [
     {
@@ -83,14 +45,14 @@ const newsLetters = [
         title: "기업이 찾는 실무형 인재, W.I.T.H 프로젝트에서 나온다",
         content:
             "\"바로 채용하고 싶을 정도였어요.\" 프로젝트 파트너 기업의 솔직한 이야기. 이들이 주목한 건 단순한 스펙이 아닌, 실무에 강한 팀워크형 ...",
-        href: "/",
+        href: "https://forms.gle/Ujx2ishv4DTiv9tE9",
     },
     {
         image: "/main/section7_picture2.png",
         title: "육아와 커리어, 두마리 토끼를 잡은 그녀의 하루",
         content:
             "오전엔 아이 등원, 오후엔 실무 교육, 저녁엔 나만의 성장 시간. 육아와 커리어를 동시에 이끌어가는 한 엄마의 진짜 이야기를 ...",
-        href: "/",
+        href: "https://forms.gle/Ujx2ishv4DTiv9tE9",
     },
 ];
 
@@ -151,6 +113,49 @@ export default function Home() {
         threshold: 0.3,     // 30% 보이면 발동
     });
 
+    const [imageSlides, setImageSlides] = useState<imageSlides[]>([])
+    const [stats, setStats] = useState<Stats[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        const fetchSlides = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/home`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("슬라이드 데이터를 불러오지 못했습니다.")
+
+                const data = await res.json()
+                console.log('data', data)
+                const imageSlides: imageSlides[] = data.introImages
+                const statsResponses: StatsResponse[] = data.stats
+
+                const stats: Stats[] = statsResponses.map(item => ({
+                    statsName: item.statsName,
+                    statistic: `${item.statistic}${item.unit}`
+                }));
+
+                console.log('imageSlides', imageSlides);
+                console.log('stats', stats);
+
+                setImageSlides(imageSlides)
+                setStats(stats)
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchSlides()
+    }, [])
+
     const [index, setIndex] = useState(0);
 
     const prev = () => {
@@ -169,6 +174,14 @@ export default function Home() {
     // 💡 logos 길이 기준 애니메이션 시간 계산
     const logos1Duration = ((baseWidth + gap) * logos1.length * 2) / scrollSpeed;
     const logos2Duration = ((baseWidth + gap) * logos2.length * 2) / scrollSpeed;
+
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        // TODO: API 호출 에러처리
+    }
 
     return (
         <main>
@@ -228,7 +241,6 @@ export default function Home() {
                     />
                 </div>
             </section>
-
             {/* Section2 - 슬라이드 */}
             <section className="relative bg-white w-full h-auto">
                 <Swiper
@@ -239,12 +251,12 @@ export default function Home() {
                     autoplay={{delay: 3000, disableOnInteraction: false}}
                     loop
                 >
-                    {slides.map((slide, index) => (
+                    {imageSlides.map((slide, index) => (
                         <SwiperSlide key={index}>
                             <div className="relative w-full aspect-video group overflow-hidden shadow-md">
                                 {/* 배경 이미지 */}
                                 <Image
-                                    src={slide.src}
+                                    src={slide.imagePath}
                                     alt={`슬라이드 ${index + 1}`}
                                     fill
                                     unoptimized
@@ -270,7 +282,6 @@ export default function Home() {
                     ))}
                 </Swiper>
             </section>
-
             {/* Section3 - 수치 */}
             <section
                 ref={counterSectionRef} // 여기에 ref 걸어줌
@@ -289,21 +300,21 @@ export default function Home() {
                 </h1>
 
                 <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-[34px] lg:mt-[86px]">
-                    {storyLabels.map((item, idx) => (
+                    {stats.map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col items-center justify-center w-[176px] h-[176px]
+                            className="flex flex-col items-center justify-center w-[176px] h-[176px] hover:scale-105 transition
                                 rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]"
                         >
                             <div className="flex-[3] flex items-center justify-center text-center">
                                 <p
                                     className="text-black font-bold text-[18px] space-y-[9px]"
-                                    dangerouslySetInnerHTML={{__html: item.label}}
+                                    dangerouslySetInnerHTML={{__html: item.statsName}}
                                 ></p>
                             </div>
                             <div className="flex-[2] flex items-center justify-center text-center">
                                 <p className="text-[#541E80] font-black text-[31px]">
-                                    <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                    <AnimatedCounter value={item.statistic} shouldAnimate={inView}
                                                      duration={1 + idx * 0.3}/>
                                 </p>
                             </div>
@@ -313,7 +324,7 @@ export default function Home() {
 
                 <div className="lg:hidden grid grid-rows-2 gap-y-[17px] mt-[31px]">
                     <div className="flex justify-center items-center gap-x-[9px]">
-                        {storyLabels.slice(0, 3).map((item, idx) => (
+                        {stats.slice(0, 3).map((item, idx) => (
                             <div
                                 key={idx}
                                 className="flex flex-col items-center justify-center w-[87px] h-[87px]
@@ -322,12 +333,12 @@ export default function Home() {
                                 <div className="flex-[3] flex items-center justify-center text-center">
                                     <p
                                         className="text-black font-bold text-[9px] space-y-[6px]"
-                                        dangerouslySetInnerHTML={{__html: item.label}}
+                                        dangerouslySetInnerHTML={{__html: item.statsName}}
                                     ></p>
                                 </div>
                                 <div className="flex-[2] flex items-center justify-center text-center">
                                     <p className="text-[#541E80] font-black text-[15px]">
-                                        <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                        <AnimatedCounter value={item.statistic} shouldAnimate={inView}
                                                          duration={1 + idx * 0.3}/>
                                     </p>
                                 </div>
@@ -336,7 +347,7 @@ export default function Home() {
                     </div>
 
                     <div className="flex justify-center items-center gap-x-[9px]">
-                        {storyLabels.slice(3, 5).map((item, idx) => (
+                        {stats.slice(3, 5).map((item, idx) => (
                             <div
                                 key={idx}
                                 className="flex flex-col items-center justify-center w-[87px] h-[87px]
@@ -345,12 +356,12 @@ export default function Home() {
                                 <div className="flex-[3] flex items-center justify-center text-center">
                                     <p
                                         className="text-black font-bold text-[9px] space-y-[6px]"
-                                        dangerouslySetInnerHTML={{__html: item.label}}
+                                        dangerouslySetInnerHTML={{__html: item.statsName}}
                                     ></p>
                                 </div>
                                 <div className="flex-[2] flex items-center justify-center text-center">
                                     <p className="text-[#541E80] font-black text-[15px]">
-                                        <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                        <AnimatedCounter value={item.statistic} shouldAnimate={inView}
                                                          duration={1.9 + idx * 0.3}/>
                                     </p>
                                 </div>
@@ -359,7 +370,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
             {/* Section4 - Brand Story */}
             <section className="relative bg-white w-full h-auto">
                 <div
@@ -368,20 +378,17 @@ export default function Home() {
                         Connecple Brand Story
                     </h1>
                     <p className="text-black font-extrabold mt-[30px] text-[8px] lg:mt-[56px] lg:text-[22px]">
-                        자신의 경험을 새로운 기회로 바꿀 수 있도록 함께해요.<br/>
-                        복귀를 넘어<br/><br/>
+                        당신의 경험이 새로운 기회가 되도록, 커넥플이 함께해요.<br/>
+                        복귀를 넘어, 다시 주인공이 되는 길<br/><br/>
 
-                        경력의 공백은 약점이 아니라 더 단단해질 기회임을 우리는 믿어요.<br/><br/>
-
+                        경력의 공백은 약점이 아니라 더 단단해질 기회임을 우리는 믿어요.<br/>
                         커넥플과 함께 우리는 새로운 출발을 준비합니다.<br/><br/>
 
-                        체계적인 교육과 커리어 연결로 당신이 다시 주인공이 되는 순간을 함께 할게요.<br/><br/>
-
+                        체계적인 교육과 커리어 연결로 당신이 다시 주인공이 되는 순간을 함께 할게요.<br/>
                         당신의 경험은 더 큰 가치를 만들어 낼 것이 분명해요.
                     </p>
                 </div>
             </section>
-
             {/* Section5 - With Project */}
             <section className="bg-white w-full h-auto">
                 <div className="relative flex flex-col w-full h-auto bg-[#F4F4F4] rounded-tl-[60px] pt-[54px]
@@ -396,7 +403,7 @@ export default function Home() {
                         <div className="text-black flex flex-col justify-center pl-[51px] lg:pl-[130px]">
                             <p className="font-black text-[12px] mt-[1px] mb-[3px]
                                 lg:text-[27px] lg:mt-[3px] lg:mb-[10px]">
-                                경력보유여성 재도약 프로젝트
+                                경력보유여성 재도약 프로그램
                             </p>
                             <p className="font-tvn-medium text-[#944896] text-[12px] lg:text-[33px]">
                                 {"가능성은 여전히 당신 안에 있습니다"}
@@ -449,8 +456,9 @@ export default function Home() {
                             </div>
                             <div>
                                 <Link
-                                    href="/with-project"
-                                    className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)]
+                                    href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                                    target="_blank"
+                                    className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                         right-[49px] top-[-34px] text-[10px] space-y-[8px] w-[68px] h-[68px]
                                         rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px]
                                         lg:top-auto lg:right-auto lg:left-[0px] lg:bottom-[2px] lg:text-[20px] lg:space-y-[10px] lg:w-[126px] lg:h-[126px]
@@ -477,7 +485,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
             {/* Section6 - With ConnecDay */}
             <section className="w-full h-auto bg-[#F4F4F4]">
                 <div className="flex flex-col text-black pt-[100px] px-[50px]
@@ -515,7 +522,7 @@ export default function Home() {
                                 content: "성장 선언 챌린지, 테이블 멘토링",
                             },
                         ].map((item, idx) => (
-                            <div key={idx} className="relative">
+                            <div key={idx} className="relative group hover:scale-105 transition">
                                 {/* 배경 이미지 */}
                                 <Image
                                     src={item.src}
@@ -531,7 +538,9 @@ export default function Home() {
                                     <h1 className="font-extrabold text-[10px] h-[7px] lg:text-[20px] lg:h-[14px]">
                                         {item.title}
                                     </h1>
-                                    <p className="font-bold text-[8px] h-[6px] mt-[6px] lg:text-[18px] lg:h-[13px] lg:mt-[21px]">
+                                    <p className="lg:hidden lg:group-hover:block font-bold
+                                        text-[8px] h-[6px] mt-[6px]
+                                        lg:text-[18px] lg:h-[13px] lg:mt-[21px]">
                                         {item.content}
                                     </p>
                                 </div>
@@ -543,8 +552,9 @@ export default function Home() {
                     <div className="relative col-span-5 h-full flex items-center justify-end mt-[17px] mb-[46px]
                         lg:mt-[37px] lg:mb-[137px]">
                         <Link
-                            href="/with-connecday"
-                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                            href="https://forms.gle/ud4xy9A8FejjwbsE9"
+                            target="_blank"
+                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[139px] h-[25px] text-[10px]
                                 lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:w-[307px] lg:h-[52px] lg:text-[20px]"
                         >
@@ -564,7 +574,6 @@ export default function Home() {
 
                 </div>
             </section>
-
             {/* Section7 - With News Letter */}
             <section className="bg-[#F4F4F4] w-full h-auto">
                 <div className="flex flex-col w-full h-auto bg-white text-black rounded-tr-[60px] pt-[47px] px-[50px]
@@ -584,7 +593,7 @@ export default function Home() {
                         <button
                             onClick={prev}
                             disabled={index === 0}
-                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:scale-120 transition`}
                         >
                             <Image
                                 src={index === 0 ? "/main/vector_left_gray.svg" : "/main/vector_right_black.svg"}
@@ -599,7 +608,7 @@ export default function Home() {
                         <button
                             onClick={next}
                             disabled={index >= newsLetters.length - 2}
-                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                            className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-120 transition'}`}
                         >
                             <Image
                                 src={index >= newsLetters.length - 2 ? "/main/vector_left_gray.svg" : "/main/vector_right_black.svg"}
@@ -616,7 +625,7 @@ export default function Home() {
                         {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
                             <div
                                 key={i}
-                                className="relative overflow-hidden group h-[118px] rounded-[12px]
+                                className="relative overflow-hidden group h-[118px] rounded-[12px] hover:scale-105 transition
                                     lg:h-[300px] lg:rounded-[30px]"
                             >
                                 {/* 이미지 */}
@@ -630,18 +639,20 @@ export default function Home() {
                                 {/* 항상 보이는 어두운 배경 */}
                                 <div className="absolute inset-0 bg-black/60"/>
                                 {/* 항상 보이는 텍스트 */}
-                                <div className="absolute inset-0 flex flex-col text-white pl-[12px] pr-[30%] pt-[28px]
+                                <div className="absolute inset-0 flex flex-col text-white group
+                                    pl-[12px] pr-[30%] pt-[28px]
                                     lg:pl-[40px] lg:pr-[40%] lg:pt-[75px]">
                                     <div className="flex-[3]">
                                         <h1 className="font-black text-[8px] lg:text-[23px]">{item.title}</h1>
                                     </div>
-                                    <div className="flex-[2] overflow-hidden">
+                                    <div className="flex-[2] overflow-hidden lg:hidden lg:group-hover:block">
                                         <p className="font-medium line-clamp-3 text-[5px] lg:text-[14px]">{item.content}</p>
                                     </div>
                                 </div>
                                 {/* 항상 보이는 우하단 버튼 (hover하면 색 반전) */}
                                 <Link
                                     href={item.href}
+                                    target="_blank"
                                     className="absolute flex items-center justify-center bg-transparent text-white border border-white
                                         hover:bg-white hover:text-black transition-colors duration-300
                                         w-[9px] h-[9px] bottom-[20px] right-[26px] text-[5px]
@@ -656,8 +667,9 @@ export default function Home() {
                     {/* 하단 버튼 */}
                     <div className="relative flex justify-start mt-[28px] lg:mt-[27px]">
                         <Link
-                            href="/with-newsletter"
-                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)]
+                            href="https://forms.gle/Ujx2ishv4DTiv9tE9"
+                            target="_blank"
+                            className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[141px] h-[25px] text-[10px]
                                 lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:w-[295px] lg:h-[52px] lg:text-[20px]"
                         >
@@ -676,7 +688,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
             {/* Section8 - 파트너스 */}
             <section className="bg-white w-full h-auto flex flex-col items-center text-black
                 pt-[84px] pb-[37px] lg:pt-[177px] lg:pb-[136px]">
@@ -751,7 +762,6 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-
             {/* Section9 - 신청 링크 */}
             <section className="relative bg-white w-full aspect-video">
                 {/* 꽉 찬 배경 이미지 */}
@@ -780,22 +790,23 @@ export default function Home() {
                             {
                                 labelEng: "W.I.T.H Project",
                                 labelKor: "바로 신청하기",
-                                href: "/with-project"
+                                href: "https://forms.gle/HWXpfoB6Me3wsNaa7"
                             },
                             {
                                 labelEng: "W.I.T.H Connecday",
                                 labelKor: "바로 함께하기",
-                                href: "/with-connecday"
+                                href: "https://forms.gle/ud4xy9A8FejjwbsE9"
                             },
                             {
                                 labelEng: "W.I.T.H News letter",
                                 labelKor: "바로 구독하기",
-                                href: "/with-newsletter"
+                                href: "https://forms.gle/Ujx2ishv4DTiv9tE9"
                             }
                         ].map((btn, idx) => (
                             <Link
                                 key={idx}
                                 href={btn.href}
+                                target="_blank"
                                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold
                                     rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px]
                                     px-[11px] w-[132px] h-[20px] text-[9px]

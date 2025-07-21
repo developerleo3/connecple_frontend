@@ -4,39 +4,49 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {useEffect, useRef, useState} from "react";
+import LoadingSpinner from "@/components/loading-spinner";
 
-const timelineItems = [
-    {
-        year: "2025",
-        contents: ["5월 한국여성재단 기부", "4월 서울시 우먼업 인턴십 참여"],
-    },
-    {
-        year: "2024",
-        contents: ["12월 NIA SW 여성인재사업 네트워킹 파티 후원", "4월 서울시 우먼업 정규직 참여"],
-    },
-    {
-        year: "2023",
-        contents: ["3월 직접 생산 증명 발급 (전시)", "2월 커넥플 경력단절여성 제도"],
-    },
-    {
-        year: "2022",
-        contents: ["3월 직접 생산 증명 발급 (전시)", "2월 커넥플 경력단절여성 제도"],
-    },
-    {
-        year: "2021",
-        contents: ["3월 직접 생산 증명 발급 (전시)", "2월 커넥플 경력단절여성 제도"],
-    },
-    {
-        year: "2020",
-        contents: ["3월 직접 생산 증명 발급 (전시)", "2월 커넥플 경력단절여성 제도"],
-    },
-];
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+
+interface TimelineItems {
+    historyYear: string
+    content: string
+}
 
 export default function AboutPage() {
-
+    const [timelineItems, setTimelineItems] = useState<TimelineItems[]>([])
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        const fetchSlides = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/history`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("슬라이드 데이터를 불러오지 못했습니다.")
+
+                const items: TimelineItems[] = await res.json()
+                console.log('items', items)
+
+                setTimelineItems(items)
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchSlides()
+    }, [])
 
     const updateScrollState = () => {
         const el = scrollRef.current;
@@ -67,10 +77,17 @@ export default function AboutPage() {
 
     const [selected, setSelected] = useState<'office' | 'class'>('office');
 
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        // TODO: API 호출 에러처리
+    }
 
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 커넥플 소개 메인 */}
             <section className="relative flex flex-col w-full h-auto
                 pl-[30px] pr-[20px] mt-[46px] lg:pl-[106px] lg:pr-[76px] lg:mt-[180px]">
                 <h2 className="font-extrabold text-end text-[15px] mr-[30px] lg:text-[60px] lg:mr-[100px]">
@@ -90,7 +107,8 @@ export default function AboutPage() {
                     “경보녀, 당신의 가치를 응원합니다&#34;
                 </p>
                 <Link
-                    href={"/about"}
+                    href={"https://www.issuemaker.kr/news/articleView.html?idxno=39727"}
+                    target="_blank"
                     className="flex font-bold justify-center items-center text-[#541E80]
                         rounded-[10px] w-[96px] h-[17px] text-[7px] mt-[3px] mb-[5px] border-[0.5px]
                         lg:rounded-[20px] lg:w-[262px] lg:h-[36px] lg:text-[20px] lg:mt-[14px] lg:mb-[26px] lg:border-[2px]
@@ -104,7 +122,7 @@ export default function AboutPage() {
                        className="absolute right-[71px] lg:right-[340px] bottom-0 lg:w-[450px] lg:h-[680px]"
                 />
             </section>
-            {/* section2 */}
+            {/* section2 - 팀 소개 */}
             <section className="flex flex-col w-full h-auto
                 px-[30px] mt-[59px] mb-[60px] lg:px-[157px] lg:mt-[225px] lg:mb-[229px]">
                 <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">
@@ -134,7 +152,7 @@ export default function AboutPage() {
                             des: '10년 이상의 현장 경험을<br />바탕으로 한 교육 기획·운영<br />전문가 조직 <span class="font-black text-[#541E80]">교육사업부</span>'
                         }
                     ].map((item, idx) => (
-                        <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]
+                        <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                             w-[92px] h-[104px] rounded-[10px] lg:w-[296px] lg:h-[318px] lg:rounded-[50px]">
                             <div className="flex flex-row w-full h-auto items-center px-[3px] lg:px-[14px] lg:mt-[-15px]">
                                 <div className="overflow-hidden rounded-full w-[44px] h-[44px] lg:w-[157px] lg:h-[157px]">
@@ -162,7 +180,7 @@ export default function AboutPage() {
                     ))}
                 </div>
             </section>
-            {/* section3 */}
+            {/* section3 - 연혁 */}
             <section className="flex flex-col w-full h-auto bg-[#F6F6F6] px-[30px] pb-[50px] lg:px-[157px] lg:pb-[109px]">
                 <h1 className="font-black text-[#541E80] text-[15px] mt-[33px] lg:text-[45px] lg:mt-[108px]">
                     더 나은 내일을 꿈꿔온 우리
@@ -175,7 +193,7 @@ export default function AboutPage() {
                     {/* 왼쪽 화살표 */}
                     <button onClick={scrollLeft}
                             disabled={!canScrollLeft}
-                            className={`${canScrollLeft ? "cursor-pointer" : "cursor-not-allowed"}`}
+                            className={`${canScrollLeft ? "cursor-pointer" : "cursor-not-allowed"} hover:scale-120 transition`}
                     >
                         <Image
                             src={canScrollLeft ? "/main/vector_right_black.svg" : "/main/vector_left_gray.svg"}
@@ -189,7 +207,7 @@ export default function AboutPage() {
                     <button
                         onClick={scrollRight}
                         disabled={!canScrollRight}
-                        className={`${canScrollRight ? "cursor-pointer" : "cursor-not-allowed"}`}
+                        className={`${canScrollRight ? "cursor-pointer" : "cursor-not-allowed"} hover:scale-120 transition`}
                     >
                         <Image
                             src={canScrollRight ? "/main/vector_right_black.svg" : "/main/vector_left_gray.svg"}
@@ -209,7 +227,7 @@ export default function AboutPage() {
                                 className="min-w-fit flex flex-col items-start">
                                 {/* 연도 */}
                                 <div className="text-[#541E80] font-black text-[13px] lg:text-[35px]">
-                                    {item.year}
+                                    {item.historyYear}
                                 </div>
                                 {/* 점 */}
                                 <div className="bg-[#541E80] rounded-full w-[6px] h-[6px]
@@ -220,7 +238,7 @@ export default function AboutPage() {
                                 <div className="flex flex-col font-semibold text-start text-[#9A9A9A]
                                     gap-y-[2px] text-[7px] mt-[13px] mr-[40px]
                                     lg:gap-y-[4px] lg:text-[20px] lg:mt-[33px] lg:mr-[170px]">
-                                    {item.contents.map((line, i) => (
+                                    {item.content.split('\n').map((line, i) => (
                                         <span key={i}>{line}</span>
                                     ))}
                                 </div>
@@ -229,29 +247,29 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-            {/* section4 */}
+            {/* section4 - 사진 */}
             <section className="flex w-full h-auto px-[30px] lg:px-[157px]">
                 <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
                     {[
                         {
                             path: "/about/section4_picture1.png",
                             title: "NIA 2023년 SW여성인재 역량강화기반 조성교육",
-                            content: "타이트한 일정이었지만 엑기스로 배울 수 있어 좋았습니다. 강사님께서 친절하고 밝게 교육해주셔서 에너지가 너무 좋았습니다."
+                            content: "타이트한 일정이었지만 엑기스로 배울 수 있어<br />좋았습니다. 강사님께서 친절하고 밝게<br />교육해주셔서 에너지가 너무 좋았습니다."
                         },
                         {
                             path: "/about/section4_picture2.png",
                             title: "NIA 2023년 SW여성인재 역량강화기반 조성교육",
-                            content: "과제를 통해 이론뿐만이 아니라 실무 스킬까지 익힐 수 있는 점이 너무 만족스러웠습니다. 새로운 도전에 설레고 재밌었어요."
+                            content: "과제를 통해 이론뿐만이 아니라 실무 스킬까지<br />익힐 수 있는 점이 너무 만족스러웠습니다.<br />새로운 도전에 설레고 재밌었어요."
                         },
                         {
                             path: "/about/section4_picture3.png",
                             title: "K-DATA 2023년 데이터안심구역<br />미개방데이터 확보 및 이용 활성화",
-                            content: "일방적인 주입식 교육이 아닌 과제 피드백과 중간중간 소통을 통해 교육이 진행되어 더욱 집중할 수 있었습니다."
+                            content: "일방적인 주입식 교육이 아닌 과제 피드백과<br />중간중간 소통을 통해 교육이 진행되어 더욱<br />집중할 수 있었습니다."
                         }
                     ].map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col w-[98px] lg:w-[314px]  h-auto items-center">
+                            className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center hover:scale-110 transition">
                             <div className="relative w-full h-[87px] lg:h-[279px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
                                 <Image
                                     src={item.path}
@@ -273,7 +291,7 @@ export default function AboutPage() {
                     ))}
                 </div>
             </section>
-            {/* section5 */}
+            {/* section5 - 복지 소개 */}
             <section className="flex flex-col w-full h-auto bg-gradient-to-b from-[#C0AED1B2] to-white
                 px-[30px] lg:px-[157px] pb-[50px] lg:pb-[100px]">
                 <h1 className="font-black text-[#541E80] text-[15px] mt-[35px] lg:text-[45px] lg:mt-[78px]">
@@ -334,7 +352,7 @@ export default function AboutPage() {
                                 width={150}
                                 height={130}
                                 unoptimized
-                                className="object-contain lg:w-[500px] lg:h-[260px]"
+                                className="object-contain lg:w-[500px] lg:h-[260px] hover:scale-120 transition"
                             />
                         </div>
 
@@ -395,14 +413,14 @@ export default function AboutPage() {
                 <div className="flex flex-row w-full h-auto justify-between items-center
                     mt-[24px] gap-x-[20px] lg:mt-[48px] lg:gap-x-[39px]">
                     <button onClick={() => setSelected('office')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px]
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px] hover:scale-110 transition
                         ${selected === 'office' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[10px] pb-[5px] lg:text-[25px] lg:pb-[17px] cursor-pointer`}
                     >
                         사무실
                     </button>
                     <button onClick={() => setSelected('class')}
-                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px]
+                            className={`flex w-full h-full justify-center items-center font-black border-b-[1px] lg:border-b-[2px] hover:scale-110 transition
                         ${selected === 'class' ? 'text-[#541E80]' : 'text-[#B3B3B3]'}
                         text-[10px] pb-[5px] lg:text-[25px] lg:pb-[17px] cursor-pointer`}
                     >

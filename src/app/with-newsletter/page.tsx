@@ -6,14 +6,15 @@ import Link from "next/link";
 export default function WithNewsletterPage() {
     return (
         <main>
-            {/* section1 */}
+            {/* section1 - 뉴스레터 소개 */}
             <section className="flex flex-col w-full h-auto mt-[58px] lg:mt-[144px]">
                 <h1 className="text-center
                         text-[18px] font-black
                         lg:text-[30px] lg:font-extrabold">
                     W.I.T.H Newsletter
                 </h1>
-                <div className="relative flex justify-center items-center h-[140px] mt-[26px] lg:h-[456px] lg:mt-[43px]">
+                <div
+                    className="relative flex justify-center items-center h-[140px] mt-[26px] lg:h-[456px] lg:mt-[43px]">
                     {/* 배경 이미지 */}
                     <Image
                         src="/withNewsletter/section1_image.png"
@@ -32,10 +33,13 @@ export default function WithNewsletterPage() {
                         className="absolute z-10 lg:w-[944px] lg:h-[96px] brightness-75"
                     />
                     <p className="hidden lg:block absolute z-20 text-center font-bold lg:text-[30px]">
-                        최신 뉴스 정보와 커넥플 경력단절여성 지원 프로그램 소식을 만나보세요!
+                        SINCE 2022<br/>
+                        국내 최초 경력보유여성을 위한 뉴스레터, 커넥플이 앞장섭니다.
+
                     </p>
                     <p className="block lg:hidden absolute z-20 text-center font-bold text-[11px]">
-                        최신 뉴스 정보와 커넥플 경력단절여성 지원<br /> 프로그램 소식을 만나보세요!
+                        SINCE 2022<br/>
+                        국내 최초 경력보유여성을 위한 뉴스레터, 커넥플이 앞장섭니다.
                     </p>
                 </div>
                 <p className="font-extrabold text-center text-[10px] mt-[39px]
@@ -43,24 +47,26 @@ export default function WithNewsletterPage() {
                     당신의 시간과 가능성은 소중합니다.<br/>
                     <span className="text-[#541E80]">가능성을 향한 첫 걸음</span>
                 </p>
-                <div className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[16px]">
+                <div
+                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[16px]">
                     <Link
-                        href="/with-newsletter"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        href="https://forms.gle/Ujx2ishv4DTiv9tE9"
+                        target="_blank"
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         위드뉴스레터 무료 구독
                     </Link>
                     <Link
-                        href="/with-newsletter"
-                        className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px]
+                        href="/with-newsletter" // TODO: 이메일 바로가기?
+                        className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         뉴스레터 파트너 문의하기
                     </Link>
                 </div>
             </section>
-            {/* section2 */}
+            {/* section2 - 뉴스레터란? */}
             <section className="w-full h-auto px-[30px] mt-[96px] lg:px-[200px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
@@ -95,8 +101,8 @@ export default function WithNewsletterPage() {
                 </h1>
                 <h2 className="font-black
                     mt-[11px] text-[10px] lg:mt-[20px] lg:text-[27px]">
-                    국내 최초 경력보유여성 대상 뉴스레터인 위드뉴스레터는 경력보유여성을 위해<br/>
-                    유익한 정보, 최신소식, 실전 팁을 담아 매주 한 번, 당신의 메일함으로 찾아갑니다.
+                    국내 최초 경력단절여성을 위한 뉴스레터<br/>
+                    2주에 한번, 유익한 정보를 가득 담아 메일로 보내 드려요.
                 </h2>
 
                 <div className="flex flex-row w-full h-auto bg-[#2C0E59]
@@ -121,13 +127,9 @@ export default function WithNewsletterPage() {
                             lg:mt-[25px] lg:ml-[50px] lg:gap-x-[15px]">
                             <p className="text-[6.8px] lg:text-[20px]">🐝</p>
                             <div className="flex flex-col gap-y-[4px] lg:gap-y-[14px]">
-                                <p className="font-bold text-white text-[6.8px] lg:text-[20px]">
+                                <p className="font-bold text-white text-[8px] lg:text-[25px]">
                                     바쁜 당신을 위해, 여러분 대신 바쁘게 꿀정보 꿀소식<br/>
                                     찾아 돌아다니는 커넥플 허니비의 꿀정보 큐레이션!
-                                </p>
-                                <p className="font-normal text-white text-[6px] lg:text-[17px]">
-                                    위드뉴스레터는 시간이 부족한 워킹맘과<br/>
-                                    경력보유여성을 위해 꼭 필요한 정보를 한눈에 전달합니다.
                                 </p>
                             </div>
                         </div>
@@ -139,7 +141,7 @@ export default function WithNewsletterPage() {
                             ml-[10px] gap-x-[7px] lg:ml-[50px] lg:gap-x-[15px]">
                             <p className="text-[6.8px] lg:text-[20px]">🐝</p>
                             <div className="flex flex-col mb-[14px]">
-                                <p className="font-bold text-white text-[6.8px] lg:text-[20px] lg:mb-[10px]">
+                                <p className="font-bold text-white text-[8px] lg:text-[25px] lg:mb-[10px]">
                                     뉴스레터의 하이라이트!
                                 </p>
                                 {[
@@ -157,7 +159,7 @@ export default function WithNewsletterPage() {
                                             unoptimized
                                             className="lg:w-[15px] lg:h-[20px]"
                                         />
-                                        <p className="font-normal text-white text-[5.5px] ml-[4.3px] lg:text-[14px] lg:ml-[10px]">
+                                        <p className="font-normal text-white text-[7px] ml-[4.3px] lg:text-[20px] lg:ml-[10px]">
                                             {text}
                                         </p>
                                     </div>
@@ -167,7 +169,7 @@ export default function WithNewsletterPage() {
                     </div>
                 </div>
             </section>
-            {/* section3 */}
+            {/* section3 - 이런분들이 구독하고 계세요 */}
             <section className="flex flex-col w-full h-auto bg-gradient-to-b from-white via-[#C0AED1] to-white
                 mt-[53px] px-[30px] pb-[57px] lg:mt-[286px] lg:px-[200px] lg:pb-[74px]">
                 <h1 className="font-black text-[#541E80] text-center
@@ -245,22 +247,24 @@ export default function WithNewsletterPage() {
                     </div>
                 ))}
             </section>
-            {/* section4 */}
+            {/* section4 - 뉴스레터 벌꿀 카드 */}
             <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
-                    <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
-                        w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
-                        <p className="font-extrabold lg:font-bold text-[8px] lg:text-[25px]">정보통 꿀단지 위드뉴스레터</p>
-                        <Image src={"/withNewsletter/honey_bee.svg"} alt={"honey_bee"}
-                               width={80}
-                               height={41}
-                               unoptimized
-                               className="lg:w-[254px] lg:h-[164px] mt-[16px] lg:mt-[18px]"/>
-                        <p className="font-bold text-center text-[6px] mt-[12px] lg:text-[17px] lg:mt-[29px]">
-                            바쁜 꿀벌 커넥플 허니비가<br/>
-                            맞춤형 꿀정보 꿀소식을 전해드려요.
-                        </p>
-                    </div>
+                    <Link href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
+                        <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                            w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
+                            <p className="font-extrabold lg:font-bold text-[8px] lg:text-[25px]">정보통 꿀단지 위드뉴스레터</p>
+                            <Image src={"/withNewsletter/honey_bee.svg"} alt={"honey_bee"}
+                                   width={80}
+                                   height={41}
+                                   unoptimized
+                                   className="lg:w-[254px] lg:h-[164px] mt-[16px] lg:mt-[18px]"/>
+                            <p className="font-bold text-center text-[6px] mt-[12px] lg:text-[17px] lg:mt-[29px]">
+                                바쁜 꿀벌 커넥플 허니비가<br/>
+                                맞춤형 꿀정보 꿀소식을 전해드려요.
+                            </p>
+                        </div>
+                    </Link>
                     {[
                         {
                             img_url: "/withNewsletter/section4_image1.png",
@@ -281,18 +285,20 @@ export default function WithNewsletterPage() {
                             content: "서울시 남부여성발전센터와 남부여성새로일하기 센터는 여성의 경력단절 예방과 경제활동 참여를 지원...",
                         }
                     ].map((item, idx) => (
-                        <div key={idx} className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)]
-                        w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
-                        lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
-                            <Image src={item.img_url}
-                                   alt={item.img_alt}
-                                   width={123}
-                                   height={123}
-                                   unoptimized
-                                   className="lg:w-[159px] lg:h-[126px]"/>
-                            <p className="font-bold text-center text-[5px] mt-[6px] lg:text-[15px] lg:mt-[12px]">{item.title}</p>
-                            <p className="font-semibold text-[4.5px] mt-[4px] lg:text-[12px] lg:mt-[12px]">{item.content}</p>
-                        </div>
+                        <Link key={idx} href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
+                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                                w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
+                                lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
+                                <Image src={item.img_url}
+                                       alt={item.img_alt}
+                                       width={123}
+                                       height={123}
+                                       unoptimized
+                                       className="lg:w-[159px] lg:h-[126px]"/>
+                                <p className="font-bold text-center text-[5px] mt-[6px] lg:text-[15px] lg:mt-[12px]">{item.title}</p>
+                                <p className="font-semibold text-[4.5px] mt-[4px] lg:text-[12px] lg:mt-[12px]">{item.content}</p>
+                            </div>
+                        </Link>
                     ))}
                     <div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
                         w-[17px] h-[101px] rounded-[5px] lg:w-[42px] lg:h-[307px] lg:rounded-[15px]">
@@ -300,7 +306,7 @@ export default function WithNewsletterPage() {
                     </div>
                 </div>
             </section>
-            {/* section5 */}
+            {/* section5 - 지원하기 */}
             <section className="flex flex-col w-full h-auto
                 mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[300px] lg:px-[200px]">
                 <h1 className="text-center
@@ -313,10 +319,13 @@ export default function WithNewsletterPage() {
                 <div className="flex flex-row bg-[#F1F1F1] w-full items-center justify-center
                     h-[77px] mt-[26px] rounded-[10px] lg:h-[208px] lg:mt-[56px] lg:rounded-[20px]">
                     <div className="flex flex-col justify-center items-end gap-y-[16px] lg:gap-y-[32px]">
-                        <p className="font-bold text-[10px] lg:text-[20px]">이름<span className="text-[#D02121] text-[10px] lg:text-[25px] lg:ml-[9px]">*</span></p>
-                        <p className="font-bold text-[10px] lg:text-[20px]">이메일<span className="text-[#D02121] text-[10px] lg:text-[25px] lg:ml-[9px]">*</span></p>
+                        <p className="font-bold text-[10px] lg:text-[20px]">이름<span
+                            className="text-[#D02121] text-[10px] lg:text-[25px] lg:ml-[9px]">*</span></p>
+                        <p className="font-bold text-[10px] lg:text-[20px]">이메일<span
+                            className="text-[#D02121] text-[10px] lg:text-[25px] lg:ml-[9px]">*</span></p>
                     </div>
-                    <div className="flex flex-col justify-center items-center ml-[4px] gap-y-[16px] lg:ml-[14px] lg:gap-y-[32px]">
+                    <div
+                        className="flex flex-col justify-center items-center ml-[4px] gap-y-[16px] lg:ml-[14px] lg:gap-y-[32px]">
                         <input
                             type={"text"}
                             placeholder={"이름을 입력해주세요."}
@@ -331,18 +340,19 @@ export default function WithNewsletterPage() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-row w-full h-auto items-center justify-center mt-[26px] gap-x-[16px] lg:mt-[49px] lg:gap-x-[30px]">
+                <div
+                    className="flex flex-row w-full h-auto items-center justify-center mt-[26px] gap-x-[16px] lg:mt-[49px] lg:gap-x-[30px]">
                     <label className="flex flex-row justify-center items-center">
                         <input
                             type={"checkbox"}
-                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px]"}
+                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px] cursor-pointer"}
                         />
                         <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(필수) 개인정보 수집 및 이용에 동의합니다.</span>
                     </label>
                     <label className="flex flex-row justify-center items-center">
                         <input
                             type={"checkbox"}
-                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px]"}
+                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px] cursor-pointer"}
                         />
                         <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(선택) 광고성 정보 수신에 동의합니다.</span>
                     </label>
@@ -351,8 +361,9 @@ export default function WithNewsletterPage() {
                     가능성을 향한 첫 걸음
                 </h2>
                 <Link
-                    href="/with-newsletter"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold
+                    href="https://forms.gle/Ujx2ishv4DTiv9tE9"
+                    target="_blank"
+                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[7px] w-[159px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[21px] lg:w-[388px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
                     위드뉴스레터 무료 구독
