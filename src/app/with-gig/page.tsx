@@ -2,8 +2,59 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import {useState, useEffect} from "react";
+import LoadingSpinner from "@/components/loading-spinner";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+
+interface Links {
+    title: string
+    linkPath: string
+}
 
 export default function WithGigPage() {
+    // 링크 설정
+    const [links, setLinks] = useState<Links[]>([])
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    // 링크 불러오기
+    useEffect(() => {
+        const fetchLinks = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/links`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+
+                const getLinks = await res.json();
+                console.log('getLinks', getLinks);
+
+                setLinks(getLinks);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchLinks()
+    }, [])
+
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        // TODO: API 호출 에러처리
+    }
+
     return (
         <main>
             {/* section1 - 위드GIG 소개 */}
@@ -276,7 +327,8 @@ export default function WithGigPage() {
                     </div>
                 </div>
                 <Link
-                    href="/with-gig"
+                    href={links[3]?.linkPath || "https://www.connecple.com"}
+                    target="_blank"
                     className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[19px] w-[131px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
@@ -442,7 +494,8 @@ export default function WithGigPage() {
                 <h2 className="font-black text-center text-[10px] mt-[12px] lg:text-[23px] lg:mt-[42px]">인건비는 줄이고, 전문성은 더하다</h2>
                 <h3 className="font-black text-center text-[#541E80] text-[10px] mt-[8px] lg:text-[25px] lg:mt-[16px]">단기 프로젝트 중심의 검증된 실무 인재 매칭</h3>
                 <Link
-                    href="/with-gig"
+                    href={links[3]?.linkPath || "https://www.connecple.com"}
+                    target="_blank"
                     className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[26px] w-[131px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
