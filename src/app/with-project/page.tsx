@@ -6,6 +6,9 @@ import Link from "next/link";
 import {useState} from "react";
 import {useInView} from "react-intersection-observer";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import LoadingSpinner from "@/components/loading-spinner";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 /**
  * font-thin        100
@@ -64,6 +67,11 @@ const contents = [
     }
 ]
 
+interface Links {
+    title: string
+    linkPath: string
+}
+
 export default function WithProjectPage() {
     const {ref: counterSectionRef, inView} = useInView({
         triggerOnce: true,  // 한 번만 실행
@@ -99,6 +107,48 @@ export default function WithProjectPage() {
 
     // 신청 & 수강 절차
     const [selected2, setSelected2] = useState<'reg' | 'class'>('reg');
+
+    // 링크 설정
+    const [links, setLinks] = useState<Links[]>([])
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    // 링크 불러오기
+    useEffect(() => {
+        const fetchLinks = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/links`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+
+                const getLinks = await res.json();
+                console.log('getLinks', getLinks);
+
+                setLinks(getLinks);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchLinks()
+    }, [])
+
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        // TODO: API 호출 에러처리
+    }
 
     return (
         <main>
@@ -152,7 +202,7 @@ export default function WithProjectPage() {
                         <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
                     </h3>
                     <Link
-                        href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                        href={links[0]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             mt-[20px] w-[159px] h-[25px] text-[10px]
@@ -918,7 +968,7 @@ export default function WithProjectPage() {
                 />
                 <div className="flex justify-center items-center">
                     <Link
-                        href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                        href={links[0]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                             font-bold rounded-[30px] text-[10px] w-[159px] h-[25px] mt-[21px]
@@ -954,7 +1004,7 @@ export default function WithProjectPage() {
                     <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
                 </h3>
                 <Link
-                    href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                    href={links[0]?.linkPath || "https://www.connecple.com"}
                     target="_blank"
                     className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
                         mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
