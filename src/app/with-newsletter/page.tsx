@@ -2,8 +2,59 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import {useState, useEffect} from "react";
+import LoadingSpinner from "@/components/loading-spinner";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+
+interface Links {
+    title: string
+    linkPath: string
+}
 
 export default function WithNewsletterPage() {
+    // 링크 설정
+    const [links, setLinks] = useState<Links[]>([])
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    // 링크 불러오기
+    useEffect(() => {
+        const fetchLinks = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/links`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+
+                const getLinks = await res.json();
+                console.log('getLinks', getLinks);
+
+                setLinks(getLinks);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchLinks()
+    }, [])
+
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        // TODO: API 호출 에러처리
+    }
+
     return (
         <main>
             {/* section1 - 뉴스레터 소개 */}
@@ -50,7 +101,7 @@ export default function WithNewsletterPage() {
                 <div
                     className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[16px]">
                     <Link
-                        href="https://forms.gle/Ujx2ishv4DTiv9tE9"
+                        href={links[2]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
@@ -58,7 +109,7 @@ export default function WithNewsletterPage() {
                         위드뉴스레터 무료 구독
                     </Link>
                     <Link
-                        href="/with-newsletter" // TODO: 이메일 바로가기?
+                        href={links[2]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
                         className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
@@ -250,7 +301,7 @@ export default function WithNewsletterPage() {
             {/* section4 - 뉴스레터 벌꿀 카드 */}
             <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
-                    <Link href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
+                    <Link href={links[2]?.linkPath || "https://www.connecple.com"} target="_blank">
                         <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                             w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
                             <p className="font-extrabold lg:font-bold text-[8px] lg:text-[25px]">정보통 꿀단지 위드뉴스레터</p>
@@ -265,6 +316,7 @@ export default function WithNewsletterPage() {
                             </p>
                         </div>
                     </Link>
+                    {/* TODO: 뉴스레터 관리자 페이지 만들기 */}
                     {[
                         {
                             img_url: "/withNewsletter/section4_image1.png",
@@ -309,7 +361,7 @@ export default function WithNewsletterPage() {
             {/* section5 - 지원하기 */}
             <section className="flex flex-col w-full h-auto
                 mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[300px] lg:px-[200px]">
-                <h1 className="text-center
+                {/*<h1 className="text-center
                         text-[18px] font-black lg:text-[30px] lg:font-extrabold">
                     W.I.T.H Newsletter
                 </h1>
@@ -356,12 +408,12 @@ export default function WithNewsletterPage() {
                         />
                         <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(선택) 광고성 정보 수신에 동의합니다.</span>
                     </label>
-                </div>
+                </div>*/}
                 <h2 className="flex justify-center items-center font-extrabold text-[#541E80] text-[10px] mt-[31px] lg:text-[25px] lg:mt-[86px]">
                     가능성을 향한 첫 걸음
                 </h2>
                 <Link
-                    href="https://forms.gle/Ujx2ishv4DTiv9tE9"
+                    href={links[2]?.linkPath || "https://www.connecple.com"}
                     target="_blank"
                     className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[7px] w-[159px] h-[25px] text-[10px] rounded-[30px]
