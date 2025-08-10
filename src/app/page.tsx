@@ -838,7 +838,7 @@ export default function Home() {
                         ].map((btn, idx) => (
                             <Link
                                 key={idx}
-                                href={btn.href}
+                                href={links[idx]?.linkPath || btn.href}
                                 target="_blank"
                                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold
                                     rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px]
