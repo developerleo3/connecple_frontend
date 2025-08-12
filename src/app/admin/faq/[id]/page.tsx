@@ -102,7 +102,7 @@ const formatContentForView = (content: string) => {
     return content.replace(/<p><\/p>/g, '<p><br/></p>');
 }
 
-const CATEGORIES = ["워드프로젝트", "워드커네이어", "워드뉴스리터", "워드GIG", "기타"]
+const CATEGORIES = ["위드프로젝트", "위드커넥데이", "위드뉴스레터", "위드GIG", "기타"]
 
 export default function FaqDetailPage() {
     const router = useRouter()

@@ -118,7 +118,7 @@ export default function WithConnecdayPage() {
                     <p className="text-center font-semibold
                         text-[9px] mt-[25px]
                         lg:text-[23px] lg:mt-[77px]">
-                        워드커넥데이는 교육 수료생, 참여 기업, 전문가, 참여 동기들과<br/>
+                        위드커넥데이는 교육 수료생, 참여 기업, 전문가, 참여 동기들과<br/>
                         소통하며 새로운 기회를 만드는 네트워킹 행사입니다.
                     </p>
                     <h3 className="text-center font-extrabold

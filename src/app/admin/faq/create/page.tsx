@@ -249,10 +249,10 @@ export default function CreateFaqPage() {
                                                 <SelectValue placeholder="카테고리를 선택하세요" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-white shadow-lg border border-gray-200 rounded-md z-50">
-                                                <SelectItem value="워드프로젝트" className="hover:bg-gray-50 hover:cursor-pointer">워드프로젝트</SelectItem>
-                                                <SelectItem value="워드커네이어" className="hover:bg-gray-50 hover:cursor-pointer">워드커네이어</SelectItem>
-                                                <SelectItem value="워드뉴스리터" className="hover:bg-gray-50 hover:cursor-pointer">워드뉴스리터</SelectItem>
-                                                <SelectItem value="워드GIG" className="hover:bg-gray-50 hover:cursor-pointer">워드GIG</SelectItem>
+                                                <SelectItem value="위드프로젝트" className="hover:bg-gray-50 hover:cursor-pointer">위드프로젝트</SelectItem>
+                                                <SelectItem value="위드커넥데이" className="hover:bg-gray-50 hover:cursor-pointer">위드커넥데이</SelectItem>
+                                                <SelectItem value="위드뉴스레터" className="hover:bg-gray-50 hover:cursor-pointer">위드뉴스레터</SelectItem>
+                                                <SelectItem value="위드GIG" className="hover:bg-gray-50 hover:cursor-pointer">위드GIG</SelectItem>
                                                 <SelectItem value="기타" className="hover:bg-gray-50 hover:cursor-pointer">기타</SelectItem>
                                             </SelectContent>
                                         </Select>
