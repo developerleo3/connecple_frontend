@@ -424,7 +424,7 @@ export default function SupportPage() {
                                                 <TableRow key={notice.id} className="hover:bg-gray-50 border-t border-gray-200">
                                                     <TableCell className="text-gray-600 font-medium text-base text-center align-middle py-3">{notice.category}</TableCell>
                                                     <TableCell className="text-center py-3">
-                                                        <Link href={`/admin/notice/${notice.id}`} className="text-base text-blue-600 hover:underline">
+                                                        <Link href={`/support/notices/${notice.id}`} className="text-base text-blue-600 hover:underline">
                                                             {notice.title}
                                                         </Link>
                                                     </TableCell>
@@ -466,7 +466,7 @@ export default function SupportPage() {
                                                     <TableCell
                                                         className="text-gray-600 font-medium text-base text-center align-middle py-3">{faq.category}</TableCell>
                                                     <TableCell className="text-center py-3">
-                                                        <Link href={`/admin/faq/${faq.id}`}
+                                                        <Link href={`/support/faqs/${faq.id}`}
                                                               className="text-base text-blue-600 hover:underline">
                                                             {faq.question}
                                                         </Link>
