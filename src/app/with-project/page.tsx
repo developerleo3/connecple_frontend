@@ -10,25 +10,6 @@ import LoadingSpinner from "@/components/loading-spinner";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
-/**
- * font-thin        100
- * font-extralight  200
- * font-light       300
- * font-normal      400 (기본값)
- * font-medium      500
- * font-semibold    600
- * font-bold        700
- * font-extrabold   800
- * font-black       900
- */
-
-
-/**
- * [flex]
- * items-center               세로 가운데 정렬
- * justify-center or mx-auto  가로 가운데 정렬
- * self-center                자신 가운데 정렬 (ex: section1 button 가운데정렬)
- */
 const contents = [
     {
         title: "실습 중심 기본기 함양 온라인 교육",
@@ -78,26 +59,6 @@ export default function WithProjectPage() {
         threshold: 0.3,     // 30% 보이면 발동
     });
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("animate-fade-in-up");
-                        entry.target.classList.remove("opacity-0");
-                    }
-                });
-            },
-            {threshold: 0.2}
-        );
-
-        const targets = document.querySelectorAll("[data-animate]");
-        targets.forEach(el => observer.observe(el));
-
-        return () => {
-            targets.forEach(el => observer.unobserve(el));
-        };
-    }, []);
 
     // PROGRAM 버튼
     const [selected, setSelected] = useState(0);
@@ -140,6 +101,28 @@ export default function WithProjectPage() {
 
         fetchLinks()
     }, [])
+
+    function ReviewFade({
+                            className = "",
+                            children,
+                        }: {
+        className?: string;
+        children: React.ReactNode;
+    }) {
+        const { ref, inView } = useInView({
+            threshold: 0.2,
+            triggerOnce: true,
+        });
+
+        return (
+            <div
+                ref={ref}
+                className={`${className} ${inView ? "animate-fade-in-up" : "opacity-0"}`}
+            >
+                {children}
+            </div>
+        );
+    }
 
     if (isLoading) {
         return <LoadingSpinner />
@@ -463,10 +446,9 @@ export default function WithProjectPage() {
                 </h1>
                 <div className="relative mt-[22px] lg:mt-[73px] w-full h-[274px] lg:h-[590px]">
 
-                    <div className="absolute top-0 left-0 flex flex-row justify-between items-center bg-[#F8F8F8] opacity-0
+                    <ReviewFade className="absolute top-0 left-0 flex flex-row justify-between items-center bg-[#F8F8F8] opacity-0
                         w-[193px] h-[35px] rounded-[15px] px-[8px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:w-[469px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)"
-                         data-animate>
+                        lg:w-[469px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)">
                         <Image
                             src={"/withProject/comment1.png"}
                             alt={"comment1.png"}
@@ -479,12 +461,11 @@ export default function WithProjectPage() {
                             첫 날이라 시스템 환경이 어수선한 참가자들도 많았음에도 불구하고<br/>
                             전체를 잘 아울러 이끌어 무리없이 진행하는 운영능력이 돋보였습니다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute  flex flex-row justify-between items-center bg-[#FCF9FF] opacity-0
+                    <ReviewFade className="absolute  flex flex-row justify-between items-center bg-[#FCF9FF] opacity-0
                         top-[48px] right-[0px] w-[164px] h-[35px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[0px] lg:right-[13px] lg:w-[415px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[0px] lg:right-[13px] lg:w-[415px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="font-bold text-[5px] lg:text-[13px]">
                             무슨 업무인지 스스로 판단해보며,<br/>
                             설문처럼 답하는 방식의 교육이 즐거웠습니다.
@@ -497,12 +478,11 @@ export default function WithProjectPage() {
                             unoptimized
                             className="lg:w-[55px] lg:h-[55px]"
                         />
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-between items-center bg-[#FCF9FF] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-between items-center bg-[#FCF9FF] opacity-0
                          top-[48px] left-[0px] w-[112px] h-[56px] rounded-[15px] px-[10px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                         lg:top-[124px] lg:left-[20px] lg:w-[512px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                         lg:top-[124px] lg:left-[20px] lg:w-[512px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <Image
                             src={"/withProject/comment1.png"}
                             alt={"comment1.png"}
@@ -523,48 +503,43 @@ export default function WithProjectPage() {
                             가져와 적용하는 부분은 매우<br/>
                             도움이 되었습니다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
                         top-[10px] right-[0px] w-[82px] h-[25px] rounded-[15px] px-[10px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[138px] lg:right-[108px] lg:w-[281px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[138px] lg:right-[108px] lg:w-[281px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="font-bold text-[5px] lg:text-[13px]">
                             내가 해보지 않은 분야에서의 첫 도전! 재밌었다!
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
                         top-[112px] left-[4px] w-[82px] h-[16px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[199px] lg:left-auto lg:right-[25px] lg:w-[151px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[199px] lg:left-auto lg:right-[25px] lg:w-[151px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="font-bold text-[5px] lg:text-[13px]">
                             좋은 교육 감사합니다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute  flex flex-row justify-center items-center bg-[#F8F8F8]
+                    <ReviewFade className="absolute  flex flex-row justify-center items-center bg-[#F8F8F8]
                         top-[96px] right-[16px] w-[179px] h-[16px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[244px] lg:left-[77px] lg:w-[429px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0"
-                         data-animate>
+                        lg:top-[244px] lg:left-[77px] lg:w-[429px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)] opacity-0">
                         <p className="font-bold text-[5px] lg:text-[13px]">
                             한 주가 빠르게 지나갔지만, 교육을 놓치지 않고 들을 수 있어서 좋았습니다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-center items-center bg-[#FCF9FF] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-center items-center bg-[#FCF9FF] opacity-0
                         top-[137px] left-[20px] w-[94px] h-[16px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[317px] lg:left-[24px] lg:w-[201px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[317px] lg:left-[24px] lg:w-[201px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="font-bold text-[5px] lg:text-[13px]">
                             복기는 곧 다음을 위한 시작이다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-between items-center bg-[#F8F8F8] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-between items-center bg-[#F8F8F8] opacity-0
                         top-[121px] right-[0px] w-[164px] h-[68px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[269px] lg:right-[13px] lg:w-[520px] lg:h-[176px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[269px] lg:right-[13px] lg:w-[520px] lg:h-[176px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="hidden lg:block font-bold text-[13px]">
                             5일이었지만 매우 알차게 교육을 받은 것 같습니다.<br/>
                             과제 피드백과 중간 소통을 하는 교육이였기에 집중이 가능했고,<br/>
@@ -590,12 +565,11 @@ export default function WithProjectPage() {
                             unoptimized
                             className="lg:w-[55px] lg:h-[55px]"
                         />
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
                         top-[162px] left-[0px] w-[112px] h-[36px] rounded-[15px] px-[14px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[379px] lg:left-[125px] lg:w-[309px] lg:h-[71px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[379px] lg:left-[125px] lg:w-[309px] lg:h-[71px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="hidden lg:block font-bold text-[13px]">
                             교육 행사나 전반적인 운영 체계에 관심이 있다면,<br/>
                             꼭 알아야 할 내용이라고 생각합니다.
@@ -605,21 +579,19 @@ export default function WithProjectPage() {
                             관심이 있다면, 꼭 알아야 할 내용이라고<br/>
                             생각합니다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-center items-center bg-[#FCF9FF] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-center items-center bg-[#FCF9FF] opacity-0
                         top-[206px] left-[0px] w-[158px] h-[16px] rounded-[15px] px-[10px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-[473px] lg:left-auto lg:right-[187px] lg:w-[398px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-[473px] lg:left-auto lg:right-[187px] lg:w-[398px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="font-bold text-[5px] lg:text-[13px]">
                             이론 뿐 아니라 과제를 통해 실무 스킬까지 익힐 수 있어서 좋은 것 같음.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-center items-center bg-[#F8F8F8] opacity-0
                         top-[201px] right-[0px] w-[120px] h-[25px] rounded-[15px] px-[10px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:top-auto lg:bottom-0 lg:right-0 lg:w-[545px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:top-auto lg:bottom-0 lg:right-0 lg:w-[545px] lg:h-[43px] lg:rounded-[30px] lg:px-[13px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <p className="hidden lg:block font-bold text-[13px]">
                             전문가 양성 교육이라 내용 대비 타이트한 일정이였지만 엑기스로 배울 수 있어 좋았습니다.
                         </p>
@@ -627,12 +599,11 @@ export default function WithProjectPage() {
                             전문가 양성 교육이라 내용 대비 타이트한 일정이<br/>
                             였지만 엑기스로 배울 수 있어 좋았습니다.
                         </p>
-                    </div>
+                    </ReviewFade>
 
-                    <div className="absolute flex flex-row justify-between items-center bg-[#FCF9FF] opacity-0
+                    <ReviewFade className="absolute flex flex-row justify-between items-center bg-[#FCF9FF] opacity-0
                         bottom-[0px] left-[0px] w-[185px] h-[37px] rounded-[15px] px-[20px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
-                        lg:bottom-0 lg:left-0 lg:w-[365px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]"
-                         data-animate>
+                        lg:bottom-0 lg:left-0 lg:w-[365px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)]">
                         <Image
                             src={"/withProject/comment1.png"}
                             alt={"comment1.png"}
@@ -649,7 +620,7 @@ export default function WithProjectPage() {
                             경험해 보지 못한 새로운 분야를 수강하면서 과제도 해보고<br/>
                             유익하고 흥미로운 시간이였습니다.
                         </p>
-                    </div>
+                    </ReviewFade>
                 </div>
             </section>
             {/* section6 - 질문&응답 */}
