@@ -188,10 +188,10 @@ export default function AdminLinkPage() {
                             <CardDescription className="text-black text-base">매뉴별 메인 링크를 설정할 수 있습니다.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-8 bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-                            {/* 워드프로젝트 메인 링크 설정 */}
+                            {/* 위드프로젝트 메인 링크 설정 */}
                             <div className="space-y-2">
                                 <Label htmlFor="wordProject" className="text-base font-medium text-black">
-                                    워드프로젝트 메인 링크 설정 <span className="text-red-500">*</span>
+                                    위드프로젝트 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4 w-full">
                                     <div className="flex-1">
@@ -215,10 +215,10 @@ export default function AdminLinkPage() {
                                 </div>
                             </div>
 
-                            {/* 워드커넥데이 메인 링크 설정 */}
+                            {/* 위드커넥데이 메인 링크 설정 */}
                             <div className="space-y-2">
                                 <Label htmlFor="wordConnecday" className="text-base font-medium text-black">
-                                    워드커넥데이 메인 링크 설정 <span className="text-red-500">*</span>
+                                    위드커넥데이 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4">
                                     <div className="flex-1">
@@ -242,10 +242,10 @@ export default function AdminLinkPage() {
                                 </div>
                             </div>
 
-                            {/* 워드뉴스레터 메인 링크 설정 */}
+                            {/* 위드뉴스레터 메인 링크 설정 */}
                             <div className="space-y-2">
                                 <Label htmlFor="wordNewsletter" className="text-base font-medium text-black">
-                                    워드뉴스레터 메인 링크 설정 <span className="text-red-500">*</span>
+                                    위드뉴스레터 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4">
                                     <div className="flex-1">
@@ -269,10 +269,10 @@ export default function AdminLinkPage() {
                                 </div>
                             </div>
 
-                            {/* 워드GIG 메인 링크 설정 */}
+                            {/* 위드GIG 메인 링크 설정 */}
                             <div className="space-y-2">
                                 <Label htmlFor="wordGig" className="text-base font-medium text-black">
-                                    워드GIG 메인 링크 설정 <span className="text-red-500">*</span>
+                                    위드GIG 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4">
                                     <div className="flex-1">

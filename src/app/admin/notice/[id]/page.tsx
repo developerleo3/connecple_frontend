@@ -11,8 +11,6 @@ import { ConfirmModal } from "@/components/confirm-modal"
 import AlertModal from "@/components/alert-modal"
 import { Trash2, Edit, List, Download, Upload } from "lucide-react"
 import AdminSidebar from "@/components/admin-sidebar"
-import LoadingSpinner from "@/components/loading-spinner"
-import { ReactNode } from "react";
 
 // Types for this page
 interface FileAttachment {
@@ -96,7 +94,7 @@ const deleteNotice = async (id: number): Promise<ApiResponse<null>> => {
     })
 }
 
-const CATEGORIES = ["워드프로젝트", "워드커네이어", "워드뉴스리터", "워드GIG", "기타"]
+const CATEGORIES = ["위드프로젝트", "위드커넥데이", "위드뉴스레터", "위드GIG", "기타"]
 
 // 함수 추가
 const formatContentForView = (content: string) => {

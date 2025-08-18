@@ -39,6 +39,11 @@ interface Stats {
     statistic: string
 }
 
+interface Links {
+    title: string
+    linkPath: string
+}
+
 const newsLetters = [
     {
         image: "/main/section7_picture1.png",
@@ -115,11 +120,12 @@ export default function Home() {
 
     const [imageSlides, setImageSlides] = useState<imageSlides[]>([])
     const [stats, setStats] = useState<Stats[]>([])
+    const [links, setLinks] = useState<Links[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        const fetchSlides = async () => {
+        const fetchMainDataList = async () => {
             try {
                 const res = await fetch(`${API_BASE_URL}/client/home`, {
                     method: "GET",
@@ -129,10 +135,9 @@ export default function Home() {
                     },
                 })
 
-                if (!res.ok) throw new Error("슬라이드 데이터를 불러오지 못했습니다.")
+                if (!res.ok) throw new Error("메인페이지 데이터를 불러오지 못했습니다.")
 
                 const data = await res.json()
-                console.log('data', data)
                 const imageSlides: imageSlides[] = data.introImages
                 const statsResponses: StatsResponse[] = data.stats
 
@@ -140,9 +145,6 @@ export default function Home() {
                     statsName: item.statsName,
                     statistic: `${item.statistic}${item.unit}`
                 }));
-
-                console.log('imageSlides', imageSlides);
-                console.log('stats', stats);
 
                 setImageSlides(imageSlides)
                 setStats(stats)
@@ -153,7 +155,32 @@ export default function Home() {
             }
         }
 
-        fetchSlides()
+        fetchMainDataList()
+    }, [])
+
+    useEffect(() => {
+        const fetchLinks = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/links`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+
+                const getLinks = await res.json();
+                setLinks(getLinks);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchLinks()
     }, [])
 
     const [index, setIndex] = useState(0);
@@ -456,7 +483,7 @@ export default function Home() {
                             </div>
                             <div>
                                 <Link
-                                    href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                                    href={links[0]?.linkPath || "https://www.connecple.com"}
                                     target="_blank"
                                     className="absolute bg-[#541E80] text-white font-extrabold flex flex-col items-center justify-center shadow-[3px_3px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                         right-[49px] top-[-34px] text-[10px] space-y-[8px] w-[68px] h-[68px]
@@ -552,7 +579,7 @@ export default function Home() {
                     <div className="relative col-span-5 h-full flex items-center justify-end mt-[17px] mb-[46px]
                         lg:mt-[37px] lg:mb-[137px]">
                         <Link
-                            href="https://forms.gle/ud4xy9A8FejjwbsE9"
+                            href={links[1]?.linkPath || "https://www.connecple.com"}
                             target="_blank"
                             className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[139px] h-[25px] text-[10px]
@@ -651,7 +678,7 @@ export default function Home() {
                                 </div>
                                 {/* 항상 보이는 우하단 버튼 (hover하면 색 반전) */}
                                 <Link
-                                    href={item.href}
+                                    href={links[2]?.linkPath || "https://www.connecple.com"}
                                     target="_blank"
                                     className="absolute flex items-center justify-center bg-transparent text-white border border-white
                                         hover:bg-white hover:text-black transition-colors duration-300
@@ -667,7 +694,7 @@ export default function Home() {
                     {/* 하단 버튼 */}
                     <div className="relative flex justify-start mt-[28px] lg:mt-[27px]">
                         <Link
-                            href="https://forms.gle/Ujx2ishv4DTiv9tE9"
+                            href={links[2]?.linkPath || "https://www.connecple.com"}
                             target="_blank"
                             className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[141px] h-[25px] text-[10px]
@@ -805,7 +832,7 @@ export default function Home() {
                         ].map((btn, idx) => (
                             <Link
                                 key={idx}
-                                href={btn.href}
+                                href={links[idx]?.linkPath || btn.href}
                                 target="_blank"
                                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold
                                     rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px]

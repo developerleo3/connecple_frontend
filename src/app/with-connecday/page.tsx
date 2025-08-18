@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
+import {useEffect} from "react";
+import LoadingSpinner from "@/components/loading-spinner";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 const programData = [
     {
@@ -40,9 +44,55 @@ const programData = [
     },
 ];
 
+interface Links {
+    title: string
+    linkPath: string
+}
+
 export default function WithConnecdayPage() {
     const [selected, setSelected] = useState(0);
     const current = programData[selected];
+
+    // 링크 설정
+    const [links, setLinks] = useState<Links[]>([])
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    // 링크 불러오기
+    useEffect(() => {
+        const fetchLinks = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/client/links`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+
+                const getLinks = await res.json();
+
+                setLinks(getLinks);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchLinks()
+    }, [])
+
+    if (isLoading) {
+        return <LoadingSpinner />
+    }
+
+    if (error) {
+        // TODO: API 호출 에러처리
+    }
 
     return (
         <main>
@@ -67,7 +117,7 @@ export default function WithConnecdayPage() {
                     <p className="text-center font-semibold
                         text-[9px] mt-[25px]
                         lg:text-[23px] lg:mt-[77px]">
-                        워드커넥데이는 교육 수료생, 참여 기업, 전문가, 참여 동기들과<br/>
+                        위드커넥데이는 교육 수료생, 참여 기업, 전문가, 참여 동기들과<br/>
                         소통하며 새로운 기회를 만드는 네트워킹 행사입니다.
                     </p>
                     <h3 className="text-center font-extrabold
@@ -93,7 +143,7 @@ export default function WithConnecdayPage() {
                             lg:w-[174px] lg:h-[25px] lg:mt-[120px]"/>
                     </div>
                     <Link
-                        href="https://forms.gle/HWXpfoB6Me3wsNaa7"
+                        href={links[1]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             mt-[9px] w-[159px] h-[25px] text-[10px]
