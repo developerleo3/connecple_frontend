@@ -138,7 +138,6 @@ export default function Home() {
                 if (!res.ok) throw new Error("메인페이지 데이터를 불러오지 못했습니다.")
 
                 const data = await res.json()
-                console.log('data', data)
                 const imageSlides: imageSlides[] = data.introImages
                 const statsResponses: StatsResponse[] = data.stats
 
@@ -146,9 +145,6 @@ export default function Home() {
                     statsName: item.statsName,
                     statistic: `${item.statistic}${item.unit}`
                 }));
-
-                console.log('imageSlides', imageSlides);
-                console.log('stats', stats);
 
                 setImageSlides(imageSlides)
                 setStats(stats)
@@ -176,8 +172,6 @@ export default function Home() {
                 if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
 
                 const getLinks = await res.json();
-                console.log('getLinks', getLinks);
-
                 setLinks(getLinks);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "알 수 없는 오류")

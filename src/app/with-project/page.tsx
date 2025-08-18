@@ -129,7 +129,6 @@ export default function WithProjectPage() {
                 if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
 
                 const getLinks = await res.json();
-                console.log('getLinks', getLinks);
 
                 setLinks(getLinks);
             } catch (err) {
