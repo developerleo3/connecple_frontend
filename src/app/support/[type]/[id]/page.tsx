@@ -90,7 +90,8 @@ export default function SupportDetailPage() {
     const router = useRouter()
     const params = useParams()
     const supportType = params.type as "notices" || "faqs";
-    const id = Number(params.id)
+    const isNotice = supportType === "notices";
+    const id = Number(params.id);
 
     const [notice, setNotice] = useState<Notice | null>(null)
     const [faq, setFaq] = useState<Faq | null>(null)
@@ -186,8 +187,7 @@ export default function SupportDetailPage() {
     }
 
     // 데이터가 없을 경우
-    const data = supportType === "notices" ? notice : faq
-    if (!data) {
+    if (isNotice && !notice) {
         return (
             <div className="flex min-h-screen bg-gray-50">
                 <div className="flex-1 p-6">
@@ -202,124 +202,91 @@ export default function SupportDetailPage() {
         )
     }
 
+    if (!isNotice && !faq) {
+        return (
+            <div className="flex min-h-screen bg-gray-50">
+                <div className="flex-1 p-6">
+                    <div className="text-center">
+                        <h1 className="text-2xl font-bold mb-4">데이터가 없습니다.</h1>
+                        <Button onClick={() => router.push("/support")}>
+                            목록으로 돌아가기
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    const titleText = isNotice ? notice!.title : faq!.question;
+    const categoryText = isNotice ? notice!.category : faq!.category;
+    const html = isNotice ? (notice!.content ?? "") : (faq!.answer ?? "");
+    const createdAtText = isNotice ? notice!.createdAt : faq!.createdAt;
+    const files = isNotice ? notice!.files ?? [] : faq!.files ?? [];
+
     return (
         <div className="flex min-h-screen bg-gray-50">
             <div className="flex-1 p-6">
                 <div className="max-w-4xl mx-auto">
-                    {supportType == 'notices' ? (
-                        <div className="p-6 space-y-10 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <Label className="text-gray-600 mb-2">카테고리</Label>
-                                    <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{notice.category}</div>
-                                </div>
-                            </div>
-
+                    <div className="p-6 space-y-10 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <Label className="text-gray-600 mb-2">공지사항 제목</Label>
-                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{notice.title}</div>
-                            </div>
-
-                            <div>
-                                <Label className="text-gray-600 mb-2">공지사항 내용</Label>
-                                <div
-                                    className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[300px] max-h-[300px]"
-                                    style={{ maxHeight: '300px', overflowY: 'auto', whiteSpace: 'pre-wrap' }} // 스크롤 및 빈 줄 표시
-                                    dangerouslySetInnerHTML={{ __html: formatContentForView(notice.content || "") }}
-                                />
-                            </div>
-
-                            {notice.files && notice.files.length > 0 && (
-                                <div>
-                                    <Label className="text-gray-600 mb-2">첨부 파일</Label>
-                                    <ul className="space-y-2">
-                                        {notice.files.map((file) => (
-                                            <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
-                                                <span className="text-sm text-gray-600 truncate max-w-[500px]" title={file.originalFileName}>{file.originalFileName}</span>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    onClick={() => handleDownload(file)}
-                                                    className="text-blue-600 hover:text-blue-800"
-                                                >
-                                                    <Download className="h-4 w-4" />
-                                                </Button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            <div>
-                                <Label className="text-gray-600 mb-2">작성일시</Label>
-                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(notice.createdAt)}</div>
-                            </div>
-
-                            <div className="absolute bottom-6 right-6 flex gap-2">
-                                <Button variant="outline" onClick={() => router.push("/support")} className="text-gray-600 font-medium border-gray-600 hover:bg-gray-50 hover:cursor-pointer">
-                                    <List className="h-4 w-4 mr-1" />
-                                    목록으로
-                                </Button>
+                                <Label className="text-gray-600 mb-2">카테고리</Label>
+                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">
+                                    {categoryText}</div>
                             </div>
                         </div>
-                    ) : (
-                        <div className="p-6 space-y-10 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <Label className="text-gray-600 mb-2">카테고리</Label>
-                                    <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{faq.category}</div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <Label className="text-gray-600 mb-2">질문</Label>
-                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{faq.question}</div>
-                            </div>
-
-                            <div>
-                                <Label className="text-gray-600 mb-2">답변</Label>
-                                <div
-                                    className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[300px] max-h-[300px]"
-                                    style={{ maxHeight: '300px', overflowY: 'auto', whiteSpace: 'pre-wrap' }} // 스크롤 및 빈 줄 표시
-                                    dangerouslySetInnerHTML={{ __html: formatContentForView(faq.answer || "") }}
-                                />
-                            </div>
-
-                            {faq.files && faq.files.length > 0 && (
-                                <div>
-                                    <Label className="text-gray-600 mb-2">첨부 파일</Label>
-                                    <ul className="space-y-2">
-                                        {faq.files.map((file) => (
-                                            <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
-                                                <span className="text-sm text-gray-600 truncate max-w-[500px]" title={file.originalFileName}>{file.originalFileName}</span>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    onClick={() => handleDownload(file)}
-                                                    className="text-blue-600 hover:text-blue-800"
-                                                >
-                                                    <Download className="h-4 w-4" />
-                                                </Button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            <div>
-                                <Label className="text-gray-600 mb-2">작성일시</Label>
-                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(faq.createdAt)}</div>
-                            </div>
-
-                            <div className="absolute bottom-6 right-6 flex gap-2">
-                                <Button variant="outline" onClick={() => router.push("/support")} className="text-gray-600 font-medium border-gray-600 hover:bg-gray-50 hover:cursor-pointer">
-                                    <List className="h-4 w-4 mr-1" />
-                                    목록으로
-                                </Button>
+                        <div>
+                            <Label className="text-gray-600 mb-2">
+                                {isNotice ? "공지사항 제목" : "질문"}
+                            </Label>
+                            <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">
+                                {titleText}
                             </div>
                         </div>
-                    )}
+                        <div>
+                            <Label className="text-gray-600 mb-2">
+                                {supportType === "notices" ? "공지사항 내용" : "답변"}
+                            </Label>
+                            <div
+                                className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[300px] max-h-[300px]"
+                                style={{ maxHeight: "300px", overflowY: "auto", whiteSpace: "pre-wrap" }}
+                                dangerouslySetInnerHTML={{__html: formatContentForView(html)}}
+                            />
+                        </div>
 
+                        {files && files.length > 0 && (
+                            <div>
+                                <Label className="text-gray-600 mb-2">첨부 파일</Label>
+                                <ul className="space-y-2">
+                                    {files.map((file) => (
+                                        <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
+                                            <span className="text-sm text-gray-600 truncate max-w-[500px]" title={file.originalFileName}>{file.originalFileName}</span>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                onClick={() => handleDownload(file)}
+                                                className="text-blue-600 hover:text-blue-800"
+                                            >
+                                                <Download className="h-4 w-4" />
+                                            </Button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        <div>
+                            <Label className="text-gray-600 mb-2">작성일시</Label>
+                            <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(createdAtText)}</div>
+                        </div>
+
+                        <div className="absolute bottom-6 right-6 flex gap-2">
+                            <Button variant="outline" onClick={() => router.push("/support")} className="text-gray-600 font-medium border-gray-600 hover:bg-gray-50 hover:cursor-pointer">
+                                <List className="h-4 w-4 mr-1" />
+                                목록으로
+                            </Button>
+                        </div>
+                    </div>
                     <AlertModal
                         isOpen={alertModal.isOpen}
                         onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
