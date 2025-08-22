@@ -98,7 +98,7 @@ export default function WithNewsletterPage() {
                     <span className="text-[#541E80]">가능성을 향한 첫 걸음</span>
                 </p>
                 <div
-                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[16px]">
+                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[40px]">
                     <Link
                         href={links[2]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
@@ -337,24 +337,24 @@ export default function WithNewsletterPage() {
                         }
                     ].map((item, idx) => (
                         <Link key={idx} href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
-                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition items-center
                                 w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
-                                lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
+                                lg:w-[243px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
                                 <Image src={item.img_url}
                                        alt={item.img_alt}
                                        width={123}
                                        height={123}
                                        unoptimized
-                                       className="lg:w-[159px] lg:h-[126px]"/>
+                                       className="lg:w-[209px] lg:h-[146px]"/>
                                 <p className="font-bold text-center text-[5px] mt-[6px] lg:text-[15px] lg:mt-[12px]">{item.title}</p>
                                 <p className="font-semibold text-[4.5px] mt-[4px] lg:text-[12px] lg:mt-[12px]">{item.content}</p>
                             </div>
                         </Link>
                     ))}
-                    <div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
-                        w-[17px] h-[101px] rounded-[5px] lg:w-[42px] lg:h-[307px] lg:rounded-[15px]">
-                        <p className="font-semibold text-[8px] lg:text-[20px]">{">"}</p>
-                    </div>
+                    {/*<div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center*/}
+                    {/*    w-[17px] h-[101px] rounded-[5px] lg:w-[42px] lg:h-[307px] lg:rounded-[15px]">*/}
+                    {/*    <p className="font-semibold text-[8px] lg:text-[20px]">{">"}</p>*/}
+                    {/*</div>*/}
                 </div>
             </section>
             {/* section5 - 지원하기 */}
