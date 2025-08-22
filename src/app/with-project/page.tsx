@@ -163,11 +163,17 @@ interface Links {
 }
 
 export default function WithProjectPage() {
-    const {ref: counterSectionRef, inView} = useInView({
-        triggerOnce: true,  // 한 번만 실행
-        threshold: 0.3,     // 30% 보이면 발동
+    const { ref: counterSectionRef, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.6,            // 더 많이 보였을 때만 발동
+        rootMargin: "0px 0px -15% 0px", // 아래쪽 15%는 제외(조금 더 들어왔을 때만)
+        initialInView: false,      // SSR/초기 렌더에서 true로 시작하는 것 방지
     });
+    const [shouldCount, setShouldCount] = useState(false);
 
+    useEffect(() => {
+        if (inView) setShouldCount(true);
+    }, [inView]);
 
     // PROGRAM 버튼
     const [selected, setSelected] = useState(0);
@@ -386,7 +392,7 @@ export default function WithProjectPage() {
                             <p className="font-semibold text-[8px] mt-[16px] lg:text-[20px] lg:mt-[37px]"
                                dangerouslySetInnerHTML={{__html: item.label}}></p>
                             <p className="font-extrabold text-[#541E80] text-[13px] mt-[11px] lg:text-[35px] lg:mt-[28px]">
-                                <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                <AnimatedCounter value={item.value} shouldAnimate={shouldCount}
                                                  duration={1 + idx * 0.3}/>
                             </p>
                         </div>
