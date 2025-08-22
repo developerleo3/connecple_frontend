@@ -109,7 +109,7 @@ export default function WithNewsletterPage() {
                     </Link>
                     <Link
                         href={links[2]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
-                        className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         뉴스레터 파트너 문의하기
@@ -139,7 +139,7 @@ export default function WithNewsletterPage() {
                         {/* 말풍선 본문 */}
                         <div className="bg-[#C0AED1] text-white font-tvn-medium rounded-[20px]
                             px-[10px] py-[1px] text-[15px]
-                            lg:px-[28px] lg:py-[3px] lg:text-[25px]">
+                            lg:px-[28px] lg:py-[3px] lg:text-[35px]">
                             W.I.T.H Newsletter 란?
                         </div>
                     </div>
@@ -297,7 +297,7 @@ export default function WithNewsletterPage() {
                     </div>
                 ))}
             </section>
-            {/* section4 - 뉴스레터 벌꿀 카드 */}
+            {/* section4 - 뉴스레터 벌꿀 카드 TODO: 관리자 만들기 */}
             <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
                     <Link href={links[2]?.linkPath || "https://www.connecple.com"} target="_blank">
@@ -359,7 +359,7 @@ export default function WithNewsletterPage() {
             </section>
             {/* section5 - 지원하기 */}
             <section className="flex flex-col w-full h-auto
-                mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[300px] lg:px-[200px]">
+                mt-[21px] mb-[74px] px-[30px] lg:mt-[50px] lg:mb-[300px] lg:px-[200px]">
                 {/*<h1 className="text-center
                         text-[18px] font-black lg:text-[30px] lg:font-extrabold">
                     W.I.T.H Newsletter
