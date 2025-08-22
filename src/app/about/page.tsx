@@ -17,7 +17,7 @@ export default function AboutPage() {
     const [timelineItems, setTimelineItems] = useState<TimelineItems[]>([])
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(true);
+    const [canScrollRight, setCanScrollRight] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -50,30 +50,53 @@ export default function AboutPage() {
 
     const updateScrollState = () => {
         const el = scrollRef.current;
-        if (el) {
-            setCanScrollLeft(el.scrollLeft > 0);
-            setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
-        }
+        if (!el) return;
+        const { scrollLeft, clientWidth, scrollWidth } = el;
+
+        // 왼쪽: 맨 왼쪽보다 오른쪽으로 이동했는지
+        setCanScrollLeft(scrollLeft > 0);
+
+        // 오른쪽: 현재 뷰 오른쪽 경계가 전체 컨텐츠 끝보다 작은지
+        // (부동소수/반올림 오차 방지 위해 약간의 여유값 사용)
+        setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
     };
 
+    const SCROLL_STEP = () => scrollRef.current?.clientWidth ?? 0;
+
     const scrollLeft = () => {
-        const scrollAmount = window.innerWidth >= 1024 ? 800 : 300; // lg 기준
-        scrollRef.current?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        const el = scrollRef.current;
+        if (!el) return;
+        el.scrollBy({ left: -SCROLL_STEP(), behavior: "smooth" });
+        // 스무스 스크롤 후 상태 갱신(약간 지연)
+        setTimeout(updateScrollState, 300);
     };
 
     const scrollRight = () => {
-        const scrollAmount = window.innerWidth >= 1024 ? 800 : 300;
-        scrollRef.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        const el = scrollRef.current;
+        if (!el) return;
+        el.scrollBy({ left: SCROLL_STEP(), behavior: "smooth" });
+        setTimeout(updateScrollState, 300);
     };
 
+    // 초기/리사이즈/컨텐츠 변경 시 갱신
     useEffect(() => {
         updateScrollState();
         const el = scrollRef.current;
-        if (el) {
-            el.addEventListener("scroll", updateScrollState);
-            return () => el.removeEventListener("scroll", updateScrollState);
-        }
-    }, []);
+        if (!el) return;
+
+        el.addEventListener("scroll", updateScrollState, { passive: true });
+        window.addEventListener("resize", updateScrollState);
+
+        // 이미지 로딩 등으로 영역이 늦게 잡히는 경우 대비
+        const id = setTimeout(updateScrollState, 0);
+
+        return () => {
+            el.removeEventListener("scroll", updateScrollState);
+            window.removeEventListener("resize", updateScrollState);
+            clearTimeout(id);
+        };
+        // timelineItems가 변하면 다시 계산
+    }, [timelineItems.length]);
 
     const [selected, setSelected] = useState<'office' | 'class'>('office');
 
@@ -219,7 +242,11 @@ export default function AboutPage() {
                     </button>
                 </div>
                 {/* 타임라인 바 */}
-                <div ref={scrollRef} className="overflow-x-auto scroll-smooth no-scrollbar">
+                <div
+                    ref={scrollRef}
+                    onScroll={updateScrollState}
+                    className="overflow-x-auto scroll-smooth no-scrollbar"
+                >
                     <div className="flex flex-row items-start relative min-w-fit mt-[16px] lg:mt-[70px]">
                         {timelineItems.map((item, idx) => (
                             <div
@@ -402,7 +429,7 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-            {/* section6 */}
+            {/* section6 - 오시는 길 */}
             <section className="flex flex-col w-full h-auto px-[30px] pb-[50px] lg:px-[157px] lg:pb-[220px]">
                 <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px] lg:mt-[78px]">
                     당신을 맞이할 준비가 되어 있는 곳

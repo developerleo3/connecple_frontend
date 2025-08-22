@@ -12,6 +12,30 @@ interface Links {
     linkPath: string
 }
 
+// 신청절차
+const applicationProcess = [
+    {
+        title: "지원 신청",
+        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        img: "/withGIG/section8_step1.svg"
+    },
+    {
+        title: "역량 매칭",
+        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        img: "/withGIG/section8_step2.svg"
+    },
+    {
+        title: "프로젝트 제안 수락",
+        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        img: "/withGIG/section8_step3.svg"
+    },
+    {
+        title: "협업 시작",
+        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        img: "/withGIG/section8_step4.svg"
+    }
+]
+
 export default function WithGigPage() {
     // 링크 설정
     const [links, setLinks] = useState<Links[]>([])
@@ -124,8 +148,8 @@ export default function WithGigPage() {
                     ))}
                 </div>
             </section>
-            {/* section3 - 위드GIG 성공사례 */}
-            <section className={"flex flex-col w-full h-auto px-[30px] mt-[63px] lg:px-[200px] lg:mt-[455px]"}>
+            {/* section3 - 성공사례 */}
+            <section className={"flex flex-col w-full h-auto px-[30px] mt-[63px] lg:px-[200px] lg:mt-[255px]"}>
                 <h1 className={"font-black text-[#541E80] text-[15px] lg:text-[45px]"}>
                     위드GIG 성공사례
                 </h1>
@@ -135,10 +159,10 @@ export default function WithGigPage() {
                     • 당신의 다음 이야기가 될 수 있는, 누군가의 지금 이야기<br/>
                 </div>
                 <div className={"flex flex-row w-full h-auto justify-between items-center mt-[17px] lg:mt-[54px]"}>
-                    <div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
+                    {/*<div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
                         w-[13px] h-[70px] rounded-[4px] lg:w-[42px] lg:h-[293px] lg:rounded-[15px]">
                         <p className="font-semibold text-[10px] lg:text-[20px]">{"<"}</p>
-                    </div>
+                    </div>*/}
                     {[
                         {
                             path: "/withGIG/section3_image1.png",
@@ -162,10 +186,10 @@ export default function WithGigPage() {
                             unoptimized
                             className={"lg:w-[293px] lg:h-[293px] rounded-[6px] lg:rounded-[30px]"}/>
                     ))}
-                    <div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
+                    {/*<div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
                         w-[13px] h-[70px] rounded-[4px] lg:w-[42px] lg:h-[293px] lg:rounded-[15px]">
                         <p className="font-semibold text-[10px] lg:text-[20px]">{">"}</p>
-                    </div>
+                    </div>*/}
                 </div>
             </section>
             {/* section4 - 구직자를 위한 GIG */}
@@ -189,7 +213,7 @@ export default function WithGigPage() {
 
                         {/* 말풍선 본문 */}
                         <div className="bg-[#C0AED1] text-white font-tvn-medium rounded-[20px]
-                            px-[13px] py-[2px] text-[15px] lg:px-[28px] lg:py-[3px] lg:text-[25px]">
+                            px-[13px] py-[2px] text-[15px] lg:px-[28px] lg:py-[3px] lg:text-[35px]">
                             다시 일하고 싶지만, 내 삶의 방식도 지키고 싶다면?
                         </div>
                     </div>
@@ -358,7 +382,7 @@ export default function WithGigPage() {
                             {/* 말풍선 본문 */}
                             <div className="bg-[#C0AED1] text-white font-tvn-medium
                                 px-[15px] py-[1px] rounded-[20px] text-[15px]
-                                lg:px-[28px] lg:py-[3px] lg:rounded-[20px] lg:text-[25px]">
+                                lg:px-[28px] lg:py-[3px] lg:rounded-[20px] lg:text-[35px]">
                                 고정 인건비는 부담되는데, 일은 쌓여만 가는가요?
                             </div>
                         </div>
@@ -512,23 +536,29 @@ export default function WithGigPage() {
                     text-[12px] mt-[26px] w-[137px] border-b-[1px] pb-[6px]
                     lg:text-[25px] lg:mt-[71px] lg:w-[477px] lg:border-b-[2px] lg:pb-[17px]">
                     신청절차</h1>
-                <div className="hidden lg:block relative w-full aspect-video">
-                    <Image
-                        src={"/withGIG/section8_image1.png"}
-                        alt={"section8_image.png"}
-                        fill
-                        unoptimized
-                        className={"object-contain w-full"}
-                    />
-                </div>
-                <div className="relative lg:hidden w-full aspect-video">
-                    <Image
-                        src={"/withGIG/section8_image2.png"}
-                        alt={"section8_image.png"}
-                        fill
-                        unoptimized
-                        className={"object-contain w-full"}
-                    />
+                <div className="flex flex-row w-full h-auto mt-[20px] lg:mt-[50px] justify-between">
+                    {applicationProcess.map((item, idx) => (
+                        <div key={idx} className="flex flex-col items-center">
+                            <div className="flex items-center justify-center bg-white rounded-full
+                                shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.125)] lg:shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.25)]
+                                w-[23px] h-[23px] lg:w-[54px] lg:h-[54px]">
+                                <p className="font-black text-[#541E80] text-[10px] lg:text-[20px]">{(idx + 1).toString().padStart(2, "0")}</p>
+                            </div>
+                            <p className="bg-[#541E80] text-white rounded-full font-extrabold
+                                mt-[10px] py-[3px] px-[5px] text-[6px] lg:mt-[30px] lg:py-[5px] lg:px-[24px] lg:text-[23px]">{item.title}</p>
+                            <p className="flex font-semibold justify-center items-center text-center
+                                h-[40px] text-[6px] lg:h-[150px] lg:text-[18px]"
+                               dangerouslySetInnerHTML={{__html: item.content}}/>
+                            <Image
+                                src={item.img}
+                                alt="step"
+                                width={30}
+                                height={30}
+                                className="lg:w-[150px] lg:h-[150px]"
+                            >
+                            </Image>
+                        </div>
+                    ))}
                 </div>
                 <div className="flex flex-col justify-center items-center bg-[#D9D9D9] w-full
                     h-[45px] rounded-[10px] mt-[19px] px-[20px] lg:h-[126px] lg:rounded-[30px] lg:mt-[80px] lg:px-[40px]">
@@ -538,6 +568,24 @@ export default function WithGigPage() {
                         프로젝트 예시 : 교육 콘텐츠 기획 및 자료 제작, 행사 운영보조, 참가자 응대 업무, 디자인 / 문서 작업 / 홍보 콘텐츠 기획,<br />
                         제안서 및 보고서 작성 지원, 교육 운영/진행 어시스턴트
                     </p>
+                </div>
+                <div
+                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[40px]">
+                    <Link
+                        href={links[3]?.linkPath || "https://www.connecple.com"}
+                        target="_blank"
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
+                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                        위드긱 &#39;참여자&#39; 신청
+                    </Link>
+                    <Link
+                        href={links[3]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
+                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                        위드긱 &#39;수요기업&#39; 신청
+                    </Link>
                 </div>
             </section>
         </main>

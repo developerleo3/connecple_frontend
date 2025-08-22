@@ -98,7 +98,7 @@ export default function WithNewsletterPage() {
                     <span className="text-[#541E80]">가능성을 향한 첫 걸음</span>
                 </p>
                 <div
-                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[16px]">
+                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[40px]">
                     <Link
                         href={links[2]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
@@ -109,7 +109,7 @@ export default function WithNewsletterPage() {
                     </Link>
                     <Link
                         href={links[2]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
-                        className="bg-[#878787] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         뉴스레터 파트너 문의하기
@@ -139,7 +139,7 @@ export default function WithNewsletterPage() {
                         {/* 말풍선 본문 */}
                         <div className="bg-[#C0AED1] text-white font-tvn-medium rounded-[20px]
                             px-[10px] py-[1px] text-[15px]
-                            lg:px-[28px] lg:py-[3px] lg:text-[25px]">
+                            lg:px-[28px] lg:py-[3px] lg:text-[35px]">
                             W.I.T.H Newsletter 란?
                         </div>
                     </div>
@@ -297,7 +297,7 @@ export default function WithNewsletterPage() {
                     </div>
                 ))}
             </section>
-            {/* section4 - 뉴스레터 벌꿀 카드 */}
+            {/* section4 - 뉴스레터 벌꿀 카드 TODO: 관리자 만들기 */}
             <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
                     <Link href={links[2]?.linkPath || "https://www.connecple.com"} target="_blank">
@@ -337,29 +337,29 @@ export default function WithNewsletterPage() {
                         }
                     ].map((item, idx) => (
                         <Link key={idx} href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
-                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                            <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition items-center
                                 w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
-                                lg:w-[183px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
+                                lg:w-[243px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
                                 <Image src={item.img_url}
                                        alt={item.img_alt}
                                        width={123}
                                        height={123}
                                        unoptimized
-                                       className="lg:w-[159px] lg:h-[126px]"/>
+                                       className="lg:w-[209px] lg:h-[146px]"/>
                                 <p className="font-bold text-center text-[5px] mt-[6px] lg:text-[15px] lg:mt-[12px]">{item.title}</p>
                                 <p className="font-semibold text-[4.5px] mt-[4px] lg:text-[12px] lg:mt-[12px]">{item.content}</p>
                             </div>
                         </Link>
                     ))}
-                    <div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center
-                        w-[17px] h-[101px] rounded-[5px] lg:w-[42px] lg:h-[307px] lg:rounded-[15px]">
-                        <p className="font-semibold text-[8px] lg:text-[20px]">{">"}</p>
-                    </div>
+                    {/*<div className="flex bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] items-center justify-center*/}
+                    {/*    w-[17px] h-[101px] rounded-[5px] lg:w-[42px] lg:h-[307px] lg:rounded-[15px]">*/}
+                    {/*    <p className="font-semibold text-[8px] lg:text-[20px]">{">"}</p>*/}
+                    {/*</div>*/}
                 </div>
             </section>
             {/* section5 - 지원하기 */}
             <section className="flex flex-col w-full h-auto
-                mt-[81px] mb-[74px] px-[30px] lg:mt-[274px] lg:mb-[300px] lg:px-[200px]">
+                mt-[21px] mb-[74px] px-[30px] lg:mt-[50px] lg:mb-[300px] lg:px-[200px]">
                 {/*<h1 className="text-center
                         text-[18px] font-black lg:text-[30px] lg:font-extrabold">
                     W.I.T.H Newsletter

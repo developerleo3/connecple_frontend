@@ -12,6 +12,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 const contents = [
     {
+        level: 'LEVEL 1',
         title: "실습 중심 기본기 함양 온라인 교육",
         sub: "이러닝 + 실시간 온라인 강의 병행",
         content1: "ICT MICE 실무자 특강부터<br />AI 협업툴 활용 워크숍까지",
@@ -19,6 +20,7 @@ const contents = [
         img: "/withProject/section7_image11.png"
     },
     {
+        level: 'LEVEL 2',
         title: "실습 중심 실전 감각 함양 온라인 교육",
         sub: "현장 중심 실전 과제 구성",
         content1: "교육 행사 기획서부터<br />실제 기업용 홍보물 제작까지 단계별 과제",
@@ -26,6 +28,7 @@ const contents = [
         img: "/withProject/section7_image2.png"
     },
     {
+        level: 'LEVEL 3',
         title: "1:1 맞춤 멘토링",
         sub: "담당 멘토 배정 + 밀착형 코칭",
         content1: "현직 교육 기획자·행사<br />PM 출신 멘토의 경력별 실전 조언",
@@ -33,6 +36,7 @@ const contents = [
         img: "/withProject/section7_image3.png"
     },
     {
+        level: 'LEVEL 4',
         title: "실무 프로젝트 참여",
         sub: "레벨별 실무 투입 + 단계별 급여 지급",
         content1: "레벨1(보조) → 레벨2(매니저) → 레벨3~5(리더급)까지<br />실무 난이도에 따라 점진적 투입",
@@ -40,11 +44,116 @@ const contents = [
         img: "/withProject/section7_image4.png"
     },
     {
+        level: 'LEVEL 5',
         title: "현장 참관 프로그램",
         sub: "ICT 융합 분야 체험형 학습",
         content1: "국제 행사, 교육 테크,<br />데이터·AI 교육 현장 실습 탐방",
         content2: "변화하는 현장을 직접 보고 배우는 생생한 체험 기회",
         img: "/withProject/section7_image5.png"
+    }
+]
+
+// 신청절차
+const applicationProcess = [
+    {
+        title: "온라인 신청서 작성",
+        content: "간단한 기본정보<br />작성 및 신청",
+        img: "/withProject/section9_reg_step1.svg"
+    },
+    {
+        title: "사전 진단 및 인터뷰",
+        content: "유선 상담 또는<br />설문 진행",
+        img: "/withProject/section9_reg_step2.svg"
+    },
+    {
+        title: "교육 프로그램 등록 및 OT",
+        content: "개인에게 맞는<br />프로그램 배정<br />온라인 OT 안내",
+        img: "/withProject/section9_reg_step3.svg"
+    },
+    {
+        title: "학습 시작 및 멘토 배정",
+        content: "온라인 강의 개시<br />전담 멘토 배정",
+        img: "/withProject/section9_reg_step4.svg"
+    }
+]
+
+// 수강절차
+const enrollmentProcess = [
+    {
+        title: "온라인 학습 환경 접속",
+        content: "수강 플랫폼 접속<br />(학습자 개별 안내)",
+        img: "/withProject/section9_class_step1.svg"
+    },
+    {
+        title: "레벨별 교육 수강",
+        content: "이러닝 & 실시간<br />ZOOM 강의",
+        img: "/withProject/section9_class_step2.svg"
+    },
+    {
+        title: "과제 제출 및 피드백",
+        content: "실무 기반<br />실습 과제 수행,<br />전담 멘토 피드백",
+        img: "/withProject/section9_class_step3.svg"
+    },
+    {
+        title: "실무 연계 기회 제공",
+        content: "레벨별 맞춤형 급여<br />지급 실무 연계<br />기회 제공",
+        img: "/withProject/section9_class_step4.svg"
+    }
+]
+
+// 참여하면 뭐가 좋나요?
+const section6 = [
+    {
+        title: "효율적인 온라인 교육 운영",
+        img: [
+            {
+                title: "온라인 실시간 교육",
+                src: "/withProject/section6_image1.png"
+            },
+            {
+                title: "온라인 이러닝 교육",
+                src: "/withProject/section6_image2.png"
+            }
+        ],
+        content: "교육시간 : 오전 10시 ~ 오후 3시<br />교육방식 : 온라인 블렌디드 학습 (온라인 실시간 + 영상 청취)",
+    },
+    {
+        title: "단기간/실습형 커리큘럼",
+        img: [
+            {
+                title: "이론 교육",
+                src: "/withProject/section6_image3.png"
+            },
+            {
+                title: "실습 교육",
+                src: "/withProject/section6_image4.png"
+            },
+            {
+                title: "추가 실습과제",
+                src: "/withProject/section6_image5.png"
+            }
+        ],
+        content: "학습기간 최소 5일<br />경력 7년 이상의 현업 전문가들이 개발한 실무 중심형 커리큘럼",
+    },
+    {
+        title: "트렌디한 업무 스킬 적용",
+        img: [
+            {
+                title: "",
+                src: "/withProject/section6_image6.png"
+            }
+        ],
+        content: "업무기초 : 한글, MS오피스 등<br />대세도구 : Drive, Spreadsheet emd<br />협업도구 : 슬랙, 노션 등",
+    },
+    {
+        title: "담당 멘토와의 밀착 멘토링 진행",
+        img: [
+            {
+                title: "",
+                src: "/withProject/section6_image7.png"
+            }
+        ],
+        content: "경력 7년 이상의 현업 전문가들이 10개월 이상의<br />기간을 거쳐 개발한 커리큘럼으로 밀착 멘토링 진행",
     }
 ]
 
@@ -109,7 +218,7 @@ export default function WithProjectPage() {
         className?: string;
         children: React.ReactNode;
     }) {
-        const { ref, inView } = useInView({
+        const {ref, inView} = useInView({
             threshold: 0.2,
             triggerOnce: true,
         });
@@ -125,7 +234,7 @@ export default function WithProjectPage() {
     }
 
     if (isLoading) {
-        return <LoadingSpinner />
+        return <LoadingSpinner/>
     }
 
     if (error) {
@@ -145,7 +254,7 @@ export default function WithProjectPage() {
                     <h1 className="text-center
                         text-[13px] font-bold mt-[22px]
                         lg:text-[27px] lg:font-semibold lg:mt-[20px]">
-                        경력보유여성 재도약 프로젝트(Women In The Hope)
+                        경력보유여성 실전 실무 재도약 프로젝트(Women In The Hope)
                     </h1>
                 </div>
                 <div className="flex w-full h-auto justify-center">
@@ -165,23 +274,26 @@ export default function WithProjectPage() {
                     <p className="text-center font-semibold
                         text-[9px] mt-[32px]
                         lg:text-[23px] lg:mt-[54px]">
-                        자신감 저하, 빠르게 변하는 트렌드,<br/>
-                        단절된 네트워크와 육아의 병행,<br/>
-                        그리고 유연한 일자리의 부족까지.<br/><br/>
+                        위드프로젝트는 <span className="text-[#541E80] font-extrabold">실무 능력·실전 경험·급여 수익까지 한 번에<br/>
+                        잡는 ‘단기 완성 온라인 실전 교육’ 프로그램</span>입니다.<br/>
+                        교육 수료 후엔 수료 레벨에 맞는 급여 지급 업무에 투입돼, 4차차 산업 분야에서의<br/>
+                        <span className="font-extrabold">스텝·인턴·매니저로 활약하실 수 있는 기회를 제공</span>합니다.<br/><br/>
 
-                        커리어를 다시 시작하려는 분들에게<br/>
-                        심리적·현실적인 장벽은 생각보다 높습니다.<br/><br/>
+                        교육부터 실전까지 단계별 수강이 가능하며, 단계가 높아질수록 실무 연계 기회는 더 많아집니다.<br/><br/>
 
-                        커넥플은 그 마음을 누구보다 잘 알기에,<br/>
-                        재도약의 시작이 가벼워질 수 있도록<br/>
-                        ‘교육’, ‘네트워크’, ‘실전 프로젝트’ 를 한데 모은<br/>
-                        <span className="font-extrabold">“커리어 재도약 프로그램 – 위드프로젝트”</span>를 준비했습니다.
+                        자신감 저하, 빠르게 변하는 트렌드, 단절된 네트워크와 육아의 병행,<br/>
+                        그리고 유연한 일자리 부족까지 혼자서는 어렵다는 것을 누구보다도 잘 알기에<br/><br/>
+
+                        지금, <span className="font-extrabold">우리 함께(WITH)</span>단기 프로젝트로 장기 재도약을 꿈꿔보세요.<br/>
                     </p>
-                    <h3 className="text-center font-extrabold
+                    <h3 className="text-center font-semibold
                         text-[10px] mt-[40px]
                         lg:text-[25px] lg:mt-[62px]">
-                        이제, 경력의 획을 추가 할 시간입니다.<br/>
-                        <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
+                        <span className="text-[#541E80] font-extrabold">W</span>omen&nbsp;
+                        <span className="text-[#541E80] font-extrabold">I</span>n&nbsp;
+                        <span className="text-[#541E80] font-extrabold">T</span>he&nbsp;
+                        <span className="text-[#541E80] font-extrabold">H</span>ope<br/>
+                        <span className="text-[#541E80] font-extrabold">당신의 재도약을 커넥플이 응원합니다.</span>
                     </h3>
                     <Link
                         href={links[0]?.linkPath || "https://www.connecple.com"}
@@ -194,8 +306,7 @@ export default function WithProjectPage() {
                 </div>
             </section>
             {/* section2 - 수치 */}
-            <section
-                ref={counterSectionRef} // 여기에 ref 걸어줌
+            <section ref={counterSectionRef} // 여기에 ref 걸어줌
                 className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
@@ -218,7 +329,7 @@ export default function WithProjectPage() {
                         {/* 말풍선 본문 */}
                         <div className="bg-[#C0AED1] text-white font-tvn-medium rounded-[20px]
                             px-[10px] py-[1px] text-[15px]
-                            lg:px-[28px] lg:py-[3px] lg:text-[25px]">
+                            lg:px-[28px] lg:py-[3px] lg:text-[35px]">
                             “예전엔 나도 일 잘했는데..”라는 마음, 그대로 두지 마세요.
                         </div>
                     </div>
@@ -227,13 +338,14 @@ export default function WithProjectPage() {
                 <h1 className="font-black text-[#541E80]
                     mt-[10px] text-[15px]
                     lg:mt-[25px] lg:text-[45px]">
-                    ICT 융합분야 교육 운영 매니저, 행사를 직접 기획<br/>
-                    운영하는 프로젝트 매니저까지
+                    4차산업 교육 및 행사 분야에서 스텝·인턴·매니저로<br/>
+                    활약하실 수 있는 기회
                 </h1>
                 <h2 className="font-black
                     mt-[6px] text-[10px]
                     lg:mt-[20px] lg:text-[27px]">
-                    내가 다시 주인공이 되는 자리, 위드프로젝트에 준비되어 있습니다.
+                    기존 경험, 경력이 없어도, 오랜 경력 단절로 업무 감각을 잃었어도 기초부터 함께 차근차근<br/>
+                    위드프로젝트에 준비되어 있습니다.
                 </h2>
                 {/* 하단 아이콘 지표 */}
                 <div className="flex flex-row w-full h-auto justify-between
@@ -242,7 +354,7 @@ export default function WithProjectPage() {
                     {[
                         {
                             icon: "/withProject/icon_career_gap.svg",
-                            label: "위드프로젝트<br /> 평균 경력단절기간",
+                            label: "'위드프로젝트' 참여자<br /> 평균 경력단절기간",
                             value: "5.7년",
                         },
                         {
@@ -287,13 +399,11 @@ export default function WithProjectPage() {
                          background: "linear-gradient(to bottom, rgba(192, 174, 209, 0.7), rgba(255, 255, 255, 1))",
                      }}>
                 <h2 className="font-bold mt-[38px] text-[10px] lg:mt-[122px] lg:text-[27px]">
-                    ICT 융합 분야 프로젝트 기획 및 운영 전문기업 커넥플이 자체 개발한
+                    ICT 융합 분야 프로젝트 기획 및 운영 전문기업 커넥플이 자체 개발한<br/>
+                    <span className="font-black text-[15px] lg:text-[45px] text-[#541E80]">경력보유여성 실전 실무 재도약 프로젝트 = 위드프로젝트</span><br/>
+                    다음과 같은 분께 추천합니다.
                 </h2>
-                <h2 className="font-bold mt-[5px] text-[10px] lg:mt-[10px] lg:text-[27px]">
-                    <span
-                        className="font-black text-[15px] lg:text-[45px] text-[#541E80]">[경력보유여성 커리어 재도약 프로그램]</span> 입니다.
-                </h2>
-                <div className="flex flex-row justify-between mt-[29px] mb-[70px] lg:mt-[73px] lg:mb-[218px]">
+                <div className="flex flex-row justify-between mt-[29px] mb-[50px] lg:mt-[73px] lg:mb-[118px]">
                     {[
                         {
                             picture: "/withProject/program1.png",
@@ -332,11 +442,10 @@ export default function WithProjectPage() {
                     ))}
                 </div>
             </section>
-
             {/* section4 - 이런분들께 추천합니다. */}
             <section className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[83px] lg:px-[146px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
-                    이런분들께 추천합니다.
+                    특히! 이런분들께 추천합니다.
                 </h1>
                 <div className="flex flex-col w-full h-auto mt-[24px] lg:mt-[55px]">
                     {[
@@ -439,13 +548,242 @@ export default function WithProjectPage() {
                     ))}
                 </div>
             </section>
-            {/* section5 - 생생후기 */}
-            <section className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[200px]">
+            {/* section5 - 프로그램 */}
+            <section className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[109px] lg:px-[146px]">
+                <h1 className="self-center lg:self-start font-black text-[#541E80] text-[15px] mt-[55px] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
+                {/* pc 레이아웃 */}
+                <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px] justify-between">
+                    <div className="flex flex-col w-auto justify-center lg:mt-[26px] lg:gap-y-[60px]">
+                        {contents.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setSelected(idx)}
+                                className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer hover:scale-110 transition
+                                ${
+                                    selected === idx ? "bg-[#541E80] z-10" : "bg-[#D9D9D9] z-0"
+                                }`}
+                            >
+                                <p className={`font-bold text-[30px] rotate-270 ${
+                                    selected === idx ? "text-[#D9D9D9]" : "text-[#5D5D5D]"}`}>
+                                    {idx + 1}
+                                </p>
+                            </button>
+                        ))}
+                    </div>
+                    {/* 제목, 소제목, 전문성, 포인트 */}
+                    <div className="flex flex-col justify-center lg:w-auto lg:h-[531px] lg:px-[43px]">
+                        <div className="flex items-center justify-center  border-[#541E80]
+                            border-[0.5px] w-[47px] h-[14px] mt-[10px] rounded-[20px] mb-[10px]
+                            lg:border-[2px] lg:w-[142px] lg:h-[36px] lg:mt-[27px] lg:rounded-[20px] lg:mb-[32px]">
+                            <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{contents[selected].level}</p>
+                        </div>
+                        <h2 className="font-bold lg:text-[28px]">{contents[selected].title}</h2>
+                        <h3 className="font-bold text-[#541E80] lg:text-[25px] lg:mt-[10px]">{contents[selected].sub}</h3>
+                        <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
+                        <div className="flex flex-row items-center lg:mt-[35px]">
+                            <Image
+                                src={"/withProject/check_purple.png"}
+                                alt={"check_purple.png"}
+                                width={25}
+                                height={25}
+                                unoptimized
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">전문성</p>
+                        </div>
+                        <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
+                           dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
+                        <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
+                        <div className="flex flex-row items-center lg:mt-[35px]">
+                            <Image
+                                src={"/withProject/check_purple.png"}
+                                alt={"check_purple.png"}
+                                width={25}
+                                height={25}
+                                unoptimized
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">포인트</p>
+                        </div>
+                        <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
+                           dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                    </div>
+                    {/* 이미지 */}
+                    <div
+                        className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px] cursor-pointer">
+                        <Image
+                            src={contents[selected].img}
+                            alt="image"
+                            width={selected === 0 || selected === 1 ? 487 : 444}
+                            height={selected === 0 || selected === 1 ? 525 : 481}
+                            unoptimized
+                            className={`object-fill ${
+                                selected === 0 || selected === 1
+                                    ? 'lg:w-[487px] lg:h-[525px]'
+                                    : 'lg:w-[444px] lg:h-[481px]'
+                            }`}
+                            onClick={() => setIsModalOpen(true)}
+                        />
+                        {isModalOpen && (
+                            <div
+                                className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                <div
+                                    className="relative bg-[#D9D9D9] rounded-[20px] lg:w-[741px] lg:h-[798px]"
+                                    onClick={(e) => e.stopPropagation()} // 바깥 클릭 시 닫히게 + 내부 클릭은 무시
+                                >
+                                    {/* 닫기 버튼 */}
+                                    <button
+                                        className="absolute z-100 top-[11px] right-[11px] text-[#541E80] cursor-pointer"
+                                        onClick={() => setIsModalOpen(false)}
+                                    >
+                                        <Image
+                                            src={"/withProject/section7_modal_X.svg"}
+                                            alt={"닫기"}
+                                            width={37}
+                                            height={37}
+                                            unoptimized
+                                        />
+                                    </button>
+                                    {/* 팝업 이미지 */}
+                                    <Image
+                                        src={contents[selected].img}
+                                        alt="popup-image"
+                                        fill
+                                        className={`object-fill 
+                                            ${selected === 0 || selected === 1 ? "p-[10px]" : "p-[50px]"}`}
+                                        unoptimized
+                                    />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                {/* 모바일 레이아웃 */}
+                <div className="flex lg:hidden flex-col w-full h-auto mt-[19px]">
+                    {/* 버튼 */}
+                    <div className="flex flex-row w-auto justify-center gap-x-[9px]">
+                        {contents.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setSelected(idx)}
+                                className={`flex justify-center items-center w-[46px] h-[12px] rounded-[10px] cursor-pointer 
+                                    ${selected === idx ? "bg-[#541E80]" : "bg-[#D9D9D9]"}`}
+                            >
+                                <p className={`font-bold text-[8px] 
+                                    ${selected === idx ? "text-white" : "text-[#878787]"}`}
+                                >
+                                    {idx + 1}
+                                </p>
+                            </button>
+                        ))}
+                    </div>
+                    {/* 제목, 소제목, 전문성, 포인트 */}
+                    <div className="relative flex flex-col justify-center items-center w-[289px] h-auto
+                            bg-[#E7E2EC] mt-[8px] self-center rounded-[10px] p-[14px]">
+                        <div
+                            className="flex flex-col w-full h-auto rounded-[10px] bg-white justify-center px-[16px] py-[10px]">
+                            <h2 className="font-extrabold text-[10px]">{contents[selected].title}</h2>
+                            <h3 className="font-bold text-[#541E80] text-[9px] mt-[3px]">{contents[selected].sub}</h3>
+                            <div
+                                className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[6px] self-center"/>
+                            <div className="flex flex-row items-center mt-[9px]">
+                                <Image
+                                    src={"/withProject/check_purple.png"}
+                                    alt={"check_purple.png"}
+                                    width={10}
+                                    height={10}
+                                    unoptimized
+                                />
+                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">전문성</p>
+                            </div>
+                            <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
+                               dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
+                            <div
+                                className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[3px] self-center"/>
+                            <div className="flex flex-row items-center mt-[7px]">
+                                <Image
+                                    src={"/withProject/check_purple.png"}
+                                    alt={"check_purple.png"}
+                                    width={10}
+                                    height={10}
+                                    unoptimized
+                                />
+                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">포인트</p>
+                            </div>
+                            <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
+                               dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                        </div>
+                    </div>
+                    {/* 이미지 */}
+                    <div className={`relative bg-[#D9D9D9] rounded-[10px] flex justify-center items-center
+                            w-[289px] h-auto self-center mt-[11px]
+                            ${selected === 0 || selected === 1 ? "p-[1px]" : "p-[15px]"}`}>
+                        <Image
+                            src={contents[selected].img}
+                            alt="image"
+                            width={487}
+                            height={525}
+                            unoptimized
+                            className="object-fill"
+                            onClick={() => setIsModalOpen(true)}
+                        />
+                    </div>
+                </div>
+            </section>
+            {/* section6 - 참여하면 뭐가 좋나요? */}
+            <section className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[146px]">
+                <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
+                    위드프로젝트에 참여하면 뭐가 좋나요?
+                </h1>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] lg:gap-[45px] mt-[30px] lg:mt-[77px]">
+                    {section6.map((card, idx) => (
+                        <div key={idx}
+                             className="flex flex-col bg-[#F7F7F7] rounded-[20px] lg:rounded-[30px] shadow-[2px_2px_6px_0_rgba(0,0,0,0.25)]">
+                            {/* 타이틀 */}
+                            <h3 className="text-center font-extrabold text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]">
+                                {card.title}
+                            </h3>
+                            {/* 이미지 리스트 (가변 개수 대응) */}
+                            <div className="flex flex-row w-full bg-[#E7E2EC] items-start justify-center
+                                px-[10px] lg:px-[20px] py-[10px] lg:py-[20px] mt-[12px] lg:mt-[18px] gap-[10px] lg:gap-[16px]">
+                                {card.img.map((img, i) => (
+                                    <div key={i} className="flex flex-col items-center justify-center">
+                                        <div className="h-[72px] lg:h-[120px] rounded-[10px]">
+                                            <Image
+                                                src={img.src}
+                                                alt={img.title || "thumbnail"}
+                                                height={120} // 최대 높이 기준
+                                                width={0} // Next.js에서 width를 0으로 두고 sizes="auto" 설정
+                                                sizes="auto"
+                                                className="h-full w-auto object-contain"
+                                            />
+                                        </div>
+                                        {img.title && (
+                                            <p className="mt-[6px] text-[10px] lg:text-[14px] font-semibold text-[#3B3B3B]">
+                                                {img.title}
+                                            </p>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                            {/* 본문 */}
+                            <p className="text-black leading-[1.6]
+                                text-[10px] lg:text-[18px] px-[15px] lg:px-[30px] py-[10px] lg:py-[20px]"
+                               dangerouslySetInnerHTML={{ __html: card.content }}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </section>
+            {/* section7 - 생생후기 */}
+            <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[50px] lg:rounded-tl-[120px]
+                mt-[40px] px-[30px] pt-[38px] pb-[62px] lg:mt-[200px] lg:px-[146px] lg:pt-[118px] lg:pb-[160px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     교육생들의 생생후기
                 </h1>
                 <div className="relative mt-[22px] lg:mt-[73px] w-full h-[274px] lg:h-[590px]">
-
                     <ReviewFade className="absolute top-0 left-0 flex flex-row justify-between items-center bg-[#F8F8F8] opacity-0
                         w-[193px] h-[35px] rounded-[15px] px-[8px] shadow-[2px_4px_4px_0_rgba(0,0,0,0.25)]
                         lg:w-[469px] lg:h-[91px] lg:rounded-[30px] lg:px-[20px] lg:shadow-[2px_2px_10px_0_rgba(0,0,0,0.25)">
@@ -623,283 +961,105 @@ export default function WithProjectPage() {
                     </ReviewFade>
                 </div>
             </section>
-            {/* section6 - 질문&응답 */}
-            <section className="flex flex-col w-full h-auto bg-[#EAEAEA80] rounded-tl-[120px]
-                px-[30px] mt-[78px] pb-[62px] lg:px-[146px] lg:mt-[439px] lg:pb-[195px]">
-                <div className="relative w-full h-auto lg:mt-[-209px]">
-                    {/* 배경 */}
-                    <Image
-                        src="/withProject/section6_image.png" // 이미지 경로
-                        alt="section6 background"
-                        width={1020}
-                        height={432}
-                        unoptimized
-                        className="w-full h-auto object-cover rounded-[20px] mb-[1px] lg:rounded-[50px] lg:mb-[26px]"
-                    />
-                    {/* 오버레이 및 텍스트 */}
-                    <div className="absolute inset-0 flex flex-col justify-center px-[22px] lg:px-[62px]">
-                        {/* 로고 + 텍스트 */}
-                        <Image
-                            src="/withProject/logo_section6.svg" // 흰색 로고 사용
-                            alt="connecple logo"
-                            width={67}
-                            height={15}
-                            unoptimized
-                            className="lg:w-[157px] lg:h-[35px]"
-                        />
-                        {/* 타이틀 */}
-                        <h1 className="font-black text-white
-                            text-[12px] mt-[15px] lg:text-[45px] lg:mt-[32px]">
-                            재도약에 성공한 그녀의<br/>
-                            이야기를 들어보다
-                        </h1>
-
-                        {/* 가로 선 */}
-                        <div className="w-full h-[1px] lg:h-[2px] bg-white mt-[16px] lg:mt-[35px]"/>
-
-                        {/* 서브 텍스트 */}
-                        <p className="font-semibold text-white mt-[14px] text-[8px] lg:mt-[31px] lg:text-[20px]">
-                            위드프로젝트 수료생 인터뷰<br/>
-                            3~5레벨 수료생의 변화
-                        </p>
-                    </div>
-                </div>
-                {[
-                    {
-                        question: "위드프로젝트를 시작하시게 된 계기가 있나요?",
-                        answer: "아이가 어린이집에 들어가니 저도 여유가 생기게 되었어요. 다시 일을 시작하고 싶었지만 3년이라는 공백으로 혼자 뒤처진 건 아닌지 걱정이 많아지더라구요.<br />어린이집 친구 엄마에게 위드 프로젝트를 소개받아 연락하게 되었습니다.",
-                    },
-                    {
-                        question: "위드프로젝트를 수강하면서 어떤 점이 가장 좋으셨어요?",
-                        answer: "궁금한 부분들을 바로 확인하여 가이드해 주시는 점이요.  제가 이런 질문을 해도 되나 싶을 만큼 사소한 부분이었는데도<br />늘 친절하게 답변해 주셨어요. 덕분에 금방 적응했어요!",
-                    },
-                    {
-                        question: "위드프로젝트 전체 레벨을 수강하셨던데요!",
-                        answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했습니다. 레벨 3이 되니 커뮤니케이션 역량이 많이 필요하다는 생각이<br />들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
-                    },
-                    {
-                        question: "위드프로젝트와 타교육의 차이점이 있나요?",
-                        answer: "효율적인 교육 운영 방식이요! 경력 보유 여성 입장을 누구보다 잘 아는 분들이 설계해서 그런지 저희가 가장 자유로운 오전 10시부터 오후 3시까지 교육을<br />진행하시더라구요! 이해 못하고 넘어간 부분은 다시 공부해 볼 수 있도록 온라인 영상 학습도 지원해 주셨어요!",
-                    },
-                    {
-                        question: "위드프로젝트 수료 후 달라진 점이 있나요?",
-                        answer: "무엇보다 자신감이 아닐까요? 저는 망고보드, 노션, 슬랙... 모두 낯설기만 했거든요. 위드프로젝트 교육을 들으며 과제도 해보고 실무 프로젝트에서 직접<br />사용해 보니까 너무 재밌더라구요! 이제 그런거 다 사용할 수 있다고 어디에서든 자신있게 말해요!",
-                    },
-                ].map((item, idx) => (
-                    <div
-                        key={idx}
-                        className="relative flex flex-col w-full border-[#E7E2EC]
-                            h-[48px] rounded-[10px] border-[1px] mt-[11px]
-                            lg:h-[108px] lg:rounded-[20px] lg:border-[2px] lg:mt-[20px]"
-                    >
-                        <div className="flex items-center w-full bg-[#E2E2E2]
-                            h-[20px] rounded-[10px] lg:h-[42px] lg:rounded-[20px]">
-                            <div
-                                className="absolute flex items-center justify-center bg-[#541E80]
-                                    rounded-[10px] w-[40px] h-[20px]
-                                    lg:rounded-[20px] lg:w-[65px] lg:h-[42px]">
-                                <p className="font-extrabold text-white text-[8px] lg:text-[22px]">{`Q${idx + 1}.`}</p>
-                            </div>
-                            <p
-                                className="font-extrabold text-[#541E80] text-[8px] ml-[46px] lg:text-[22px] lg:ml-[72px]"
-                                dangerouslySetInnerHTML={{__html: item.question}}
-                            />
-                        </div>
-                        <p
-                            className="absolute font-medium
-                                text-[5.5px] ml-[11px] bottom-[5px]
-                                lg:text-[15px] lg:ml-[29px] lg:bottom-[9px]"
-                            dangerouslySetInnerHTML={{__html: item.answer}}
-                        />
-                        <p className="absolute font-extrabold text-[#C3B2D4]
-                            text-[8px] bottom-[5px] right-[8px]
-                            lg:text-[22px] lg:bottom-[16px] lg:right-[21px]">
-                            {`A${idx + 1}.`}
-                        </p>
-                    </div>
-                ))}
-            </section>
-            {/* section7 - 프로그램 5개 */}
+            {/* section8 - 질문&답변 */}
             <section className="flex w-full h-auto bg-[#EAEAEA80]">
                 <div className="flex flex-col w-full h-auto bg-white justify-between
-                    rounded-tr-[50px] px-[53px] lg:rounded-tr-[120px] lg:px-[146px]">
-                    <h1 className="font-black text-[#541E80] text-[15px] mt-[55px] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
-                    {/* pc 레이아웃 */}
-                    <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px]">
-                        <div className="flex flex-col w-auto justify-center lg:mt-[26px] lg:gap-y-[60px]">
-                            {contents.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setSelected(idx)}
-                                    className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer hover:scale-110 transition
-                                ${
-                                        selected === idx ? "bg-[#541E80] z-10" : "bg-[#D9D9D9] z-0"
-                                    }`}
-                                >
-                                    <p className={`font-bold text-[30px] rotate-270 ${
-                                        selected === idx ? "text-[#D9D9D9]" : "text-[#5D5D5D]"}`}>
-                                        {idx + 1}
-                                    </p>
-                                </button>
-                            ))}
-                        </div>
-                        {/* 제목, 소제목, 전문성, 포인트 */}
-                        <div className="flex flex-col justify-center lg:w-auto lg:h-[531px] lg:px-[43px]">
-                            <h2 className="font-bold lg:text-[28px]">{contents[selected].title}</h2>
-                            <h3 className="font-bold text-[#541E80] lg:text-[25px] lg:mt-[10px]">{contents[selected].sub}</h3>
-                            <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
-                            <div className="flex flex-row items-center lg:mt-[35px]">
-                                <Image
-                                    src={"/withProject/check_purple.png"}
-                                    alt={"check_purple.png"}
-                                    width={25}
-                                    height={25}
-                                    unoptimized
-                                    className="lg:w-[25px] lg:h-[25px]"
-                                />
-                                <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">전문성</p>
-                            </div>
-                            <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                               dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
-                            <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
-                            <div className="flex flex-row items-center lg:mt-[35px]">
-                                <Image
-                                    src={"/withProject/check_purple.png"}
-                                    alt={"check_purple.png"}
-                                    width={25}
-                                    height={25}
-                                    unoptimized
-                                    className="lg:w-[25px] lg:h-[25px]"
-                                />
-                                <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">포인트</p>
-                            </div>
-                            <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                               dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
-                        </div>
-                        {/* 이미지 */}
-                        <div className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px] cursor-pointer">
+                    rounded-tr-[50px] px-[30px] lg:rounded-tr-[120px] lg:px-[146px]">
+                    <div className="relative w-full h-auto mt-[30px] lg:mt-[123px]">
+                        {/* 배경 */}
+                        <Image
+                            src="/withProject/section8_image.png" // 이미지 경로
+                            alt="section6 background"
+                            width={1020}
+                            height={432}
+                            unoptimized
+                            className="w-full h-auto object-cover rounded-[20px] mb-[1px] lg:rounded-[50px] lg:mb-[26px]"
+                        />
+                        {/* 오버레이 및 텍스트 */}
+                        <div className="absolute inset-0 flex flex-col justify-center px-[22px] lg:px-[62px]">
+                            {/* 로고 + 텍스트 */}
                             <Image
-                                src={contents[selected].img}
-                                alt="image"
-                                width={selected === 0 || selected === 1 ? 487 : 444}
-                                height={selected === 0 || selected === 1 ? 525 : 481}
-                                unoptimized
-                                className={`object-fill ${
-                                    selected === 0 || selected === 1
-                                        ? 'lg:w-[487px] lg:h-[525px]'
-                                        : 'lg:w-[444px] lg:h-[481px]'
-                                }`}
-                                onClick={() => setIsModalOpen(true)}
+                                src="/withProject/logo_section6.svg" // 흰색 로고 사용
+                                alt="connecple logo"
+                                width={67}
+                                height={15}
+                                className="lg:w-[157px] lg:h-[35px]"
                             />
-                            {isModalOpen && (
-                                <div
-                                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-                                    onClick={() => setIsModalOpen(false)}
-                                >
-                                    <div
-                                        className="relative bg-[#D9D9D9] rounded-[20px] lg:w-[741px] lg:h-[798px]"
-                                        onClick={(e) => e.stopPropagation()} // 바깥 클릭 시 닫히게 + 내부 클릭은 무시
-                                    >
-                                        {/* 닫기 버튼 */}
-                                        <button
-                                            className="absolute z-100 top-[11px] right-[11px] text-[#541E80] cursor-pointer"
-                                            onClick={() => setIsModalOpen(false)}
-                                        >
-                                            <Image
-                                                src={"/withProject/section7_modal_X.svg"}
-                                                alt={"닫기"}
-                                                width={37}
-                                                height={37}
-                                                unoptimized
-                                            />
-                                        </button>
-                                        {/* 팝업 이미지 */}
-                                        <Image
-                                            src={contents[selected].img}
-                                            alt="popup-image"
-                                            fill
-                                            className={`object-fill 
-                                            ${selected === 0 || selected === 1 ? "p-[10px]" : "p-[50px]"}`}
-                                            unoptimized
-                                        />
-                                    </div>
-                                </div>
-                            )}
+                            {/* 타이틀 */}
+                            <h1 className="font-black text-white
+                            text-[12px] mt-[15px] lg:text-[45px] lg:mt-[32px]">
+                                재도약에 성공한 그녀의<br/>
+                                이야기를 들어보다
+                            </h1>
+
+                            {/* 가로 선 */}
+                            <div className="w-full h-[1px] lg:h-[2px] bg-white mt-[16px] lg:mt-[35px]"/>
+
+                            {/* 서브 텍스트 */}
+                            <p className="font-semibold text-white mt-[14px] text-[8px] lg:mt-[31px] lg:text-[20px]">
+                                위드프로젝트 수료생 인터뷰<br/>
+                                3~5레벨 수료생의 변화
+                            </p>
                         </div>
                     </div>
-                    {/* 모바일 레이아웃 */}
-                    <div className="flex lg:hidden flex-col w-full h-auto mt-[19px]">
-                        {/* 버튼 */}
-                        <div className="flex flex-row w-auto justify-center gap-x-[9px]">
-                            {contents.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setSelected(idx)}
-                                    className={`flex justify-center items-center w-[46px] h-[12px] rounded-[10px] cursor-pointer 
-                                    ${selected === idx ? "bg-[#541E80]" : "bg-[#D9D9D9]"}`}
-                                >
-                                    <p className={`font-bold text-[8px] 
-                                    ${selected === idx ? "text-white" : "text-[#878787]"}`}
-                                    >
-                                        {idx + 1}
-                                    </p>
-                                </button>
-                            ))}
-                        </div>
-                        {/* 제목, 소제목, 전문성, 포인트 */}
-                        <div className="relative flex flex-col justify-center items-center w-[289px] h-auto
-                            bg-[#E7E2EC] mt-[8px] self-center rounded-[10px] p-[14px]">
-                            <div className="flex flex-col w-full h-auto rounded-[10px] bg-white justify-center px-[16px] py-[10px]">
-                                <h2 className="font-extrabold text-[10px]">{contents[selected].title}</h2>
-                                <h3 className="font-bold text-[#541E80] text-[9px] mt-[3px]">{contents[selected].sub}</h3>
-                                <div className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[6px] self-center"/>
-                                <div className="flex flex-row items-center mt-[9px]">
-                                    <Image
-                                        src={"/withProject/check_purple.png"}
-                                        alt={"check_purple.png"}
-                                        width={10}
-                                        height={10}
-                                        unoptimized
-                                    />
-                                    <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">전문성</p>
-                                </div>
-                                <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
-                                   dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
+                    {[
+                        {
+                            question: "위드프로젝트를 시작하시게 된 계기가 있나요?",
+                            answer: "아이가 어린이집에 들어가니 저도 여유가 생기게 되었어요. 다시 일을 시작하고 싶었지만 3년이라는 공백으로 혼자 뒤처진 건 아닌지 걱정이 많아지더라구요.<br />어린이집 친구 엄마에게 위드 프로젝트를 소개받아 연락하게 되었습니다.",
+                        },
+                        {
+                            question: "위드프로젝트를 수강하면서 어떤 점이 가장 좋으셨어요?",
+                            answer: "궁금한 부분들을 바로 확인하여 가이드해 주시는 점이요.  제가 이런 질문을 해도 되나 싶을 만큼 사소한 부분이었는데도<br />늘 친절하게 답변해 주셨어요. 덕분에 금방 적응했어요!",
+                        },
+                        {
+                            question: "위드프로젝트 전체 레벨을 수강하셨던데요!",
+                            answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했습니다. 레벨 3이 되니 커뮤니케이션 역량이 많이 필요하다는 생각이<br />들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
+                        },
+                        {
+                            question: "위드프로젝트와 타교육의 차이점이 있나요?",
+                            answer: "효율적인 교육 운영 방식이요! 경력 보유 여성 입장을 누구보다 잘 아는 분들이 설계해서 그런지 저희가 가장 자유로운 오전 10시부터 오후 3시까지 교육을<br />진행하시더라구요! 이해 못하고 넘어간 부분은 다시 공부해 볼 수 있도록 온라인 영상 학습도 지원해 주셨어요!",
+                        },
+                        {
+                            question: "위드프로젝트 수료 후 달라진 점이 있나요?",
+                            answer: "무엇보다 자신감이 아닐까요? 저는 망고보드, 노션, 슬랙... 모두 낯설기만 했거든요. 위드프로젝트 교육을 들으며 과제도 해보고 실무 프로젝트에서 직접<br />사용해 보니까 너무 재밌더라구요! 이제 그런거 다 사용할 수 있다고 어디에서든 자신있게 말해요!",
+                        },
+                    ].map((item, idx) => (
+                        <div
+                            key={idx}
+                            className="relative flex flex-col w-full border-[#E7E2EC]
+                            h-[48px] rounded-[10px] border-[1px] mt-[11px]
+                            lg:h-[108px] lg:rounded-[20px] lg:border-[2px] lg:mt-[20px]"
+                        >
+                            <div className="flex items-center w-full bg-[#E2E2E2]
+                            h-[20px] rounded-[10px] lg:h-[42px] lg:rounded-[20px]">
                                 <div
-                                    className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[3px] self-center"/>
-                                <div className="flex flex-row items-center mt-[7px]">
-                                    <Image
-                                        src={"/withProject/check_purple.png"}
-                                        alt={"check_purple.png"}
-                                        width={10}
-                                        height={10}
-                                        unoptimized
-                                    />
-                                    <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">포인트</p>
+                                    className="absolute flex items-center justify-center bg-[#541E80]
+                                    rounded-[10px] w-[40px] h-[20px]
+                                    lg:rounded-[20px] lg:w-[65px] lg:h-[42px]">
+                                    <p className="font-extrabold text-white text-[8px] lg:text-[22px]">{`Q${idx + 1}.`}</p>
                                 </div>
-                                <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
-                                   dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                                <p
+                                    className="font-extrabold text-[#541E80] text-[8px] ml-[46px] lg:text-[22px] lg:ml-[72px]"
+                                    dangerouslySetInnerHTML={{__html: item.question}}
+                                />
                             </div>
-                        </div>
-                        {/* 이미지 */}
-                        <div className={`relative bg-[#D9D9D9] rounded-[10px] flex justify-center items-center
-                            w-[289px] h-auto self-center mt-[11px]
-                            ${selected === 0 || selected === 1 ? "p-[1px]" : "p-[15px]"}`}>
-                            <Image
-                                src={contents[selected].img}
-                                alt="image"
-                                width={487}
-                                height={525}
-                                unoptimized
-                                className="object-fill"
-                                onClick={() => setIsModalOpen(true)}
+                            <p
+                                className="absolute font-medium
+                                text-[5px] ml-[11px] bottom-[5px]
+                                lg:text-[15px] lg:ml-[29px] lg:bottom-[9px]"
+                                dangerouslySetInnerHTML={{__html: item.answer}}
                             />
+                            <p className="absolute font-extrabold text-[#C3B2D4]
+                            text-[8px] bottom-[5px] right-[5px]
+                            lg:text-[22px] lg:bottom-[16px] lg:right-[21px]">
+                                {`A${idx + 1}.`}
+                            </p>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </section>
-            {/* section8 - 신청/수강 절차 */}
-            <section className="flex flex-col w-full h-auto px-[52px] mt-[69px] lg:px-[200px] lg:mt-[138px]">
+            {/* section9 - 신청/수강 절차 */}
+            <section className="flex flex-col w-full h-auto px-[30px] mt-[69px] lg:px-[146px] lg:mt-[138px]">
                 <h1 className="text-center font-black text-[#541E80] text-[15px] mt-[25px] lg:text-[45px] lg:mt-[59px]">
                     위드프로젝트 어떻게 들을 수 있나요?
                 </h1>
@@ -920,43 +1080,52 @@ export default function WithProjectPage() {
                         수강절차
                     </button>
                 </div>
-                <Image
-                    src={`${selected2 === 'reg' ? "/withProject/section8_image1.png" : "/withProject/section8_image2.png"}`}
-                    alt={"image"}
-                    width={487}
-                    height={525}
-                    unoptimized
-                    className="hidden lg:block w-full h-[350px] mt-[50px]"
-                />
-                <Image
-                    src={`${selected2 === 'reg' ? "/withProject/section8_image3.png" : "/withProject/section8_image4.png"}`}
-                    alt={"image"}
-                    width={250}
-                    height={263}
-                    unoptimized
-                    className="block lg:hidden w-full h-[135px] mt-[15px]"
-                />
+
+                <div className="flex flex-row w-full h-auto mt-[20px] lg:mt-[50px] justify-between">
+                    {(selected2 === 'reg' ? applicationProcess : enrollmentProcess).map((item, idx) => (
+                        <div key={idx} className="flex flex-col items-center">
+                            <div className="flex items-center justify-center bg-white rounded-full
+                                shadow-[inset_2px_2px_2px_0_rgba(0,0,0,0.125)] lg:shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.25)]
+                                w-[23px] h-[23px] lg:w-[54px] lg:h-[54px]">
+                                <p className="font-black text-[#541E80] text-[10px] lg:text-[20px]">{(idx + 1).toString().padStart(2, "0")}</p>
+                            </div>
+                            <p className="bg-[#541E80] text-white rounded-full font-extrabold
+                                mt-[10px] py-[3px] px-[5px] text-[6px] lg:mt-[30px] lg:py-[5px] lg:px-[24px] lg:text-[23px]">{item.title}</p>
+                            <p className="flex font-semibold justify-center items-center text-center
+                                h-[40px] text-[6px] lg:h-[150px] lg:text-[18px]"
+                               dangerouslySetInnerHTML={{__html: item.content}}/>
+                            <Image
+                                src={item.img}
+                                alt="step"
+                                width={30}
+                                height={30}
+                                className="lg:w-[150px] lg:h-[150px]"
+                            >
+                            </Image>
+                        </div>
+                    ))}
+                </div>
                 <div className="flex justify-center items-center">
                     <Link
                         href={links[0]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
-                            font-bold rounded-[30px] text-[10px] w-[159px] h-[25px] mt-[21px]
-                            lg:font-extrabold lg:rounded-[30px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:mt-[60px]"
+                            font-bold rounded-[30px] text-[10px] w-[159px] h-[25px] mt-[40px]
+                            lg:font-extrabold lg:rounded-[30px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:mt-[100px]"
                     >
                         위드프로젝트 신청서 작성하러 가기
                     </Link>
                 </div>
             </section>
-            {/* section9 - 프로젝트 신청 */}
-            <section className="flex flex-col w-full h-auto
-                mt-[113px] mb-[67px] lg:px-[146px] lg:mt-[207px] lg:mb-[300px]">
+            {/* section10 - 프로젝트 신청 */}
+            <section
+                className="flex flex-col w-full h-auto mt-[113px] mb-[67px] lg:px-[146px] lg:mt-[207px] lg:mb-[300px]">
                 <div className="flex flex-col justify-center mt-[58px] lg:mt-[156px]">
                     <h1 className="text-center text-[15px] font-black lg:text-[30px] lg:font-extrabold">
                         W.I.T.H Project
                     </h1>
                     <h1 className="text-center text-[13px] font-bold mt-[11px] lg:text-[27px] lg:font-semibold lg:mt-[20px]">
-                        경력보유여성 재도약 프로젝트(Women In The Hope)
+                        경력보유여성 실전 실무 재도약 프로젝트(Women In The Hope)
                     </h1>
                 </div>
                 <div className="flex w-full h-auto justify-center">
@@ -969,18 +1138,29 @@ export default function WithProjectPage() {
                         className="object-contain lg:w-[581px] lg:h-[361px]"
                     />
                 </div>
-                <h3 className="text-center font-bold text-[10px] mt-[4px] lg:font-extrabold lg:text-[25px] lg:mt-[62px] leading-loose">
+                <h3 className="text-center font-bold text-[10px] mt-[4px] lg:font-extrabold lg:text-[25px] lg:mt-[16px] leading-loose">
                     인생변화를 위한 당신의 선택! 도전!<br/>
                     <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
                 </h3>
-                <Link
-                    href={links[0]?.linkPath || "https://www.connecple.com"}
-                    target="_blank"
-                    className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
+                <div
+                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[50px] lg:gap-x-[32px]">
+                    <Link
+                        href="https://open.kakao.com/o/gQKq9lJh"
+                        target="_blank"
+                        className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
+                        mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                        lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
+                        맛보기 교육 수강
+                    </Link>
+                    <Link
+                        href={links[0]?.linkPath || "https://www.connecple.com"}
+                        target="_blank"
+                        className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
                         mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
                         lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
                         위드프로젝트 신청
-                </Link>
+                    </Link>
+                </div>
             </section>
         </main>
     );
