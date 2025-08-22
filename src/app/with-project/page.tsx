@@ -1089,22 +1089,21 @@ export default function WithProjectPage() {
                                 w-[23px] h-[23px] lg:w-[54px] lg:h-[54px]">
                                 <p className="font-black text-[#541E80] text-[10px] lg:text-[20px]">{(idx + 1).toString().padStart(2, "0")}</p>
                             </div>
-                            <p className="bg-[#541E80] text-white rounded-full
-                                mt-[10px] py-[3px] px-[5px] text-[6px] lg:mt-[30px] lg:py-[5px] lg:px-[24px] lg:text-[18px]">{item.title}</p>
+                            <p className="bg-[#541E80] text-white rounded-full font-extrabold
+                                mt-[10px] py-[3px] px-[5px] text-[6px] lg:mt-[30px] lg:py-[5px] lg:px-[24px] lg:text-[23px]">{item.title}</p>
                             <p className="flex font-semibold justify-center items-center text-center
-                                h-[40px] text-[6px] lg:h-[100px] lg:text-[14px]"
+                                h-[40px] text-[6px] lg:h-[150px] lg:text-[18px]"
                                dangerouslySetInnerHTML={{__html: item.content}}/>
                             <Image
                                 src={item.img}
                                 alt="step"
                                 width={30}
                                 height={30}
-                                className="lg:w-[100px] lg:h-[100px]"
+                                className="lg:w-[150px] lg:h-[150px]"
                             >
                             </Image>
                         </div>
-                    ))
-                    }
+                    ))}
                 </div>
                 <div className="flex justify-center items-center">
                     <Link
