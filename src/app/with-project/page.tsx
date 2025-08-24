@@ -7,6 +7,12 @@ import {useState} from "react";
 import {useInView} from "react-intersection-observer";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import LoadingSpinner from "@/components/loading-spinner";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Pagination, Navigation, Keyboard } from "swiper/modules";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -17,7 +23,12 @@ const contents = [
         sub: "이러닝 + 실시간 온라인 강의 병행",
         content1: "ICT MICE 실무자 특강부터<br />AI 협업툴 활용 워크숍까지",
         content2: "아이를 돌보며 집에서도 수강 가능한, 유연한 학습 시스템",
-        img: "/withProject/section7_image11.png"
+        img: "/withProject/section5_image1.png",
+        detail: [
+            {
+                src: "/withProject/section5_image1.png"
+            }
+        ]
     },
     {
         level: 'LEVEL 2',
@@ -25,7 +36,12 @@ const contents = [
         sub: "현장 중심 실전 과제 구성",
         content1: "교육 행사 기획서부터<br />실제 기업용 홍보물 제작까지 단계별 과제",
         content2: "결과물이 바로 포트폴리오가 되는 실전형 과제",
-        img: "/withProject/section7_image2.png"
+        img: "/withProject/section5_image2.png",
+        detail: [
+            {
+                src: "/withProject/section5_image2.png"
+            }
+        ]
     },
     {
         level: 'LEVEL 3',
@@ -33,7 +49,21 @@ const contents = [
         sub: "담당 멘토 배정 + 밀착형 코칭",
         content1: "현직 교육 기획자·행사<br />PM 출신 멘토의 경력별 실전 조언",
         content2: "경력단절 기간도 나만의 강점으로 바꾸는 커리어 코칭 지원",
-        img: "/withProject/section7_image3.png"
+        img: "/withProject/section5_image3.png",
+        detail: [
+            {
+                src: "/withProject/section5_image3_1.png"
+            },
+            {
+                src: "/withProject/section5_image3_2.png"
+            },
+            {
+                src: "/withProject/section5_image3_3.png"
+            },
+            {
+                src: "/withProject/section5_image3_4.png"
+            }
+        ]
     },
     {
         level: 'LEVEL 4',
@@ -41,7 +71,21 @@ const contents = [
         sub: "레벨별 실무 투입 + 단계별 급여 지급",
         content1: "레벨1(보조) → 레벨2(매니저) → 레벨3~5(리더급)까지<br />실무 난이도에 따라 점진적 투입",
         content2: "교육 수료 후 실제 프로젝트에 참여하며 커리어 방향을 탐색",
-        img: "/withProject/section7_image4.png"
+        img: "/withProject/section5_image4.png",
+        detail: [
+            {
+                src: "/withProject/section5_image4_1.png"
+            },
+            {
+                src: "/withProject/section5_image4_2.png"
+            },
+            {
+                src: "/withProject/section5_image4_3.png"
+            },
+            {
+                src: "/withProject/section5_image4_4.png"
+            }
+        ]
     },
     {
         level: 'LEVEL 5',
@@ -49,7 +93,21 @@ const contents = [
         sub: "ICT 융합 분야 체험형 학습",
         content1: "국제 행사, 교육 테크,<br />데이터·AI 교육 현장 실습 탐방",
         content2: "변화하는 현장을 직접 보고 배우는 생생한 체험 기회",
-        img: "/withProject/section7_image5.png"
+        img: "/withProject/section5_image5.png",
+        detail: [
+            {
+                src: "/withProject/section5_image5_1.png"
+            },
+            {
+                src: "/withProject/section5_image5_2.png"
+            },
+            {
+                src: "/withProject/section5_image5_3.png"
+            },
+            {
+                src: "/withProject/section5_image5_4.png"
+            }
+        ]
     }
 ]
 
@@ -163,11 +221,17 @@ interface Links {
 }
 
 export default function WithProjectPage() {
-    const {ref: counterSectionRef, inView} = useInView({
-        triggerOnce: true,  // 한 번만 실행
-        threshold: 0.3,     // 30% 보이면 발동
+    const { ref: counterSectionRef, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.6,            // 더 많이 보였을 때만 발동
+        rootMargin: "0px 0px -15% 0px", // 아래쪽 15%는 제외(조금 더 들어왔을 때만)
+        initialInView: false,      // SSR/초기 렌더에서 true로 시작하는 것 방지
     });
+    const [shouldCount, setShouldCount] = useState(false);
 
+    useEffect(() => {
+        if (inView) setShouldCount(true);
+    }, [inView]);
 
     // PROGRAM 버튼
     const [selected, setSelected] = useState(0);
@@ -386,7 +450,7 @@ export default function WithProjectPage() {
                             <p className="font-semibold text-[8px] mt-[16px] lg:text-[20px] lg:mt-[37px]"
                                dangerouslySetInnerHTML={{__html: item.label}}></p>
                             <p className="font-extrabold text-[#541E80] text-[13px] mt-[11px] lg:text-[35px] lg:mt-[28px]">
-                                <AnimatedCounter value={item.value} shouldAnimate={inView}
+                                <AnimatedCounter value={item.value} shouldAnimate={shouldCount}
                                                  duration={1 + idx * 0.3}/>
                             </p>
                         </div>
@@ -624,19 +688,20 @@ export default function WithProjectPage() {
                             }`}
                             onClick={() => setIsModalOpen(true)}
                         />
-                        {isModalOpen && (
+                        {/*{isModalOpen && (
                             <div
                                 className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
                                 onClick={() => setIsModalOpen(false)}
                             >
                                 <div
-                                    className="relative bg-[#D9D9D9] rounded-[20px] lg:w-[741px] lg:h-[798px]"
-                                    onClick={(e) => e.stopPropagation()} // 바깥 클릭 시 닫히게 + 내부 클릭은 무시
+                                    className="relative bg-[#D9D9D9] rounded-[20px] w-[90vw] max-w-[760px] h-[80vh] max-h-[820px] p-[8px] lg:w-[741px] lg:h-[798px]"
+                                    onClick={(e) => e.stopPropagation()} // 내부 클릭은 닫히지 않도록
                                 >
-                                    {/* 닫기 버튼 */}
+                                     닫기 버튼
                                     <button
-                                        className="absolute z-100 top-[11px] right-[11px] text-[#541E80] cursor-pointer"
+                                        className="absolute top-[10px] right-[10px] text-[#541E80] cursor-pointer z-[60]"
                                         onClick={() => setIsModalOpen(false)}
+                                        aria-label="닫기"
                                     >
                                         <Image
                                             src={"/withProject/section7_modal_X.svg"}
@@ -646,18 +711,61 @@ export default function WithProjectPage() {
                                             unoptimized
                                         />
                                     </button>
-                                    {/* 팝업 이미지 */}
-                                    <Image
-                                        src={contents[selected].img}
-                                        alt="popup-image"
-                                        fill
-                                        className={`object-fill 
-                                            ${selected === 0 || selected === 1 ? "p-[10px]" : "p-[50px]"}`}
-                                        unoptimized
-                                    />
+
+                                     슬라이더(모바일: 터치 스와이프, 웹: 화살표 클릭)
+                                    <div className="relative w-full h-full">
+                                        <Swiper
+                                            modules={[Navigation, Pagination, Keyboard]}
+                                            pagination={{ clickable: true }}
+                                            navigation={{
+                                                nextEl: "#modal-next",
+                                                prevEl: "#modal-prev",
+                                            }}
+                                            keyboard={{ enabled: true }}
+                                            loop={contents[selected].detail.length > 1}
+                                            className="w-full h-full rounded-[12px] bg-white modal-swiper-withproject"
+                                        >
+                                            {contents[selected].detail.map((d, i) => (
+                                                <SwiperSlide key={i}>
+                                                    <div className="relative w-full h-[calc(80vh-80px)] lg:h-[calc(798px-80px)]">
+                                                        <Image
+                                                            src={d.src}
+                                                            alt={`detail-${i + 1}`}
+                                                            fill
+                                                            unoptimized
+                                                            className={`object-contain ${selected === 0 || selected === 1 ? "p-[10px]" : "p-[30px] lg:p-[50px]"}`}
+                                                        />
+                                                    </div>
+                                                </SwiperSlide>
+                                            ))}
+                                        </Swiper>
+                                         좌/우 네비게이션 버튼 (웹용)
+                                        {contents[selected].detail.length > 1 && (
+                                            <>
+                                                <button
+                                                    id="modal-prev"
+                                                    aria-label="이전"
+                                                    className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-2 z-[50]
+                                                        w-10 h-10 items-center justify-center rounded-full bg-white/80 hover:bg-[#541E80] cursor-pointer
+                                                        border border-[#541E80] text-[#541E80] hover:text-white font-extrabold shadow-md"
+                                                >
+                                                    &#8249;
+                                                </button>
+                                                <button
+                                                    id="modal-next"
+                                                    aria-label="다음"
+                                                    className="hidden lg:flex absolute top-1/2 -translate-y-1/2 right-2 z-[50]
+                                                        w-10 h-10 items-center justify-center rounded-full bg-white hover:bg-[#541E80] cursor-pointer
+                                                        border border-[#541E80] text-[#541E80] hover:text-white font-extrabold shadow-md"
+                                                >
+                                                    &#8250;
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        )}
+                        )}*/}
                     </div>
                 </div>
                 {/* 모바일 레이아웃 */}
@@ -731,6 +839,87 @@ export default function WithProjectPage() {
                         />
                     </div>
                 </div>
+                {isModalOpen && (
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        <div
+                            className="relative bg-[#D9D9D9] rounded-[20px] w-[92vw] max-w-[760px] h-[80vh] max-h-[820px] p-[8px] lg:w-[741px] lg:h-[798px]"
+                            onClick={(e) => e.stopPropagation()} // 내부 클릭은 닫히지 않도록
+                        >
+                            {/* 닫기 버튼 */}
+                            <button
+                                className="absolute top-[10px] right-[10px] text-[#541E80] cursor-pointer z-[60]"
+                                onClick={() => setIsModalOpen(false)}
+                                aria-label="닫기"
+                            >
+                                <Image
+                                    src={"/withProject/section7_modal_X.svg"}
+                                    alt={"닫기"}
+                                    width={37}
+                                    height={37}
+                                    unoptimized
+                                />
+                            </button>
+
+                            {/* 슬라이더(모바일: 터치 스와이프, PC: 화살표 클릭+키보드) */}
+                            <div className="relative w-full h-full modal-swiper-withproject">
+                                <Swiper
+                                    modules={[Navigation, Pagination, Keyboard]}
+                                    pagination={{ clickable: true }}
+                                    navigation={{
+                                        nextEl: "#modal-next",
+                                        prevEl: "#modal-prev",
+                                    }}
+                                    keyboard={{ enabled: true }}
+                                    loop={contents[selected].detail.length > 1}
+                                    className="w-full h-full rounded-[12px] bg-white"
+                                >
+                                    {contents[selected].detail.map((d, i) => (
+                                        <SwiperSlide key={i}>
+                                            <div className="relative w-full h-[calc(80vh-80px)] lg:h-[calc(798px-80px)]">
+                                                <Image
+                                                    src={d.src}
+                                                    alt={`detail-${i + 1}`}
+                                                    fill
+                                                    unoptimized
+                                                    className={`object-contain ${
+                                                        selected === 0 || selected === 1 ? "p-[10px]" : "p-[30px] lg:p-[50px]"
+                                                    }`}
+                                                />
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+
+                                {/* 좌/우 네비게이션 버튼: 모바일에서는 숨김, PC에서만 보이게 */}
+                                {contents[selected].detail.length > 1 && (
+                                    <>
+                                        <button
+                                            id="modal-prev"
+                                            aria-label="이전"
+                                            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-2 z-[50]
+                w-10 h-10 items-center justify-center rounded-full bg-white/80 hover:bg-[#541E80] cursor-pointer
+                border border-[#541E80] text-[#541E80] hover:text-white font-extrabold shadow-md"
+                                        >
+                                            &#8249;
+                                        </button>
+                                        <button
+                                            id="modal-next"
+                                            aria-label="다음"
+                                            className="hidden lg:flex absolute top-1/2 -translate-y-1/2 right-2 z-[50]
+                w-10 h-10 items-center justify-center rounded-full bg-white hover:bg-[#541E80] cursor-pointer
+                border border-[#541E80] text-[#541E80] hover:text-white font-extrabold shadow-md"
+                                        >
+                                            &#8250;
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </section>
             {/* section6 - 참여하면 뭐가 좋나요? */}
             <section className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[146px]">

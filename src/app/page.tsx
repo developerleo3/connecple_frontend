@@ -113,10 +113,17 @@ const logos2 = [
 ];
 
 export default function Home() {
-    const {ref: counterSectionRef, inView} = useInView({
-        triggerOnce: true,  // 한 번만 실행
-        threshold: 0.3,     // 30% 보이면 발동
+    const { ref: counterSectionRef, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.6,            // 더 많이 보였을 때만 발동
+        rootMargin: "0px 0px -15% 0px", // 아래쪽 15%는 제외(조금 더 들어왔을 때만)
+        initialInView: false,      // SSR/초기 렌더에서 true로 시작하는 것 방지
     });
+    const [shouldCount, setShouldCount] = useState(false);
+
+    useEffect(() => {
+        if (inView) setShouldCount(true);
+    }, [inView]);
 
     const [imageSlides, setImageSlides] = useState<imageSlides[]>([])
     const [stats, setStats] = useState<Stats[]>([])
@@ -270,44 +277,48 @@ export default function Home() {
             </section>
             {/* Section2 - 슬라이드 */}
             <section className="relative bg-white w-full h-auto">
-                <Swiper
-                    modules={[Autoplay, Pagination]}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    pagination={{clickable: true}}
-                    autoplay={{delay: 3000, disableOnInteraction: false}}
-                    loop
-                >
-                    {imageSlides.map((slide, index) => (
-                        <SwiperSlide key={index}>
-                            <div className="relative w-full aspect-video group overflow-hidden shadow-md">
-                                {/* 배경 이미지 */}
-                                <Image
-                                    src={slide.imagePath}
-                                    alt={`슬라이드 ${index + 1}`}
-                                    fill
-                                    unoptimized
-                                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
-                                {/* 텍스트 오버레이 */}
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 opacity-100 transition-opacity duration-300
-                                    lg:opacity-0 lg:group-hover:opacity-100 ">
-                                    {/* 텍스트 감싸는 div */}
-                                    <div
-                                        className="border-t-[1px] border-b-[1px] border-white py-[15px] px-[22px] lg:py-[44px] lg:px-[65px]">
-                                        <p className="text-white font-extrabold text-[9px] lg:text-[29px]">
-                                            {slide.company}
-                                        </p>
-                                        <h1
-                                            className="text-white font-extrabold text-[20px] lg:text-[51px]"
-                                            dangerouslySetInnerHTML={{__html: slide.title}}
-                                        ></h1>
+                {imageSlides.length === 0 ? null : (
+                    <Swiper
+                        modules={[Autoplay, Pagination]}
+                        spaceBetween={0}
+                        slidesPerView={1}
+                        pagination={{ clickable: true }}
+                        autoplay={
+                            imageSlides.length > 1
+                                ? { delay: 3000, disableOnInteraction: false }
+                                : false
+                        }
+                        loop={imageSlides.length > 1}
+                        key={imageSlides.length > 1 ? "loop" : "no-loop"} // 옵션 변경 감지 강제
+                    >
+                        {imageSlides.map((slide, index) => (
+                            <SwiperSlide key={index}>
+                                <div className="relative w-full aspect-video group overflow-hidden shadow-md">
+                                    {/* 배경 이미지 */}
+                                    <Image
+                                        src={slide.imagePath}
+                                        alt={`슬라이드 ${index + 1}`}
+                                        fill
+                                        unoptimized
+                                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                    />
+                                    {/* 텍스트 오버레이 */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black/50 opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100 ">
+                                        <div className="border-t-[1px] border-b-[1px] border-white py-[15px] px-[22px] lg:py-[44px] lg:px-[65px]">
+                                            <p className="text-white font-extrabold text-[9px] lg:text-[29px]">
+                                                {slide.company}
+                                            </p>
+                                            <h1
+                                                className="text-white font-extrabold text-[20px] lg:text-[51px]"
+                                                dangerouslySetInnerHTML={{ __html: slide.title }}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                )}
             </section>
             {/* Section3 - 수치 */}
             <section
@@ -341,7 +352,7 @@ export default function Home() {
                             </div>
                             <div className="flex-[2] flex items-center justify-center text-center">
                                 <p className="text-[#541E80] font-black text-[31px]">
-                                    <AnimatedCounter value={item.statistic} shouldAnimate={inView}
+                                    <AnimatedCounter value={item.statistic} shouldAnimate={shouldCount}
                                                      duration={1 + idx * 0.3}/>
                                 </p>
                             </div>
@@ -365,7 +376,7 @@ export default function Home() {
                                 </div>
                                 <div className="flex-[2] flex items-center justify-center text-center">
                                     <p className="text-[#541E80] font-black text-[15px]">
-                                        <AnimatedCounter value={item.statistic} shouldAnimate={inView}
+                                        <AnimatedCounter value={item.statistic} shouldAnimate={shouldCount}
                                                          duration={1 + idx * 0.3}/>
                                     </p>
                                 </div>
