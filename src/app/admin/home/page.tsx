@@ -56,7 +56,7 @@ interface ValidationErrors {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 // 안전 JSON 파서: 204/빈 본문 대응
-const safeJson = async <T = any>(res: Response): Promise<T | null> => {
+const safeJson = async <T = never>(res: Response): Promise<T | null> => {
     if (res.status === 204) return null;
     const text = await res.text();
     if (!text) return null;
