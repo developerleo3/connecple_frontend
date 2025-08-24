@@ -141,6 +141,15 @@ export default function AdminSidebar({className, onNavigate}: AdminSidebarProps)
                                     pathname === "/admin/history" ? "bg-gray-100" : "transparent"
                                 )}
                             >
+                                연혁 관리
+                            </button>
+                            <button
+                                onClick={() => handleNavigation("/admin/story")}
+                                className={cn(
+                                    "flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-gray-100 mb-2 text-gray-600 w-full text-left hover:cursor-pointer",
+                                    pathname === "/admin/story" ? "bg-gray-100" : "transparent"
+                                )}
+                            >
                                 소개 관리
                             </button>
                             <button
