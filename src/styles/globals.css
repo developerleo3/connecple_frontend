@@ -151,6 +151,21 @@ body {
   /* 흰색 */
 }
 
+/* === withProject 모달 Swiper 전용 === */
+.modal-swiper-withproject .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #d9d9d9 !important; /* 비활성 색 */
+  opacity: 1 !important;
+  border-radius: 9999px !important;
+  margin: 0 4px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.modal-swiper-withproject .swiper-pagination-bullet-active {
+  background-color: #541E80 !important; /* 활성 색 */
+}
+
 /* sm 이상 (태블릿) */
 /* @media (min-width: 640px) {
   .swiper-pagination-bullet {
