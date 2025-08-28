@@ -13,6 +13,12 @@ interface TimelineItems {
     content: string
 }
 
+interface Story {
+    title: string
+    content: string
+    imagePath: string
+}
+
 export default function AboutPage() {
     const [timelineItems, setTimelineItems] = useState<TimelineItems[]>([])
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -20,33 +26,49 @@ export default function AboutPage() {
     const [canScrollRight, setCanScrollRight] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const [stories, setStories] = useState<Story[]>([])
 
+    // 링크 불러오기
     useEffect(() => {
-        const fetchSlides = async () => {
+        const fetchData = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/client/history`, {
-                    method: "GET",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
+                const [resHistory, resStory] = await Promise.all([
+                    fetch(`${API_BASE_URL}/client/history`, {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {"Content-Type": "application/json"},
+                    }),
+                    fetch(`${API_BASE_URL}/client/story`, {
+                        method: "GET",
+                        credentials: "include",
+                        headers: { "Content-Type": "application/json"},
+                    }),
+                ]);
 
-                if (!res.ok) throw new Error("슬라이드 데이터를 불러오지 못했습니다.")
+                if (!resHistory.ok) {
+                    throw new Error("연혁 정보를 불러오지 못했습니다.");
+                }
 
-                const items: TimelineItems[] = await res.json()
-                console.log('items', items)
+                // 2) news 응답 검증 + 상세 로그
+                if (!resStory.ok) {
+                    throw new Error("이야기 정보를 불러오지 못했습니다.");
+                }
 
-                setTimelineItems(items)
+                const getHistories: TimelineItems[] = await resHistory.json()
+                // /client/news 가 '그냥 리스트'라면 아래처럼 바로 배열로 받기
+                const getStories = (await resStory.json()) as Story[];
+
+                setTimelineItems(getHistories);
+                setStories(getStories);
             } catch (err) {
-                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+                setError(err instanceof Error ? err.message : "알 수 없는 오류");
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
-        }
+        };
 
-        fetchSlides()
-    }, [])
+        fetchData();
+    }, []);
 
     const updateScrollState = () => {
         const el = scrollRef.current;
@@ -277,29 +299,13 @@ export default function AboutPage() {
             {/* section4 - 사진 */}
             <section className="flex w-full h-auto px-[30px] lg:px-[157px]">
                 <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
-                    {[
-                        {
-                            path: "/about/section4_picture1.png",
-                            title: "NIA 2023년 SW여성인재 역량강화기반 조성교육",
-                            content: "타이트한 일정이었지만 엑기스로 배울 수 있어<br />좋았습니다. 강사님께서 친절하고 밝게<br />교육해주셔서 에너지가 너무 좋았습니다."
-                        },
-                        {
-                            path: "/about/section4_picture2.png",
-                            title: "NIA 2023년 SW여성인재 역량강화기반 조성교육",
-                            content: "과제를 통해 이론뿐만이 아니라 실무 스킬까지<br />익힐 수 있는 점이 너무 만족스러웠습니다.<br />새로운 도전에 설레고 재밌었어요."
-                        },
-                        {
-                            path: "/about/section4_picture3.png",
-                            title: "K-DATA 2023년 데이터안심구역<br />미개방데이터 확보 및 이용 활성화",
-                            content: "일방적인 주입식 교육이 아닌 과제 피드백과<br />중간중간 소통을 통해 교육이 진행되어 더욱<br />집중할 수 있었습니다."
-                        }
-                    ].map((item, idx) => (
+                    {stories.map((item, idx) => (
                         <div
                             key={idx}
                             className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center hover:scale-110 transition">
                             <div className="relative w-full h-[87px] lg:h-[279px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
                                 <Image
-                                    src={item.path}
+                                    src={item.imagePath}
                                     alt="alt"
                                     fill
                                     unoptimized
