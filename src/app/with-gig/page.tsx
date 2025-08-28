@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
+import { useInView } from "react-intersection-observer";
 import LoadingSpinner from "@/components/loading-spinner";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
@@ -16,27 +17,80 @@ interface Links {
 const applicationProcess = [
     {
         title: "지원 신청",
-        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        content: "아래 신청 버튼 클릭<br />① 참여자 : 신청서, 이력서 등<br />② 수요기업 : 구인 요청서 등",
         img: "/withGIG/section8_step1.svg"
     },
     {
         title: "역량 매칭",
-        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        content: "실시간 프로젝트 연계방 초대,<br />신청자와 수요기업 매칭",
         img: "/withGIG/section8_step2.svg"
     },
     {
         title: "프로젝트 제안 수락",
-        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        content: "위드긱 업무 계약 체결<br />- 커넥플<->참여자<br />- 커넥플<-수요기업",
         img: "/withGIG/section8_step3.svg"
     },
     {
         title: "협업 시작",
-        content: "프로젝트에 대한 설명<br />프로젝트에 대한 설명",
+        content: "위드긱 업무 진행<br />(필요시 커넥플 QA 지원)",
         img: "/withGIG/section8_step4.svg"
     }
 ]
 
 export default function WithGigPage() {
+    const { ref: gigSection2Ref, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.6,
+        rootMargin: "0px 0px -15% 0px",
+        initialInView: false,
+    });
+    const [showStickyBar, setShowStickyBar] = useState(false);
+    useEffect(() => {
+        if (inView) setShowStickyBar(true); // 한번 보이면 이후 계속 표시
+    }, [inView]);
+
+    const footerRef = useRef<HTMLElement | null>(null);
+    const [footerHeight, setFooterHeight] = useState(0);
+    const [extraOffset, setExtraOffset] = useState(0);
+
+    useEffect(() => {
+        const footerEl = document.getElementById("page-footer");
+        footerRef.current = footerEl as HTMLElement | null;
+
+        const updateFooter = () => {
+            if (!footerRef.current) return;
+            setFooterHeight(footerRef.current.offsetHeight || 0);
+        };
+        updateFooter();
+        window.addEventListener("resize", updateFooter);
+
+        let raf = 0;
+        const onScroll = () => {
+            if (!footerRef.current) return;
+            const footerRect = footerRef.current.getBoundingClientRect();
+            const footerTopAbs = window.scrollY + footerRect.top;
+            const viewportBottom = window.scrollY + window.innerHeight;
+            const overlap = Math.max(0, viewportBottom - footerTopAbs);
+            const clamped = Math.min(overlap, footerHeight);
+
+            if (!raf) {
+                raf = requestAnimationFrame(() => {
+                    setExtraOffset(clamped);
+                    raf = 0;
+                });
+            }
+        };
+
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener("resize", updateFooter);
+            window.removeEventListener("scroll", onScroll);
+            if (raf) cancelAnimationFrame(raf);
+        };
+    }, [footerHeight]);
+
     // 링크 설정
     const [links, setLinks] = useState<Links[]>([])
 
@@ -106,7 +160,7 @@ export default function WithGigPage() {
                 </p>
             </section>
             {/* section2 - 이런 분들을 위해 만들어 졌습니다 */}
-            <section className={"flex flex-col w-full h-auto px-[30px] mt-[52px] lg:px-[200px] lg:mt-[169px]"}>
+            <section ref={gigSection2Ref} className={"flex flex-col w-full h-auto px-[30px] mt-[52px] lg:px-[200px] lg:mt-[169px]"}>
                 <h1 className={"font-black text-[#541E80] lg:text-[45px]"}>이런 분들을 위해 만들어졌습니다.</h1>
                 <div className={"flex flex-col w-full h-auto mt-[20px] gap-y-[15px] lg:mt-[46px] lg:gap-y-[23px]"}>
                     {[
@@ -350,7 +404,7 @@ export default function WithGigPage() {
                     </div>
                 </div>
                 <Link
-                    href={links[3]?.linkPath || "https://www.connecple.com"}
+                    href={links[5]?.linkPath || "https://www.connecple.com"}
                     target="_blank"
                     className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[19px] w-[131px] h-[25px] text-[10px] rounded-[30px]
@@ -517,12 +571,12 @@ export default function WithGigPage() {
                 <h2 className="font-black text-center text-[10px] mt-[12px] lg:text-[23px] lg:mt-[42px]">인건비는 줄이고, 전문성은 더하다</h2>
                 <h3 className="font-black text-center text-[#541E80] text-[10px] mt-[8px] lg:text-[25px] lg:mt-[16px]">단기 프로젝트 중심의 검증된 실무 인재 매칭</h3>
                 <Link
-                    href={links[3]?.linkPath || "https://www.connecple.com"}
+                    href={links[6]?.linkPath || "https://www.connecple.com"}
                     target="_blank"
                     className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
                         mt-[26px] w-[131px] h-[25px] text-[10px] rounded-[30px]
                         lg:mt-[45px] lg:w-[316px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
-                    위드긱 ‘수요기업’ 신청
+                    위드긱 ‘수요 기업’ 신청
                 </Link>
             </section>
             {/* section8 */}
@@ -560,33 +614,59 @@ export default function WithGigPage() {
                         </div>
                     ))}
                 </div>
-                <div className="flex flex-col justify-center items-center bg-[#D9D9D9] w-full
-                    h-[45px] rounded-[10px] mt-[19px] px-[20px] lg:h-[126px] lg:rounded-[30px] lg:mt-[80px] lg:px-[40px]">
-                    <p className="font-bold text-[#6C6C6C] text-center text-[6px] lg:text-[15px]">기업은 간단히 요청서 제출, 참여자는 제안서 등록 후 맞춤 매칭</p>
+                <div className="flex flex-col justify-center items-center bg-[#D9D9D9] w-full h-auto
+                    rounded-[10px] mt-[19px] px-[20px] py-[10px] lg:rounded-[30px] lg:mt-[80px] lg:px-[40px] lg:py-[20px]">
+                    <p className="font-black text-[#6C6C6C] text-center text-[6px] lg:text-[15px]">
+                        위드긱 프로젝트 예시<br />
+                        “실제 업무 현장에서 즉시 투입 가능한 실무 지원 역할”
+                    </p>
                     <div className="w-full border-t-[0.5px] lg:border-t-2 border-dotted my-[3px] lg:my-[10px]" />
-                    <p className="font-bold text-[#6C6C6C] text-center text-[5.5px] lg:text-[15px]">
-                        프로젝트 예시 : 교육 콘텐츠 기획 및 자료 제작, 행사 운영보조, 참가자 응대 업무, 디자인 / 문서 작업 / 홍보 콘텐츠 기획,<br />
-                        제안서 및 보고서 작성 지원, 교육 운영/진행 어시스턴트
+                    <p className="font-normal text-[#6C6C6C] text-center text-[5.5px] lg:text-[15px]">
+                        <span className="font-black"> ① 교육 프로젝트 추가 가능 업무<br /></span>
+                        - 자료 조사 및 번역 : 교육 교재, 참고자료, 해외 사례 번역·정리<br />
+                        - 온라인 시스템 운영 : 줌(Zoom), Webex 등 화상강의 세팅 및 지원<br />
+                        - 수강생 관리 : 출결 체크, 만족도 조사, 설문조사 데이터 취합<br />
+                        - 홍보 지원 : SNS·홈페이지 교육 안내 게시, 신청자 모집 홍보 콘텐츠 보조<br />
+                        - 성과 정리 : 교육 결과 리포트(요약본) 작성, 통계 그래프 제작<br /><br />
+
+                        <span className="font-black">② 행사 프로젝트 추가 가능 업무<br /></span>
+                        - 참가자 관리 : 사전 등록 확인, 현장 등록·출입 관리, 명찰 제작 지원<br />
+                        - 홍보·마케팅 보조 : 행사 카드뉴스·웹포스터 제작 보조, 현장 SNS 홍보 지원<br />
+                        - 현장 지원 세부 역할 : 안내데스크, 동시통역·장비 세팅 보조, 물품 배부<br />
+                        - 행사 기록 : 사진·영상 촬영 보조, 현장 스케치 작성, 결과보고용 자료 취합<br />
+                        - 파트너 협력 : 협찬·후원 업체 응대, 연사·패널 안내 및 지원
                     </p>
                 </div>
-                <div
-                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[40px]">
-                    <Link
-                        href={links[3]?.linkPath || "https://www.connecple.com"}
-                        target="_blank"
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
-                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
-                        위드긱 &#39;참여자&#39; 신청
-                    </Link>
-                    <Link
-                        href={links[3]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
-                        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
-                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
-                        위드긱 &#39;수요기업&#39; 신청
-                    </Link>
-                </div>
+                {showStickyBar && (
+                    <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
+                        <div
+                            className="fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[32px]"
+                            style={{
+                                bottom: 100 + extraOffset, // 푸터 겹침 보정
+                                transition: "bottom 200ms ease",
+                            }}
+                        >
+                            <Link
+                                href={links[5]?.linkPath || "https://www.connecple.com"}
+                                target="_blank"
+                                className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
+          w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+          lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                            >
+                                위드긱 ‘참여자’ 신청
+                            </Link>
+                            <Link
+                                href={links[6]?.linkPath || "https://www.connecple.com"}
+                                target="_blank"
+                                className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
+          w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+          lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                            >
+                                위드긱 ‘수요기업’ 신청
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </section>
         </main>
     );

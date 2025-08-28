@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Footer() {
+export default function Footer2() {
   return (
-    <footer className="w-full h-auto flex flex-col bg-[#B1B1B1] text-white
+    <footer id="page-footer" className="w-full h-auto flex flex-col bg-[#B1B1B1] text-white
       py-[31px] px-[34px]
       lg:py-[100px] lg:px-[130px]">
       {/* 메뉴 */}

@@ -1,18 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import Link from "next/link";
 import {useState} from "react";
 import {useInView} from "react-intersection-observer";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import LoadingSpinner from "@/components/loading-spinner";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Pagination, Navigation, Keyboard } from "swiper/modules";
+import {Pagination, Navigation, Keyboard} from "swiper/modules";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -162,7 +162,7 @@ const enrollmentProcess = [
 // 참여하면 뭐가 좋나요?
 const section6 = [
     {
-        title: "효율적인 온라인 교육 운영",
+        title: "여성들의 시간을 잘 아니까<br /><span class='font-extrabold'>효율적인 온라인 교육 운영</span>",
         img: [
             {
                 title: "온라인 실시간 교육",
@@ -176,7 +176,7 @@ const section6 = [
         content: "교육시간 : 오전 10시 ~ 오후 3시<br />교육방식 : 온라인 블렌디드 학습 (온라인 실시간 + 영상 청취)",
     },
     {
-        title: "단기간/실습형 커리큘럼",
+        title: "업무의 감을 되살릴 수 있는<br /><span class='font-extrabold'>단기간/실습형 커리큘럼</span>",
         img: [
             {
                 title: "이론 교육",
@@ -194,17 +194,17 @@ const section6 = [
         content: "학습기간 최소 5일<br />경력 7년 이상의 현업 전문가들이 개발한 실무 중심형 커리큘럼",
     },
     {
-        title: "트렌디한 업무 스킬 적용",
+        title: "요즘 친구들처럼 생산성툴, 협업툴<br />잘 쓸 수 있게 <span class='font-extrabold'>트렌디한 업무 스킬 적용</span>",
         img: [
             {
                 title: "",
                 src: "/withProject/section6_image6.png"
             }
         ],
-        content: "업무기초 : 한글, MS오피스 등<br />대세도구 : Drive, Spreadsheet emd<br />협업도구 : 슬랙, 노션 등",
+        content: "업무기초 : 한글, MS오피스 망고보드/캔바 등<br />대세도구 : 구글(드라이브, 스프레드시트) 생성형AI 등<br />협업도구 : 슬랙, 노션, 네이버클로바노트",
     },
     {
-        title: "담당 멘토와의 밀착 멘토링 진행",
+        title: "효율적인 온라인 교육 운영<br /><span class='font-extrabold'>담당 멘토와의 밀착 멘토링 진행</span>",
         img: [
             {
                 title: "",
@@ -221,13 +221,19 @@ interface Links {
 }
 
 export default function WithProjectPage() {
-    const { ref: counterSectionRef, inView } = useInView({
+    const {ref: counterSectionRef, inView} = useInView({
         triggerOnce: true,
         threshold: 0.6,            // 더 많이 보였을 때만 발동
         rootMargin: "0px 0px -15% 0px", // 아래쪽 15%는 제외(조금 더 들어왔을 때만)
         initialInView: false,      // SSR/초기 렌더에서 true로 시작하는 것 방지
     });
     const [shouldCount, setShouldCount] = useState(false);
+
+    const [showStickyBar, setShowStickyBar] = useState(false);
+
+    useEffect(() => {
+        if (inView) setShowStickyBar(true); // section2가 보이면 이후 계속 표시
+    }, [inView]);
 
     useEffect(() => {
         if (inView) setShouldCount(true);
@@ -244,6 +250,49 @@ export default function WithProjectPage() {
 
     // 링크 설정
     const [links, setLinks] = useState<Links[]>([])
+
+    const footerRef = useRef<HTMLElement | null>(null);
+    const [footerHeight, setFooterHeight] = useState(0);
+    const [extraOffset, setExtraOffset] = useState(0); // 푸터 겹침 보정(px)
+
+    useEffect(() => {
+        const footerEl = document.getElementById("page-footer");
+        footerRef.current = footerEl as HTMLElement | null;
+
+        const updateFooter = () => {
+            if (!footerRef.current) return;
+            setFooterHeight(footerRef.current.offsetHeight || 0);
+        };
+        updateFooter();
+        window.addEventListener("resize", updateFooter);
+
+        let raf = 0;
+        const onScroll = () => {
+            if (!footerRef.current) return;
+            const footerRect = footerRef.current.getBoundingClientRect();
+            const footerTopAbs = window.scrollY + footerRect.top;
+            const viewportBottom = window.scrollY + window.innerHeight;
+
+            const overlap = Math.max(0, viewportBottom - footerTopAbs);
+            const clamped = Math.min(overlap, footerHeight);
+
+            if (!raf) {
+                raf = requestAnimationFrame(() => {
+                    setExtraOffset(clamped);
+                    raf = 0;
+                });
+            }
+        };
+
+        onScroll();
+        window.addEventListener("scroll", onScroll, {passive: true});
+
+        return () => {
+            window.removeEventListener("resize", updateFooter);
+            window.removeEventListener("scroll", onScroll);
+            if (raf) cancelAnimationFrame(raf);
+        };
+    }, [footerHeight]);
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
@@ -371,7 +420,7 @@ export default function WithProjectPage() {
             </section>
             {/* section2 - 수치 */}
             <section ref={counterSectionRef} // 여기에 ref 걸어줌
-                className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
+                     className="w-full h-auto px-[30px] mt-[110px] lg:px-[146px] lg:mt-[300px]">
                 {/* 상단: 로고 + 문구 */}
                 <div className="flex flex-row items-center">
                     {/* 왼쪽 로고 */}
@@ -507,7 +556,8 @@ export default function WithProjectPage() {
                 </div>
             </section>
             {/* section4 - 이런분들께 추천합니다. */}
-            <section className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[83px] lg:px-[146px]">
+            <section
+                className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[83px] lg:px-[146px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     특히! 이런분들께 추천합니다.
                 </h1>
@@ -613,7 +663,8 @@ export default function WithProjectPage() {
                 </div>
             </section>
             {/* section5 - 프로그램 */}
-            <section className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[109px] lg:px-[146px]">
+            <section
+                className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[109px] lg:px-[146px]">
                 <h1 className="self-center lg:self-start font-black text-[#541E80] text-[15px] mt-[55px] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
                 {/* pc 레이아웃 */}
                 <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px] justify-between">
@@ -867,18 +918,19 @@ export default function WithProjectPage() {
                             <div className="relative w-full h-full modal-swiper-withproject">
                                 <Swiper
                                     modules={[Navigation, Pagination, Keyboard]}
-                                    pagination={{ clickable: true }}
+                                    pagination={{clickable: true}}
                                     navigation={{
                                         nextEl: "#modal-next",
                                         prevEl: "#modal-prev",
                                     }}
-                                    keyboard={{ enabled: true }}
+                                    keyboard={{enabled: true}}
                                     loop={contents[selected].detail.length > 1}
                                     className="w-full h-full rounded-[12px] bg-white"
                                 >
                                     {contents[selected].detail.map((d, i) => (
                                         <SwiperSlide key={i}>
-                                            <div className="relative w-full h-[calc(80vh-80px)] lg:h-[calc(798px-80px)]">
+                                            <div
+                                                className="relative w-full h-[calc(80vh-80px)] lg:h-[calc(798px-80px)]">
                                                 <Image
                                                     src={d.src}
                                                     alt={`detail-${i + 1}`}
@@ -922,7 +974,8 @@ export default function WithProjectPage() {
                 )}
             </section>
             {/* section6 - 참여하면 뭐가 좋나요? */}
-            <section className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[146px]">
+            <section
+                className="flex flex-col w-full h-auto justify-center mt-[58px] px-[30px] lg:mt-[250px] lg:px-[146px]">
                 <h1 className="font-black text-[#541E80] text-center text-[15px] lg:text-[45px]">
                     위드프로젝트에 참여하면 뭐가 좋나요?
                 </h1>
@@ -931,19 +984,23 @@ export default function WithProjectPage() {
                         <div key={idx}
                              className="flex flex-col bg-[#F7F7F7] rounded-[20px] lg:rounded-[30px] shadow-[2px_2px_6px_0_rgba(0,0,0,0.25)]">
                             {/* 타이틀 */}
-                            <h3 className="text-center font-extrabold text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]">
-                                {card.title}
-                            </h3>
+                            <h3 className="text-center font-normal text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]"
+                                dangerouslySetInnerHTML={{__html: card.title}}
+                            />
                             {/* 이미지 리스트 (가변 개수 대응) */}
                             <div className="flex flex-row w-full bg-[#E7E2EC] items-start justify-center
                                 px-[10px] lg:px-[20px] py-[10px] lg:py-[20px] mt-[12px] lg:mt-[18px] gap-[10px] lg:gap-[16px]">
                                 {card.img.map((img, i) => (
                                     <div key={i} className="flex flex-col items-center justify-center">
-                                        <div className="h-[72px] lg:h-[120px] rounded-[10px]">
+                                        <div
+                                            className={`rounded-[10px] ${
+                                                i === 3 || i === 4 ? "h-[200px]" : "h-[72px] lg:h-[120px]"
+                                            }`}
+                                        >
                                             <Image
                                                 src={img.src}
                                                 alt={img.title || "thumbnail"}
-                                                height={120} // 최대 높이 기준
+                                                height={i == 3 || i == 4 ? 200 : 120} // 최대 높이 기준
                                                 width={0} // Next.js에서 width를 0으로 두고 sizes="auto" 설정
                                                 sizes="auto"
                                                 className="h-full w-auto object-contain"
@@ -960,7 +1017,7 @@ export default function WithProjectPage() {
                             {/* 본문 */}
                             <p className="text-black leading-[1.6]
                                 text-[10px] lg:text-[18px] px-[15px] lg:px-[30px] py-[10px] lg:py-[20px]"
-                               dangerouslySetInnerHTML={{ __html: card.content }}
+                               dangerouslySetInnerHTML={{__html: card.content}}
                             />
                         </div>
                     ))}
@@ -1331,25 +1388,37 @@ export default function WithProjectPage() {
                     인생변화를 위한 당신의 선택! 도전!<br/>
                     <span className="text-[#541E80]">당신의 재도약을 커넥플이 응원합니다.</span>
                 </h3>
-                <div
-                    className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[50px] lg:gap-x-[32px]">
-                    <Link
-                        href="https://open.kakao.com/o/gQKq9lJh"
-                        target="_blank"
-                        className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-                        mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-                        lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
-                        맛보기 교육 수강
-                    </Link>
-                    <Link
-                        href={links[0]?.linkPath || "https://www.connecple.com"}
-                        target="_blank"
-                        className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-                        mt-[17px] w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-                        lg:mt-[55px] lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold">
-                        위드프로젝트 신청
-                    </Link>
-                </div>
+                {/* 고정 하단 액션바 */}
+                {showStickyBar && (
+                    <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
+                        <div
+                            className="fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[32px]"
+                            style={{
+                                bottom: 100 + extraOffset, // 기존 로직 유지
+                                transition: "bottom 200ms ease",
+                            }}
+                        >
+                            <Link
+                                href={links[1]?.linkPath || 'https://www.connecple.com'}
+                                target="_blank"
+                                className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
+                                w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                                lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                            >
+                                무료 교육 수강
+                            </Link>
+                            <Link
+                                href={links[0]?.linkPath || 'https://www.connecple.com'}
+                                target="_blank"
+                                className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
+                                w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                                lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                            >
+                                위드프로젝트 신청
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </section>
         </main>
     );

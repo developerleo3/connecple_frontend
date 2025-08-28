@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
+import {useInView} from "react-intersection-observer";
 import LoadingSpinner from "@/components/loading-spinner";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
@@ -12,42 +13,120 @@ interface Links {
     linkPath: string
 }
 
+interface NewsLetter {
+    title: string
+    content: string
+    imagePath: string
+    newsUrl: string
+}
+
 export default function WithNewsletterPage() {
+    // 1) section1의 버튼 덩어리가 화면에 보이는지 관찰
+    const {ref: btnGroupRef, inView: isBtnGroupVisible} = useInView({
+        threshold: 0,          // 살짝만 보여도 "보임"으로 처리
+        rootMargin: "0px",
+        initialInView: true,   // 처음엔 보이는 상태로 시작(상단에 있으니까)
+    });
+
+    // 2) 푸터 겹침 보정 (#page-footer 기준)
+    const footerRef = useRef<HTMLElement | null>(null);
+    const [footerHeight, setFooterHeight] = useState(0);
+    const [extraOffset, setExtraOffset] = useState(0);
+
+    useEffect(() => {
+        const footerEl = document.getElementById("page-footer");
+        footerRef.current = footerEl as HTMLElement | null;
+
+        const updateFooter = () => {
+            if (!footerRef.current) return;
+            setFooterHeight(footerRef.current.offsetHeight || 0);
+        };
+        updateFooter();
+        window.addEventListener("resize", updateFooter);
+
+        let raf = 0;
+        const onScroll = () => {
+            if (!footerRef.current) return;
+            const rect = footerRef.current.getBoundingClientRect();
+            const footerTopAbs = window.scrollY + rect.top;
+            const viewportBottom = window.scrollY + window.innerHeight;
+            const overlap = Math.max(0, viewportBottom - footerTopAbs);
+            const clamped = Math.min(overlap, footerHeight);
+
+            if (!raf) {
+                raf = requestAnimationFrame(() => {
+                    setExtraOffset(clamped);
+                    raf = 0;
+                });
+            }
+        };
+
+        onScroll();
+        window.addEventListener("scroll", onScroll, {passive: true});
+
+        return () => {
+            window.removeEventListener("resize", updateFooter);
+            window.removeEventListener("scroll", onScroll);
+            if (raf) cancelAnimationFrame(raf);
+        };
+    }, [footerHeight]);
+
+    // 3) 떠다니는 바는 "원래 버튼이 화면에서 사라졌을 때"만 보이게
+    const showStickyBar = !isBtnGroupVisible;
+
     // 링크 설정
     const [links, setLinks] = useState<Links[]>([])
 
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
+    const [newsList, setNewsList] = useState<NewsLetter[]>([])
+
     // 링크 불러오기
     useEffect(() => {
-        const fetchLinks = async () => {
+        const fetchData = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/client/links`, {
-                    method: "GET",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
+                const [resLinks, resNews] = await Promise.all([
+                    fetch(`${API_BASE_URL}/client/links`, {
+                        method: "GET",
+                        credentials: "include",
+                        headers: { "Content-Type": "application/json" },
+                    }),
+                    fetch(`${API_BASE_URL}/client/news`, {
+                        method: "GET",
+                        credentials: "include",
+                        headers: { "Content-Type": "application/json" },
+                    }),
+                ]);
 
-                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+                // 1) links 응답 검증 + 상세 로그
+                if (!resLinks.ok) {
+                    throw new Error("URL 정보를 불러오지 못했습니다.");
+                }
 
-                const getLinks = await res.json();
+                // 2) news 응답 검증 + 상세 로그
+                if (!resNews.ok) {
+                    throw new Error("뉴스 정보를 불러오지 못했습니다.");
+                }
+
+                const getLinks = await resLinks.json();
+                // /client/news 가 '그냥 리스트'라면 아래처럼 바로 배열로 받기
+                const getNews = (await resNews.json()) as NewsLetter[];
 
                 setLinks(getLinks);
+                setNewsList(getNews);
             } catch (err) {
-                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+                setError(err instanceof Error ? err.message : "알 수 없는 오류");
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
-        }
+        };
 
-        fetchLinks()
-    }, [])
+        fetchData();
+    }, []);
 
     if (isLoading) {
-        return <LoadingSpinner />
+        return <LoadingSpinner/>
     }
 
     if (error) {
@@ -98,9 +177,10 @@ export default function WithNewsletterPage() {
                     <span className="text-[#541E80]">가능성을 향한 첫 걸음</span>
                 </p>
                 <div
+                    ref={btnGroupRef}
                     className="flex flex-row justify-center items-center mt-[20px] gap-x-[13px] lg:mt-[69px] lg:gap-x-[40px]">
                     <Link
-                        href={links[2]?.linkPath || "https://www.connecple.com"}
+                        href={links[3]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
@@ -108,7 +188,7 @@ export default function WithNewsletterPage() {
                         위드뉴스레터 무료 구독
                     </Link>
                     <Link
-                        href={links[2]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
+                        href={links[4]?.linkPath || "https://www.connecple.com"}
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
@@ -297,10 +377,11 @@ export default function WithNewsletterPage() {
                     </div>
                 ))}
             </section>
-            {/* section4 - 뉴스레터 벌꿀 카드 TODO: 관리자 만들기 */}
-            <section className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px]">
+            {/* section4 - 뉴스레터 벌꿀 카드 */}
+            <section
+                className="flex w-full h-auto mt-[47px] px-[10px] lg:mt-[213px] lg:px-[200px] mb-[74px] lg:mb-[300px]">
                 <div className="flex flex-row w-full h-auto items-center justify-between">
-                    <Link href={links[2]?.linkPath || "https://www.connecple.com"} target="_blank">
+                    <Link href={links[3]?.linkPath || "https://www.connecple.com"} target="_blank">
                         <div className="flex flex-col justify-center items-center bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                             w-[127px] h-[127px] rounded-[20px] lg:w-[360px] lg:h-[360px] lg:rounded-[30px]">
                             <p className="font-extrabold lg:font-bold text-[8px] lg:text-[25px]">정보통 꿀단지 위드뉴스레터</p>
@@ -315,33 +396,13 @@ export default function WithNewsletterPage() {
                             </p>
                         </div>
                     </Link>
-                    {/* TODO: 뉴스레터 관리자 페이지 만들기 */}
-                    {[
-                        {
-                            img_url: "/withNewsletter/section4_image1.png",
-                            img_alt: "section4_image1.png",
-                            title: "벚꽃의 계절인가 봄",
-                            content: "시국이 어수선하고 마냥 좋을 수만은 없는 현실이긴 하지만 벚꽃의 계절이 온만큼 시국이 안정되면 벚꽃 야경으로 마음을 달래보아요.",
-                        },
-                        {
-                            img_url: "/withNewsletter/section4_image2.png",
-                            img_alt: "section4_image1.png",
-                            title: "커넥플, 경력보유(단절)..",
-                            content: "동네 육아친구를 찾아주는 육아크루는 3월 27일부터 30일까지 열린 ‘2025 마이비 마곡 베이비페어'에 참여하여...",
-                        },
-                        {
-                            img_url: "/withNewsletter/section4_image3.png",
-                            img_alt: "section4_image1.png",
-                            title: "남부여성새로일하기센터..",
-                            content: "서울시 남부여성발전센터와 남부여성새로일하기 센터는 여성의 경력단절 예방과 경제활동 참여를 지원...",
-                        }
-                    ].map((item, idx) => (
-                        <Link key={idx} href="https://forms.gle/Ujx2ishv4DTiv9tE9" target="_blank">
+                    {newsList.map((item, idx) => (
+                        <Link key={idx} href={item.newsUrl} target="_blank">
                             <div className="flex flex-col bg-[#F1F1F1] shadow-[2px_2px_7px_0_rgba(0,0,0,0.25)] hover:scale-110 transition items-center
                                 w-[63px] h-[101px] rounded-[8px] px-[4px] py-[3px]
                                 lg:w-[243px] lg:h-[307px] lg:rounded-[30px] lg:px-[12px] lg:py-[16px]">
-                                <Image src={item.img_url}
-                                       alt={item.img_alt}
+                                <Image src={item.imagePath}
+                                       alt="이미지"
                                        width={123}
                                        height={123}
                                        unoptimized
@@ -357,69 +418,33 @@ export default function WithNewsletterPage() {
                     {/*</div>*/}
                 </div>
             </section>
-            {/* section5 - 지원하기 */}
-            <section className="flex flex-col w-full h-auto
-                mt-[21px] mb-[74px] px-[30px] lg:mt-[50px] lg:mb-[300px] lg:px-[200px]">
-                {/*<h1 className="text-center
-                        text-[18px] font-black lg:text-[30px] lg:font-extrabold">
-                    W.I.T.H Newsletter
-                </h1>
-                <h2 className="text-center font-semibold text-[10px] mt-[24px] lg:text-[25px] lg:mt-[44px]">
-                    최신 뉴스 정보와 커넥플 경력단절여성 지원 프로그램 소식을 만나보세요!
-                </h2>
-                <div className="flex flex-row bg-[#F1F1F1] w-full items-center justify-center
-                    h-[77px] mt-[26px] rounded-[10px] lg:h-[208px] lg:mt-[56px] lg:rounded-[20px]">
-                    <div className="flex flex-col justify-center items-end gap-y-[16px] lg:gap-y-[32px]">
-                        <p className="font-bold text-[10px] lg:text-[20px]">이름<span
-                            className="text-[#D02121] text-[10px] lg:text-[25px] lg:ml-[9px]">*</span></p>
-                        <p className="font-bold text-[10px] lg:text-[20px]">이메일<span
-                            className="text-[#D02121] text-[10px] lg:text-[25px] lg:ml-[9px]">*</span></p>
-                    </div>
+            {showStickyBar && (
+                <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
                     <div
-                        className="flex flex-col justify-center items-center ml-[4px] gap-y-[16px] lg:ml-[14px] lg:gap-y-[32px]">
-                        <input
-                            type={"text"}
-                            placeholder={"이름을 입력해주세요."}
-                            className="border-[#BDBDBD] border-[1px] w-[170px] h-[16px] rounded-[5px] pl-[4px] text-[7px]
-                                lg:border-[2px] lg:w-[395px] lg:h-[40px] lg:rounded-[10px] lg:pl-[19px] lg:text-[15px]"
-                        />
-                        <input
-                            type={"text"}
-                            placeholder={"이메일을 입력해주세요."}
-                            className="border-[#BDBDBD] border-[1px] w-[170px] h-[16px] rounded-[5px] pl-[4px] text-[7px]
-                                lg:border-[2px] lg:w-[395px] lg:h-[40px] lg:rounded-[10px] lg:pl-[19px] lg:text-[15px]"
-                        />
+                        className="fixed left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[40px]"
+                        style={{
+                            bottom: 100 + extraOffset, // 푸터와 겹치면 자연스럽게 위로 밀림
+                            transition: "bottom 200ms ease",
+                        }}
+                    >
+                        <Link
+                            href={links[2]?.linkPath || "https://www.connecple.com"}
+                            target="_blank"
+                            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
+                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                            위드뉴스레터 무료 구독
+                        </Link>
+                        <Link
+                            href={links[2]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
+                            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
+                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                            뉴스레터 파트너 문의하기
+                        </Link>
                     </div>
                 </div>
-                <div
-                    className="flex flex-row w-full h-auto items-center justify-center mt-[26px] gap-x-[16px] lg:mt-[49px] lg:gap-x-[30px]">
-                    <label className="flex flex-row justify-center items-center">
-                        <input
-                            type={"checkbox"}
-                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px] cursor-pointer"}
-                        />
-                        <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(필수) 개인정보 수집 및 이용에 동의합니다.</span>
-                    </label>
-                    <label className="flex flex-row justify-center items-center">
-                        <input
-                            type={"checkbox"}
-                            className={"accent-[#541E80] w-[10px] h-[10px] lg:w-[20px] lg:h-[20px] cursor-pointer"}
-                        />
-                        <span className="font-bold text-[7px] ml-[6px] lg:text-[15px] lg:ml-[10px]">(선택) 광고성 정보 수신에 동의합니다.</span>
-                    </label>
-                </div>*/}
-                <h2 className="flex justify-center items-center font-extrabold text-[#541E80] text-[10px] mt-[31px] lg:text-[25px] lg:mt-[86px]">
-                    가능성을 향한 첫 걸음
-                </h2>
-                <Link
-                    href={links[2]?.linkPath || "https://www.connecple.com"}
-                    target="_blank"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold hover:scale-105 transition
-                        mt-[7px] w-[159px] h-[25px] text-[10px] rounded-[30px]
-                        lg:mt-[21px] lg:w-[388px] lg:h-[60px] lg:text-[27px] lg:rounded-[30px]">
-                    위드뉴스레터 무료 구독
-                </Link>
-            </section>
+            )}
         </main>
     );
 }

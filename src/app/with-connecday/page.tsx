@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {useState} from "react";
-import {useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
+import {useInView} from "react-intersection-observer";
 import LoadingSpinner from "@/components/loading-spinner";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
@@ -50,6 +50,59 @@ interface Links {
 }
 
 export default function WithConnecdayPage() {
+    // section1의 '원래 버튼' 가시성 관찰
+    const {ref: btnRef, inView: isBtnVisible} = useInView({
+        threshold: 0,
+        rootMargin: "0px",
+        initialInView: true,
+    });
+
+// 푸터(#page-footer) 겹침 보정
+    const footerRef = useRef<HTMLElement | null>(null);
+    const [footerHeight, setFooterHeight] = useState(0);
+    const [extraOffset, setExtraOffset] = useState(0);
+
+    useEffect(() => {
+        const footerEl = document.getElementById("page-footer");
+        footerRef.current = footerEl as HTMLElement | null;
+
+        const updateFooter = () => {
+            if (!footerRef.current) return;
+            setFooterHeight(footerRef.current.offsetHeight || 0);
+        };
+        updateFooter();
+        window.addEventListener("resize", updateFooter);
+
+        let raf = 0;
+        const onScroll = () => {
+            if (!footerRef.current) return;
+            const rect = footerRef.current.getBoundingClientRect();
+            const footerTopAbs = window.scrollY + rect.top;
+            const viewportBottom = window.scrollY + window.innerHeight;
+            const overlap = Math.max(0, viewportBottom - footerTopAbs);
+            const clamped = Math.min(overlap, footerHeight);
+
+            if (!raf) {
+                raf = requestAnimationFrame(() => {
+                    setExtraOffset(clamped);
+                    raf = 0;
+                });
+            }
+        };
+
+        onScroll();
+        window.addEventListener("scroll", onScroll, {passive: true});
+
+        return () => {
+            window.removeEventListener("resize", updateFooter);
+            window.removeEventListener("scroll", onScroll);
+            if (raf) cancelAnimationFrame(raf);
+        };
+    }, [footerHeight]);
+
+// 떠다니는 바 노출 여부: 원래 버튼이 안 보일 때만
+    const showStickyBar = !isBtnVisible;
+
     const [selected, setSelected] = useState(0);
     const current = programData[selected];
 
@@ -87,7 +140,7 @@ export default function WithConnecdayPage() {
     }, [])
 
     if (isLoading) {
-        return <LoadingSpinner />
+        return <LoadingSpinner/>
     }
 
     if (error) {
@@ -126,12 +179,12 @@ export default function WithConnecdayPage() {
                         연결을 통해 커리어를 확장하는 날.<br/>
                         <span className="text-[#541E80]">사람과 사회를 잇는 진짜 네트워킹의 장.</span>
                     </h3>
-                    <p className="text-center font-semibold
-                        text-[9px] mt-[25px]
-                        lg:text-[23px] lg:mt-[77px]">
-                        매년 3월, 6월, 9월 운영<br/>
-                        ‘위드프로젝트 교육 접수’
-                    </p>
+                    {/*<p className="text-center font-semibold*/}
+                    {/*    text-[9px] mt-[25px]*/}
+                    {/*    lg:text-[23px] lg:mt-[77px]">*/}
+                    {/*    매년 3월, 6월, 9월 운영<br/>*/}
+                    {/*    ‘위드프로젝트 교육 접수’*/}
+                    {/*</p>*/}
 
                     <div className="relative flex flex-col items-center">
                         <h1 className="relative z-10 text-center font-tvn-medium text-[#541E80]
@@ -143,11 +196,12 @@ export default function WithConnecdayPage() {
                             lg:w-[174px] lg:h-[25px] lg:mt-[120px]"/>
                     </div>
                     <Link
-                        href={links[1]?.linkPath || "https://www.connecple.com"}
+                        ref={btnRef}
+                        href={links[2]?.linkPath || "https://www.connecple.com"}
                         target="_blank"
                         className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                            mt-[9px] w-[159px] h-[25px] text-[10px]
-                            lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                                mt-[9px] w-[159px] h-[25px] text-[10px]
+                                lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
                         위드커넥데이 무료 신청
                     </Link>
                     <h3 className="flex self-center font-bold
@@ -362,19 +416,39 @@ export default function WithConnecdayPage() {
                     className="object-contain rounded-[20px] lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
                 />
             </section>
-            <section className="flex flex-col w-full h-auto mt-[10px] px-[30px] mb-[84px] lg:mt-[28px] lg:px-[146px] lg:mb-[300px]">
-                <h3 className="flex self-center font-bold
-                            text-[9px] mt-[13px] lg:text-[20px] lg:mt-[25px]">
-                    매월 둘째주 금요일 운영
-                </h3>
-                <Link
-                    href={links[1]?.linkPath || "https://www.connecple.com"}
-                    target="_blank"
-                    className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                                mt-[9px] w-[159px] h-[25px] text-[10px] lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
-                    위드커넥데이 무료 신청
-                </Link>
-            </section>
+            {/*<section className="flex flex-col w-full h-auto mt-[10px] px-[30px] mb-[84px] lg:mt-[28px] lg:px-[146px] lg:mb-[300px]">*/}
+            {/*    <h3 className="flex self-center font-bold*/}
+            {/*                text-[9px] mt-[13px] lg:text-[20px] lg:mt-[25px]">*/}
+            {/*        매월 둘째주 금요일 운영*/}
+            {/*    </h3>*/}
+            {/*    <Link*/}
+            {/*        href={links[1]?.linkPath || "https://www.connecple.com"}*/}
+            {/*        target="_blank"*/}
+            {/*        className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition*/}
+            {/*                    mt-[9px] w-[159px] h-[25px] text-[10px] lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">*/}
+            {/*        위드커넥데이 무료 신청*/}
+            {/*    </Link>*/}
+            {/*</section> */}
+            {showStickyBar && (
+                <div className="fixed inset-x-0 bottom-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
+                    <div
+                        className="fixed left-1/2 -translate-x-1/2 z-50"
+                        style={{
+                            bottom: 100 + extraOffset,   // 푸터와 겹치면 자연스럽게 위로
+                            transition: "bottom 200ms ease",
+                        }}
+                    >
+                        <Link
+                            href={links[2]?.linkPath || "https://www.connecple.com"}
+                            target="_blank"
+                            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
+                                mt-[9px] w-[159px] h-[25px] text-[10px]
+                                lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                            위드커넥데이 무료 신청
+                        </Link>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
