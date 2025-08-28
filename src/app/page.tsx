@@ -209,6 +209,9 @@ export default function Home() {
     const logos1Duration = ((baseWidth + gap) * logos1.length * 2) / scrollSpeed;
     const logos2Duration = ((baseWidth + gap) * logos2.length * 2) / scrollSpeed;
 
+    // section9 링크 인덱스
+    const linkIndexMap = [0, 2, 3];
+
     if (isLoading) {
         return <LoadingSpinner />
     }
@@ -590,7 +593,7 @@ export default function Home() {
                     <div className="relative col-span-5 h-full flex items-center justify-end mt-[17px] mb-[46px]
                         lg:mt-[37px] lg:mb-[137px]">
                         <Link
-                            href={links[1]?.linkPath || "https://www.connecple.com"}
+                            href={links[2]?.linkPath || "https://www.connecple.com"}
                             target="_blank"
                             className="bg-[#541E80] text-white font-extrabold flex items-center justify-center shadow-[4px_4px_6px_0_rgba(0,0,0,0.25)] hover:scale-105 transition
                                 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] w-[139px] h-[25px] text-[10px]
@@ -689,7 +692,7 @@ export default function Home() {
                                 </div>
                                 {/* 항상 보이는 우하단 버튼 (hover하면 색 반전) */}
                                 <Link
-                                    href={links[2]?.linkPath || "https://www.connecple.com"}
+                                    href={links[3]?.linkPath || "https://www.connecple.com"}
                                     target="_blank"
                                     className="absolute flex items-center justify-center bg-transparent text-white border border-white
                                         hover:bg-white hover:text-black transition-colors duration-300
@@ -843,7 +846,7 @@ export default function Home() {
                         ].map((btn, idx) => (
                             <Link
                                 key={idx}
-                                href={links[idx]?.linkPath || btn.href}
+                                href={links[linkIndexMap[idx]]?.linkPath || btn.href}
                                 target="_blank"
                                 className="flex items-center justify-between bg-[#541E80] hover:bg-[#944896] text-white font-bold
                                     rounded-tl-[5px] rounded-tr-[5px] rounded-bl-[5px]
