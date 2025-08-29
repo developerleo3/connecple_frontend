@@ -19,10 +19,11 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 const contents = [
     {
         level: 'LEVEL 1',
-        title: "실습 중심 기본기 함양 온라인 교육",
-        sub: "이러닝 + 실시간 온라인 강의 병행",
-        content1: "ICT MICE 실무자 특강부터<br />AI 협업툴 활용 워크숍까지",
-        content2: "아이를 돌보며 집에서도 수강 가능한, 유연한 학습 시스템",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />" +
+            "* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />" +
+            "* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image1.png",
         detail: [
             {
@@ -32,10 +33,11 @@ const contents = [
     },
     {
         level: 'LEVEL 2',
-        title: "실습 중심 실전 감각 함양 온라인 교육",
-        sub: "현장 중심 실전 과제 구성",
-        content1: "교육 행사 기획서부터<br />실제 기업용 홍보물 제작까지 단계별 과제",
-        content2: "결과물이 바로 포트폴리오가 되는 실전형 과제",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />" +
+            "* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />" +
+            "* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image2.png",
         detail: [
             {
@@ -45,10 +47,11 @@ const contents = [
     },
     {
         level: 'LEVEL 3',
-        title: "1:1 맞춤 멘토링",
-        sub: "담당 멘토 배정 + 밀착형 코칭",
-        content1: "현직 교육 기획자·행사<br />PM 출신 멘토의 경력별 실전 조언",
-        content2: "경력단절 기간도 나만의 강점으로 바꾸는 커리어 코칭 지원",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />" +
+            "* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />" +
+            "* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image3.png",
         detail: [
             {
@@ -692,8 +695,21 @@ export default function WithProjectPage() {
                             lg:border-[2px] lg:w-[142px] lg:h-[36px] lg:mt-[27px] lg:rounded-[20px] lg:mb-[32px]">
                             <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{contents[selected].level}</p>
                         </div>
-                        <h2 className="font-bold lg:text-[28px]">{contents[selected].title}</h2>
-                        <h3 className="font-bold text-[#541E80] lg:text-[25px] lg:mt-[10px]">{contents[selected].sub}</h3>
+                        {/*<h2 className="font-bold lg:text-[28px]">{contents[selected].title}</h2>*/}
+                        {/*<h3 className="font-bold text-[#541E80] lg:text-[25px] lg:mt-[10px]">{contents[selected].sub}</h3>*/}
+                        <div className="flex flex-row items-center">
+                            <Image
+                                src={"/withProject/check_purple.png"}
+                                alt={"check_purple.png"}
+                                width={25}
+                                height={25}
+                                unoptimized
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">교육 일정</p>
+
+                        </div><p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
+                                 dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
                         <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
                         <div className="flex flex-row items-center lg:mt-[35px]">
                             <Image
@@ -704,24 +720,24 @@ export default function WithProjectPage() {
                                 unoptimized
                                 className="lg:w-[25px] lg:h-[25px]"
                             />
-                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">전문성</p>
-                        </div>
-                        <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                           dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
-                        <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
-                        <div className="flex flex-row items-center lg:mt-[35px]">
-                            <Image
-                                src={"/withProject/check_purple.png"}
-                                alt={"check_purple.png"}
-                                width={25}
-                                height={25}
-                                unoptimized
-                                className="lg:w-[25px] lg:h-[25px]"
-                            />
-                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">포인트</p>
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">커리큘럼</p>
                         </div>
                         <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
                            dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                        <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
+                        <div className="flex flex-row items-center lg:mt-[35px]">
+                            <Image
+                                src={"/withProject/check_purple.png"}
+                                alt={"check_purple.png"}
+                                width={25}
+                                height={25}
+                                unoptimized
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">수료자 혜택</p>
+                        </div>
+                        <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
+                           dangerouslySetInnerHTML={{__html: contents[selected].content3}}/>
                     </div>
                     {/* 이미지 */}
                     <div
@@ -980,47 +996,61 @@ export default function WithProjectPage() {
                     위드프로젝트에 참여하면 뭐가 좋나요?
                 </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] lg:gap-[45px] mt-[30px] lg:mt-[77px]">
-                    {section6.map((card, idx) => (
-                        <div key={idx}
-                             className="flex flex-col bg-[#F7F7F7] rounded-[20px] lg:rounded-[30px] shadow-[2px_2px_6px_0_rgba(0,0,0,0.25)]">
-                            {/* 타이틀 */}
-                            <h3 className="text-center font-normal text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]"
-                                dangerouslySetInnerHTML={{__html: card.title}}
-                            />
-                            {/* 이미지 리스트 (가변 개수 대응) */}
-                            <div className="flex flex-row w-full bg-[#E7E2EC] items-start justify-center
-                                px-[10px] lg:px-[20px] py-[10px] lg:py-[20px] mt-[12px] lg:mt-[18px] gap-[10px] lg:gap-[16px]">
-                                {card.img.map((img, i) => (
-                                    <div key={i} className="flex flex-col items-center justify-center">
+                    {section6.map((card, idx) => {
+                        const isBleed = idx === 2 || idx === 3; // 3,4번째 카드만 풀블리드
+
+                        return (
+                            <div
+                                key={idx}
+                                className="flex flex-col bg-[#F7F7F7] rounded-[20px] lg:rounded-[30px] shadow-[2px_2px_6px_0_rgba(0,0,0,0.25)]"
+                            >
+                                {/* 타이틀 */}
+                                <h3
+                                    className="text-center font-normal text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]"
+                                    dangerouslySetInnerHTML={{ __html: card.title }}
+                                />
+
+                                {/* 이미지 리스트 */}
+                                <div
+                                    className="flex flex-row w-full bg-[#E7E2EC] items-start justify-center
+             px-[10px] lg:px-[20px] py-0 gap-[10px] lg:gap-[16px] mt-[12px] lg:mt-[18px]"
+                                >
+                                    {card.img.map((img, i) => (
                                         <div
-                                            className={`rounded-[10px] ${
-                                                i === 3 || i === 4 ? "h-[200px]" : "h-[72px] lg:h-[120px]"
-                                            }`}
+                                            key={i}
+                                            className="flex flex-col items-center justify-center w-full"
                                         >
-                                            <Image
-                                                src={img.src}
-                                                alt={img.title || "thumbnail"}
-                                                height={i == 3 || i == 4 ? 200 : 120} // 최대 높이 기준
-                                                width={0} // Next.js에서 width를 0으로 두고 sizes="auto" 설정
-                                                sizes="auto"
-                                                className="h-full w-auto object-contain"
-                                            />
+                                            {/* 이미지 영역 */}
+                                            <div className="relative w-full h-[180px] lg:h-[320px] rounded-[10px] overflow-hidden">
+                                                <Image
+                                                    src={img.src}
+                                                    alt={img.title || "thumbnail"}
+                                                    fill
+                                                    unoptimized
+                                                    className="object-contain"
+                                                />
+                                            </div>
+
+                                            {/* 제목 있으면 표시 */}
+                                            {img.title && (
+                                                <p className="font-semibold text-[#3B3B3B] text-center text-[12px] lg:text-[24px] mb-[8px] lg:mb-[20px]">
+                                                    {img.title}
+                                                </p>
+                                            )}
                                         </div>
-                                        {img.title && (
-                                            <p className="mt-[6px] text-[10px] lg:text-[14px] font-semibold text-[#3B3B3B]">
-                                                {img.title}
-                                            </p>
-                                        )}
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+
+                                {/* 본문 */}
+                                <p
+                                    className={`text-black leading-[1.6] text-[10px] lg:text-[18px] px-[15px] lg:px-[30px] py-[10px] lg:py-[20px] ${
+                                        isBleed ? "mt-0" : ""
+                                    }`}
+                                    dangerouslySetInnerHTML={{ __html: card.content }}
+                                />
                             </div>
-                            {/* 본문 */}
-                            <p className="text-black leading-[1.6]
-                                text-[10px] lg:text-[18px] px-[15px] lg:px-[30px] py-[10px] lg:py-[20px]"
-                               dangerouslySetInnerHTML={{__html: card.content}}
-                            />
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </section>
             {/* section7 - 생생후기 */}
