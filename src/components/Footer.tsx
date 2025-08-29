@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full h-auto flex flex-col bg-white text-black
+    <footer id="page-footer" className="w-full h-auto flex flex-col bg-white text-black
       pt-[31px] px-[34px]
       lg:pt-[66px] lg:px-[100px]">
       {/* 메뉴 */}

@@ -10,25 +10,34 @@ import AlertModal from "@/components/alert-modal"
 import AdminSidebar from "@/components/admin-sidebar"
 
 interface LinkData {
-    wordProject: string
-    wordConnecday: string
-    wordNewsletter: string
-    wordGig: string
+    withProject: string
+    withProject2: string
+    withConnecday: string
+    withNewsletter: string
+    withNewsletter2: string
+    withGig: string
+    withGig2: string
 }
 
 interface ValidationErrors {
-    wordProject?: string
-    wordConnecday?: string
-    wordNewsletter?: string
-    wordGig?: string
+    withProject?: string
+    withProject2?: string
+    withConnecday?: string
+    withNewsletter?: string
+    withNewsletter2?: string
+    withGig?: string
+    withGig2?: string
 }
 
 export default function AdminLinkPage() {
     const [links, setLinks] = useState<LinkData>({
-        wordProject: "",
-        wordConnecday: "",
-        wordNewsletter: "",
-        wordGig: "",
+        withProject: "",
+        withProject2: "",
+        withConnecday: "",
+        withNewsletter: "",
+        withNewsletter2: "",
+        withGig: "",
+        withGig2: "",
     })
 
     const [modal, setModal] = useState({
@@ -64,10 +73,13 @@ export default function AdminLinkPage() {
                     const { data } = await response.json()
                     // API 응답 데이터를 links 상태에 매핑
                     const mappedLinks: LinkData = {
-                        wordProject: data.find((item: any) => item.title === "위드프로젝트 메인 링크 설정")?.linkPath || "",
-                        wordConnecday: data.find((item: any) => item.title === "위드커넥데이 메인 링크 설정")?.linkPath || "",
-                        wordNewsletter: data.find((item: any) => item.title === "위드뉴스레터 메인 링크 설정")?.linkPath || "",
-                        wordGig: data.find((item: any) => item.title === "위드GIG 메인 링크 설정")?.linkPath || "",
+                        withProject: data.find((item: { title: string }) => item.title === "위드프로젝트 메인 링크 설정")?.linkPath || "",
+                        withProject2: data.find((item: { title: string }) => item.title === "위드프로젝트 무료 교육 링크 설정")?.linkPath || "",
+                        withConnecday: data.find((item: { title: string }) => item.title === "위드커넥데이 메인 링크 설정")?.linkPath || "",
+                        withNewsletter: data.find((item: { title: string }) => item.title === "위드뉴스레터 메인 링크 설정")?.linkPath || "",
+                        withNewsletter2: data.find((item: { title: string }) => item.title === "위드뉴스레터 파트너 문의하기 링크 설정")?.linkPath || "",
+                        withGig: data.find((item: { title: string }) => item.title === "위드GIG 참여자 링크 설정")?.linkPath || "",
+                        withGig2: data.find((item: { title: string }) => item.title === "위드GIG 수요 기업 링크 설정")?.linkPath || "",
                     }
                     setLinks(mappedLinks)
                 }
@@ -80,10 +92,13 @@ export default function AdminLinkPage() {
     }, [])
 
     const linkLabels = {
-        wordProject: "위드프로젝트 메인 링크 설정",
-        wordConnecday: "위드커넥데이 메인 링크 설정",
-        wordNewsletter: "위드뉴스레터 메인 링크 설정",
-        wordGig: "위드GIG 메인 링크 설정",
+        withProject: "위드프로젝트 메인 링크 설정",
+        withProject2: "위드프로젝트 무료 교육 링크 설정",
+        withConnecday: "위드커넥데이 메인 링크 설정",
+        withNewsletter: "위드뉴스레터 메인 링크 설정",
+        withNewsletter2: "위드뉴스레터 파트너 문의하기 링크 설정",
+        withGig: "위드GIG 참여자 링크 설정",
+        withGig2: "위드GIG 수요 기업 링크 설정"
     }
 
     const validateUrl = (url: string): boolean => {
@@ -158,10 +173,11 @@ export default function AdminLinkPage() {
                 type: "success",
             })
         } catch (error) {
+            const message = error instanceof Error ? error.message : "링크 등록 중 오류가 발생하였습니다."
             setModal({
                 isOpen: true,
                 title: "등록 실패",
-                message: "링크 등록 중 오류가 발생하였습니다.",
+                message: message,
                 type: "error",
             })
         } finally {
@@ -190,23 +206,23 @@ export default function AdminLinkPage() {
                         <CardContent className="space-y-8 bg-white rounded-lg shadow-sm border border-gray-200 p-8">
                             {/* 위드프로젝트 메인 링크 설정 */}
                             <div className="space-y-2">
-                                <Label htmlFor="wordProject" className="text-base font-medium text-black">
+                                <Label htmlFor="withProject" className="text-base font-medium text-black">
                                     위드프로젝트 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4 w-full">
                                     <div className="flex-1">
                                         <Input
-                                            id="wordProject"
+                                            id="withProject"
                                             type="url"
                                             placeholder="링크를 입력해 넣어주세요"
-                                            value={links.wordProject}
-                                            onChange={(e) => handleInputChange("wordProject", e.target.value)}
+                                            value={links.withProject}
+                                            onChange={(e) => handleInputChange("withProject", e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
                                         />
-                                        {errors.wordProject && <p className="text-red-500 text-sm mt-1">{errors.wordProject}</p>}
+                                        {errors.withProject && <p className="text-red-500 text-sm mt-1">{errors.withProject}</p>}
                                     </div>
                                     <Button
-                                        onClick={() => handleSubmit("wordProject")}
+                                        onClick={() => handleSubmit("withProject")}
                                         className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
@@ -214,26 +230,51 @@ export default function AdminLinkPage() {
                                     </Button>
                                 </div>
                             </div>
-
+                            {/* 위드프로젝트 무료 교육 설정 */}
+                            <div className="space-y-2">
+                                <Label htmlFor="withProject2" className="text-base font-medium text-black">
+                                    위드프로젝트 무료 교육 링크 설정 <span className="text-red-500">*</span>
+                                </Label>
+                                <div className="flex gap-4 w-full">
+                                    <div className="flex-1">
+                                        <Input
+                                            id="withProject2"
+                                            type="url"
+                                            placeholder="링크를 입력해 넣어주세요"
+                                            value={links.withProject2}
+                                            onChange={(e) => handleInputChange("withProject2", e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
+                                        />
+                                        {errors.withProject2 && <p className="text-red-500 text-sm mt-1">{errors.withProject2}</p>}
+                                    </div>
+                                    <Button
+                                        onClick={() => handleSubmit("withProject2")}
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        disabled={isLoading}
+                                    >
+                                        등록하기
+                                    </Button>
+                                </div>
+                            </div>
                             {/* 위드커넥데이 메인 링크 설정 */}
                             <div className="space-y-2">
-                                <Label htmlFor="wordConnecday" className="text-base font-medium text-black">
+                                <Label htmlFor="withConnecday" className="text-base font-medium text-black">
                                     위드커넥데이 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4">
                                     <div className="flex-1">
                                         <Input
-                                            id="wordConnecday"
+                                            id="withConnecday"
                                             type="url"
                                             placeholder="링크를 입력해 넣어주세요"
-                                            value={links.wordConnecday}
-                                            onChange={(e) => handleInputChange("wordConnecday", e.target.value)}
+                                            value={links.withConnecday}
+                                            onChange={(e) => handleInputChange("withConnecday", e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
                                         />
-                                        {errors.wordConnecday && <p className="text-red-500 text-sm mt-1">{errors.wordConnecday}</p>}
+                                        {errors.withConnecday && <p className="text-red-500 text-sm mt-1">{errors.withConnecday}</p>}
                                     </div>
                                     <Button
-                                        onClick={() => handleSubmit("wordConnecday")}
+                                        onClick={() => handleSubmit("withConnecday")}
                                         className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
@@ -244,23 +285,23 @@ export default function AdminLinkPage() {
 
                             {/* 위드뉴스레터 메인 링크 설정 */}
                             <div className="space-y-2">
-                                <Label htmlFor="wordNewsletter" className="text-base font-medium text-black">
+                                <Label htmlFor="withNewsletter" className="text-base font-medium text-black">
                                     위드뉴스레터 메인 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4">
                                     <div className="flex-1">
                                         <Input
-                                            id="wordNewsletter"
+                                            id="withNewsletter"
                                             type="url"
                                             placeholder="링크를 입력해 넣어주세요"
-                                            value={links.wordNewsletter}
-                                            onChange={(e) => handleInputChange("wordNewsletter", e.target.value)}
+                                            value={links.withNewsletter}
+                                            onChange={(e) => handleInputChange("withNewsletter", e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
                                         />
-                                        {errors.wordNewsletter && <p className="text-red-500 text-sm mt-1">{errors.wordNewsletter}</p>}
+                                        {errors.withNewsletter && <p className="text-red-500 text-sm mt-1">{errors.withNewsletter}</p>}
                                     </div>
                                     <Button
-                                        onClick={() => handleSubmit("wordNewsletter")}
+                                        onClick={() => handleSubmit("withNewsletter")}
                                         className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
@@ -269,25 +310,79 @@ export default function AdminLinkPage() {
                                 </div>
                             </div>
 
-                            {/* 위드GIG 메인 링크 설정 */}
+                            {/* 위드뉴스레터 파트너 문의하기 설정 */}
                             <div className="space-y-2">
-                                <Label htmlFor="wordGig" className="text-base font-medium text-black">
-                                    위드GIG 메인 링크 설정 <span className="text-red-500">*</span>
+                                <Label htmlFor="withNewsletter2" className="text-base font-medium text-black">
+                                    위드뉴스레터 파트너 문의하기 링크 설정 <span className="text-red-500">*</span>
                                 </Label>
                                 <div className="flex gap-4">
                                     <div className="flex-1">
                                         <Input
-                                            id="wordGig"
+                                            id="withNewsletter2"
                                             type="url"
                                             placeholder="링크를 입력해 넣어주세요"
-                                            value={links.wordGig}
-                                            onChange={(e) => handleInputChange("wordGig", e.target.value)}
+                                            value={links.withNewsletter2}
+                                            onChange={(e) => handleInputChange("withNewsletter2", e.target.value)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
                                         />
-                                        {errors.wordGig && <p className="text-red-500 text-sm mt-1">{errors.wordGig}</p>}
+                                        {errors.withNewsletter2 && <p className="text-red-500 text-sm mt-1">{errors.withNewsletter2}</p>}
                                     </div>
                                     <Button
-                                        onClick={() => handleSubmit("wordGig")}
+                                        onClick={() => handleSubmit("withNewsletter2")}
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        disabled={isLoading}
+                                    >
+                                        등록하기
+                                    </Button>
+                                </div>
+                            </div>
+
+                            {/* 위드GIG 참여자 링크 설정 */}
+                            <div className="space-y-2">
+                                <Label htmlFor="withGig" className="text-base font-medium text-black">
+                                    위드GIG 참여자 링크 설정 <span className="text-red-500">*</span>
+                                </Label>
+                                <div className="flex gap-4">
+                                    <div className="flex-1">
+                                        <Input
+                                            id="withGig"
+                                            type="url"
+                                            placeholder="링크를 입력해 넣어주세요"
+                                            value={links.withGig}
+                                            onChange={(e) => handleInputChange("withGig", e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
+                                        />
+                                        {errors.withGig && <p className="text-red-500 text-sm mt-1">{errors.withGig}</p>}
+                                    </div>
+                                    <Button
+                                        onClick={() => handleSubmit("withGig")}
+                                        className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
+                                        disabled={isLoading}
+                                    >
+                                        등록하기
+                                    </Button>
+                                </div>
+                            </div>
+
+                            {/* 위드GIG 수요 기업 링크 설정 */}
+                            <div className="space-y-2">
+                                <Label htmlFor="withGig2" className="text-base font-medium text-black">
+                                    위드GIG 수요 기업 링크 설정 <span className="text-red-500">*</span>
+                                </Label>
+                                <div className="flex gap-4">
+                                    <div className="flex-1">
+                                        <Input
+                                            id="withGig2"
+                                            type="url"
+                                            placeholder="링크를 입력해 넣어주세요"
+                                            value={links.withGig2}
+                                            onChange={(e) => handleInputChange("withGig2", e.target.value)}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black placeholder:text-gray-500"
+                                        />
+                                        {errors.withGig2 && <p className="text-red-500 text-sm mt-1">{errors.withGig2}</p>}
+                                    </div>
+                                    <Button
+                                        onClick={() => handleSubmit("withGig2")}
                                         className="bg-[#541E80] font-bold hover:bg-purple-700 px-8 text-white hover:cursor-pointer"
                                         disabled={isLoading}
                                     >
