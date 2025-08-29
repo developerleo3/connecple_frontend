@@ -27,7 +27,7 @@ const applicationProcess = [
     },
     {
         title: "프로젝트 제안 수락",
-        content: "위드긱 업무 계약 체결<br />- 커넥플<->참여자<br />- 커넥플<-수요기업",
+        content: "위드긱 업무 계약 체결<br />① 커넥플 ↔ 참여자<br />② 커넥플 ↔ 수요기업",
         img: "/withGIG/section8_step3.svg"
     },
     {
@@ -620,22 +620,26 @@ export default function WithGigPage() {
                         위드긱 프로젝트 예시<br />
                         “실제 업무 현장에서 즉시 투입 가능한 실무 지원 역할”
                     </p>
-                    <div className="w-full border-t-[0.5px] lg:border-t-2 border-dotted my-[3px] lg:my-[10px]" />
-                    <p className="font-normal text-[#6C6C6C] text-center text-[5.5px] lg:text-[15px]">
-                        <span className="font-black"> ① 교육 프로젝트 추가 가능 업무<br /></span>
-                        - 자료 조사 및 번역 : 교육 교재, 참고자료, 해외 사례 번역·정리<br />
-                        - 온라인 시스템 운영 : 줌(Zoom), Webex 등 화상강의 세팅 및 지원<br />
-                        - 수강생 관리 : 출결 체크, 만족도 조사, 설문조사 데이터 취합<br />
-                        - 홍보 지원 : SNS·홈페이지 교육 안내 게시, 신청자 모집 홍보 콘텐츠 보조<br />
-                        - 성과 정리 : 교육 결과 리포트(요약본) 작성, 통계 그래프 제작<br /><br />
-
-                        <span className="font-black">② 행사 프로젝트 추가 가능 업무<br /></span>
-                        - 참가자 관리 : 사전 등록 확인, 현장 등록·출입 관리, 명찰 제작 지원<br />
-                        - 홍보·마케팅 보조 : 행사 카드뉴스·웹포스터 제작 보조, 현장 SNS 홍보 지원<br />
-                        - 현장 지원 세부 역할 : 안내데스크, 동시통역·장비 세팅 보조, 물품 배부<br />
-                        - 행사 기록 : 사진·영상 촬영 보조, 현장 스케치 작성, 결과보고용 자료 취합<br />
-                        - 파트너 협력 : 협찬·후원 업체 응대, 연사·패널 안내 및 지원
-                    </p>
+                    <div className="flex flex-row mt-[10px] lg:mt-[20px] gap-x-[10px] lg:gap-x-[30px]">
+                        <p className="font-normal bg-white text-[#6C6C6C] p-[10px] lg:p-[20px]
+                            text-[5px] lg:text-[15px] rounded-[10px] lg:rounded-[22px] lg:leading-[23px]">
+                            <span className="font-black"> ① 교육 프로젝트 추가 가능 업무<br /></span>
+                            - 자료 조사 및 번역 : 교육 교재, 참고자료, 해외 사례 번역·정리<br />
+                            - 온라인 시스템 운영 : 줌(Zoom), Webex 등 화상강의 세팅 및 지원<br />
+                            - 수강생 관리 : 출결 체크, 만족도 조사, 설문조사 데이터 취합<br />
+                            - 홍보 지원 : SNS·홈페이지 교육 안내 게시, 신청자 모집 홍보 콘텐츠 보조<br />
+                            - 성과 정리 : 교육 결과 리포트(요약본) 작성, 통계 그래프 제작
+                        </p>
+                        <p className="font-normal bg-white text-[#6C6C6C] p-[10px] lg:p-[20px]
+                            text-[5px] lg:text-[15px] rounded-[10px] lg:rounded-[22px] lg:leading-[23px]">
+                            <span className="font-black">② 행사 프로젝트 추가 가능 업무<br /></span>
+                            - 참가자 관리 : 사전 등록 확인, 현장 등록·출입 관리, 명찰 제작 지원<br />
+                            - 홍보·마케팅 보조 : 행사 카드뉴스·웹포스터 제작 보조, 현장 SNS 홍보 지원<br />
+                            - 현장 지원 세부 역할 : 안내데스크, 동시통역·장비 세팅 보조, 물품 배부<br />
+                            - 행사 기록 : 사진·영상 촬영 보조, 현장 스케치 작성, 결과보고용 자료 취합<br />
+                            - 파트너 협력 : 협찬·후원 업체 응대, 연사·패널 안내 및 지원
+                        </p>
+                    </div>
                 </div>
                 {showStickyBar && (
                     <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
@@ -650,8 +654,8 @@ export default function WithGigPage() {
                                 href={links[5]?.linkPath || "https://www.connecple.com"}
                                 target="_blank"
                                 className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-          w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-          lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                                    w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                                    lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
                             >
                                 위드긱 ‘참여자’ 신청
                             </Link>
@@ -659,8 +663,8 @@ export default function WithGigPage() {
                                 href={links[6]?.linkPath || "https://www.connecple.com"}
                                 target="_blank"
                                 className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-          w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-          lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                                    w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                                    lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
                             >
                                 위드긱 ‘수요기업’ 신청
                             </Link>
