@@ -197,7 +197,10 @@ export default function AboutPage() {
                             des: '10년 이상의 현장 경험을<br />바탕으로 한 교육 기획·운영<br />전문가 조직 <span class="font-black text-[#541E80]">교육사업부</span>'
                         }
                     ].map((item, idx) => (
-                        <div key={idx} className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
+                        <Link key={idx}
+                              href={"https://cuboid-thief-2cf.notion.site/1cbf427433ae8077b8a5c0bf33b2b643?source=copy_link"}
+                              target="_blank"
+                              className="flex flex-col justify-center items-center bg-[#F4F4F4] shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)] hover:scale-110 transition
                             w-[92px] h-[104px] rounded-[10px] lg:w-[296px] lg:h-[318px] lg:rounded-[50px]">
                             <div className="flex flex-row w-full h-auto items-center px-[3px] lg:px-[14px] lg:mt-[-15px]">
                                 <div className="overflow-hidden rounded-full w-[44px] h-[44px] lg:w-[157px] lg:h-[157px]">
@@ -221,7 +224,7 @@ export default function AboutPage() {
                             <p className="font-bold text-[7px] mt-[10px] lg:text-[20px] lg:px-[24px] lg:mt-[19px]"
                                 dangerouslySetInnerHTML={{__html:item.des}}>
                             </p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>

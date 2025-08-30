@@ -19,10 +19,9 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 const contents = [
     {
         level: 'LEVEL 1',
-        title: "실습 중심 기본기 함양 온라인 교육",
-        sub: "이러닝 + 실시간 온라인 강의 병행",
-        content1: "ICT MICE 실무자 특강부터<br />AI 협업툴 활용 워크숍까지",
-        content2: "아이를 돌보며 집에서도 수강 가능한, 유연한 학습 시스템",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image1.png",
         detail: [
             {
@@ -32,10 +31,9 @@ const contents = [
     },
     {
         level: 'LEVEL 2',
-        title: "실습 중심 실전 감각 함양 온라인 교육",
-        sub: "현장 중심 실전 과제 구성",
-        content1: "교육 행사 기획서부터<br />실제 기업용 홍보물 제작까지 단계별 과제",
-        content2: "결과물이 바로 포트폴리오가 되는 실전형 과제",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image2.png",
         detail: [
             {
@@ -45,10 +43,9 @@ const contents = [
     },
     {
         level: 'LEVEL 3',
-        title: "1:1 맞춤 멘토링",
-        sub: "담당 멘토 배정 + 밀착형 코칭",
-        content1: "현직 교육 기획자·행사<br />PM 출신 멘토의 경력별 실전 조언",
-        content2: "경력단절 기간도 나만의 강점으로 바꾸는 커리어 코칭 지원",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image3.png",
         detail: [
             {
@@ -67,10 +64,9 @@ const contents = [
     },
     {
         level: 'LEVEL 4',
-        title: "실무 프로젝트 참여",
-        sub: "레벨별 실무 투입 + 단계별 급여 지급",
-        content1: "레벨1(보조) → 레벨2(매니저) → 레벨3~5(리더급)까지<br />실무 난이도에 따라 점진적 투입",
-        content2: "교육 수료 후 실제 프로젝트에 참여하며 커리어 방향을 탐색",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image4.png",
         detail: [
             {
@@ -89,10 +85,9 @@ const contents = [
     },
     {
         level: 'LEVEL 5',
-        title: "현장 참관 프로그램",
-        sub: "ICT 융합 분야 체험형 학습",
-        content1: "국제 행사, 교육 테크,<br />데이터·AI 교육 현장 실습 탐방",
-        content2: "변화하는 현장을 직접 보고 배우는 생생한 체험 기회",
+        content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
+        content2: "우측 이미지 클릭 (확대)",
+        content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
         img: "/withProject/section5_image5.png",
         detail: [
             {
@@ -201,7 +196,7 @@ const section6 = [
                 src: "/withProject/section6_image6.png"
             }
         ],
-        content: "업무기초 : 한글, MS오피스 망고보드/캔바 등<br />대세도구 : 구글(드라이브, 스프레드시트) 생성형AI 등<br />협업도구 : 슬랙, 노션, 네이버클로바노트",
+        content: "업무기초 : 한글, MS오피스 망고보드/캔바 등<br />대세도구 : 구글(드라이브, 스프레드시트) 생성형AI 등<br />협업도구 : 슬랙, 노션, 네이버클로바노트 등",
     },
     {
         title: "효율적인 온라인 교육 운영<br /><span class='font-extrabold'>담당 멘토와의 밀착 멘토링 진행</span>",
@@ -692,8 +687,19 @@ export default function WithProjectPage() {
                             lg:border-[2px] lg:w-[142px] lg:h-[36px] lg:mt-[27px] lg:rounded-[20px] lg:mb-[32px]">
                             <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{contents[selected].level}</p>
                         </div>
-                        <h2 className="font-bold lg:text-[28px]">{contents[selected].title}</h2>
-                        <h3 className="font-bold text-[#541E80] lg:text-[25px] lg:mt-[10px]">{contents[selected].sub}</h3>
+                        <div className="flex flex-row items-center">
+                            <Image
+                                src={"/withProject/check_purple.png"}
+                                alt={"check_purple.png"}
+                                width={25}
+                                height={25}
+                                unoptimized
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">교육 일정</p>
+
+                        </div><p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
+                                 dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
                         <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
                         <div className="flex flex-row items-center lg:mt-[35px]">
                             <Image
@@ -704,24 +710,24 @@ export default function WithProjectPage() {
                                 unoptimized
                                 className="lg:w-[25px] lg:h-[25px]"
                             />
-                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">전문성</p>
-                        </div>
-                        <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                           dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
-                        <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
-                        <div className="flex flex-row items-center lg:mt-[35px]">
-                            <Image
-                                src={"/withProject/check_purple.png"}
-                                alt={"check_purple.png"}
-                                width={25}
-                                height={25}
-                                unoptimized
-                                className="lg:w-[25px] lg:h-[25px]"
-                            />
-                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">포인트</p>
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">커리큘럼</p>
                         </div>
                         <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
                            dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                        <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
+                        <div className="flex flex-row items-center lg:mt-[35px]">
+                            <Image
+                                src={"/withProject/check_purple.png"}
+                                alt={"check_purple.png"}
+                                width={25}
+                                height={25}
+                                unoptimized
+                                className="lg:w-[25px] lg:h-[25px]"
+                            />
+                            <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">수료자 혜택</p>
+                        </div>
+                        <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
+                           dangerouslySetInnerHTML={{__html: contents[selected].content3}}/>
                     </div>
                     {/* 이미지 */}
                     <div
@@ -739,84 +745,6 @@ export default function WithProjectPage() {
                             }`}
                             onClick={() => setIsModalOpen(true)}
                         />
-                        {/*{isModalOpen && (
-                            <div
-                                className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-                                onClick={() => setIsModalOpen(false)}
-                            >
-                                <div
-                                    className="relative bg-[#D9D9D9] rounded-[20px] w-[90vw] max-w-[760px] h-[80vh] max-h-[820px] p-[8px] lg:w-[741px] lg:h-[798px]"
-                                    onClick={(e) => e.stopPropagation()} // 내부 클릭은 닫히지 않도록
-                                >
-                                     닫기 버튼
-                                    <button
-                                        className="absolute top-[10px] right-[10px] text-[#541E80] cursor-pointer z-[60]"
-                                        onClick={() => setIsModalOpen(false)}
-                                        aria-label="닫기"
-                                    >
-                                        <Image
-                                            src={"/withProject/section7_modal_X.svg"}
-                                            alt={"닫기"}
-                                            width={37}
-                                            height={37}
-                                            unoptimized
-                                        />
-                                    </button>
-
-                                     슬라이더(모바일: 터치 스와이프, 웹: 화살표 클릭)
-                                    <div className="relative w-full h-full">
-                                        <Swiper
-                                            modules={[Navigation, Pagination, Keyboard]}
-                                            pagination={{ clickable: true }}
-                                            navigation={{
-                                                nextEl: "#modal-next",
-                                                prevEl: "#modal-prev",
-                                            }}
-                                            keyboard={{ enabled: true }}
-                                            loop={contents[selected].detail.length > 1}
-                                            className="w-full h-full rounded-[12px] bg-white modal-swiper-withproject"
-                                        >
-                                            {contents[selected].detail.map((d, i) => (
-                                                <SwiperSlide key={i}>
-                                                    <div className="relative w-full h-[calc(80vh-80px)] lg:h-[calc(798px-80px)]">
-                                                        <Image
-                                                            src={d.src}
-                                                            alt={`detail-${i + 1}`}
-                                                            fill
-                                                            unoptimized
-                                                            className={`object-contain ${selected === 0 || selected === 1 ? "p-[10px]" : "p-[30px] lg:p-[50px]"}`}
-                                                        />
-                                                    </div>
-                                                </SwiperSlide>
-                                            ))}
-                                        </Swiper>
-                                         좌/우 네비게이션 버튼 (웹용)
-                                        {contents[selected].detail.length > 1 && (
-                                            <>
-                                                <button
-                                                    id="modal-prev"
-                                                    aria-label="이전"
-                                                    className="hidden lg:flex absolute top-1/2 -translate-y-1/2 left-2 z-[50]
-                                                        w-10 h-10 items-center justify-center rounded-full bg-white/80 hover:bg-[#541E80] cursor-pointer
-                                                        border border-[#541E80] text-[#541E80] hover:text-white font-extrabold shadow-md"
-                                                >
-                                                    &#8249;
-                                                </button>
-                                                <button
-                                                    id="modal-next"
-                                                    aria-label="다음"
-                                                    className="hidden lg:flex absolute top-1/2 -translate-y-1/2 right-2 z-[50]
-                                                        w-10 h-10 items-center justify-center rounded-full bg-white hover:bg-[#541E80] cursor-pointer
-                                                        border border-[#541E80] text-[#541E80] hover:text-white font-extrabold shadow-md"
-                                                >
-                                                    &#8250;
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        )}*/}
                     </div>
                 </div>
                 {/* 모바일 레이아웃 */}
@@ -841,12 +769,11 @@ export default function WithProjectPage() {
                     {/* 제목, 소제목, 전문성, 포인트 */}
                     <div className="relative flex flex-col justify-center items-center w-[289px] h-auto
                             bg-[#E7E2EC] mt-[8px] self-center rounded-[10px] p-[14px]">
-                        <div
-                            className="flex flex-col w-full h-auto rounded-[10px] bg-white justify-center px-[16px] py-[10px]">
-                            <h2 className="font-extrabold text-[10px]">{contents[selected].title}</h2>
-                            <h3 className="font-bold text-[#541E80] text-[9px] mt-[3px]">{contents[selected].sub}</h3>
-                            <div
-                                className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[6px] self-center"/>
+                        <div className="flex flex-col w-full h-auto rounded-[10px] bg-white justify-center px-[16px] py-[10px]">
+                            <div className="flex items-center justify-center  border-[#541E80]
+                                border-[0.5px] w-[47px] h-[14px] rounded-[20px]">
+                                <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{contents[selected].level}</p>
+                            </div>
                             <div className="flex flex-row items-center mt-[9px]">
                                 <Image
                                     src={"/withProject/check_purple.png"}
@@ -855,12 +782,24 @@ export default function WithProjectPage() {
                                     height={10}
                                     unoptimized
                                 />
-                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">전문성</p>
+                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">교육 일정</p>
                             </div>
                             <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
                                dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
-                            <div
-                                className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[3px] self-center"/>
+                            <div className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[6px] self-center"/>
+                            <div className="flex flex-row items-center mt-[9px]">
+                                <Image
+                                    src={"/withProject/check_purple.png"}
+                                    alt={"check_purple.png"}
+                                    width={10}
+                                    height={10}
+                                    unoptimized
+                                />
+                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">커리큘럼</p>
+                            </div>
+                            <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
+                               dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                            <div className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[3px] self-center"/>
                             <div className="flex flex-row items-center mt-[7px]">
                                 <Image
                                     src={"/withProject/check_purple.png"}
@@ -869,10 +808,10 @@ export default function WithProjectPage() {
                                     height={10}
                                     unoptimized
                                 />
-                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">포인트</p>
+                                <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">수료자 혜택</p>
                             </div>
                             <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
-                               dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                               dangerouslySetInnerHTML={{__html: contents[selected].content3}}/>
                         </div>
                     </div>
                     {/* 이미지 */}
@@ -980,47 +919,61 @@ export default function WithProjectPage() {
                     위드프로젝트에 참여하면 뭐가 좋나요?
                 </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] lg:gap-[45px] mt-[30px] lg:mt-[77px]">
-                    {section6.map((card, idx) => (
-                        <div key={idx}
-                             className="flex flex-col bg-[#F7F7F7] rounded-[20px] lg:rounded-[30px] shadow-[2px_2px_6px_0_rgba(0,0,0,0.25)]">
-                            {/* 타이틀 */}
-                            <h3 className="text-center font-normal text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]"
-                                dangerouslySetInnerHTML={{__html: card.title}}
-                            />
-                            {/* 이미지 리스트 (가변 개수 대응) */}
-                            <div className="flex flex-row w-full bg-[#E7E2EC] items-start justify-center
-                                px-[10px] lg:px-[20px] py-[10px] lg:py-[20px] mt-[12px] lg:mt-[18px] gap-[10px] lg:gap-[16px]">
-                                {card.img.map((img, i) => (
-                                    <div key={i} className="flex flex-col items-center justify-center">
+                    {section6.map((card, idx) => {
+                        const isBleed = idx === 2 || idx === 3; // 3,4번째 카드만 풀블리드
+
+                        return (
+                            <div
+                                key={idx}
+                                className="flex flex-col bg-[#F7F7F7] rounded-[20px] lg:rounded-[30px] shadow-[2px_2px_6px_0_rgba(0,0,0,0.25)]"
+                            >
+                                {/* 타이틀 */}
+                                <h3
+                                    className="text-center font-normal text-[#1A1A1A] text-[14px] mt-[10px] lg:text-[28px] lg:mt-[20px]"
+                                    dangerouslySetInnerHTML={{ __html: card.title }}
+                                />
+
+                                {/* 이미지 리스트 */}
+                                <div
+                                    className="flex flex-row w-full bg-[#E7E2EC] items-start justify-center
+                                        px-[10px] lg:px-[20px] py-0 gap-[10px] lg:gap-[16px] mt-[12px] lg:mt-[18px]"
+                                >
+                                    {card.img.map((img, i) => (
                                         <div
-                                            className={`rounded-[10px] ${
-                                                i === 3 || i === 4 ? "h-[200px]" : "h-[72px] lg:h-[120px]"
-                                            }`}
+                                            key={i}
+                                            className="flex flex-col items-center justify-center w-full"
                                         >
-                                            <Image
-                                                src={img.src}
-                                                alt={img.title || "thumbnail"}
-                                                height={i == 3 || i == 4 ? 200 : 120} // 최대 높이 기준
-                                                width={0} // Next.js에서 width를 0으로 두고 sizes="auto" 설정
-                                                sizes="auto"
-                                                className="h-full w-auto object-contain"
-                                            />
+                                            {/* 이미지 영역 */}
+                                            <div className="relative w-full h-[180px] lg:h-[320px] rounded-[10px] overflow-hidden">
+                                                <Image
+                                                    src={img.src}
+                                                    alt={img.title || "thumbnail"}
+                                                    fill
+                                                    unoptimized
+                                                    className="object-contain"
+                                                />
+                                            </div>
+
+                                            {/* 제목 있으면 표시 */}
+                                            {img.title && (
+                                                <p className="font-semibold text-[#3B3B3B] text-center text-[12px] lg:text-[24px] mb-[8px] lg:mb-[20px]">
+                                                    {img.title}
+                                                </p>
+                                            )}
                                         </div>
-                                        {img.title && (
-                                            <p className="mt-[6px] text-[10px] lg:text-[14px] font-semibold text-[#3B3B3B]">
-                                                {img.title}
-                                            </p>
-                                        )}
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+
+                                {/* 본문 */}
+                                <p
+                                    className={`text-black leading-[1.6] text-[10px] lg:text-[18px] px-[15px] lg:px-[30px] py-[10px] lg:py-[20px] ${
+                                        isBleed ? "mt-0" : ""
+                                    }`}
+                                    dangerouslySetInnerHTML={{ __html: card.content }}
+                                />
                             </div>
-                            {/* 본문 */}
-                            <p className="text-black leading-[1.6]
-                                text-[10px] lg:text-[18px] px-[15px] lg:px-[30px] py-[10px] lg:py-[20px]"
-                               dangerouslySetInnerHTML={{__html: card.content}}
-                            />
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </section>
             {/* section7 - 생생후기 */}
