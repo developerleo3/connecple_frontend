@@ -38,6 +38,8 @@ const applicationProcess = [
 ]
 
 export default function WithGigPage() {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+
     const { ref: gigSection2Ref, inView } = useInView({
         triggerOnce: true,
         threshold: 0.6,
@@ -646,7 +648,7 @@ export default function WithGigPage() {
                         <div
                             className="fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[32px]"
                             style={{
-                                bottom: 100 + extraOffset, // 푸터 겹침 보정
+                                bottom: (isMobile ? 40 : 100) + extraOffset,
                                 transition: "bottom 200ms ease",
                             }}
                         >

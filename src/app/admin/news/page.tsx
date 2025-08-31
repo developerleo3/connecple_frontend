@@ -218,7 +218,7 @@ export default function AdminNewsPage() {
         setConfirmModal({
             isOpen: true,
             title: "등록하기",
-            message: "홈 화면에 이미지 슬라이드를 등록하시겠습니까?",
+            message: "뉴스를 등록하시겠습니까?",
             action: async () => {
                 setIsLoading(true)
                 try {
