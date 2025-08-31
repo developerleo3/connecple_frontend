@@ -16,16 +16,16 @@ import {Pagination, Navigation, Keyboard} from "swiper/modules";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
-const contents = [
+/*const programs = [
     {
         level: 'LEVEL 1',
         content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
         content2: "우측 이미지 클릭 (확대)",
         content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
-        img: "/withProject/section5_image1.png",
-        detail: [
+        imagePath: "/withProject/section5_image1.png",
+        programFiles: [
             {
-                src: "/withProject/section5_image1.png"
+                imagePath: "/withProject/section5_image1.png"
             }
         ]
     },
@@ -34,10 +34,10 @@ const contents = [
         content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
         content2: "우측 이미지 클릭 (확대)",
         content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
-        img: "/withProject/section5_image2.png",
-        detail: [
+        imagePath: "/withProject/section5_image2.png",
+        programFiles: [
             {
-                src: "/withProject/section5_image2.png"
+                imagePath: "/withProject/section5_image2.png"
             }
         ]
     },
@@ -46,19 +46,19 @@ const contents = [
         content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
         content2: "우측 이미지 클릭 (확대)",
         content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
-        img: "/withProject/section5_image3.png",
-        detail: [
+        imagePath: "/withProject/section5_image3.png",
+        programFiles: [
             {
-                src: "/withProject/section5_image3_1.png"
+                imagePath: "/withProject/section5_image3_1.png"
             },
             {
-                src: "/withProject/section5_image3_2.png"
+                imagePath: "/withProject/section5_image3_2.png"
             },
             {
-                src: "/withProject/section5_image3_3.png"
+                imagePath: "/withProject/section5_image3_3.png"
             },
             {
-                src: "/withProject/section5_image3_4.png"
+                imagePath: "/withProject/section5_image3_4.png"
             }
         ]
     },
@@ -67,19 +67,19 @@ const contents = [
         content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
         content2: "우측 이미지 클릭 (확대)",
         content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
-        img: "/withProject/section5_image4.png",
-        detail: [
+        imagePath: "/withProject/section5_image4.png",
+        programFiles: [
             {
-                src: "/withProject/section5_image4_1.png"
+                imagePath: "/withProject/section5_image4_1.png"
             },
             {
-                src: "/withProject/section5_image4_2.png"
+                imagePath: "/withProject/section5_image4_2.png"
             },
             {
-                src: "/withProject/section5_image4_3.png"
+                imagePath: "/withProject/section5_image4_3.png"
             },
             {
-                src: "/withProject/section5_image4_4.png"
+                imagePath: "/withProject/section5_image4_4.png"
             }
         ]
     },
@@ -88,23 +88,23 @@ const contents = [
         content1: "5일 * 4시간씩 (10시~14시) * 온라인 과정",
         content2: "우측 이미지 클릭 (확대)",
         content3: "* 레벨 1 수료증 발급<br />* 급여 지급 업무 1회 이상 투입<br />(업무 레벨 : 4차산업분야 교육/행사 지원 스텝)<br />* 단기 업무 연계 채널 초대",
-        img: "/withProject/section5_image5.png",
-        detail: [
+        imagePath: "/withProject/section5_image5.png",
+        programFiles: [
             {
-                src: "/withProject/section5_image5_1.png"
+                imagePath: "/withProject/section5_image5_1.png"
             },
             {
-                src: "/withProject/section5_image5_2.png"
+                imagePath: "/withProject/section5_image5_2.png"
             },
             {
-                src: "/withProject/section5_image5_3.png"
+                imagePath: "/withProject/section5_image5_3.png"
             },
             {
-                src: "/withProject/section5_image5_4.png"
+                imagePath: "/withProject/section5_image5_4.png"
             }
         ]
     }
-]
+]*/
 
 // 신청절차
 const applicationProcess = [
@@ -215,7 +215,23 @@ interface Links {
     linkPath: string
 }
 
+interface Programs {
+    level: string
+    content1: string
+    content2: string
+    content3: string
+    imagePath: string
+    programFiles: ProgramFiles[]
+}
+
+interface ProgramFiles {
+    programId: number
+    imagePath: string
+}
+
 export default function WithProjectPage() {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+
     const {ref: counterSectionRef, inView} = useInView({
         triggerOnce: true,
         threshold: 0.6,            // 더 많이 보였을 때만 발동
@@ -245,6 +261,9 @@ export default function WithProjectPage() {
 
     // 링크 설정
     const [links, setLinks] = useState<Links[]>([])
+
+    // 프로그램 설정
+    const [programs, setPrograms] = useState<Programs[]>([])
 
     const footerRef = useRef<HTMLElement | null>(null);
     const [footerHeight, setFooterHeight] = useState(0);
@@ -292,32 +311,47 @@ export default function WithProjectPage() {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    // 링크 불러오기
     useEffect(() => {
-        const fetchLinks = async () => {
-            try {
-                const res = await fetch(`${API_BASE_URL}/client/links`, {
+        let mounted = true;
+        setIsLoading(true);
+
+        (async () => {
+            const [linksRes, programsRes] = await Promise.allSettled([
+                fetch(`${API_BASE_URL}/client/links`, {
                     method: "GET",
                     credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
+                    headers: { "Content-Type": "application/json" },
+                }),
+                fetch(`${API_BASE_URL}/client/programs`, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json" },
+                }),
+            ]);
 
-                if (!res.ok) throw new Error("URL 정보를 불러오지 못했습니다.")
+            try {
+                // links
+                if (linksRes.status === "fulfilled" && linksRes.value.ok) {
+                    const data = await linksRes.value.json();
+                    if (mounted) setLinks(data);
+                } else if (mounted) {
+                    setError("URL 정보를 불러오지 못했습니다.");
+                }
 
-                const getLinks = await res.json();
-
-                setLinks(getLinks);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : "알 수 없는 오류")
+                // programs
+                if (programsRes.status === "fulfilled" && programsRes.value.ok) {
+                    const data = await programsRes.value.json();
+                    if (mounted) setPrograms(data);
+                } else if (mounted) {
+                    setError((prev) => prev ?? "프로그램 정보를 불러오지 못했습니다.");
+                }
             } finally {
-                setIsLoading(false)
+                if (mounted) setIsLoading(false);
             }
-        }
+        })();
 
-        fetchLinks()
-    }, [])
+        return () => { mounted = false; };
+    }, []);
 
     function ReviewFade({
                             className = "",
@@ -664,7 +698,7 @@ export default function WithProjectPage() {
                 {/* pc 레이아웃 */}
                 <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px] justify-between">
                     <div className="flex flex-col w-auto justify-center lg:mt-[26px] lg:gap-y-[60px]">
-                        {contents.map((_, idx) => (
+                        {programs.map((_, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => setSelected(idx)}
@@ -680,12 +714,11 @@ export default function WithProjectPage() {
                             </button>
                         ))}
                     </div>
-                    {/* 제목, 소제목, 전문성, 포인트 */}
                     <div className="flex flex-col justify-center lg:w-auto lg:h-[531px] lg:px-[43px]">
                         <div className="flex items-center justify-center  border-[#541E80]
                             border-[0.5px] w-[47px] h-[14px] mt-[10px] rounded-[20px] mb-[10px]
                             lg:border-[2px] lg:w-[142px] lg:h-[36px] lg:mt-[27px] lg:rounded-[20px] lg:mb-[32px]">
-                            <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{contents[selected].level}</p>
+                            <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{programs[selected].level}</p>
                         </div>
                         <div className="flex flex-row items-center">
                             <Image
@@ -699,7 +732,7 @@ export default function WithProjectPage() {
                             <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">교육 일정</p>
 
                         </div><p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                                 dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
+                                 dangerouslySetInnerHTML={{__html: programs[selected].content1}}/>
                         <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
                         <div className="flex flex-row items-center lg:mt-[35px]">
                             <Image
@@ -713,7 +746,7 @@ export default function WithProjectPage() {
                             <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">커리큘럼</p>
                         </div>
                         <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                           dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                           dangerouslySetInnerHTML={{__html: programs[selected].content2}}/>
                         <div className="lg:w-[411px] border-t-2 border-dotted lg:mt-[35px]"/>
                         <div className="flex flex-row items-center lg:mt-[35px]">
                             <Image
@@ -727,13 +760,13 @@ export default function WithProjectPage() {
                             <p className="font-extrabold text-[#541E80] lg:text-[25px] lg:ml-[15px]">수료자 혜택</p>
                         </div>
                         <p className="font-extrabold text-[#878787] lg:text-[18px] lg:mt-[5px]"
-                           dangerouslySetInnerHTML={{__html: contents[selected].content3}}/>
+                           dangerouslySetInnerHTML={{__html: programs[selected].content3}}/>
                     </div>
                     {/* 이미지 */}
                     <div
                         className="relative bg-[#D9D9D9] rounded-[20px] flex justify-center items-center lg:w-[493px] lg:h-[531px] cursor-pointer">
                         <Image
-                            src={contents[selected].img}
+                            src={programs[selected].imagePath}
                             alt="image"
                             width={selected === 0 || selected === 1 ? 487 : 444}
                             height={selected === 0 || selected === 1 ? 525 : 481}
@@ -751,7 +784,7 @@ export default function WithProjectPage() {
                 <div className="flex lg:hidden flex-col w-full h-auto mt-[19px]">
                     {/* 버튼 */}
                     <div className="flex flex-row w-auto justify-center gap-x-[9px]">
-                        {contents.map((_, idx) => (
+                        {programs.map((_, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => setSelected(idx)}
@@ -772,7 +805,7 @@ export default function WithProjectPage() {
                         <div className="flex flex-col w-full h-auto rounded-[10px] bg-white justify-center px-[16px] py-[10px]">
                             <div className="flex items-center justify-center  border-[#541E80]
                                 border-[0.5px] w-[47px] h-[14px] rounded-[20px]">
-                                <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{contents[selected].level}</p>
+                                <p className="font-bold text-[#541E80] text-[7px] lg:text-[20px]">{programs[selected].level}</p>
                             </div>
                             <div className="flex flex-row items-center mt-[9px]">
                                 <Image
@@ -785,7 +818,7 @@ export default function WithProjectPage() {
                                 <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">교육 일정</p>
                             </div>
                             <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
-                               dangerouslySetInnerHTML={{__html: contents[selected].content1}}/>
+                               dangerouslySetInnerHTML={{__html: programs[selected].content1}}/>
                             <div className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[6px] self-center"/>
                             <div className="flex flex-row items-center mt-[9px]">
                                 <Image
@@ -798,7 +831,7 @@ export default function WithProjectPage() {
                                 <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">커리큘럼</p>
                             </div>
                             <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
-                               dangerouslySetInnerHTML={{__html: contents[selected].content2}}/>
+                               dangerouslySetInnerHTML={{__html: programs[selected].content2}}/>
                             <div className="w-full border-[0.7px] border-dotted border-[#BDBDBD] mt-[3px] self-center"/>
                             <div className="flex flex-row items-center mt-[7px]">
                                 <Image
@@ -811,7 +844,7 @@ export default function WithProjectPage() {
                                 <p className="font-extrabold text-[#541E80] text-[10px] ml-[6px]">수료자 혜택</p>
                             </div>
                             <p className="font-bold text-[#878787] text-[8px] mt-[1px]"
-                               dangerouslySetInnerHTML={{__html: contents[selected].content3}}/>
+                               dangerouslySetInnerHTML={{__html: programs[selected].content3}}/>
                         </div>
                     </div>
                     {/* 이미지 */}
@@ -819,7 +852,7 @@ export default function WithProjectPage() {
                             w-[289px] h-auto self-center mt-[11px]
                             ${selected === 0 || selected === 1 ? "p-[1px]" : "p-[15px]"}`}>
                         <Image
-                            src={contents[selected].img}
+                            src={programs[selected].imagePath}
                             alt="image"
                             width={487}
                             height={525}
@@ -863,15 +896,15 @@ export default function WithProjectPage() {
                                         prevEl: "#modal-prev",
                                     }}
                                     keyboard={{enabled: true}}
-                                    loop={contents[selected].detail.length > 1}
+                                    loop={programs[selected].programFiles.length > 1}
                                     className="w-full h-full rounded-[12px] bg-white"
                                 >
-                                    {contents[selected].detail.map((d, i) => (
+                                    {programs[selected].programFiles.map((d, i) => (
                                         <SwiperSlide key={i}>
                                             <div
                                                 className="relative w-full h-[calc(80vh-80px)] lg:h-[calc(798px-80px)]">
                                                 <Image
-                                                    src={d.src}
+                                                    src={d.imagePath}
                                                     alt={`detail-${i + 1}`}
                                                     fill
                                                     unoptimized
@@ -885,7 +918,7 @@ export default function WithProjectPage() {
                                 </Swiper>
 
                                 {/* 좌/우 네비게이션 버튼: 모바일에서는 숨김, PC에서만 보이게 */}
-                                {contents[selected].detail.length > 1 && (
+                                {programs[selected].programFiles.length > 1 && (
                                     <>
                                         <button
                                             id="modal-prev"
@@ -1347,7 +1380,7 @@ export default function WithProjectPage() {
                         <div
                             className="fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[32px]"
                             style={{
-                                bottom: 100 + extraOffset, // 기존 로직 유지
+                                bottom: (isMobile ? 20 : 100) + extraOffset,
                                 transition: "bottom 200ms ease",
                             }}
                         >
