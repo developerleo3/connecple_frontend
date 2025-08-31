@@ -50,6 +50,8 @@ interface Links {
 }
 
 export default function WithConnecdayPage() {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+
     // section1의 '원래 버튼' 가시성 관찰
     const {ref: btnRef, inView: isBtnVisible} = useInView({
         threshold: 0,
@@ -359,7 +361,7 @@ export default function WithConnecdayPage() {
             </section>
             {/* section3 - 버튼 클릭에 따라 콘텐츠 변경 */}
             <section className="flex flex-row w-full justify-between h-auto
-                    px-[30px] mt-[88px] gap-x-[10px]
+                    px-[30px] mt-[88px] gap-x-[10px] mb-[100px]
                     lg:px-[130px] lg:py-[90px] lg:mt-[300px]">
                 <div className="flex flex-col">
                     <h1 className="font-black text-[#541E80] text-[15px] lg:text-[45px]">PROGRAM</h1>
@@ -434,7 +436,7 @@ export default function WithConnecdayPage() {
                     <div
                         className="fixed left-1/2 -translate-x-1/2 z-50"
                         style={{
-                            bottom: 100 + extraOffset,   // 푸터와 겹치면 자연스럽게 위로
+                            bottom: (isMobile ? 40 : 100) + extraOffset,  // 모바일이면 60, PC는 100
                             transition: "bottom 200ms ease",
                         }}
                     >

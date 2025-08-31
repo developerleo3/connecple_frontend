@@ -21,6 +21,8 @@ interface NewsLetter {
 }
 
 export default function WithNewsletterPage() {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+
     // 1) section1의 버튼 덩어리가 화면에 보이는지 관찰
     const {ref: btnGroupRef, inView: isBtnGroupVisible} = useInView({
         threshold: 0,          // 살짝만 보여도 "보임"으로 처리
@@ -423,7 +425,7 @@ export default function WithNewsletterPage() {
                     <div
                         className="fixed left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[40px]"
                         style={{
-                            bottom: 100 + extraOffset, // 푸터와 겹치면 자연스럽게 위로 밀림
+                            bottom: (isMobile ? 20 : 100) + extraOffset,
                             transition: "bottom 200ms ease",
                         }}
                     >
