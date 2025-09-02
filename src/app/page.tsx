@@ -17,6 +17,8 @@ import { useEffect, useState } from "react"
 import {motion} from "framer-motion";
 import LoadingSpinner from "@/components/loading-spinner";
 
+import FloatingSnsFab from "@/components/FloatingSnsFab";
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 interface imageSlides {
@@ -875,6 +877,17 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            <FloatingSnsFab
+                items={[
+                    { name: "Instagram", href: "https://www.instagram.com/cnp.withproject", iconSrc: "/sns/instagram.png" },
+                    { name: "newsletter", href: "https://connecple.stibee.com/subscribe", iconSrc: "/sns/newsletter.png" },
+                    { name: "naverblog", href: "https://m.blog.naver.com/connecple2022", iconSrc: "/sns/naverblog.png" },
+                    { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
+                ]}
+                // 위치 커스터마이즈 하고싶으면:
+                positionClass="right-3 bottom-3 lg:right-10 lg:bottom-10"
+            />
         </main>
     );
 }
