@@ -115,6 +115,8 @@ export default function WithNewsletterPage() {
                 // /client/news 가 '그냥 리스트'라면 아래처럼 바로 배열로 받기
                 const getNews = (await resNews.json()) as NewsLetter[];
 
+                console.log('links : ', getLinks);
+
                 setLinks(getLinks);
                 setNewsList(getNews);
             } catch (err) {
@@ -430,7 +432,7 @@ export default function WithNewsletterPage() {
                         }}
                     >
                         <Link
-                            href={links[2]?.linkPath || "https://www.connecple.com"}
+                            href={links[3]?.linkPath || "https://www.connecple.com"}
                             target="_blank"
                             className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
@@ -438,7 +440,7 @@ export default function WithNewsletterPage() {
                             위드뉴스레터 무료 구독
                         </Link>
                         <Link
-                            href={links[2]?.linkPath || "https://www.connecple.com"} // TODO: 이메일 바로가기?
+                            href={links[4]?.linkPath || "https://www.connecple.com"}
                             className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
                             lg:mt-[19px] w-[131px] h-[25px] text-[10px]
                             lg:w-[388px] lg:h-[60px] lg:text-[27px]">
