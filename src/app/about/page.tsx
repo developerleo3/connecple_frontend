@@ -306,8 +306,8 @@ export default function AboutPage() {
                     {stories.map((item, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center hover:scale-110 transition">
-                            <div className="relative w-full h-[57px] lg:h-[200px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
+                            className="flex flex-col w-[60px] lg:w-[300px] h-auto items-center hover:scale-110 transition">
+                            <div className="relative w-full h-[50px] lg:h-[200px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
                                 <Image
                                     src={item.imagePath}
                                     alt="alt"
