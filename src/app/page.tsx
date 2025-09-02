@@ -630,10 +630,10 @@ export default function Home() {
                         당신과의 시간과 당신의 가능성은 소중합니다.
                     </p>
                     {/* 네비게이션 화살표 */}
-                    <div
-                        className="flex justify-end gap-[10px] mt-[-20px] mb-[10px] lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
+                    <div className="flex justify-end gap-[10px] mt-[-20px] mb-[10px]
+                        lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
                         {/* 왼쪽 */}
-                        <button
+                        {/*<button
                             onClick={prev}
                             disabled={index === 0}
                             className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:scale-120 transition`}
@@ -646,9 +646,9 @@ export default function Home() {
                                 unoptimized
                                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index === 0 ? "" : "rotate-180"}`}
                             />
-                        </button>
+                        </button>*/}
                         {/* 오른쪽 */}
-                        <button
+                        {/*<button
                             onClick={next}
                             disabled={index >= newsLetters.length - 2}
                             className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-120 transition'}`}
@@ -661,7 +661,7 @@ export default function Home() {
                                 unoptimized
                                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
                             />
-                        </button>
+                        </button>*/}
                     </div>
                     {/* 뉴스 카드 */}
                     <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px]">

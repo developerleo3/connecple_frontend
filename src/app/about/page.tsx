@@ -302,12 +302,12 @@ export default function AboutPage() {
             </section>
             {/* section4 - 사진 */}
             <section className="flex w-full h-auto px-[30px] lg:px-[157px]">
-                <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
+                <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px] gap-x-[10px] lg:gap-x-[30px]">
                     {stories.map((item, idx) => (
                         <div
                             key={idx}
                             className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center hover:scale-110 transition">
-                            <div className="relative w-full h-[87px] lg:h-[279px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
+                            <div className="relative w-full h-[57px] lg:h-[200px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
                                 <Image
                                     src={item.imagePath}
                                     alt="alt"
