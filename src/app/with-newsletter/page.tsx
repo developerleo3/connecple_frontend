@@ -424,27 +424,33 @@ export default function WithNewsletterPage() {
                 </div>
             </section>
             {showStickyBar && (
-                <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
-                    <div
-                        className="fixed left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[40px]"
-                        style={{
-                            bottom: (isMobile ? 20 : 100) + extraOffset,
-                            transition: "bottom 200ms ease",
-                        }}
-                    >
+                <div
+                    className="fixed inset-x-0 bottom-0 z-50 bg-white/95 backdrop-blur border-t border-gray-200"
+                    style={{
+                        bottom: extraOffset,                    // 푸터 올라오면 그만큼 위로
+                        transition: "bottom 200ms ease",
+                        paddingBottom: "env(safe-area-inset-bottom)", // iOS 안전영역
+                    }}
+                >
+                    <div className="mx-auto max-w-screen-md px-4 py-3 lg:py-10 flex justify-center gap-x-[13px] lg:gap-x-[40px]">
                         <Link
                             href={links[3]?.linkPath || "https://www.connecple.com"}
                             target="_blank"
-                            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
-                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                            className="bg-[#541E80] text-white flex items-center justify-center font-extrabold rounded-[30px]
+                   hover:scale-105 transition
+                   w-[131px] h-[25px] text-[10px]
+                   lg:w-[388px] lg:h-[60px] lg:text-[27px]"
+                        >
                             위드뉴스레터 무료 구독
                         </Link>
                         <Link
                             href={links[4]?.linkPath || "https://www.connecple.com"}
-                            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                            lg:mt-[19px] w-[131px] h-[25px] text-[10px]
-                            lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                            target="_blank"
+                            className="bg-[#541E80] text-white flex items-center justify-center font-extrabold rounded-[30px]
+                   hover:scale-105 transition
+                   w-[131px] h-[25px] text-[10px]
+                   lg:w-[388px] lg:h-[60px] lg:text-[27px]"
+                        >
                             뉴스레터 파트너 문의하기
                         </Link>
                     </div>
@@ -458,7 +464,7 @@ export default function WithNewsletterPage() {
                     { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
                 ]}
                 // 위치 커스터마이즈 하고싶으면:
-                positionClass="right-3 bottom-3 lg:right-10 lg:bottom-10"
+                positionClass="right-3 bottom-15 lg:right-10 lg:bottom-40"
             />
         </main>
     );

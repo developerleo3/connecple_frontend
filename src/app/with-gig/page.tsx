@@ -645,29 +645,31 @@ export default function WithGigPage() {
                     </div>
                 </div>
                 {showStickyBar && (
-                    <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
-                        <div
-                            className="fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[32px]"
-                            style={{
-                                bottom: (isMobile ? 40 : 100) + extraOffset,
-                                transition: "bottom 200ms ease",
-                            }}
-                        >
+                    <div
+                        className="fixed inset-x-0 bottom-0 z-50 bg-white/95 backdrop-blur border-t border-gray-200"
+                        style={{
+                            bottom: extraOffset,                 // 푸터 올라오면 그만큼 위로
+                            transition: "bottom 200ms ease",
+                            paddingBottom: "env(safe-area-inset-bottom)", // iOS 안전영역
+                        }}
+                    >
+                        <div className="mx-auto max-w-screen-md px-4 py-3 lg:py-10 flex justify-center gap-x-[13px] lg:gap-x-[32px]">
                             <Link
                                 href={links[5]?.linkPath || "https://www.connecple.com"}
                                 target="_blank"
-                                className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-                                    w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-                                    lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                                className="bg-[#541E80] text-white flex items-center justify-center hover:scale-105 transition
+                   w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                   lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
                             >
                                 위드긱 ‘참여자’ 신청
                             </Link>
+
                             <Link
                                 href={links[6]?.linkPath || "https://www.connecple.com"}
                                 target="_blank"
-                                className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-                                    w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-                                    lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                                className="bg-[#541E80] text-white flex items-center justify-center hover:scale-105 transition
+                   w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                   lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
                             >
                                 위드긱 ‘수요기업’ 신청
                             </Link>
@@ -683,7 +685,7 @@ export default function WithGigPage() {
                     { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
                 ]}
                 // 위치 커스터마이즈 하고싶으면:
-                positionClass="right-3 bottom-3 lg:right-10 lg:bottom-10"
+                positionClass="right-3 bottom-15 lg:right-10 lg:bottom-40"
             />
         </main>
     );
