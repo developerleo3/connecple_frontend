@@ -63,7 +63,7 @@ export default function AdminStoryPage() {
     })
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
-    const maxCount = 3
+    const maxCount = 5
     const currentCount = storyList.length
 
     /* ========= 데이터 로드 (스토리 리스트만) ========= */

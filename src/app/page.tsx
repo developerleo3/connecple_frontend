@@ -17,6 +17,8 @@ import { useEffect, useState } from "react"
 import {motion} from "framer-motion";
 import LoadingSpinner from "@/components/loading-spinner";
 
+import FloatingSnsFab from "@/components/FloatingSnsFab";
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 interface imageSlides {
@@ -628,10 +630,10 @@ export default function Home() {
                         당신과의 시간과 당신의 가능성은 소중합니다.
                     </p>
                     {/* 네비게이션 화살표 */}
-                    <div
-                        className="flex justify-end gap-[10px] mt-[-20px] mb-[10px] lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
+                    <div className="flex justify-end gap-[10px] mt-[-20px] mb-[10px]
+                        lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
                         {/* 왼쪽 */}
-                        <button
+                        {/*<button
                             onClick={prev}
                             disabled={index === 0}
                             className={`w-6 h-6 lg:w-8 lg:h-8 ${index === 0 ? 'cursor-not-allowed' : 'cursor-pointer'} hover:scale-120 transition`}
@@ -644,9 +646,9 @@ export default function Home() {
                                 unoptimized
                                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index === 0 ? "" : "rotate-180"}`}
                             />
-                        </button>
+                        </button>*/}
                         {/* 오른쪽 */}
-                        <button
+                        {/*<button
                             onClick={next}
                             disabled={index >= newsLetters.length - 2}
                             className={`w-6 h-6 lg:w-8 lg:h-8 ${index >= newsLetters.length - 2 ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-120 transition'}`}
@@ -659,7 +661,7 @@ export default function Home() {
                                 unoptimized
                                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
                             />
-                        </button>
+                        </button>*/}
                     </div>
                     {/* 뉴스 카드 */}
                     <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px]">
@@ -875,6 +877,17 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            <FloatingSnsFab
+                items={[
+                    { name: "Instagram", href: "https://www.instagram.com/cnp.withproject", iconSrc: "/sns/instagram.png" },
+                    { name: "newsletter", href: "https://connecple.stibee.com/subscribe", iconSrc: "/sns/newsletter.png" },
+                    { name: "naverblog", href: "https://m.blog.naver.com/connecple2022", iconSrc: "/sns/naverblog.png" },
+                    { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
+                ]}
+                // 위치 커스터마이즈 하고싶으면:
+                positionClass="right-3 bottom-3 lg:right-10 lg:bottom-10"
+            />
         </main>
     );
 }

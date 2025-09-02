@@ -13,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import {Pagination, Navigation, Keyboard} from "swiper/modules";
+import FloatingSnsFab from "@/components/FloatingSnsFab";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -696,23 +697,26 @@ export default function WithProjectPage() {
                 className="flex flex-col w-full h-auto justify-center mt-[23px] px-[30px] lg:mt-[109px] lg:px-[146px]">
                 <h1 className="self-center lg:self-start font-black text-[#541E80] text-[15px] mt-[55px] lg:text-[45px] lg:mt-[117px]">PROGRAM</h1>
                 {/* pc 레이아웃 */}
-                <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px] justify-between">
-                    <div className="flex flex-col w-auto justify-center lg:mt-[26px] lg:gap-y-[60px]">
-                        {programs.map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => setSelected(idx)}
-                                className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer hover:scale-110 transition
+                <div className="hidden lg:flex flex-row w-full h-auto lg:mt-[26px] justify-between border-[#CDB5B5]">
+                    <div className="flex flex-row relative">
+                        <div className="border-[1px] border-[#CDB5B5] shadow-[0px_4px_4px_0_rgba(0,0,0,0.25)]" />
+                        <div className="flex flex-col w-auto lg:mt-[26px] lg:gap-y-[60px] lg:ml-[-36.5px] lg:pt-[50px]">
+                            {programs.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setSelected(idx)}
+                                    className={`w-[108px] h-[35px] clip-trapezoid rotate-90 flex justify-center items-center z-0 cursor-pointer hover:scale-110 transition
                                 ${
-                                    selected === idx ? "bg-[#541E80] z-10" : "bg-[#D9D9D9] z-0"
-                                }`}
-                            >
-                                <p className={`font-bold text-[30px] rotate-270 ${
-                                    selected === idx ? "text-[#D9D9D9]" : "text-[#5D5D5D]"}`}>
-                                    {idx + 1}
-                                </p>
-                            </button>
-                        ))}
+                                        selected === idx ? "bg-[#541E80] z-10" : "bg-[#D9D9D9] z-0"
+                                    }`}
+                                >
+                                    <p className={`font-bold text-[30px] rotate-270 ${
+                                        selected === idx ? "text-[#D9D9D9]" : "text-[#5D5D5D]"}`}>
+                                        {idx + 1}
+                                    </p>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                     <div className="flex flex-col justify-center lg:w-auto lg:h-[531px] lg:px-[43px]">
                         <div className="flex items-center justify-center  border-[#541E80]
@@ -1245,7 +1249,7 @@ export default function WithProjectPage() {
                         },
                         {
                             question: "위드프로젝트 전체 레벨을 수강하셨던데요!",
-                            answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했습니다. 레벨 3이 되니 커뮤니케이션 역량이 많이 필요하다는 생각이<br />들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
+                            answer: "ICT분야도, 프로젝트 매니저라는 업무도 처음이다 보니 레벨1부터 차근차근 배우기 시작했습니다. 레벨 3이 되니 커뮤니케이션 역량이<br /> 많이 필요하다는 생각이 들었어요! 가지고 있던 기존의 커리어를 잘 살려주신 덕분에 여러 프로젝트에 참여할 수 있었어요!",
                         },
                         {
                             question: "위드프로젝트와 타교육의 차이점이 있나요?",
@@ -1376,20 +1380,22 @@ export default function WithProjectPage() {
                 </h3>
                 {/* 고정 하단 액션바 */}
                 {showStickyBar && (
-                    <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
-                        <div
-                            className="fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 flex gap-x-[13px] lg:gap-x-[32px]"
-                            style={{
-                                bottom: (isMobile ? 20 : 100) + extraOffset,
-                                transition: "bottom 200ms ease",
-                            }}
-                        >
+                    <div
+                        className="fixed inset-x-0 z-50 bg-white/95 backdrop-blur border-t border-gray-200"
+                        // 푸터에 겹치면 extraOffset 만큼 위로 올림
+                        style={{
+                            bottom: extraOffset,                       // 핵심
+                            transition: "bottom 200ms ease",
+                            paddingBottom: "env(safe-area-inset-bottom)", // iOS 안전 영역
+                        }}
+                    >
+                        <div className="mx-auto max-w-screen-xl px-4 py-3 lg:py-10 flex justify-center gap-x-[13px] lg:gap-x-[32px]">
                             <Link
                                 href={links[1]?.linkPath || 'https://www.connecple.com'}
                                 target="_blank"
                                 className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-                                w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-                                lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                   w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                   lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
                             >
                                 무료 교육 수강
                             </Link>
@@ -1397,8 +1403,8 @@ export default function WithProjectPage() {
                                 href={links[0]?.linkPath || 'https://www.connecple.com'}
                                 target="_blank"
                                 className="bg-[#541E80] text-white self-center flex items-center justify-center hover:scale-105 transition
-                                w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
-                                lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
+                   w-[159px] h-[25px] text-[10px] rounded-[30px] font-bold
+                   lg:w-[388px] lg:h-[60px] lg:text-[23px] lg:rounded-[30px] lg:font-extrabold"
                             >
                                 위드프로젝트 신청
                             </Link>
@@ -1406,6 +1412,16 @@ export default function WithProjectPage() {
                     </div>
                 )}
             </section>
+            <FloatingSnsFab
+                items={[
+                    { name: "Instagram", href: "https://www.instagram.com/cnp.withproject", iconSrc: "/sns/instagram.png" },
+                    { name: "newsletter", href: "https://connecple.stibee.com/subscribe", iconSrc: "/sns/newsletter.png" },
+                    { name: "naverblog", href: "https://m.blog.naver.com/connecple2022", iconSrc: "/sns/naverblog.png" },
+                    { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
+                ]}
+                // 위치 커스터마이즈 하고싶으면:
+                positionClass="right-3 bottom-15 lg:right-10 lg:bottom-40"
+            />
         </main>
     );
 }

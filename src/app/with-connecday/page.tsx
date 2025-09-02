@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useState, useEffect, useRef} from "react";
 import {useInView} from "react-intersection-observer";
 import LoadingSpinner from "@/components/loading-spinner";
+import FloatingSnsFab from "@/components/FloatingSnsFab";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -415,7 +416,7 @@ export default function WithConnecdayPage() {
                     width={124}
                     height={195}
                     unoptimized
-                    className="object-contain rounded-[20px] lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
+                    className="object-cover rounded-[20px] lg:w-[514px] lg:h-[636px] lg:rounded-[30px]"
                 />
             </section>
             {/*<section className="flex flex-col w-full h-auto mt-[10px] px-[30px] mb-[84px] lg:mt-[28px] lg:px-[146px] lg:mb-[300px]">*/}
@@ -432,25 +433,38 @@ export default function WithConnecdayPage() {
             {/*    </Link>*/}
             {/*</section> */}
             {showStickyBar && (
-                <div className="fixed inset-x-0 bottom-0 z-50 bg-white/90 backdrop-blur border-t border-gray-200">
-                    <div
-                        className="fixed left-1/2 -translate-x-1/2 z-50"
-                        style={{
-                            bottom: (isMobile ? 40 : 100) + extraOffset,  // 모바일이면 60, PC는 100
-                            transition: "bottom 200ms ease",
-                        }}
-                    >
+                <div
+                    className="fixed inset-x-0 z-50 bg-white/95 backdrop-blur border-t border-gray-200"
+                    style={{
+                        bottom: extraOffset,                      // 푸터 겹침 보정만 적용
+                        transition: "bottom 200ms ease",
+                        paddingBottom: "env(safe-area-inset-bottom)", // iOS 안전영역
+                    }}
+                >
+                    <div className="mx-auto max-w-screen-md px-4 py-3 lg:py-10 flex justify-center">
                         <Link
                             href={links[2]?.linkPath || "https://www.connecple.com"}
                             target="_blank"
-                            className="bg-[#541E80] text-white flex self-center items-center justify-center font-extrabold rounded-[30px] hover:scale-105 transition
-                                mt-[9px] w-[159px] h-[25px] text-[10px]
-                                lg:mt-[19px] lg:w-[388px] lg:h-[60px] lg:text-[27px]">
+                            className="bg-[#541E80] text-white flex items-center justify-center font-extrabold rounded-[30px]
+                   hover:scale-105 transition
+                   w-[159px] h-[25px] text-[10px]
+                   lg:w-[388px] lg:h-[60px] lg:text-[27px]"
+                        >
                             위드커넥데이 무료 신청
                         </Link>
                     </div>
                 </div>
             )}
+            <FloatingSnsFab
+                items={[
+                    { name: "Instagram", href: "https://www.instagram.com/cnp.withproject", iconSrc: "/sns/instagram.png" },
+                    { name: "newsletter", href: "https://connecple.stibee.com/subscribe", iconSrc: "/sns/newsletter.png" },
+                    { name: "naverblog", href: "https://m.blog.naver.com/connecple2022", iconSrc: "/sns/naverblog.png" },
+                    { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
+                ]}
+                // 위치 커스터마이즈 하고싶으면:
+                positionClass="right-3 bottom-15 lg:right-10 lg:bottom-40"
+            />
         </main>
     );
 }

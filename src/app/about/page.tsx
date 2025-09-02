@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import {useEffect, useRef, useState} from "react";
 import LoadingSpinner from "@/components/loading-spinner";
+import FloatingSnsFab from "@/components/FloatingSnsFab";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -301,12 +302,12 @@ export default function AboutPage() {
             </section>
             {/* section4 - 사진 */}
             <section className="flex w-full h-auto px-[30px] lg:px-[157px]">
-                <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px]">
+                <div className="flex flex-row justify-between w-full h-auto my-[63px] lg:my-[203px] gap-x-[10px] lg:gap-x-[30px]">
                     {stories.map((item, idx) => (
                         <div
                             key={idx}
                             className="flex flex-col w-[108px] lg:w-[314px] h-auto items-center hover:scale-110 transition">
-                            <div className="relative w-full h-[87px] lg:h-[279px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
+                            <div className="relative w-full h-[57px] lg:h-[200px] rounded-[10px] lg:rounded-[30px] overflow-hidden">
                                 <Image
                                     src={item.imagePath}
                                     alt="alt"
@@ -615,6 +616,17 @@ export default function AboutPage() {
                     )}
                 </div>
             </section>
+
+            <FloatingSnsFab
+                items={[
+                    { name: "Instagram", href: "https://www.instagram.com/cnp.withproject", iconSrc: "/sns/instagram.png" },
+                    { name: "newsletter", href: "https://connecple.stibee.com/subscribe", iconSrc: "/sns/newsletter.png" },
+                    { name: "naverblog", href: "https://m.blog.naver.com/connecple2022", iconSrc: "/sns/naverblog.png" },
+                    { name: "linktree", href: "https://linktr.ee/connecple", iconSrc: "/sns/linktree.png" },
+                ]}
+                // 위치 커스터마이즈 하고싶으면:
+                positionClass="right-3 bottom-3 lg:right-10 lg:bottom-10"
+            />
         </main>
     )
 }
