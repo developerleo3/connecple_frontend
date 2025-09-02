@@ -630,8 +630,8 @@ export default function Home() {
                         당신과의 시간과 당신의 가능성은 소중합니다.
                     </p>
                     {/* 네비게이션 화살표 */}
-                    <div className="flex justify-end gap-[10px] mt-[-20px] mb-[10px]
-                        lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">
+                    {/*<div className="flex justify-end gap-[10px] mt-[-20px] mb-[10px]
+                        lg:gap-[44px] lg:mt-[-20px] lg:mb-[33px]">*/}
                         {/* 왼쪽 */}
                         {/*<button
                             onClick={prev}
@@ -662,9 +662,9 @@ export default function Home() {
                                 className={`lg:w-[32px] lg:h-[32px] object-contain ${index >= newsLetters.length - 2 ? "rotate-180" : ""}`}
                             />
                         </button>*/}
-                    </div>
+                    {/*</div>*/}
                     {/* 뉴스 카드 */}
-                    <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px]">
+                    <div className="grid grid-cols-2 w-full gap-[11px] lg:gap-[16px] mt-[10px] lg:mt-[30px]">
                         {[newsLetters[index], newsLetters[index + 1]].map((item, i) => (
                             <div
                                 key={i}
