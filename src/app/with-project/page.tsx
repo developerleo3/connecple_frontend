@@ -419,7 +419,7 @@ export default function WithProjectPage() {
                         lg:text-[23px] lg:mt-[54px]">
                         위드프로젝트는 <span className="text-[#541E80] font-extrabold">실무 능력·실전 경험·급여 수익까지 한 번에<br/>
                         잡는 ‘단기 완성 온라인 실전 교육’ 프로그램</span>입니다.<br/>
-                        교육 수료 후엔 수료 레벨에 맞는 급여 지급 업무에 투입돼, 4차차 산업 분야에서의<br/>
+                        교육 수료 후엔 수료 레벨에 맞는 급여 지급 업무에 투입돼, 4차 산업 분야에서의<br/>
                         <span className="font-extrabold">스텝·인턴·매니저로 활약하실 수 있는 기회를 제공</span>합니다.<br/><br/>
 
                         교육부터 실전까지 단계별 수강이 가능하며, 단계가 높아질수록 실무 연계 기회는 더 많아집니다.<br/><br/>
