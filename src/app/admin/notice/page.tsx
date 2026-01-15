@@ -199,9 +199,10 @@ export default function NoticeListPage() {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
+            // hour: "2-digit",
+            // minute: "2-digit",
         })
+            .replace(/\.$/, ""); // ← 마지막 점 제거
     }
 
     // Pagination logic
@@ -317,7 +318,7 @@ export default function NoticeListPage() {
                                     <TableHead
                                         className="text-white text-base font-medium text-center align-middle py-3">제목</TableHead>
                                     <TableHead
-                                        className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                                        className="text-white text-base font-medium text-center align-middle py-3">작성일</TableHead>
                                     <TableHead
                                         className="text-white text-base font-medium text-center align-middle py-3">상태</TableHead>
                                 </TableRow>

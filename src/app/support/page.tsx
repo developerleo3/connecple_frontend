@@ -278,9 +278,10 @@ export default function SupportPage() {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
+            // hour: "2-digit",
+            // minute: "2-digit",
         })
+            .replace(/\.$/, ""); // ← 마지막 점 제거
     }
 
     // Pagination logic
@@ -403,7 +404,7 @@ export default function SupportPage() {
                                         <TableRow>
                                             <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
                                             <TableHead className="text-white text-base font-medium text-center align-middle py-3">제목</TableHead>
-                                            <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                                            <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일</TableHead>
                                             <TableHead className="text-white text-base font-medium text-center align-middle py-3">파일갯수</TableHead>
                                         </TableRow>
                                     </TableHeader>
@@ -443,7 +444,7 @@ export default function SupportPage() {
                                         <TableRow>
                                             <TableHead className="text-white text-base font-medium text-center align-middle py-3">카테고리</TableHead>
                                             <TableHead className="text-white text-base font-medium text-center align-middle py-3">질문</TableHead>
-                                            <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                                            <TableHead className="text-white text-base font-medium text-center align-middle py-3">작성일</TableHead>
                                             <TableHead className="text-white text-base font-medium text-center align-middle py-3">파일갯수</TableHead>
                                         </TableRow>
                                     </TableHeader>

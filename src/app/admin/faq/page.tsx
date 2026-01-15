@@ -205,8 +205,8 @@ export default function FaqListPage() {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
+            // hour: "2-digit",
+            // minute: "2-digit",
         })
     }
 
@@ -323,7 +323,7 @@ export default function FaqListPage() {
                                     <TableHead
                                         className="text-white text-base font-medium text-center align-middle py-3">질문</TableHead>
                                     <TableHead
-                                        className="text-white text-base font-medium text-center align-middle py-3">작성일자</TableHead>
+                                        className="text-white text-base font-medium text-center align-middle py-3">작성일</TableHead>
                                     <TableHead
                                         className="text-white text-base font-medium text-center align-middle py-3">상태</TableHead>
                                 </TableRow>

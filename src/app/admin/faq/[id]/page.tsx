@@ -414,9 +414,10 @@ export default function FaqDetailPage() {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
+            // hour: "2-digit",
+            // minute: "2-digit",
         })
+            .replace(/\.$/, ""); // ← 마지막 점 제거
     }
 
     if (loading && !faq) {
@@ -506,7 +507,7 @@ export default function FaqDetailPage() {
                             )}
 
                             <div>
-                                <Label className="text-gray-600 mb-2">작성일시</Label>
+                                <Label className="text-gray-600 mb-2">작성일</Label>
                                 <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(faq.createdAt)}</div>
                             </div>
 

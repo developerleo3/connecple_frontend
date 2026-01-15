@@ -421,9 +421,10 @@ export default function NoticeDetailPage() {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
+            // hour: "2-digit",
+            // minute: "2-digit",
         })
+            .replace(/\.$/, ""); // ← 마지막 점 제거
     }
 
     if (loading && !notice) {
@@ -512,7 +513,7 @@ export default function NoticeDetailPage() {
                             )}
 
                             <div>
-                                <Label className="text-gray-600 mb-2">작성일시</Label>
+                                <Label className="text-gray-600 mb-2">작성일</Label>
                                 <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(notice.createdAt)}</div>
                             </div>
 
