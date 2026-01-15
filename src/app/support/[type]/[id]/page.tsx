@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { useRouter, useParams } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
+import {useState, useEffect} from "react"
+import {useRouter, useParams} from "next/navigation"
+import {Button} from "@/components/ui/button"
+import {Label} from "@/components/ui/label"
 import AlertModal from "@/components/alert-modal"
 import {Download, List} from "lucide-react"
 import LoadingSpinner from "@/components/loading-spinner";
@@ -180,7 +180,7 @@ export default function SupportDetailPage() {
             <div className="flex min-h-screen bg-gray-50">
                 <div className="flex-1 p-6">
                     <div className="flex justify-center items-center h-64">
-                        <LoadingSpinner />
+                        <LoadingSpinner/>
                     </div>
                 </div>
             </div>
@@ -225,78 +225,89 @@ export default function SupportDetailPage() {
     const files = isNotice ? notice!.files ?? [] : faq!.files ?? [];
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
-            <div className="flex-1 p-6">
-                <div className="max-w-4xl mx-auto">
-                    <div className="p-6 space-y-10 relative pb-12 bg-white rounded-lg shadow-sm border border-gray-200">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <Label className="text-gray-600 mb-2">카테고리</Label>
-                                <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">
-                                    {categoryText}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <Label className="text-gray-600 mb-2">
-                                {isNotice ? "공지사항 제목" : "질문"}
-                            </Label>
-                            <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">
-                                {titleText}
-                            </div>
-                        </div>
-                        <div>
-                            <Label className="text-gray-600 mb-2">
-                                {supportType === "notices" ? "공지사항 내용" : "답변"}
-                            </Label>
-                            <div
-                                className="mt-1 p-4 bg-white rounded-lg shadow-sm border border-gray-200 min-h-[300px] max-h-[300px]"
-                                style={{ maxHeight: "300px", overflowY: "auto", whiteSpace: "pre-wrap" }}
-                                dangerouslySetInnerHTML={{__html: formatContentForView(html)}}
-                            />
-                        </div>
-
-                        {files && files.length > 0 && (
-                            <div>
-                                <Label className="text-gray-600 mb-2">첨부 파일</Label>
-                                <ul className="space-y-2">
-                                    {files.map((file) => (
-                                        <li key={file.id} className="flex items-center justify-between bg-gray-50 p-2 rounded-md">
-                                            <span className="text-sm text-gray-600 truncate max-w-[500px]" title={file.originalFileName}>{file.originalFileName}</span>
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                onClick={() => handleDownload(file)}
-                                                className="text-blue-600 hover:text-blue-800"
-                                            >
-                                                <Download className="h-4 w-4" />
-                                            </Button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-
-                        <div>
-                            <Label className="text-gray-600 mb-2">작성일</Label>
-                            <div className="mt-1 p-2 bg-white rounded-lg shadow-sm border border-gray-200">{formatDate(createdAtText)}</div>
-                        </div>
-
-                        <div className="absolute bottom-6 right-6 flex gap-2">
-                            <Button variant="outline" onClick={() => router.push("/support")} className="text-gray-600 font-medium border-gray-600 hover:bg-gray-50 hover:cursor-pointer">
-                                <List className="h-4 w-4 mr-1" />
-                                목록으로
-                            </Button>
-                        </div>
-                    </div>
-                    <AlertModal
-                        isOpen={alertModal.isOpen}
-                        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
-                        title={alertModal.title}
-                        message={alertModal.message}
-                        type={alertModal.type}
-                    />
+        <div className="max-w-4xl mx-auto mt-10">
+            <article className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+                {/* Meta */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500">
+                    <span className="font-medium text-gray-700">{categoryText}</span>
+                    <span className="text-gray-300">|</span>
+                    <time>{formatDate(createdAtText)}</time>
                 </div>
-            </div>
+
+                {/* Title */}
+                <h1 className="mt-3 text-2xl font-bold text-gray-900 leading-snug">
+                    {titleText}
+                </h1>
+
+                {/* Divider */}
+                <hr className="mt-6 border-gray-200"/>
+
+                {/* Content */}
+                <section
+                    className="prose prose-gray max-w-none mt-6 leading-8"
+                    // prose 스타일이 싫으면 위 className을 "mt-6 text-gray-900 leading-8" 로 바꿔도 됨
+                    dangerouslySetInnerHTML={{__html: formatContentForView(html)}}
+                />
+
+                {/* Attachments */}
+                {files && files.length > 0 && (
+                    <>
+                        <hr className="mt-10 border-gray-200"/>
+
+                        <div className="mt-6 rounded-lg bg-gray-50 p-4">
+                            <div className="text-sm font-semibold text-gray-700 mb-3">
+                                첨부 파일
+                            </div>
+
+                            <ul className="space-y-2">
+                                {files.map((file) => (
+                                    <li
+                                        key={file.id}
+                                        className="flex items-center justify-between rounded-md bg-white px-3 py-2"
+                                    >
+            <span
+                className="text-sm text-gray-700 truncate max-w-[520px]"
+                title={file.originalFileName}
+            >
+              {file.originalFileName}
+            </span>
+
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() => handleDownload(file)}
+                                            className="text-blue-600 hover:text-blue-800"
+                                        >
+                                            <Download className="h-4 w-4"/>
+                                        </Button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </>
+                )}
+
+
+                {/* Footer actions */}
+                <div className="mt-10 flex justify-end">
+                    <Button
+                        variant="outline"
+                        onClick={() => router.push("/support")}
+                        className="text-gray-600 font-medium border-gray-600 hover:bg-gray-50 hover:cursor-pointer"
+                    >
+                        <List className="h-4 w-4 mr-1"/>
+                        목록으로
+                    </Button>
+                </div>
+            </article>
+
+            <AlertModal
+                isOpen={alertModal.isOpen}
+                onClose={() => setAlertModal({...alertModal, isOpen: false})}
+                title={alertModal.title}
+                message={alertModal.message}
+                type={alertModal.type}
+            />
         </div>
     )
 }
