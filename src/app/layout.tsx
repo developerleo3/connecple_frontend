@@ -1,31 +1,37 @@
-'use client'
+import type { Metadata } from "next";
+import "../styles/globals.css";
+import { AuthProvider } from "@/components/auth-provider";
+import LayoutClient from "./LayoutClient";
 
-import '../styles/globals.css'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import Footer2 from '@/components/Footer2'
-import {usePathname} from 'next/navigation'
-import {AuthProvider} from '@/components/auth-provider'
+export const metadata: Metadata = {
+    metadataBase: new URL("https://www.connecple.com"),
+    title: {
+        default: "커넥플 | 사람과 사회를 연결하다",
+        template: "%s | 커넥플",
+    },
+    description: "커넥플은 사람과 사회를 연결하는 플랫폼입니다.",
+    openGraph: {
+        title: "커넥플 | 사람과 사회를 연결하다",
+        description: "커넥플은 사람과 사회를 연결하는 플랫폼입니다.",
+        url: "https://www.connecple.com",
+        siteName: "커넥플",
+        locale: "ko_KR",
+        type: "website",
+    },
+};
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
-    const pathname = usePathname()
-    const isAdminPage = pathname?.startsWith('/admin')
-    const useFooter2 = [
-        '/with-connecday',
-        '/with-newsletter',
-        '/with-gig',
-        '/about',
-    ].some((prefix) => pathname?.startsWith(prefix));
-
+export default function RootLayout({
+                                       children,
+                                   }: {
+    children: React.ReactNode;
+}) {
     return (
         <html lang="ko">
         <body className="__className_e8ce0c">
         <AuthProvider>
-            {!isAdminPage && <Header/>}
-            {children}
-            {!isAdminPage && (useFooter2 ? <Footer2 /> : <Footer />)}
+            <LayoutClient>{children}</LayoutClient>
         </AuthProvider>
         </body>
         </html>
-    )
+    );
 }
