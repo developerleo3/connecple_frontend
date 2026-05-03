@@ -64,9 +64,10 @@ export default function Footer() {
         {/* 우측 고객센터 (2/5) */}
         <div className="col-span-2 pt-[5px] pl-[11px] lg:pt-[10px] lg:pl-[112px]">
           <p className="font-bold text-[7px] lg:text-[20px]">고객센터</p>
-          <p className="font-bold text-[8px] lg:text-[24px]">02-2610-9770<span className="font-medium text-[8px] lg:text-[20px]">  (대표)</span></p>
-          <p className="font-bold text-[8px] lg:text-[24px]">02-2610-9772<span className="font-medium text-[8px] lg:text-[20px]">  (MICE사업부)</span></p>
-          <p className="font-bold text-[8px] lg:text-[24px]">02-2610-9774<span className="font-medium text-[8px] lg:text-[20px]">  (교육사업부)</span></p>
+          <p className="font-bold text-[8px] lg:text-[24px]">02-2653-9912<span className="font-medium text-[8px] lg:text-[20px]">  (대표)</span></p>
+          <p className="font-bold text-[8px] lg:text-[24px]">02-2653-9913<span className="font-medium text-[8px] lg:text-[20px]">  (MICE사업부)</span></p>
+          <p className="font-bold text-[8px] lg:text-[24px]">02-2653-9914<span className="font-medium text-[8px] lg:text-[20px]">  (교육사업부)</span></p>
+          <p className="font-bold text-[8px] lg:text-[24px]">02-2653-9915<span className="font-medium text-[8px] lg:text-[20px]">  (홍보사업부)</span></p>
           <p className="font-medium text-[6px] lg:text-[20px]">평일 9:00 - 18:00</p>
         </div>
       </div>
